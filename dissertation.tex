@@ -1,0 +1,127 @@
+\documentclass{dukedissertation}
+%\documentclass[economy,twoside,bind]{dukedissertation}
+
+% Other useful options (there are more options documented in Chapter 2):
+%  * draft -- don't actually include images, print a black bar on overful
+%             hboxes
+%  * MS    -- Format for a Master's Thesis.  No UMI abstract page, some
+%             textual changes to title page.
+
+
+% Useful packages for dissertation writing:
+\usepackage{amsmath, amssymb, amsfonts, amsthm}
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{color}
+\usepackage{subcaption}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{setspace}
+\captionsetup[table]{skip=10pt} % space between table and its caption
+
+%-----------------------------------------------------------------------------%
+% PREAMBLE
+%-----------------------------------------------------------------------------%
+\author{Author Name}
+\title{A Fancy and Concise Dissertation Title}
+\supervisor{John Dolbow}
+\department{Mechanical Engineering and Materials Science} % Appears as Department of \department
+% Declare dissertation subject used on UMI abstract page.  List of
+% categories: http://dissertations.umi.com/duke/subject_categories.html
+%\subject{[Your Subject Here]}
+
+\date{2021} % Anything but the year is ignored.
+
+% Copyright text.  If undefined, default is 'All rights reserved'
+% (Example sets the text to a hyperlinked Creative Commons Licence)
+% \copyrighttext{ All rights reserved except the rights granted by the\\
+%   \href{http://creativecommons.org/licenses/by-nc/3.0/us/}
+%         {Creative Commons Attribution-Noncommercial Licence}
+%}
+
+% Committee Members other than supervisor.  No more than five beyond the
+% supervisor allowed.
+\member{Committee Member 1}
+\member{Committee Member 2}
+\member{Committee Member 3}
+%-----------------------------------------------------------------------------%
+
+
+%-----------------------------------------------------------------------------%
+% HYPERREF: plain black hypertext references for ref's and cite's.
+%-----------------------------------------------------------------------------%
+\usepackage[pdftex, pdfusetitle, plainpages=false,
+				bookmarks, bookmarksnumbered,
+				colorlinks, linkcolor=black, citecolor=black,
+	            filecolor=black, urlcolor=black]
+				{hyperref}
+
+\begin{document}
+
+%-----------------------------------------------------------------------------%
+% TITLE PAGE -- provides UMI abstract title page & copyright if appropriate
+%-----------------------------------------------------------------------------%
+\maketitle
+
+%-----------------------------------------------------------------------------%
+% ABSTRACT -- included file should start with '\abstract'.
+%-----------------------------------------------------------------------------%
+\include{Abstract/abstract}
+
+%-----------------------------------------------------------------------------%
+% DEDICATION -- OPTIONAL.  Put the text inside the braces.
+%               (Long 'dedications' probably belong in the acknowledgements)
+%-----------------------------------------------------------------------------%
+%\dedication{If you want to dedicate your thesis to anyone do so here}
+
+%-----------------------------------------------------------------------------%
+% FRONTMATTER -- ToC is required, LoT and LoF are required if you have any
+% tables or figures, respectively. List of Abbreviations and Symbols is
+% optional.
+%-----------------------------------------------------------------------------%
+\tableofcontents % Automatically generated
+\listoftables	% If you have any tables, automatically generated
+\listoffigures	% If you have any figures, automatically generated
+%\include{{./Abbreviations/listofabbr}} % List of Abbreviations. Start file with '\abbreviations'
+
+%-----------------------------------------------------------------------------%
+% ACKNOWLEDGEMENTS -- included file should start with '\acknowledgements'
+%-----------------------------------------------------------------------------%
+\include{Acknowledgements/acknowledgements}
+
+%==============================================================================
+%-----------------------------------------------------------------------------%
+% MAIN BODY OF PAPER
+%-----------------------------------------------------------------------------%
+\include{Chapter1/introduction}
+%==============================================================================
+
+%-----------------------------------------------------------------------------%
+% APPENDICES -- OPTIONAL. These are just chapters enumerated by Appendix A,
+%                Appendix B, Appendix C...
+%-----------------------------------------------------------------------------%
+\appendix
+\include{appendix} % Start with '\chapter{Title}'
+
+%-----------------------------------------------------------------------------%
+% BIBLIOGRAPHY -- uncomment \nocite{*} to include items in 'mybib.bib' file
+% that aren't cited in the text.  Change the style to match your
+% discipline's standards.  Of course, if your bibliography file isn't called
+% 'mybib.bib' you might want to change that here too :)
+%-----------------------------------------------------------------------------%
+%\nocite{*} - if you use this it will put EVERYTHING in your .bib file into the references even if you don't cite it in the text
+\bibliographystyle{abbrv} %Formats bibliography
+\cleardoublepage
+\normalbaselines %Fixes spacing of bibliography
+\addcontentsline{toc}{chapter}{Bibliography} %adds Bibliography to your table of contents
+\bibliography{Bibliography/References} %your bibliography file - change the path if needed
+%-----------------------------------------------------------------------------%
+
+%-----------------------------------------------------------------------------%
+% BIOGRAPHY -- Start file with '\biography'.  Mandatory for Ph.D.
+%-----------------------------------------------------------------------------%
+\include{Biography/biography}
+
+%-----------------------------------------------------------------------------
+% You're done :)
+\end{document}

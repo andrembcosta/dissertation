@@ -1,0 +1,8 @@
+\contentsline {chapter}{Abstract}{iv}{chapter*.1}%
+\contentsline {chapter}{List of Tables}{vi}{chapter*.3}%
+\contentsline {chapter}{List of Figures}{vii}{chapter*.4}%
+\contentsline {chapter}{Acknowledgements}{viii}{chapter*.5}%
+\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}%
+\contentsline {chapter}{\numberline {A}Super useful stuff in the appendix}{2}{appendix.A}%
+\contentsline {chapter}{Bibliography}{3}{appendix.A}%
+\contentsline {chapter}{Biography}{4}{appendix*.7}%
