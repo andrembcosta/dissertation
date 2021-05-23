@@ -11,3 +11,6 @@
 **/*.fls
 **/*.out
 **/*.synctex.gz
+**/*.lof
+**/*.lot
+**/*.toc
