@@ -1,0 +1,62 @@
+\begin{figure}[htb!]
+  \centering
+  \begin{subfigure}[b]{0.475\textwidth}
+    \centering
+    \tikzsetnextfilenamesafe{Chapter4/2D/dimensionless_curve_smoothness}
+    \begin{tikzpicture}
+      \begin{axis}[
+          width=\textwidth,
+          height=0.9\textwidth,
+          ymode=log,
+          log ticks with fixed point,
+          ylabel=$\underline{l^*}$,xlabel=$\mathcal{D}^*$,
+          % ymin=0,ymax=2.5,
+          legend style={
+              at={(0.05,0.05)},
+              anchor=south west,
+              nodes={scale=1, transform shape},
+              fill=white,
+              fill opacity=0.8,
+              draw opacity=1,
+              text opacity=1,
+              cells={align=left}
+            },
+          legend cell align={left},
+          every axis plot/.append style={thick}
+        ]
+        % sqexp
+        \addplot [select coords between index={40}{220},color=black] table [x expr=\thisrowno{0},y expr=\thisrowno{1}]{Chapter4/data/2D/dimensionless_curve_sqexp_cartesian_5_5.csv};
+        % exp
+        \addplot [select coords between index={40}{220},color=red] table [x expr=\thisrowno{0},y expr=\thisrowno{1}]{Chapter4/data/2D/dimensionless_curve_exp_cartesian_5_5.csv};
+        \legend{sqexp,exp}
+      \end{axis}
+    \end{tikzpicture}
+    \caption{}
+    \label{fig: Chapter4/2D/dimensionless_curve_smoothness}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.475\textwidth}
+    \centering
+    \tikzsetnextfilenamesafe{hapter4/2D/distribution_smoothness}
+    \begin{tikzpicture}
+      \begin{axis}[
+          width=\textwidth,
+          height=0.9\textwidth,
+          xlabel=$l^*$,ylabel=estimated PDF,
+          ymin=0,ymax=0.012,
+          xmin=0,xmax=300,
+          legend style={at={(0.95,0.95)},anchor=north east},
+          legend style={nodes={scale=1, transform shape}},
+          legend cell align={left},
+          every axis plot/.append style={thick}
+        ]
+        \addplot [color=black] table [x expr=\thisrowno{0},y expr=\thisrowno{1}]{Chapter4/data/2D/distribution_sqexp_cartesian_5_5.csv};
+        \addplot [color=red] table [x expr=\thisrowno{0},y expr=\thisrowno{1}]{Chapter4/data/2D/distribution_exp_cartesian_5_5.csv};
+        \legend{sqexp,exp}
+      \end{axis}
+    \end{tikzpicture}
+    \caption{}
+    \label{fig: Chapter4/2D/distribution_smoothness}
+  \end{subfigure}
+  \caption{Comparisons of (a) mean dimensionless crack spacing $\underline{l^*}$ versus dimensionless crack driving force $\mathcal{D}^*$ and (b) Estimated probability density of dimensionless crack spacing for different values of correlation length when $\mathcal{D}^* = 5.17$ for results obtained using a PSE kernel and a PE kernel}
+  \label{fig: Chapter4/2D/statistics_smoothness}
+\end{figure}

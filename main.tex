@@ -9,15 +9,11 @@
 
 
 % Useful packages for dissertation writing:
-\usepackage{amsmath, amssymb, amsfonts, amsthm}
-\usepackage{graphicx}
-\usepackage{natbib}
-\usepackage{color}
-\usepackage{subcaption}
-\usepackage{graphicx}
-\usepackage{multirow}
-\usepackage{setspace}
-\captionsetup[table]{skip=10pt} % space between table and its caption
+\input{garypackagesbasic}
+\input{garypackagestikzhelper}
+\input{garypackagesmath}
+\input{garypackagesutils}
+\usepackage[numbers]{natbib}
 
 %-----------------------------------------------------------------------------%
 % PREAMBLE
@@ -46,16 +42,6 @@
 \member{Manolis Veveakis}
 \member{Benjamin W. Spencer}
 %-----------------------------------------------------------------------------%
-
-
-%-----------------------------------------------------------------------------%
-% HYPERREF: plain black hypertext references for ref's and cite's.
-%-----------------------------------------------------------------------------%
-\usepackage[pdftex, pdfusetitle, plainpages=false,
-				bookmarks, bookmarksnumbered,
-				colorlinks, linkcolor=black, citecolor=black,
-	            filecolor=black, urlcolor=black]
-				{hyperref}
 
 \begin{document}
 
@@ -107,7 +93,7 @@
 %                Appendix B, Appendix C...
 %-----------------------------------------------------------------------------%
 \appendix
-\include{appendix} % Start with '\chapter{Title}'
+\include{Appendices/main} % Start with '\chapter{Title}'
 
 %-----------------------------------------------------------------------------%
 % BIBLIOGRAPHY -- uncomment \nocite{*} to include items in 'mybib.bib' file
@@ -116,7 +102,7 @@
 % 'mybib.bib' you might want to change that here too :)
 %-----------------------------------------------------------------------------%
 %\nocite{*} - if you use this it will put EVERYTHING in your .bib file into the references even if you don't cite it in the text
-\bibliographystyle{abbrv} %Formats bibliography
+\bibliographystyle{unsrtnat} %Formats bibliography
 \cleardoublepage
 \normalbaselines %Fixes spacing of bibliography
 \addcontentsline{toc}{chapter}{Bibliography} %adds Bibliography to your table of contents

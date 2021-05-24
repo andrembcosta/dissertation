@@ -1,8 +1,282 @@
 \section{Numerical examples}
 \label{section: cohesive/examples}
 
-\subsection{One-dimensional simplification: side view}
+In this section, we study in detail the formation of crack networks in thin films and soil dessication.  We begin
+in Section \ref{s: application/1D} with a deterministic benchmark problem under quasi-one-dimensional conditions.  The spacing between fractures is calculated as a function of the driving force with the cohesive fracture model and compared against a linear elasticity solution. Attention is then turned to an investigation of the stochastic aspects of fracture with a two-dimensional plane stress model in Section \ref{s: Chapter4/2D}, wherein the fracture toughness and critical fracture energy are modeled as random fields.  Finally, in Section \ref{s: Chapter4/3D} we present stochastic simulations of a soil dessication process in three dimensions.
 
-\subsection{Two-dimensional simplification: Stochastic aspects of fracture}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{One-Dimensional Simplification: Side View}
 
-\subsection{Inverse identification based on three-dimensional physical experiments}
+We begin by deriving an analytical solution for the fracture of a thin film bonded to a thick substrate, as shown in \Cref{fig: Chapter4/1D/simplification}.  Assuming that the planar dimensions of the film are much larger than its thickness, we first simplify the problem into a two-dimensional (or quasi 1D) plane-strain problem. The film is assumed to have Young's modulus $E_1$, Poisson's ratio $\nu_1$, and thickness $h$. The substrate has Young's modulus $E_0$, Poisson's ratio $\nu_0$, and thickness $H$.  The fracture of the film is driven by the underlying substrate being stretched an amount $\varepsilon_x$.  The problem with these simplifications and assumptions has been studied by many researchers, and analytical solutions from elasticity theory have been derived in several different ways.  The derivation presented herein most closely follows that provided in \citet{yin2008explicit}.
+
+\input{Chapter4/figures/1D/simplification}
+
+\input{Chapter4/figures/1D/supersuperposition}
+
+With the increase of the tensile strain in the substrate, some uniformly distributed discontinuities with spacing $2\lambda$ form across the thickness of the film. We assume that no debonding occurs and that the vertical component of the displacement does not vary in the horizontal direction, i.e.
+\begin{align}
+  u_y(x,y) = u_y(y) .
+\end{align}
+The plane-strain equilibrium equation in the x--direction is written as
+\begin{align}
+  \dfrac{E_1}{1-\nu_1^2}u_{x,xx} + \mu_1u_{x,yy} = 0 ,
+\end{align}
+where $\mu_1$ denotes the shear modulus of the film.  This is supplemented by appropriate boundary conditions (\Cref{fig: Chapter4/1D/supersuperposition})
+\begin{align}
+  u_x(0,y)                                                    & = 0 ,                                    \\
+  u_{x,y}(x,h)                                                & = 0 ,                                    \\
+  \dfrac{1}{h}\int\limits_{0}^h \sigma_x(\lambda,y)\text{ d}y & = -\dfrac{E_1}{1-\nu_1^2}\varepsilon_x .
+\end{align}
+We obtain the closed-form solution to the displacement field
+\begin{align}
+  u_x(x,y) = \varepsilon_xx-\dfrac{\sinh(cx/h)}{\cosh(c\lambda/h)}\dfrac{\cos(d(1-y/h))}{\sin(d)}\sqrt{\dfrac{E_1}{\mu_1(1-\nu_1^2)}}h\varepsilon_x ,
+\end{align}
+where $c$ and $d$ are functions of Dundur's parameters $\alpha$ and $\beta$. Following \cite{BEUTH19921657,xia2000crack,yin2008explicit}, $c$ and $d$ can be computed as:
+\begin{align}
+   & c = \dfrac{2}{\pi k(\alpha,\beta)}, \quad d = \sqrt{\dfrac{2}{1-\nu_1}}c ,                                                                          \\
+   & \alpha = \dfrac{\Bar{E}_1-\Bar{E}_0}{\Bar{E}_1+\Bar{E}_0}, \quad \beta = \dfrac{\mu_1(1-2\nu_0)-\mu_0(1-2\nu_1)}{2\mu_1(1-\nu_0)+2\mu_0(1-\nu_1)} , \\
+   & k(\alpha,\beta) \approx k(\alpha) = \dfrac{1.258-0.4\alpha-0.26\alpha^3-0.3\alpha^4}{1-\alpha} ,
+\end{align}
+with $\Bar{E}_0 = \dfrac{E_0}{(1-\nu_0^2)}$, and $\Bar{E}_1 = \dfrac{E_1}{(1-\nu_1^2)}$. By replacing $\lambda$ with $\lambda/2$, the crack opening displacement can be written as
+\begin{align}
+  \delta(0,y) = 2\tanh\left(\dfrac{c\lambda}{2h}\right)\dfrac{\cos(d(1-y/h))}{\sin(d)}\sqrt{\dfrac{E_1}{\mu_1(1-\nu_1^2)}}h\varepsilon_x .
+\end{align}
+Then the fracture toughness can be obtained as the work done to close the crack, i.e.
+\begin{align}
+  \mathcal{G}_c\cdot2h & = \int\limits_0^h \sigma_x(0,y)\delta(0,y)\text{ d}y,                                                                                                          \\
+  \mathcal{G}_c        & = \dfrac{(1-\nu_1^2)\sigma_x^2}{E_1}\dfrac{h}{c}\left[ 2\tanh\left( \dfrac{c\lambda}{2h} \right)-\tanh(c\lambda/h) \right] .\label{eq: 1D analytical solution}
+\end{align}
+The amount of energy released by opening a transverse crack is governed by two dimensionless parameters:
+\begin{align}
+  \mathcal{D}^* = \sqrt{\dfrac{(1-\nu_1^2)h}{E_1\mathcal{G}_c}}\sigma_x, \quad l^* = \dfrac{\lambda}{h} \label{eq: dimensionless parameters}.
+\end{align}
+It is then convenient to interpret the  parameter $\mathcal{D}^*$ as the dimensionless fracture driving energy and $l^*$ as the dimensionless crack spacing. \eqref{eq: 1D analytical solution} can be rendered dimensionless following \eqref{eq: dimensionless parameters}, and the relation between the dimensionless fracture driving energy and the dimensionless crack spacing can be written as
+\begin{align}
+  \mathcal{D}^* \mathcal{C}(l^*;c) = 1, \quad \mathcal{C}(l^*;c) = \dfrac{1}{c}\left[ 2\tanh\left( \dfrac{1}{2} c l^* \right)-\tanh(cl^*) \right].
+\end{align}
+
+\input{Chapter4/figures/1D/compare_analytical_numerical}
+
+In \Cref{fig: Chapter4/1D/analytical}, we set the Poisson's ratio of both the film and the substrate to be $\nu_0 = \nu_1 = 0.2$, and plot the dimensionless fracture driving energy versus the dimensionless crack spacing for different combinations of the mismatch in the Young's modulus between the film and the substrate.
+
+Next, we performed a series of numerical simulations using the phase-field for cohesive fracture model following the setup described in \Cref{fig: Chapter4/1D/schematic}.  Specifically, we examine the amount of driving energy required to propagate one transverse crack through the thickness of the film. The substrate and the film are represented by two rectangular domains $\body_0 = [-\lambda,\lambda] \times [\SI{-5}{\milli\meter},0]$
+and $\body_1 = [-\lambda,\lambda] \times [0,\SI{1}{\milli\meter}]$, repsectively. The film-substrate system is the union of the two, i.e.\ $\body = \body_0 \cup \body_1$, and left-right periodicity is enforced. The substrate and the film are discretized with linear triangular elements with characteristic lengths of $h^e_0 = \lambda/10$ and $h^e_1 = \lambda/100$, respectively.
+The numerical results (\Cref{fig: Chapter4/1D/numerical}) show a good agreement with the analytical solution.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Two-Dimensional Simplification: Stochastic Aspects of Fracture}
+
+We now consider a two-dimensional model of a thin film on a substrate wherein the geometry of the resulting fracture patterns is considerably more complex.  For the bulk material properties, we adopt values that are representative of clay. The material properties and model parameters are summarized in \Cref{tab: clay}.
+
+We focus attention on the sensitivity of the resulting fracture patterns to stochastic spatial variations in the fracture properties. The random field of fracture properties $\{(\Gc(\bs{x}),\psi_c(\bs{x})), \bs{x} \in \body\}$ is defined and sampled following the model and procedures presented in \Cref{s: theory/uq}. For all cases, the spatial correlation length $L$ is larger than the regularization length $l$ of the phase-field model. A tolerance of $1 \times 10^{-3}$ is chosen for the truncation error in the Karhunen-Lo\`{e}ve expansion \eqref{eq: truncation}.
+The mean values of $\Gc$ and $\psi_c$ are chosen in accordance with reported values for clay as listed in \Cref{tab: clay}. Coefficients of variation are chosen to be $0.03$, leading to a variation of about $\pm 10\%$ around the mean value for the two random fracture parameters. All realizations shown in figures are normalized with respect to the corresponding stationary mean function, and the normalized quantities are denoted by $\Gc^*$ and $\psi_c^*$.
+
+\begin{table}[htb!]
+  \centering
+  \caption{Summary of material properties and model parameters for all calculations in \Cref{s: Chapter4/2D}}
+  \begin{tabular}{r c c c c}
+    \toprule
+    Property/Parameter            & Symbol                      & Value & Unit                                & Comment                                       \\
+    \midrule
+    Young's modulus               & $E$                         & 4     & \SI{}{\mega\pascal}                 & See \cite{obrzud2010hardening, Rodriguez2006} \\
+    Poisson's ratio               & $\nu$                       & 0.2   & nondim.                             & See \cite{obrzud2010hardening, Rodriguez2006} \\
+    Mean fracture toughness       & $\underline{\mathcal{G}_c}$ & 27    & \SI{}{\kilo\joule\per\square\meter} & See \cite{ramsaroop2010fracture}              \\[5pt]
+    Mean critical fracture energy & $\underline{\psi_c}$        & 30    & \SI{}{\joule\per\square\meter}      & See \cite{ramsaroop2010fracture}              \\[5pt]
+    Regularization length         & $l$                         & 0.5   & \SI{}{\milli\meter}                 & Such that $2l/h^e \approx 5$                  \\
+    Degradation shape parameter   & $p$                         & 1     & nondim.                             &                                               \\
+    \bottomrule
+  \end{tabular}
+  \label{tab: clay}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{A Plane-Stress Model}
+
+We now consider the problem of a thin film of thickness $h$ that is bonded to an elastic underlayer of thickness $H$, as shown in Figure \ref{fig: Chapter4/2D/simplification}.  The entire structure is assumed to be bonded to a rigid substrate. For this case, we employ the shear-lag model that is detailed in \cite{liang2003evolving}.  For the sake of clarity, the model is briefly described here.
+
+\input{Chapter4/figures/2D/simplification}
+
+We consider a square domain and assume the characteristic fragment sizes to be small compared to the overall specimen dimensions, and impose periodic boundary conditions on all four boundaries. Assuming the underlying elastic layer is sufficiently thick and that the shear stress is uniform, equilibrium of a differential element of the film at the film-layer interface yields
+\begin{align}
+  \grad \cdot \stress = \mu \dfrac{\bs{u}}{hH} ,
+\end{align}
+where $\stress = \mathbb{C}:[\strain - \mathbb{S}:(\sigma_0\bs{I})]$ is the stress, $\mu$ is the shear modulus of the elastic underlayer, and $\bs{u}$ is the displacement. The corresponding potential energy representing the mismatch between the two sides of the film-layer interface can be written as
+\begin{align}
+  \psi_{\text{interface}} = \dfrac{1}{2}\dfrac{\mu}{hH}\norm{\bs{u}}^2 .
+\end{align}
+The underlying elastic layer is assumed to be much thicker than the film, i.e.\ $H = mh$, where $m \gg 1$. The interfacial energy can therefore be simplified as
+\begin{align}
+  \psi_{\text{interface}} = \dfrac{1}{2}\dfrac{\mu}{mh^2}\norm{\bs{u}}^2.
+\end{align}
+The total energy of the simplified plane-stress model can then be written as
+\begin{equation}
+  \begin{split}
+    \Psi_\total = &\ -\underbrace{\left( \int\limits_\bodyboundary \bs{\tau} \cdot \bs{u} \diff{A} + \int\limits_\body \bs{b} \cdot \bs{u} \diff{V} \right)}_{\text{external energy}} + \underbrace{\int\limits_\body g(d)\psi_\elastic^\activeenergy \diff{V} + \int\limits_\body\psi_\elastic^\inactiveenergy \diff{V}}_{\text{degraded elastic energy}} \\
+    &\ + \underbrace{\int\limits_\body g(d)\dfrac{1}{2}\dfrac{\mu}{mh^2}\norm{\bs{u}}^2 \diff{V}}_{\text{degraded interfacial energy}} + \underbrace{\int\limits_\body \dfrac{3\mathcal{G}_c}{8l} \left( d + l^2 \norm{\grad d}^2 \right) \diff{V}}_{\text{approx. fracture energy}}
+  \end{split}
+\end{equation}
+For all calculations in \Cref{s: Chapter4/2D}, we assume $\dfrac{\mu}{mh^2} = 0.1$.
+
+The square domain is discretized using linear triangular elements with a characteristic length of $h^e = a/500$. This  mesh is used for the displacement subproblem for linear elasticity, the phase-field subproblem for fracture, and the generalized eigenvalue problem for the random fields. The displacement field and the damage field are constrained to be $a-$periodic, and the random fields are constructed to be $a-$periodic as well.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Effect of Correlation Length and Smoothness}
+
+To study the effect of the correlation length, crack patterns for four different values of $L$ are compared. Ten calculations, corresponding to ten samples of the stochastic fields, are carried out for each value of $L$. Representative random fields and their corresponding damage fields are shown in \Cref{fig: Chapter4/2D/compare_correlation_length}. A Flooding algorithm (described in \Cref{s: appendix/flooding}) is used to group elements into clusters in a volume-preserving way, to facilitate the counting of distinct fragments. Following the one-dimensional derivation (\Cref{s: application/1D}), two dimensionless parameters are extracted as
+\begin{align}
+   & \mathcal{D}^* = \sqrt{\dfrac{(1-\nu_1^2)h}{E_1\underline{\mathcal{G}_c}}}\sigma_0, \quad l^* = \dfrac{\lambda}{h}, \quad \lambda \approx \sqrt{A} ,
+\end{align}
+where the crack spacing $\lambda$ is estimated from the fragment area $A$. Dimensionless curves are plotted in \Cref{fig: Chapter4/2D/statistics_correlation_length}.
+
+As expected, it is seen that the PSE covariance model generates smoother realizations. As the normalized correlation length $L^* = L/p$ becomes larger, i.e.\ \Cref{fig: Chapter4/2D/d_sqexp_cartesian_5_5_rho_0_seed_a,fig: Chapter4/2D/d_sqexp_cartesian_10_10_rho_0_seed_a,fig: Chapter4/2D/d_sqexp_cartesian_20_20_rho_0_seed_a},
+a substantial amount of damage accumulates before localization occurs to form a ``crack''. When the sample exhibits less spatial fluctuations, a non-negligible portion of the energy is dissipated into the matrix in the form of diffuse damage, resulting in fewer cracks and larger fragment sizes. As the normalized correlation gets even larger, i.e.\ \Cref{fig: Chapter4/2D/Gc_sqexp_cartesian_20_20_rho_0_seed_a,fig: Chapter4/2D/psic_sqexp_cartesian_20_20_rho_0_seed_a,fig: Chapter4/2D/d_sqexp_cartesian_20_20_rho_0_seed_a}, morphologically different crack networks are obtained.
+
+On the other hand, the rougher samples generated using the PE covariance function, i.e.\ \Cref{fig: Chapter4/2D/Gc_exp_cartesian_5_5_rho_0_seed_b,fig: Chapter4/2D/psic_exp_cartesian_5_5_rho_0_seed_b,fig: Chapter4/2D/d_exp_cartesian_5_5_rho_0_seed_b,fig: Chapter4/2D/Gc_exp_cartesian_10_10_rho_0_seed_b,fig: Chapter4/2D/psic_exp_cartesian_10_10_rho_0_seed_b,fig: Chapter4/2D/d_exp_cartesian_10_10_rho_0_seed_b,fig: Chapter4/2D/Gc_exp_cartesian_20_20_rho_0_seed_b,fig: Chapter4/2D/psic_exp_cartesian_20_20_rho_0_seed_b,fig: Chapter4/2D/d_exp_cartesian_20_20_rho_0_seed_b}, have sufficient variations that serve as effective imperfections for damage localization. In terms of the mean size of fragments that form, the corresponding damage fields are seen to be far less sensitive to the spatial correlation length.  However, as the correlation length increases, the orientation of the damage fields begins to acquire a structure that aligns with the axes of the domain. This observation is in accordance with the tensor-product structure of the covariance model, and with the fact that larger correlation lengths allow more pronounced spatial structures to develop (sample-wise) for PE functions.
+
+Samples obtained with the two covariance models (parameterized by the same correlation lengths), considering the same realization for the underlying Gaussian field (from one covariance model to another), are compared in \Cref{fig: Chapter4/2D/compare_smoothness} to study the effect of smoothness. It is seen that rougher material properties provide more candidate locations for damage localization, hence resulting in more fragments per unit volume of the domain (in a statistical sense). More precisely, the probability density functions (PDFs) corresponding to the dimensionless crack spacing (\Cref{fig: Chapter4/2D/statistics_smoothness}), estimated using approximately 2000 fragments and 10 independent realizations of the fields, show a substantial difference:the mean fragment size obtained with rough material properties (here, with the PE model) turns out to be much smaller than the mean fragment size generated by smoother samples of fracture properties (associated with the PSE model).
+
+\input{Chapter4/figures/2D/compare_correlation_length.tex}
+
+\input{Chapter4/figures/2D/compare_smoothness.tex}
+
+\input{Chapter4/figures/2D/statistics_correlation_length.tex}
+
+\input{Chapter4/figures/2D/statistics_smoothness.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Parametric Analysis}
+
+The stochastic model constructed in this paper enables the introduction of point-wise correlation (that is, in the first-order marginal probability distribution) between the two fracture properties.
+With regard to fracture mechanics, one might wonder, for example, whether or not the fracture toughness $\Gc$ and the critical fracture energy $\psi_c$ are correlated (at a given location), and if so, to what extent. In this section, we perform a parametric analysis for different values of the correlation coefficient $\rho$, with the aim of understanding which field plays a dominant role in determining the resulting fracture morphology in thin films.
+
+In order to obtain meaningful statistical results, 10 independent realizations are considered, and the same samples (of the underlying Gaussian random fields) are used when $\rho$ varies. The normalized correlation length is set to $L^* = 0.05$ for both fracture properties.
+Three pairs of fracture toughness and critical fracture energy samples, constructed using \eqref{eq: def-P1} and \eqref{eq: def-P2} with $\rho \in \{0, 0.5, 1\}$, are shown in \Cref{fig: Chapter4/2D/compare_correlation}. Note that the special case of $\rho = 0$ recovers the case of independent material properties.
+
+\input{Chapter4/figures/2D/compare_correlation.tex}
+
+Statistics of the dimensionless crack spacing $l^*$ are once again extracted at $\mathcal{D}^* = 5.17$. The resulting dimensionless curves and normalized probability density functions are shown in \Cref{fig: Chapter4/2D/statistics_sensitivity_sqexp,fig: Chapter4/2D/statistics_sensitivity_exp}. These results indicate that the distribution of fragment size is relatively insensitive to the coefficient of correlation, regardless of the smoothness of the covariance kernel.
+
+\input{Chapter4/figures/2D/statistics_sensitivity.tex}
+
+In contrast, when we superimpose the fracture patterns, we observe that the fracture morphology does exhibit a sensitivity to variations in the fracture toughness  (\Cref{fig: Chapter4/2D/morphology_psic_constant}). The superimposed results are only shown for the PSE covariance function, but comparable results are obtained with the PE covariance function.
+By comparison, when the fracture toughness is held fixed while the critical fracture energy is varied, the superimposed fracture patterns are nearly indistinguishable (\Cref{fig: Chapter4/2D/morphology_Gc_constant}). The clear conclusion is that the energetics are primarily responsible for driving the fracture morphology, a result that is not surprising. This conclusion is also supported by the results shown in \Cref{fig: Chapter4/2D/compare_sensitivity_sqexp,fig: Chapter4/2D/compare_sensitivity_exp}, in which fracture patterns are plotted over contours of the fracture toughness and the critical energy. For both types of covariance functions, the fracture patterns are seen to follow contours of minimal fracture toughness while largely ignoring those of the critical fracture energy.
+
+\input{Chapter4/figures/2D/compare_morphology.tex}
+
+\input{Chapter4/figures/2D/compare_sensitivity.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Discussion on Modeling Flexibility: Impact of the Covariance Structure}
+
+We now briefly examine how different structures of the covariance kernel can alter the fragment morphology. It has been demonstrated experimentally \cite{kitsunezaki2016shaking, kitsunezaki2017stress, halasz2017effect, kitsunezaki2017memory, nakahara2018mechanism}
+how macro-scale processing conditions to construct samples may lead to morphologically different crack networks.  For example, \citet{kitsunezaki2017memory} carried out a series of tests to study the effect of macroscopic disturbances on crack patterns. They poured calcium carbonate (CaCO$_3$) paste into a shallow circular container. Different modes of agitation were applied to the paste before it was dried, and the resulting crack patterns showed a strong correlation with the modes of agitation.
+
+We hypothesize that the agitation gives rise to effective fracture properties at the macro-scale that have a structure that is consistent with the agitation. We further assume a rougher spatial variation of properties in the direction parallel to the agitation than in the direction orthogonal to the agitation. Accordingly, we model the spatial variations in the fracture properties using composite covariance functions, defined on purpose by a tensor-product structure involving PSE and PE functions. In Figure \ref{fig: Chapter4/2D/japanese_experiments}, we compare the experimentally-observed crack patterns to our simulation results obtained using random fracture properties with the postulated anisotropic covariance functions. The comparison shows reasonable agreement (without specifically optimizing the  hyperparameters in the stochastic model), indicating that the differing processing conditions may have resulted in different spatial variations in the effective fracture properties.
+
+\input{Chapter4/figures/2D/japanese_experiment.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Inverse Identification Based on Three-Dimensional Physical Experiments}
+
+In \citet{Rodriguez2006}, a series of drying tests with mining waste placed on grooved circular plates (\SI{225}{\milli\meter} in diameter) was performed to observe crack evolution due to desiccation processes. Three tests were carried out with different film thicknesses $h \in \{ \SI{4}{\milli\meter}, \SI{8}{\milli\meter}, \text{and}~\SI{16}{\milli\meter} \}$.
+
+\begin{table}[htb!]
+  \centering
+  \caption{Summary of material properties of mining waste and model parameters for all calculations in \Cref{s: Chapter4/3D}}
+  \begin{tabular}{r c c c c}
+    \toprule
+    Property/Parameter            & Symbol                      & Value & Unit                                & Comment                                                     \\
+    \midrule
+    Young's modulus               & $E$                         & 4     & \SI{}{\mega\pascal}                 & See \cite{sanchez2014modeling}                              \\
+    Poisson's ratio               & $\nu$                       & 0.2   & nondim.                             & See \cite{sanchez2014modeling}                              \\
+    Mean fracture toughness       & $\underline{\mathcal{G}_c}$ & 27    & \SI{}{\kilo\joule\per\square\meter} & See \cite{rodriguez2007experimental,lakshmikantha2009image} \\[5pt]
+    Mean critical fracture energy & $\underline{\psi_c}$        & 30    & \SI{}{\joule\per\square\meter}      & See \cite{rodriguez2007experimental,lakshmikantha2009image} \\[5pt]
+    Regularization length         & $l$                         & 0.8   & \SI{}{\milli\meter}                 & Such that $2l/h^e \approx 5$                                \\
+    Degradation shape parameter   & $p$                         & 1     & nondim.                             &                                                             \\
+    \bottomrule
+  \end{tabular}
+  \label{tab: MW}
+\end{table}
+
+\input{Chapter4/figures/3D/inverse.tex}
+
+To replicate this study using model-based simulations and our phase-field model (enhanced with the stochastic description of fracture properties), we adopt fully three-dimensional models.  The material properties used for this study are  listed in \Cref{tab: MW}.  Consistent with the experimental studies of \cite{Rodriguez2006}, the film-substrate system is represented by a cylindrical domain. The substrate is modeled as a rigid body with an arbitrarily high fracture toughness. The substrate and film are discretized using tetrahedral elements with characteristic lengths of $h^e_0 = \SI{1.6}{\milli\meter}$ and $h^e_1 = \SI{0.36}{\milli\meter}$, respectively. The solutions to the linear elasticity subproblem, the phase-field for fracture subproblem, and the generalized eigenvalue problem are once again approximated using the same mesh.
+
+We first calibrate the spatial variability in our model against the experimental observations of the fracture patterns for the thinnest ($h = 4$mm) specimen. To formulate the statistical inverse problem, we assume that (1) the fracture toughness and the critical fracture energy are uncorrelated (i.e., $\rho = 0$); and (2) both fracture properties have the same coefficient of variation (set to 0.03) and spatial correlation lengths, and that they can be defined using isotropic squared exponential kernels. In addition, the variations of the properties through the thickness of the film are assumed negligible compared to in-plane variations.
+
+Based on these assumptions, the spatial correlation length $L$ is the only parameter to be determined, and a parametric search is performed in $\mathbb{L} = \{$ \SI{3}{\milli\meter}, \SI{3.5}{\milli\meter}, \SI{4}{\milli\meter}, \SI{4.5}{\milli\meter}, \SI{5}{\milli\meter}, \SI{5.5}{\milli\meter}, \SI{6}{\milli\meter}, \SI{6.5}{\milli\meter}, \SI{7}{\milli\meter}, \SI{7.5}{\milli\meter}, \SI{8}{\milli\meter}, \SI{8.5}{\milli\meter} $\}$. Energy minimization problems for the case of $h = \SI{4}{\milli\meter}$ are simulated for each pair of realizations and the corresponding fracture patterns are obtained. For a given value of $L \in \mathbb{L}$, the flooding algorithm is used to identify fragments on the top surface of the thin film, and a kernel density estimation of the probability density function associated with the fragment size, denoted by $f_\text{fs}^\text{sim}(\cdot; L)$, is obtained. The optimal value of $L$ is then identified by maximizing the log-likelihood function $\mathcal{L}$ defined as
+\begin{align}
+  \mathcal{L}(L) = \sum_{A_\text{fs}^\text{exp} \in \mathbb{A}^\text{exp}} \ln{f_\text{fs}^\text{sim}(l^*(A_\text{fs}^\text{exp}); L)}~, \quad l^*(A) = \dfrac{\sqrt{A}}{h}~,
+\end{align}
+where $\mathbb{A}^\text{exp}$ denotes the collection of fragment size samples extracted by using the same flooding algorithm on the experimental result.
+The aforementioned workflow to calibrate the model is summarized in \Cref{fig: Chapter4/3D/inverse}. The fracture properties with spatial correlation $L = \SI{4}{\milli\meter}$ lead to the maximum log-likelihood among the span of samples considered. \Cref{fig: Chapter4/3D/calibrated} compares the estimated PDF and the fracture morphology obtained using the calibrated stochastic model to those of the experimental specimen for $h = \SI{4}{\milli\meter}$.
+
+\input{Chapter4/figures/3D/calibrated.tex}
+
+To then benchmark our model against specimens with different thicknesses, three 3D calculations are carried out using the same realization of fracture properties with $L = \SI{4}{\milli\meter}$. As shown in \Cref{fig: Chapter4/3D/3D},
+our results appear to agree reasonably well with the experimental observations. In general, the thicker films fracture into larger fragments, which also agrees with the simplified models presented in \Cref{s: application/1D,s: application/2D}.
+
+\input{Chapter4/figures/3D/3D.tex}

@@ -1,0 +1,85 @@
+\begin{figure}[htb!]
+  \centering
+  \begin{subfigure}{0.47\textwidth}
+    \centering
+    \tikzsetnextfilenamesafe{Chapter4/mode2_force_displacement_compare_decomposition}
+    \begin{tikzpicture}
+      \begin{axis}[
+          cycle list name=exotic,
+          width=\textwidth,
+          height=1.3\textwidth,
+          xlabel=$u_x^*$,ylabel=$f_x^*$,
+          xmin=0,
+          xmax=0.02,
+          ymin=0,
+          ymax=0.35,
+          legend style={
+              at={(0.05,0.98)},
+              anchor=north west,
+              nodes={scale=0.8, transform shape},
+              fill=white,
+              fill opacity=0.8,
+              draw opacity=1,
+              text opacity=1,
+              cells={align=left}
+            },
+          legend cell align={left},
+          every axis plot/.append style={thick},
+          yticklabel style={
+              /pgf/number format/fixed
+            }
+        ]
+        \addplot +[mark=none] table[x expr=\thisrowno{2},y expr=\thisrowno{1}*20.9036/2500] {Chapter4/data/mode2_notched_plate_spectral.csv};
+        \addplot +[mark=none] table[x expr=\thisrowno{2},y expr=\thisrowno{1}*20.9036/2500] {Chapter4/data/mode2_notched_plate_odd_0.6.csv};
+        \addplot +[mark=none] table[x expr=\thisrowno{2},y expr=\thisrowno{1}*20.9036/2500] {Chapter4/data/mode2_intact_plate_odd_0.6.csv};
+        \legend{geometric notch\text{,} spectral split,geometric notch\text{,} spectral split \\ $+$ contact split,initial damage\text{,} spectral split \\ $+$ contact split}
+      \end{axis}
+    \end{tikzpicture}
+    \caption{}
+    \label{fig: Chapter4/mode2_force_displacement_compare_decomposition}
+  \end{subfigure}
+  \begin{subfigure}{0.47\textwidth}
+    \centering
+    \tikzsetnextfilenamesafe{Chapter4/mode2_force_displacement_compare_dcrit}
+    \begin{tikzpicture}
+      \begin{axis}[
+          cycle list name=exotic,
+          width=\textwidth,
+          height=1.3\textwidth,
+          xlabel=$u_x^*$,ylabel=$f_x^*$,
+          xmin=0,
+          xmax=0.02,
+          ymin=0,
+          ymax=0.35,
+          legend style={
+              at={(0.98,0.98)},
+              anchor=north east,
+              nodes={scale=0.8, transform shape},
+              fill=white,
+              fill opacity=0.8,
+              draw opacity=1,
+              text opacity=1
+            },
+          legend cell align={left},
+          every axis plot/.append style={thick},
+          yticklabel style={
+              /pgf/number format/fixed
+            }
+        ]
+        \addplot +[mark=none] table[x expr=\thisrowno{2},y expr=\thisrowno{1}*20.9036/2500] {Chapter4/data/mode2_notched_plate_odd_0.2.csv};
+        \addplot +[mark=none] table[x expr=\thisrowno{2},y expr=\thisrowno{1}*20.9036/2500] {Chapter4/data/mode2_notched_plate_odd_0.4.csv};
+        \addplot +[mark=none] table[x expr=\thisrowno{2},y expr=\thisrowno{1}*20.9036/2500] {Chapter4/data/mode2_notched_plate_odd_0.6.csv};
+        \addplot +[mark=none] table[x expr=\thisrowno{2},y expr=\thisrowno{1}*20.9036/2500] {Chapter4/data/mode2_notched_plate_odd_0.8.csv};
+        \addplot +[mark=none] table[x expr=\thisrowno{2},y expr=\thisrowno{1}*20.9036/2500] {Chapter4/data/mode2_intact_plate_odd_0.2.csv};
+        \addplot +[mark=none] table[x expr=\thisrowno{2},y expr=\thisrowno{1}*20.9036/2500] {Chapter4/data/mode2_intact_plate_odd_0.4.csv};
+        \addplot +[mark=none] table[x expr=\thisrowno{2},y expr=\thisrowno{1}*20.9036/2500] {Chapter4/data/mode2_intact_plate_odd_0.6.csv};
+        \addplot +[mark=none] table[x expr=\thisrowno{2},y expr=\thisrowno{1}*20.9036/2500] {Chapter4/data/mode2_intact_plate_odd_0.8.csv};
+        \legend{geometric notch $d_{\text{critical}}=0.2$,geometric notch $d_{\text{critical}}=0.4$,geometric notch $d_{\text{critical}}=0.6$,geometric notch $d_{\text{critical}}=0.8$,initial damage $d_{\text{critical}}=0.2$,initial damage $d_{\text{critical}}=0.4$,initial damage $d_{\text{critical}}=0.6$,initial damage $d_{\text{critical}}=0.8$}
+      \end{axis}
+    \end{tikzpicture}
+    \caption{}
+    \label{fig: Chapter4/mode2_force_displacement_compare_dcrit}
+  \end{subfigure}
+  \caption{ Mode II force--displacement curves obtained using (a) spectral decomposition with two representations of the initial crack (b) spectral decomposition in conjunction with the contact split with different critical damage threshold on two representations of the initial crack. }
+  \label{fig: Chapter4/mode2_force_displacement}
+\end{figure}

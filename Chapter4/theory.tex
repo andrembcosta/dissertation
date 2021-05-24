@@ -1,8 +1,309 @@
 \section{Theory}
 \label{section: cohesive/theory}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Constitutive choices}
 
-\subsection{Enforcing the traction-free boundary condition}
+To solve the energy minimization problem, we first find the necessary conditions for the minimizer of the objective function by temporarily relaxing the constraint, i.e.\ by solving the unconstrained version as:
+\begin{align}
+  \min_{\bs{u},d} \widetilde{\Psi}_\total = -\widetilde{\Psi}_\external + \widetilde{\Psi}_\internal + \widetilde{\Psi}_\fracture .
+\end{align}
+The Euler-Lagrange equations for this unconstrained minimization problem state that the minimizer satisfies:
+\begin{subequations}
+  \begin{align}
+    - \divergence \dfrac{\delta \Psi_\total}{\delta \grad\bs{u}} + \dfrac{\delta \Psi_\total}{\delta \bs{u}} + \dfrac{\text{d}}{\text{d}t}\dfrac{\delta \Psi_\total}{\delta \Dot{\bs{u}}} & = \bs{0} , \\
+    - \divergence \dfrac{\delta \Psi_\total}{\delta \grad d} + \dfrac{\delta \Psi_\total}{\delta d} + \dfrac{\text{d}}{\text{d}t}\dfrac{\delta \Psi_\total}{\delta \Dot{d}}               & = 0 .
+  \end{align}
+\end{subequations}
+For the quasi-static fracture problems (under the small strain assumption) studied in this work, the total energy can be written in terms of displacements $\bs{u}$ and damage $d$ as:
+\begin{equation}
+  \begin{split}
+    \Psi_\total = & -\underbrace{\left( \int\limits_\bodyboundary \bs{\tau} \cdot \bs{u} \diff{A} + \int\limits_\body \bs{b} \cdot \bs{u} \diff{V} \right)}_{\text{external energy}} + \underbrace{\int\limits_\body g(d)\psi_\elastic^\activeenergy \diff{V} + \int\limits_\body \psi_\elastic^\inactiveenergy \diff{V}}_{\text{degraded elastic energy}} \\ & + \underbrace{\int\limits_\body \dfrac{\Gc}{c_0l} \left( w(d) + l^2 \norm{\grad d}^2 \right) \diff{V}}_{\text{approx. fracture energy}},
+  \end{split}
+\end{equation}
+where $\bs{\tau}$ is the surface traction and $\bs{b}$ is the body force. Substituting the total energy into the Euler-Lagrange equations, we obtain the necessary conditions of the minimizer, which are essentially the governing equations of the given system together with boundary conditions:
+\begin{align}
+  - \divergence \xstress - \bs{b}                                      & = \bs{0} , \quad \text{in }\body,             \\
+  - \divergence \bs{\xi} +  M w'(d) + g'(d)\psi_\elastic^\activeenergy & = 0, \quad \text{in } \body ,                 \\
+  \xstress \cdot \normal                                               & = \bs{\tau}, \quad \text{on } \bodyboundary , \\
+  \bs{\xi} \cdot \normal                                               & = 0, \quad \text{on } \bodyboundary,
+\end{align}
+with constitutive relations
+\begin{align}
+  \xstress & = g(d)\dfrac{\delta \psi_\elastic^\activeenergy}{\delta \grad\bs{u}} + \dfrac{\delta \psi_\elastic^\inactiveenergy}{\delta \grad\bs{u}},              \\
+  \bs{\xi} & = M \kappa \grad d + g(d) \dfrac{\delta \psi_\elastic^\activeenergy }{\delta \grad d} + \dfrac{\delta \psi_\elastic^\inactiveenergy}{\delta \grad d},
+\end{align}
+where $\xstress$ is the degraded stress tensor, $\bs{\xi}$ is the thermodynamic conjugate to $\grad d$ (the dependence of $\psi_\elastic^\activeenergy$ and $\psi_\elastic^\inactiveenergy$ on $\grad d$ is defined in \Cref{s: theory/traction_free} ), $\kappa = 2l^2$ is the interfacial coefficient, and $M = \dfrac{\Gc}{c_0l}$ is often referred to the mobility in keeping with general Allen-Cahn phase-field models. According to \eqref{eq: general phase-field evolution}, and due to the fact that $\bs{\xi}\evalover{d=0} = \bs{0}$, the damage begins to accumulate as soon as:
+\begin{align}
+  \psi_\elastic^\activeenergy > \psi_c = -M\dfrac{w'(0)}{g'(0)} ,
+\end{align}
+where $\psi_c$ is a model-specific energy threshold for damage initiation. For example, a brittle fracture model that uses $w(d) = d^2$ results in a critical energy $\psi_c = 0$, and cohesive-type fracture models that use $w(d) = d$ have a critical energy $\psi_c = -M/g'(0)$.  In this work, we adopt a cohesive fracture model that uses the local dissipation function $w(d) = d$ in conjunction with the degradation function proposed by Lorentz \cite{lorentz2011convergence, lorentz2017nonlocal} such that the critical fracture energy is not necessarily correlated with the other material properties and model parameters, i.e.\ the fracture toughness $\Gc$ and the length scale $l$:
+\begin{align}
+  g(d; p \geqslant 1) = \dfrac{(1-d)^2}{(1-d)^2+\dfrac{M}{\psi_c}d(1+pd)} ,
+\end{align}
+where $p$ controls the size of the fracture process zone and is chosen to be 1 in this work.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Enforcing the traction-free boundary condition}
+For quasi-static mechanical-fracture coupling, the energy balance and thus the corresponding energy minimization problem can be instantiated as:
+\begin{equation}
+  \begin{aligned}
+     & \min_{\bs{u},d} \left( -\widetilde{\Psi}_\external \evalover{\body,\bodyboundary} + \widetilde{\Psi}_\internal \evalover{\body} + \widetilde{\Psi}_\fracture \evalover{\body} \right) , \\
+     & \quad \text{subject to } \Dot{d} \geqslant 0.
+  \end{aligned}
+\end{equation}
+A typical assumption in fracture mechanics is that only tensile/expansive components of the elastic energy contribute to crack initiation and growth. Therefore, the degraded elastic energy is often split into an active part that is coupled with fracture, and an inactive part that is independent of fracture. According to the split of elastic energy, we have:
+\begin{align}
+  \widetilde{\Psi}_\elastic = \int\limits_\body g(d)\psi_\elastic^\activeenergy \diff{V} + \int\limits_\body \psi_\elastic^\inactiveenergy \diff{V} .
+\end{align}
+Widely used active/inactive splits are spectral split \cite{miehe_2010_p1, miehe_2010_p2} and volumetric-deviatoric split \cite{amor_2009}.  Unfortunately, neither the spectral split nor the volumetric-deviatoric split completely prevent tensile or shear tractions from being transmitted across fully-damaged surfaces.  Accordingly, we now develop a split that is motivated by the consideration of frictionless contact conditions along fully damaged surfaces.
+
+We begin by recalling the standard Kuhn-Tucker optimality conditions for frictionless contact under small deformation, which can be written as
+\begin{equation}
+  t_N \geqslant 0, \quad u_I \leqslant 0, \quad t_N u_I = 0,
+\end{equation}
+where $t_N$ is the contact pressure and $u_I$ denotes the interpenetration between the contact surfaces.  The contact pressure is typically obtained from the stress and the unit outward normal to the contact surface.  In regularized models of fracture, however, it can be difficult to identify a unique surface based on the damage field.  Accordingly, we rely on the gradient of the damage field to construct an approximate normal $\xnormal$, viz.
+\begin{equation}
+  \xnormal = \frac{\grad d}{ \norm{\grad d} },
+\end{equation}
+and calculate the normal pressure as
+\begin{equation}
+  \label{eq: pressure}
+  t_N = -\xnormal\cdot\stress\cdot\xnormal.
+\end{equation}
+
+Our split keys off the sign of the normal pressure, by isolating the cases of a positive pressure (for contact) from a negative pressure (for opening).  In particular, we construct a ``normal-tangential'' stress decomposition of the form
+\begin{equation}
+  \stress  = \stress_n^{+} + \stress_n^{-}  + \stress_t ,
+\end{equation}
+where
+\begin{equation}
+  \stress_n^\pm = \macaulay{-t_N}_\pm\xnormal\otimes\xnormal, \quad  \stress_t = \stress - \stress_n^+ - \stress_n^-,
+\end{equation}
+with $\macaulay{-t_N}_\pm := (-t_N \pm \abs{-t_N})/2$ denoting a signed version of the standard Macaulay bracket.
+
+In the vicinity of the regularized crack surface, we then propose the use of a stress-based elastic energy split, hereafter referred to as the \textit{contact split},
+that takes the form:
+\begin{subequations}
+  \begin{align}
+     & \psi_\elastic = \psi_\elastic^\activeenergy + \psi_\elastic^\inactiveenergy , \label{eq: odd begin}                                                          \\
+     & \psi_\elastic^\activeenergy = \dfrac{1}{2}\stress^\activeenergy:\strain, \quad \psi_\elastic^\inactiveenergy = \dfrac{1}{2}\stress^\inactiveenergy:\strain , \\
+     & \stress^\activeenergy = \stress_n^+ + \stress_t, \quad \stress^\inactiveenergy = \stress_n^-.
+  \end{align}
+\end{subequations}
+The corresponding constitutive relation follows as:
+\begin{subequations}
+  \begin{align}
+    \widetilde{\stress} & = \dfrac{\delta\widetilde{\psi}_\elastic}{\delta\strain} = g(d)\dfrac{\delta\psi_\elastic^\activeenergy}{\delta\strain} + \dfrac{\delta\psi_\elastic^\inactiveenergy}{\delta\strain} ,  \\
+                        & = g(d)\dfrac{\delta}{\delta\strain}\left( \dfrac{1}{2}\stress^\activeenergy:\strain \right) + \dfrac{\delta}{\delta\strain}\left( \dfrac{1}{2}\stress^\inactiveenergy:\strain \right) , \\
+                        & = g(d)\stress^\activeenergy + \stress^\inactiveenergy , \label{eq: odd end}
+  \end{align}
+\end{subequations}
+and
+\begin{align}
+  \bs{\xi} & = M \kappa \grad d + g(d) \dfrac{\delta \psi_\elastic^\activeenergy}{\delta \grad d} + \dfrac{\delta \psi_\elastic^\inactiveenergy}{\delta \grad d} ,
+\end{align}
+where
+\begin{align}
+  \dfrac{\delta \psi_\elastic^\activeenergy}{\delta \grad d} = -\dfrac{\delta \psi_\elastic^\inactiveenergy}{\delta \grad d} = \dfrac{1}{\norm{\grad d}} \left[ 2 \macaulay{-t_N}_- \varepsilon_N \xnormal - H(t_N) \varepsilon_N \stress \cdot \xnormal - \macaulay{-t_N}_- \strain \cdot \xnormal \right],
+\end{align}
+and $H$ denotes the Heaviside function.
+
+It bears emphasis that the proposed elastic energy split only serves to enforce the crack surface traction free boundary condition, and it is not reasonable to expect it to reliably govern crack nucleation and growth. In the present work, to ensure that such a normal-tangential split is  applied only in the vicinity of the crack surface, we impose a simple threshold $d_{\text{critical}}$ such that we apply
+\begin{align*}
+  \begin{cases}
+    \text{the contact split \eqref{eq: odd begin} to \eqref{eq: odd end}, } d \geqslant d_{\text{critical}} \\
+    \text{the strain-based spectral split \cite{miehe_2010_p1, miehe_2010_p2}, } d < d_{\text{critical}}.
+  \end{cases}
+\end{align*}
+
+\begin{remark}
+  Alternative to a threshold, in principle a total energy could be constructed using a blending function that transitions between a standard split and the contact split.
+\end{remark}
+
+It can be shown that the definition of the contact pressure \eqref{eq: pressure} follows by relaxing the frictionless constraint into a minimization problem, and $t_N$ is therefore the best scalar quantity one can choose to approximate the traction-free boundary condition:
+\begin{subequations}
+  \begin{align}
+    \min\limits_{t_N} \quad & \ \norm{\stress_t(t_N)\cdot\xnormal}^2                                                                               \\
+    =                       & \ \norm{(\stress-\macaulay{-t_N}_+\xnormal\otimes\xnormal-\macaulay{-t_N}_- \xnormal\otimes\xnormal)\cdot\xnormal}^2 \\
+    =                       & \ \norm{(\stress+t_N \xnormal\otimes\xnormal)\cdot\xnormal}^2                                                        \\
+    =                       & \ t_N^2 + 2t_N\xnormal\cdot\stress\cdot\xnormal + \norm{\stress\cdot\xnormal}^2,
+  \end{align}
+\end{subequations}
+and the minimizer is
+\begin{align}
+  t_N = \argmin\limits_{t_N} \left( t_N^2 + 2t_N\xnormal\cdot\stress\cdot\xnormal + \norm{\stress\cdot\xnormal}^2 \right) = -\xnormal\cdot\stress\cdot\xnormal .
+\end{align}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Stochastic models for fracture properties}
+
+In the current work, we allow for material property inhomogeneity in the macroscopic continuum model. Specifically, we introduce the random field $\{\bs{P}(\bs{x}) = (P_1(\bs{x}), P_2(\bs{x})), \bs{x} \in \body\}$ defined on the probability space $(\Theta, \Sigma, P)$, indexed by $\body$ and with values in $\field{R}_{>0} \times \field{R}_{>0}$, such that $\{P_1(\bs{x}), \bs{x} \in \body\}$
+(respectively $\{P_2(\bs{x}), \bs{x} \in \body\}$) is a prior representation of $\{\Gc(\bs{x}), \bs{x} \in \body\}$ (respectively $\{\psi_c(\bs{x}), \bs{x} \in \body\}$).
+Due to the restrictions on the state space, the bivariate random field $\{\bs{P}(\bs{x}), \bs{x} \in \body\}$ is non-Gaussian. In order to model nongaussianity, the random field $\{\bs{P}(\bs{x}), \bs{x} \in \body\}$ is \textit{defined} as
+\begin{align}
+  \bs{P}(\bs{x}) := \fspace{T}(\bs{\Xi}(\bs{x}), \bs{x})~, \quad \forall \bs{x} \in \body~, \label{eq: def-translation}
+\end{align}
+where $\fspace{T}$ is a measurable, nonlinear mapping and $\{\bs{\Xi}(\bs{x}),\bs{x} \in \body\}$ is a centered Gaussian random field with values in $\field{R}^2$ to be defined momentarily. From a methodological standpoint, it should be noticed that the transformation $\fspace{T}$ is constructed \textit{a priori} and used to define $\{\bs{P}(\bs{x}), \bs{x} \in \body\}$ such that the latter constitutes a surrogate capturing some essential features of $\{(\Gc(\bs{x}),\psi_c(\bs{x})), \bs{x} \in \body\}$
+(while exhibiting a low dimensional parameterization). In general, the existence of a nonlinear mapping $\fspace{T}$ such that \eqref{eq: def-translation} holds for a \textit{given} non-Gaussian field is not guaranteed; see, e.g., \cite{Grigoriu2009}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Construction of the Non-Gaussian Model}
+In this work, the transformation $\fspace{T}$ is constructed by imposing the family $\{f_{\bs{x}}\}_{\bs{x}\in\body}$ of first-order marginal distributions:
+\begin{align}
+  P_{\bs{P}(\bs{x})}(d\bs{p}) = f_{\bs{x}}(\bs{p})\mathrm{d}\bs{p}~, \quad \forall \bs{x} \in \body~,
+\end{align}
+where $f_{\bs{x}}$ is the probability density function of $\bs{P}(\bs{x})$, $\bs{x}$ being fixed in $\body$, and $\mathrm{d}\bs{p}=\mathrm{d}p_1\mathrm{d}p_2$ is the Lebesgue measure in $\field{R}^2$. It is assumed that $f_{\bs{x}}(\cdot) = f(\cdot; \bs{w}_{\bs{x}})$, where $\bs{w}_{\bs{x}}$ is a vector-valued hyperparameter indexed by $\bs{x} \in \body$. In order to simplify the analysis, we assume from now on that the aforementioned hyperparameter does not depend on location, and we write $f_{\bs{x}}(\cdot) = f(\cdot; \bs{w})$ using a slight abuse of notation.
+
+The construction of $f$ can be achieved in many different ways. In what follows, the construction is performed by assuming that (i) $\Gc$ and $\psi_c$ (together with their inverses) are positive and have finite variance, for physical consistency, and (ii) the two fracture properties can exhibit some level of correlation. In accordance with information theory \cite{Jaynes1957a,Jaynes1957b} and more precisely, with the principle of maximum entropy \cite{Shannon1948a,Shannon1948b}, the first assumption leads to the consideration of Gamma marginal distributions. Following the notation introduced above, we shall impose that
+\begin{align}
+  P_{P_1(\bs{x})}(dp_1) = f_\mathcal{G}(p_1; (\underline{p}_1,\delta_{1}))dp_1~, \quad \forall \bs{x} \in \body~,
+\end{align}
+and
+\begin{align}
+  P_{P_2(\bs{x})}(dp_2) = f_\mathcal{G}(p_2; (\underline{p}_2,\delta_{2}))dp_2~, \quad \forall \bs{x} \in \body~,
+\end{align}
+where $f_\mathcal{G}(\cdot; (\underline{p}, \delta))$ denotes the univariate Gamma probability density function with mean $\underline{p}$ and coefficient of variation $\delta$. In this setting, the joint distribution of $\bs{P}(\bs{x})$ must be constructed from the knowledge of the marginal laws associated with $P_1(\bs{x})$ and $P_2(\bs{x})$. This ill-posed problem does not admit a unique solution, and many possible forms were proposed in the case of a bivariate Gamma distribution (see, e.g., Chapter 8 in \cite{Balakrishnan2009} for a review). Here, we use the bivariate Gamma distribution derived by Moran using a copula \cite{Moran1969}:
+\begin{align}
+  f(\bs{p}) = \frac{1}{\sqrt{1-\rho^2}}\exp\left\{-\frac{1}{2(1-\rho^2)}\left[(\rho \tilde{p}_1)^2-2\rho \tilde{p}_1\tilde{p}_2+(\rho \tilde{p}_2)^2\right]\right\} f_\mathcal{G}(p_1; (\underline{p}_1,\delta_{1})) f_\mathcal{G}(p_2; (\underline{p}_2,\delta_{2})),
+\end{align}
+where $\rho \in (-1,1)$ is the (Pearson) correlation coefficient between $P_1(\bs{x})$ and $P_2(\bs{x})$ ($\bs{x}$ being fixed), and
+\begin{align}
+  \tilde{p}_i = \Phi^{-1}(F_\mathcal{G}(p_i; (\underline{p}_i,\delta_{i})))~, \quad i\in\{1,2\}~,
+\end{align}
+where $\Phi^{-1}$ is the inverse of the univariate Gaussian distribution function and $F_\mathcal{G}(\cdot; (\underline{p}_i,\delta_{i})))$ is the univariate Gamma distribution function with mean $\underline{p}_i$ and coefficient of variation $\delta_i$ (which is associated with $f_\mathcal{G}(\cdot; (\underline{p}_i, \delta_i))$), and that the extreme cases $\rho = \pm 1$ are also well defined; see \cite{Moran1969}. Notice that the vector of hyperparameters then reads as $\bs{w} = (\underline{p}_1,\delta_{1},\underline{p}_2,\delta_{2},\rho)$. It follows that
+\begin{align}
+  P_1(\bs{x}) = F_\mathcal{G}^{-1}(\Phi(\Upsilon_1(\bs{x})); (\underline{p}_1,\delta_{1})))
+\end{align}
+and
+\begin{align}
+  P_2(\bs{x}) = F_\mathcal{G}^{-1}(\Phi(\Upsilon_2(\bs{x})); (\underline{p}_2,\delta_{2})))
+\end{align}
+for any $\bs{x}$ fixed in $\body$, where $\bs{\Upsilon}(\bs{x}) = (\Upsilon_1(\bs{x}),\Upsilon_2(\bs{x}))$ is a centered Gaussian random variable with covariance matrix \cite{Moran1969}:
+\begin{align}
+  [C_{\bs{\Upsilon}}] =
+  \begin{bmatrix}
+    1    & \rho \\
+    \rho & 1
+  \end{bmatrix}~.
+\end{align}
+Upon using the Cholesky factorization $[C_{\bs{\Upsilon}}] = [L_{\bs{\Upsilon}}]^\mathrm{T} [L_{\bs{\Upsilon}}]$, it can be deduced that $\{\bs{P}(\bs{x}), \bs{x} \in \body\}$ can be defined through
+\begin{align}\label{eq: def-P1}
+  P_1(\bs{x}) = F_\mathcal{G}^{-1}(\Phi(\Xi_1(\bs{x})); (\underline{p}_1,\delta_{1})))~, \quad \forall \bs{x} \in \body~,
+\end{align}
+and
+\begin{align}\label{eq: def-P2}
+  P_2(\bs{x}) = F_\mathcal{G}^{-1}(\Phi(\rho \Xi_1(\bs{x}) + \sqrt{1-\rho^2} \Xi_2(\bs{x})); (\underline{p}_2,\delta_{2})))~,\quad \forall \bs{x} \in \body~,
+\end{align}
+where $\{\bs{\Xi}(\bs{x})=(\Xi_1(\bs{x}),\Xi_2(\bs{x})), \bs{x} \in \field{R}^n\}$ is a centered Gaussian random field with statistically independent, centered Gaussian components such that $\bs{\Upsilon}(\bs{x}) = [L_{\bs{\Upsilon}}]^\mathrm{T}\bs{\Xi}(\bs{x})$,
+$\forall \bs{x} \in \body$. \Cref{eq: def-P1,eq: def-P2} define the nonlinear mapping $\fspace{T}$ introduced in \Cref{eq: def-translation} such that $\bs{P}(\bs{x}) = \fspace{T}(\bs{\Xi}(\bs{x}))$,
+for all $\bs{x} \in \body$ (note that the spatial dependence of the transformation was dropped given the retained modeling assumptions). This relation can equivalently be stated as $\bs{P}(\bs{x}) = \fspace{T}^\ast(\bs{\Upsilon}(\bs{x}))$, with obvious notation. The Gaussian random fields are defined in the next section.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Construction of the Underlying Gaussian Models}
+
+In accordance with the periodic assumption retained in the mechanical modeling framework, it is assumed that each random field $\{\Xi_i(\bs{x}), \bs{x} \in \field{R}^n\}$, $i \in \{1,2\}$, satisfies the invariance property $\Xi_i(\bs{x}) = \Xi_i(\bs{x}+p\bs{x}')$ for all $\bs{x} \in \body$ and $\bs{x}' \in \field{Z}^n$
+$P$-almost surely, where it is assumed (without loss of generality) that $\body = ([0,p])^n$. Consequently, the centered random field $\{\bs{\Xi}(\bs{x}), \bs{x} \in \field{R}^n\}$ is uniquely defined by its restriction to $\body$.  Assuming the stationary of this restriction in $\body$, the underlying Gaussian field is defined through the matrix-valued covariance function $\bs{\tau} \mapsto [\cor_{\bs{\Xi}}(\bs{\tau})] = \field{E}\{\bs{\Xi}(\bs{x}+\bs{\tau}) \otimes \bs{\Xi}(\bs{x})\}$
+such that
+\begin{align}
+  [\cor_{\bs{\Xi}}(\bs{\tau})] = \left[\begin{array}{cc}\cor_1(\bs{\tau}) & 0 \\0 & \cor_2(\bs{\tau}) \end{array}\right]~, \quad \forall \bs{\tau} \in ([0,p])^n~,
+\end{align}
+where $\cor_1$ and $\cor_2$ are the $p$-periodic covariance functions defining (the restrictions of) $\{\Xi_1(\bs{x}), \bs{x} \in \field{R}^n\}$ and $\{\Xi_2(\bs{x}), \bs{x} \in \field{R}^n\}$ (to $\body$), respectively.
+For the sake of illustration, we assume similar covariance functions for the two Gaussian components, setting $\cor_1 = \cor_2 = \cor$,
+and we consider the case of a separable covariance function in $\field{R}^2$:
+\begin{align}
+  \cor(\bs{\tau}) = \cor_1(\tau_1) \times \cor_2(\tau_2)~. \label{eq: composite covariance function}
+\end{align}
+We further assume that $\cor_1$ and $\cor_2$ only differ in the choice of hyperparameters, so that the above equation can be written, using an abuse of notation, as
+\begin{align}
+  \cor(\bs{\tau}) = \cor(\tau_1;L_1) \times \cor(\tau_2;L_2)~,
+\end{align}
+where $L_1 > 0$ and $L_2 > 0$ are model parameters controlling the correlation ranges of the fields along the directions defined by the canonical basis in $\field{R}^2$. The univariate covariance function $\cor$ is assumed to take the generic form
+\begin{align}
+  \cor_\phi(\tau; L) & = \exp\left( -c \phi(\tau; L)\right )~, \quad \forall \tau \in [0,p]~, \label{eq: def-generic-cov}
+\end{align}
+where $c$ is a positive constant (that depends on both $\phi$ and $L$) to be defined and $\phi$ is a $p$-periodic function taken as
+\begin{align}
+  \phi(\tau; L) = \dfrac{|\sin\left( \pi\tau/p \right)|}{L} \quad \text{(Periodic Exponential, PE),} \label{eq: def-exp}
+\end{align}
+or
+\begin{align}
+  \phi(\tau; L) = \dfrac{\sin\left( \pi\tau/p \right)^2}{L^2} \quad \text{(Periodic Squared-Exponential, PSE)}~. \label{eq: def-sexp}
+\end{align}
+The subscript in the notation $\cor_\phi$ underlines the choice of a particular periodic function. The two functions defined by \eqref{eq: def-exp} and \eqref{eq: def-sexp} are specifically chosen so as to investigate the impact of sample path regularity on fracture simulation outcomes. In particular, and while both functions yield random fields of fracture properties that are mean-square continuous, the periodic squared-exponential covariance function obtained by combining \eqref{eq: def-generic-cov} and \eqref{eq: def-sexp} leads to mean-square differentiable fields which exhibit ``smooth'' realizations. On the contrary, the periodic exponential function defined by considering \eqref{eq: def-exp} yields random fields that are not mean-square differentiable and thus have much rougher realizations.
+
+In order to ensure meaningful comparison between the covariance models, the normalization constants are determined such that the spatial correlation length along the direction of one main direction is equal to $L$, that is:
+\begin{align}
+  \int_0^{p/2} |\cor_\phi(\tau; L)| \mathrm{d}\tau = L~.
+\end{align}
+For later use, we introduce the normalized correlation length $L^* = L/p$. For the squared exponential model, the constant $c^{}_\text{PSE}$ is hence required to satisfy the nonlinear equation
+\begin{align}
+  \dfrac{1}{2}p\exp\left( -\dfrac{c^{}_\text{PSE}}{2L^2} \right)I_0(\dfrac{c^{}_\text{PSE}}{2L^2}) = L~, \label{eq: pse normalization}
+\end{align}
+where $I_0$ is the 0th order modified Bessel's function, whereas the constant $c^{}_\text{PE}$ associated with the exponential covariance kernel must satisfy
+\begin{align}
+  \dfrac{1}{2}p\left[ I_0\left(\dfrac{c^{}_\text{PE}}{L}\right) - S_0\left(\dfrac{c^{}_\text{PE}}{L}\right) \right] = L~, \label{eq: se normalization}
+\end{align}
+where $S_0$ is the 0th order modified Struve's function.
+In this work, these equations are solved numerically using a Newton-Raphson solver.
+
+It should be noticed that the covariance function $\bs{\tau} \mapsto [\cor_{\bs{\Upsilon}}(\bs{\tau})]$ defining the restriction of the Gaussian random field $\{\bs{\Upsilon}(\bs{x}), \bs{x} \in \field{R}^n\}$ to $\body$ is given by
+\begin{align}
+  [\cor_{\bs{\Upsilon}}(\bs{\tau})] = \left[\begin{array}{cc}\cor_1(\bs{\tau}) & \rho \cor_1(\bs{\tau}) \\\rho \cor_1(\bs{\tau}) & \rho^2 \cor_1(\bs{\tau}) + (1-\rho^2) \cor_2(\bs{\tau}) \end{array}\right]~, \quad \forall \bs{\tau} \in ([0,p])^n~,
+\end{align}
+which shows the role played by the parameter $\rho$ on the covariance function of $\{P_2(\bs{x}), \bs{x} \in \body\}$ (after the action of $\fspace{T}^*$).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Fundamental Properties of the Random Field of Fracture Properties}
+
+Based on the construction proposed in Sections \ref{s: theory/uq/non_gaussian_model} and \ref{s: theory/uq/gaussian_model}, the non-Gaussian random field $\{\bs{P}(\bs{x}), \bs{x} \in \body\}$ modeling the fracture properties satisfies the following properties:
+\begin{enumerate}
+  \item $P_i(\bs{x}) > 0$ for all $\bs{x} \in \body$ and $i \in \{1,2\}$, almost surely.
+  \item $\{\bs{P}(\bs{x}), \bs{x} \in \body\}$ is of second order, $\field{E}\{\|\bs{P}(\bs{x})\|^2\} < + \infty$ $\forall \bs{x} \in \body$.
+  \item The field satisfies $\bs{P}((0, x_2)) = \bs{P}((p, x_2))$ and $\bs{P}((x_1, 0)) = \bs{P}((x_1, p))$, almost surely.
+  \item The mean function $\bs{x} \mapsto \underline{\bs{p}}(\bs{x}) = \field{E}\{\bs{P}(\bs{x})\}$ is given by $\underline{\bs{p}}(\bs{x}) = \underline{\bs{p}} = (\underline{p}_1, \underline{p}_2)$ for all $\bs{x} \in \body$.
+  \item The covariance matrix at any location $\bs{x} \in \body$ reads as
+        \begin{align}
+          \field{E}\{(\bs{P}(\bs{x}) - \underline{\bs{p}}) \otimes (\bs{P}(\bs{x}) - \underline{\bs{p}})\} = \left[\begin{array}{cc} \underline{p}_1^2 \delta_1^2 &  \underline{p}_1 \underline{p}_2 \delta_1  \delta_2 \rho  \\[1mm] \underline{p}_1 \underline{p}_2 \delta_1  \delta_2 \rho & \underline{p}_2^2 \delta_2^2 \end{array}\right]~.
+        \end{align}
+\end{enumerate}
+It can also be deduced that the random field $\{\bs{P}(\bs{x}), \bs{x} \in \body\}$ is mean-square continuous for the PE and PSE correlation functions introduced in Section \ref{s: theory/uq/gaussian_model}. Finally, the field is mean-square differentiable for the PSE covariance function.
+
+Recall that in the properties above, $\underline{p}_1$ and $\underline{p}_2$ correspond to the desired mean values for the fracture toughness $\Gc$ and energy threshold $\psi_c$, and $\delta_1$ and $\delta_2$ are the coefficients of variation that control the statistical dispersions of these parameters. The parameter $\rho$ measures the level of correlation between the fracture properties.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Stochastic Simulation Aspects}
+
+Simulating realizations of the random field of fracture properties requires (i) drawing realizations of the underlying Gaussian random fields defined in \Cref{s: theory/uq/gaussian_model}, and (ii) evaluating the nonlinear transformations defined by \eqref{eq: def-P1} and \eqref{eq: def-P2}. Routines to compute the latter mappings are readily available in many scientific computing environments. Regarding the generation of the Gaussian fields, we presently resort to truncated Karhunen-Lo\`eve expansions. Each (mean-square continuous) random field $\{\Xi_i(\bs{x}), \bs{x} \in \field{R}^n\}$, $i \in \{1,2\}$, is thus expanded as
+\begin{align}
+  \Xi_i(\bs{x}) = \sum\limits_{k=1}^{q_i} \sqrt{\lambda_k} \eta_k \varphi_k(\bs{x})~,
+\end{align}
+where $\{\eta_k\}_{k \geqslant 1}$ is a set of independent normalized Gaussian random variables, and $\{\lambda_k\}_{k \geqslant 1}$ and $\{\varphi_k\}_{k \geqslant 1}$ are the nonnegative eigenvalues (ordered as a nonincreasing sequence) and the associated orthonormal eigenfunctions of the covariance function that satisfy the following integral equation (which is a Fredholm integral equation of the second kind):
+\begin{align}
+  \int\limits_\body \cor(\bs{x},\bs{x}')\varphi_k(\bs{x}') \diff{\bfX}' = \lambda_k\varphi_k(\bs{x})~, \quad \forall \bs{x} \in \body~, \label{eq: FIE2}
+\end{align}
+where $\cor$ is the covariance kernel introduced in Section \ref{s: theory/uq/gaussian_model} (note the abuse of notation, with $\bs{\tau} = \bs{x} - \bs{x}'$). For arbitrary covariance functions, this integral equation can be solved by using a standard Galerkin formulation \cite{GhanemSpanos,LMK2010}: given a finite set of basis functions $\{\phi_j\}_{j=1}^{N_\text{node}} \subset L_2(\body)$,
+each eigenfunction is approximated as
+\begin{align}
+  \varphi_k(\bs{x}) \approx \sum_{j=1}^{N_{\text{node}}} \alpha_{j}^{(k)}\phi_j(\bs{x})~. \label{eq: eigenfunction approximation}
+\end{align}
+Substituting this approximation in the integral equation and enforcing the residual to be orthogonal to $\mathspan(\{\phi_j\}_{j=1}^{N_\text{node}})$, we obtain
+\begin{align}
+  \sum_{j=1}^{N_{\text{node}}} \alpha_{j}^{(k)} \int\limits_\body \int\limits_\body \cor(\bs{x},\bs{x}') \phi_j(\bs{x}')\phi_\ell(\bs{x}) \diff{\bfX}' \diff{\bfX} = \sum_{j=1}^{N_{\text{node}}} \alpha_{j}^{(k)} \int\limits_\body \lambda_k \phi_j(\bs{x})\phi_\ell(\bs{x}) \diff{\bfX}~. \label{eq: gevp}
+\end{align}
+Considering the above equation for all eigenfunctions leads to the generalized eigenvalue problem $[K] [A] = [\Lambda] [M] [A]$, where $[A]_{j\ell} = \alpha_j^{(\ell)}$, $[\Lambda]_{j\ell} = \lambda_j \delta_{j_\ell}$ (with $\delta_{j_\ell}$ the Kronecker delta), and $[K]$ and $[M]$ are the matrices with entries
+\begin{align}
+  [K]_{j\ell} = \int\limits_\body \int\limits_\body \cor(\bs{x},\bs{x}') \phi_j(\bs{x}')\phi_\ell(\bs{x}) \diff{\bfX}' \diff{\bfX}~, \quad [M]_{j\ell} = \int\limits_\body \phi_j(\bs{x})\phi_\ell(\bs{x}) \diff{\bfX}~.
+\end{align}
+For each Gaussian field $\{\Xi_i(\bs{x}), \bs{x} \in \field{R}^n\}$, the truncation order $q_i \leqslant N_{\text{node}}$ can be determined by analyzing the convergence of the error function
+\begin{align}
+  \varepsilon_{\text{KL}}(q) = 1-\left( \sum\limits_{k=1}^q \lambda_k \middle/ \sum\limits_{k=1}^{N_\text{node}} \lambda_k \right)~, \label{eq: truncation}
+\end{align}
+and by selecting $q_i$ such that $\varepsilon_{\text{KL}}(q_i) \leqslant \varepsilon_0$ for some given tolerance $0 < \varepsilon_0 \ll 1$.
