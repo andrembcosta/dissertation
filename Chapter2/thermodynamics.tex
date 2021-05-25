@@ -1,2 +1,53 @@
 \section{Thermodynamics}
 \label{section: framework/thermodynamics}
+
+\subsection{Thermodynamics}
+\label{s: theory/thermodynamics}
+
+The rates of change of the kinematic variables are denoted as $\mathcal{V} = \{ \dot{\bs{\upphi}}, \dot{\defgrad}^p, \epdot, \dot{d} \}$. The generalized velocities of the kinematic state variables and their corresponding thermodynamic force conjugates are collected in the sets
+\begin{align}
+  \dot{\Lambda} = \{ \grad \dot{\defgrad}, \dot{\defgrad}^p, \epdot, \dot{d}, \grad \dot{d} \}, \quad \mathcal{F} = \{ \bfP, \bfT, Y, f, \bs{\xi} \}.
+\end{align}
+
+The internal power expenditure per unit volume takes the form
+\begin{align}
+  \mathcal{P}_\text{int} = \bfP:\dot{\bfF} + \bfT:\dot{\defgrad}^p + Y\epdot + f\dot{d} + \bs{\xi}\cdot\grad\dot{d}, \label{eq: internal power expenditure}
+\end{align}
+and the external power expenditure is assumed to be zero, i.e.\ no surface traction, body force, or the so-called micro-forces, $\mathcal{P}_\text{ext}(\mathcal{V}) = 0$.
+
+Let $\psi$ be the Helmholtz free energy per unit volume in the reference configuration. Assuming no external volumetric heat source, the total entropy rate, the internal entropy production rate and the external entropy input rate per unit volume can be rearranged as
+\begin{subequations}
+  \begin{align}
+    \rho T \dot{s}            & = \rho T \dot{s}_\text{int} + \rho T \dot{s}_\text{ext}, \label{eq: entropy rate}                                         \\
+    \rho T \dot{s}_\text{int} & \equiv \mathcal{P}_\text{int} - \dot{\psi} - \dfrac{1}{T}\bfq\cdot\grad T \geqslant 0, \label{eq: internal entropy rate}, \\
+    \rho T \dot{s}_\text{ext} & \equiv - \divergence \bfq + \dfrac{1}{T}\bfq\cdot\grad T, \label{eq: external entropy rate}
+  \end{align}
+\end{subequations}
+where $\rho$ is the reference density, and $\bfq$ is the heat flux. Substituting \eqref{eq: internal power expenditure} into \eqref{eq: internal entropy rate} yields the local dissipation inequality
+\begin{align}
+  \rho T \dot{s}_\text{int} = \bfP:\dot{\bfF} + \bfT:\dot{\defgrad}^p + Y\epdot + f\dot{d} + \bs{\xi}\cdot\grad\dot{d} - \dot{\psi} - \dfrac{1}{T}\bfq\cdot\grad T \geqslant 0. \label{eq: dissipation inequality 1}
+\end{align}
+
+We assume that the generalized forces $\bfP$, $\bfT$ and $\bs{\xi}$ are purely energetic, the generalized force $Y$ is purely dissipative, and the generalized force $f$ can be additively decomposed into an energetic part and a dissipative part. That is
+\begin{align}
+  \bfP = \bfP^\text{en}(\Lambda), \quad \bfT = \bfT^\text{en}(\Lambda), \quad Y = Y^\text{dis}(\epdot; \Lambda), \quad f = f^\text{en}(\Lambda) + f^\text{dis}(\dot{d}; \Lambda), \quad \bs{\xi} = \bs{\xi}^\text{en}(\Lambda). \label{eq: thermodynamic force additive decomposition}
+\end{align}
+The energetic forces depend only on the current thermodynamic state, while the dissipative forces depend only on the conjugate rate variables. Apparently, the dissipative forces must vanish in the quasi-static setting, i.e.\ $\lim_{\epdot \to 0^+} Y^\text{dis} = 0$ and $\lim_{\dot{d} \to 0^+} f^\text{dis} = 0$.
+
+Let $a_{,b}$ denote the partial derivative of $a$ with respect to $b$. The time derivative of the free energy density can be written as
+\begin{align}
+  \dot{\psi} = \psi_{, \bfF}:\dot{\bfF} + \psi_{, \bfF^c}:\dot{\defgrad}^p + \psi_{, \varepsilon^c}\epdot + \psi_{, d}\dot{d} + \psi_{, \grad d}\cdot\grad\dot{d}. \label{eq: free energy rate}
+\end{align}
+Substituting \eqref{eq: thermodynamic force additive decomposition} and \eqref{eq: free energy rate} into \eqref{eq: dissipation inequality 1} and applying the Coleman-Noll procedure lead to restrictions on the constitutive relations:
+\begin{align}
+  \bfP = \psi_{, \bfF}, \quad \bfT = \psi_{, \bfF^c}, \quad \psi_{, \varepsilon^c} = 0, \quad f^\text{en} = \psi_{, d}, \quad \bs{\xi} = \psi_{, \grad d}, \label{eq: constitutive restrictions}
+\end{align}
+and the dissipation inequality \eqref{eq: dissipation inequality 1} reduces to
+\begin{align}
+  \rho T \dot{s}_\text{int} = Y\epdot + f^\text{dis}\dot{d} - \dfrac{1}{T}\bfq\cdot\grad T \geqslant 0. \label{eq: dissipation inequality 2}
+\end{align}
+
+Substituting \eqref{eq: dissipation inequality 2} and \eqref{eq: external entropy rate} into \eqref{eq: entropy rate}, and using the definition of entropy $s = -\rho\psi_{, T}$ and heat capacity $c \equiv -\rho T \psi_{, TT}$, the heat equation can be written as
+\begin{align}
+  \rho T \dot{s} = \rho c \dot{T} = - \divergence\bfq + Y\epdot + f^\text{dis}\dot{d}. \label{eq: heat equation}
+\end{align}

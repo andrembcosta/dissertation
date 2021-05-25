@@ -1,2 +1,26 @@
 \section{Kinematics and Constraints}
 \label{section: framework/kinematics}
+
+We start by defining degrees of freedom in the system. Let $\body$ be a body consisting of a continuous collection of material points. Let $\body_0 \subset \mathbb{R}^d$ be the reference configuration at some time $t = t_0$, whose particles are identified by their position $\btX$, and $\body_t$ be the current configuration at time $t > t_0$, with particles at position $\btx$. Let $\bs{\upphi}: \btX \mapsto \btx$ be the deformation map from $\btX \in \body_0$ to $\btx \in \body_t$.
+The deformation gradient is denoted as $\defgrad = \grad \bs{\upphi}$, where the operator $\grad$ denotes differentiaton with respect to $\btX$. The Jacobian determinant of the deformation gradient is defined as $J = \det\defgrad$ Plastic (creep) deformations are modeled through the framework of multiplicative decomposition
+\begin{align}
+  \defgrad = \defgrad^e \defgrad^p \defgrad^g,
+\end{align}
+where $\defgrad^e$, $\defgrad^p$ are referred to as the elastic and plastic deformation gradients, respectively. $\defgrad^g$ is the product of eigen deformation gradients. For example, isotropic thermal expansion can be accounted by $\defgrad^g = (1+\alpha \Delta T)\bfI$, where $\alpha$ is the thermal expansion coefficient, and $T$ is the temperature. In general, the plastic distortion evolves subject to constraints of the following form
+\begin{align}
+  \mathcal{Z}(\dot{\defgrad}^p {\defgrad^p}^{-1}, \epdot) = 0,
+\end{align}
+where $\ep$ is the effective plastic strain.
+
+Crack surfaces are regularized and modeled using a phase-field $d$, $0 \leqslant d leqslant 1$, where $d = 0$ represents the intact state of a material point, and $d = 1$ indicates the material point has lost all of its load-carrying capacity.
+
+Both the plastic distortion and the fracture evolution are considered irreversible, i.e.
+\begin{align}
+  \epdot \geqslant 0, \quad \dot{d} \geqslant 0. \label{eq: irreversibility constraints}
+\end{align}
+
+The collected set of kinematic degrees of freedom are
+\begin{align}
+  \mathcal{K} = \{ \bs{\upphi}, \defgrad^p, \ep, d \},
+\end{align}
+and the thermodynamic and caloric states of the system are characterized by the temperature $T$ and the kinematics $\mathcal{K}$.
