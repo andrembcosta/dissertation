@@ -1,53 +1,130 @@
 \section{Thermodynamics}
 \label{section: framework/thermodynamics}
 
-\subsection{Thermodynamics}
-\label{s: theory/thermodynamics}
+Recall that the motions of the body are described by the deformation mapping $\bs{\upphi}: \body_0 \times [t_0, t] \mapsto \mathbb{R}^d$.
+Let $\rho_0$ be the density in the reference configuration, $\btb$ be the distributed body force per unit mass, $\bfP$ be the first Piola-Kirchhoff stress, $\normal_0$ be the outward normal in the reference configuration, $u$ be the internal energy density, $k$ be the kinetic energy density, $\mathcal{P}^\text{ext}$ be the external power expenditure, $s$ be the entropy density, $q$ be the distributed heat source per unit mass, and $\bth$ be the heat flux. The densities $u$, $k$ and $s$ are all defined per unit volume in the reference configuration.
+The motions of the body must obey the following conservations and thermodynamic laws:
 
-The rates of change of the kinematic variables are denoted as $\mathcal{V} = \{ \dot{\bs{\upphi}}, \dot{\defgrad}^p, \epdot, \dot{d} \}$. The generalized velocities of the kinematic state variables and their corresponding thermodynamic force conjugates are collected in the sets
-\begin{align}
-  \dot{\Lambda} = \{ \grad \dot{\defgrad}, \dot{\defgrad}^p, \epdot, \dot{d}, \grad \dot{d} \}, \quad \mathcal{F} = \{ \bfP, \bfT, Y, f, \bs{\xi} \}.
-\end{align}
-
-The internal power expenditure per unit volume takes the form
-\begin{align}
-  \mathcal{P}_\text{int} = \bfP:\dot{\bfF} + \bfT:\dot{\defgrad}^p + Y\epdot + f\dot{d} + \bs{\xi}\cdot\grad\dot{d}, \label{eq: internal power expenditure}
-\end{align}
-and the external power expenditure is assumed to be zero, i.e.\ no surface traction, body force, or the so-called micro-forces, $\mathcal{P}_\text{ext}(\mathcal{V}) = 0$.
-
-Let $\psi$ be the Helmholtz free energy per unit volume in the reference configuration. Assuming no external volumetric heat source, the total entropy rate, the internal entropy production rate and the external entropy input rate per unit volume can be rearranged as
+\begin{itemize}
+  \item Conservation of mass:
+        \begin{align}
+          \dfrac{\diff{}}{\diff{t}} \int\limits_{\body'} \rho_0 \diff{V} = 0.
+        \end{align}
+  \item Conservation of linear momentum:
+        \begin{align}
+          \dfrac{\diff{}}{\diff{t}} \int\limits_{\body'} \rho_0 \dot{\bs{\upphi}} \diff{V} = \int\limits_{\body'} \rho_0 \btb \diff{V} + \int\limits_{\bodyboundary'} \bfP\normal_0 \diff{A}.
+        \end{align}
+  \item Conservation of angular momentum:
+        \begin{align}
+          \dfrac{\diff{}}{\diff{t}} \int\limits_{\body'} \bs{\upphi} \times (\rho_0 \dot{\bs{\upphi}}) \diff{V} = \int\limits_{\body'} \bs{\upphi} \times (\rho_0 \btb) \diff{V} + \int\limits_{\bodyboundary'} \bs{\upphi} \times (\bfP\normal_0) \diff{A}.
+        \end{align}
+  \item The first law of thermodynamics:
+        \begin{equation}
+          \begin{aligned}
+            \dfrac{\diff{}}{\diff{t}} \int\limits_{\body'} u \diff{V} + \dfrac{\diff{}}{\diff{t}} \int\limits_{\body'} k \diff{V} = \int\limits_{\body'} \mathcal{P}^\text{ext} \diff{V} + \int\limits_{\body'} \rho_0 q \diff{V} - \int\limits_{\bodyboundary'} \bth \cdot \normal_0 \diff{A}.
+          \end{aligned}
+        \end{equation}
+  \item The second law of thermodynamics:
+        \begin{align}
+          \dfrac{\diff{}}{\diff{t}} \int\limits_{\body'} s \diff{V} - \int\limits_{\body'} \dfrac{\rho_0 q}{T} \diff{V} + \int\limits_{\bodyboundary'} \dfrac{\bth \cdot \normal_0}{T} \diff{A} \geqslant 0.
+        \end{align}
+\end{itemize}
+All the above conservation and thermodynamic laws hold for any arbitrary subbody $\body' \subset \body$, hence they can be written in the following local form:
 \begin{subequations}
   \begin{align}
-    \rho T \dot{s}            & = \rho T \dot{s}_\text{int} + \rho T \dot{s}_\text{ext}, \label{eq: entropy rate}                                         \\
-    \rho T \dot{s}_\text{int} & \equiv \mathcal{P}_\text{int} - \dot{\psi} - \dfrac{1}{T}\bfq\cdot\grad T \geqslant 0, \label{eq: internal entropy rate}, \\
-    \rho T \dot{s}_\text{ext} & \equiv - \divergence \bfq + \dfrac{1}{T}\bfq\cdot\grad T, \label{eq: external entropy rate}
+     & \dot{\rho_0} = 0,                                                                                                                \\
+     & \rho_0 \dot{\bs{\upphi}} = \divergence \bfP + \rho_0\btb,                                                                        \\
+     & \bfP\defgrad = \defgrad\bfP^T,                                                                                                   \\
+     & \dot{u} + \dot{k} = \mathcal{P}^\text{ext} + \rho_0 q - \divergence \bth,                                                        \\
+     & \dot{s}^\text{int} = \dot{s} - \dfrac{\rho_0 q}{T} + \divergence \dfrac{\bth}{T} \geqslant 0. \label{eq: dissipation inequality}
   \end{align}
 \end{subequations}
-where $\rho$ is the reference density, and $\bfq$ is the heat flux. Substituting \eqref{eq: internal power expenditure} into \eqref{eq: internal entropy rate} yields the local dissipation inequality
+Alternatively, local form of the second law can be written in terms of the internal energy density as
 \begin{align}
-  \rho T \dot{s}_\text{int} = \bfP:\dot{\bfF} + \bfT:\dot{\defgrad}^p + Y\epdot + f\dot{d} + \bs{\xi}\cdot\grad\dot{d} - \dot{\psi} - \dfrac{1}{T}\bfq\cdot\grad T \geqslant 0. \label{eq: dissipation inequality 1}
+  \dot{s}^\text{int} = \mathcal{P}^\text{ext} - \dot{u} - \dfrac{1}{T} \bth \cdot \grad T. \label{eq: dissipation inequality 2}
 \end{align}
 
-We assume that the generalized forces $\bfP$, $\bfT$ and $\bs{\xi}$ are purely energetic, the generalized force $Y$ is purely dissipative, and the generalized force $f$ can be additively decomposed into an energetic part and a dissipative part. That is
+For convenience, the collection of thermodynamic state variables (working with the Helmholtz free energy), kinematic degrees of freedon, and internal variables are defined as
 \begin{align}
-  \bfP = \bfP^\text{en}(\Lambda), \quad \bfT = \bfT^\text{en}(\Lambda), \quad Y = Y^\text{dis}(\epdot; \Lambda), \quad f = f^\text{en}(\Lambda) + f^\text{dis}(\dot{d}; \Lambda), \quad \bs{\xi} = \bs{\xi}^\text{en}(\Lambda). \label{eq: thermodynamic force additive decomposition}
+  \mathcal{S} = \left\{ \mathcal{K}, T \right\}, \quad \mathcal{K} = \left\{ \bs{\upphi}, \bfZ \right\}, \quad \bfZ = \left\{ \bfF^p, \ep, d \right\}.
 \end{align}
-The energetic forces depend only on the current thermodynamic state, while the dissipative forces depend only on the conjugate rate variables. Apparently, the dissipative forces must vanish in the quasi-static setting, i.e.\ $\lim_{\epdot \to 0^+} Y^\text{dis} = 0$ and $\lim_{\dot{d} \to 0^+} f^\text{dis} = 0$.
+The rates of change of the kinematic variables are denoted as $\mathcal{V} = \{ \dot{\bs{\upphi}}, \dot{\defgrad}^p, \epdot, \dot{d} \}$. The generalized velocities of the kinematic state variables are collected in the set
+\begin{align}
+  \dot{\Lambda} = \{ \dot{\defgrad}, \dot{\defgrad}^p, \epdot, \dot{d}, \grad \dot{d} \}.
+\end{align}
+Recall that the local thermodynamic state is assumed to be depend only on $\defgrad$, $\bfZ$ and $s$, i.e.
+\begin{align}
+  u = \hat{u}(\Lambda, s), \quad T = \hat{T}(\Lambda, s).
+\end{align}
+It is convenient to work with the Helmholtz free energy density (per unit volume) with $T$ as a state variable by introducing the Legendre transformation
+\begin{align}
+  \psi(\Lambda, T) = \inf_s \left[ u(\Lambda, s) - Ts \right].
+\end{align}
+The local form of the second law can then be rewritten using the identity $\dot{\psi} = \dot{u} - \dot{T}s$ and the fact that $\mathcal{P}^\text{ext} = \mathcal{P}^\text{int}$:
+\begin{align}
+  \dot{s}^\text{int} & = \delta - \dfrac{1}{T} \bth \cdot \grad T,  \quad \delta = \mathcal{P}^\text{int} - \dot{\psi} - \dot{T}s. \label{eq: dissipation inequality 3}
+\end{align}
+where $\delta$ shall be referred to as the internal dissipation density (per unit volume). Combining \eqref{eq: dissipation inequality} and \eqref{eq: dissipation inequality 3} yields the energy balance in the \emph{entropy form}:
+\begin{align}
+  T\dot{s} = \rho_0 q - \divergence \bth + \delta. \label{eq: energy balance entropy form}
+\end{align}
 
-Let $a_{,b}$ denote the partial derivative of $a$ with respect to $b$. The time derivative of the free energy density can be written as
+The internal power expenditure $\mathcal{P}^\text{int}$ can be expressed in terms of generalized forces as
 \begin{align}
-  \dot{\psi} = \psi_{, \bfF}:\dot{\bfF} + \psi_{, \bfF^c}:\dot{\defgrad}^p + \psi_{, \varepsilon^c}\epdot + \psi_{, d}\dot{d} + \psi_{, \grad d}\cdot\grad\dot{d}. \label{eq: free energy rate}
+  \mathcal{P}^\text{int} = \bfP:\dot{\bfF} + \bfT:\dot{\defgrad}^p + Y\epdot + f\dot{d} + \bs{\xi}\cdot\grad\dot{d}.
 \end{align}
-Substituting \eqref{eq: thermodynamic force additive decomposition} and \eqref{eq: free energy rate} into \eqref{eq: dissipation inequality 1} and applying the Coleman-Noll procedure lead to restrictions on the constitutive relations:
+It is assumed that each of the generalized forces can be additively decomposed into an equilibrium part, thermodynamically conjugate to the Helmholtz free energy density, and a viscous part, i.e.
+\begin{subequations}
+  \begin{align}
+    \bfP     & = \bfP^\text{eq}(\Lambda, T) + \bfP^\text{vis}(\dot{\defgrad}; \Lambda, T),       \\
+    \bfT     & = \bfT^\text{eq}(\Lambda, T) + \bfT^\text{vis}(\dot{\defgrad}^p; \Lambda, T),     \\
+    Y        & = Y^\text{eq}(\Lambda, T) + Y^\text{vis}(\epdot; \Lambda, T),                     \\
+    f        & = f^\text{eq}(\Lambda, T) + f^\text{vis}(\dot{d}; \Lambda, T),                    \\
+    \bs{\xi} & = \bs{\xi}^\text{eq}(\Lambda, T) + \bs{\xi}^\text{vis}(\grad\dot{d}; \Lambda, T),
+  \end{align}
+\end{subequations}
+where the viscous forces vanish as the rate diminishes to preclude viscous dissipation in quasi-static processes, i.e.
+\begin{subequations}
+  \begin{align}
+    \lim_{\norm{\dot{\defgrad}} \to 0^+}\bfP^\text{vis}   & = 0, \\
+    \lim_{\norm{\dot{\defgrad}^p} \to 0^+}\bfT^\text{vis} & = 0, \\
+    \lim_{\abs{\epdot} \to 0^+}Y^\text{vis}               & = 0, \\
+    \lim_{\abs{\dot{d}} \to 0^+}f^\text{vis}              & = 0, \\
+    \lim_{\norm{\grad\dot{d}} \to 0^+}\bs{\xi}^\text{vis} & = 0.
+  \end{align}
+\end{subequations}
+For convenience, the equilibrium forces and the viscous forces are collected in the sets
 \begin{align}
-  \bfP = \psi_{, \bfF}, \quad \bfT = \psi_{, \bfF^c}, \quad \psi_{, \varepsilon^c} = 0, \quad f^\text{en} = \psi_{, d}, \quad \bs{\xi} = \psi_{, \grad d}, \label{eq: constitutive restrictions}
-\end{align}
-and the dissipation inequality \eqref{eq: dissipation inequality 1} reduces to
-\begin{align}
-  \rho T \dot{s}_\text{int} = Y\epdot + f^\text{dis}\dot{d} - \dfrac{1}{T}\bfq\cdot\grad T \geqslant 0. \label{eq: dissipation inequality 2}
+  \mathcal{F}^\text{eq} = \left\{ \bfP^\text{eq}, \bfT^\text{eq}, Y^\text{eq}, f^\text{eq}, \bs{\xi}^\text{eq} \right\}, \quad \mathcal{F}^\text{vis} = \left\{ \bfP^\text{vis}, \bfT^\text{vis}, Y^\text{vis}, f^\text{vis}, \bs{\xi}^\text{vis} \right\}.
 \end{align}
 
-Substituting \eqref{eq: dissipation inequality 2} and \eqref{eq: external entropy rate} into \eqref{eq: entropy rate}, and using the definition of entropy $s = -\rho\psi_{, T}$ and heat capacity $c \equiv -\rho T \psi_{, TT}$, the heat equation can be written as
+The rate of the Helmholtz free energy density can be expanded as
 \begin{align}
-  \rho T \dot{s} = \rho c \dot{T} = - \divergence\bfq + Y\epdot + f^\text{dis}\dot{d}. \label{eq: heat equation}
+  \dot{\psi} = \psi_{,\defgrad}:\dot{\defgrad} + \psi_{,\defgrad^p}:\dot{\defgrad}^p + \psi_{\ep}\epdot + \psi_{,d}\dot{d} + \psi_{,\grad d}\cdot\grad d + \psi_{,T}\dot{T}. \label{eq: rate of helmholtz}
 \end{align}
+Inserting the identity \eqref{eq: rate of helmholtz} into \eqref{eq: dissipation inequality 3} and applying the Coleman-Noll procedure lead to several thermodynamic restrictions on the constitutive relations:
+\begin{align}
+  \bfP^\text{eq} = \psi_{,\defgrad}, \quad \bfT^\text{eq} = \psi_{,\defgrad^p}, \quad Y^\text{eq} = \psi_{,\ep}, \quad f^\text{eq} = \psi_{,d}, \quad \bs{\xi}^\text{eq} = \psi_{,\grad d}, \quad -s = \psi_{,T}. \label{eq: constitutive restrictions}
+\end{align}
+Substituting \eqref{eq: constitutive restrictions} and \eqref{eq: rate of helmholtz} into \eqref{eq: dissipation inequality 3} simplifies the definition of the internal dissipation density:
+\begin{align}
+  \delta = \bfP^\text{vis}:\dot{\defgrad} + \bfT^\text{vis}:\dot{\defgrad}^p + Y^\text{vis}\epdot + f^\text{vis}\dot{d} + \bs{\xi}^\text{vis}\cdot\grad d.
+\end{align}
+
+Using the identities \eqref{eq: rate of helmholtz} and \eqref{eq: constitutive restrictions}, the rate of the entropy density can be expanded as
+\begin{align}
+  \dot{s} = -\dot{\psi}_{,T} = - \bfP^\text{eq}_{,T}:\dot{\defgrad} - \bfT^\text{eq}_{,T}:\dot{\defgrad}^p - Y^\text{eq}_{,T}\epdot - f^\text{eq}_{,T}\dot{d} - \bs{\xi}^\text{eq}_{,T}\cdot\grad d - \psi_{,TT} \dot{T}.
+\end{align}
+By introducing the heat capacity per unit mass at constant $\Lambda$:
+\begin{align}
+  \rho_0c_v = -T\psi_{,TT},
+\end{align}
+the energy balance \eqref{eq: energy balance entropy form} can be rewritten as
+\begin{align}
+  \rho_0 c_v \dot{T} = \rho_0 q - \divergence \bth + \delta + \delta_T,
+\end{align}
+where $\delta_T$ is the dissipation density accounting for the thermal effects in the thermodynamic conjugates:
+\begin{align}
+  \delta_T = \bfP^\text{eq}_{,T}:\dot{\defgrad} + \bfT^\text{eq}_{,T}:\dot{\defgrad}^p + Y^\text{eq}_{,T}\epdot + f^\text{eq}_{,T}\dot{d} + \bs{\xi}^\text{eq}_{,T}\cdot\grad d,
+\end{align}
+e.g. $\bfP^\text{eq}_{,T}:\dot{\defgrad}$ is the dissipation accounting for thermoelastic effects, and $Y^\text{eq}_{,T}\epdot$ is the dissipation accounting for thermoplastic softening.

@@ -1,2 +1,76 @@
 \section{The minimization problem}
 \label{section: framework/minimization}
+
+In this section, we construct a potential such that \emph{all} the conservation and thermodynamic laws can be derived (if not implied by construction) from a minimization problem. First, we assume that the Helmholtz free energy density $\psi$ can be additively decomposed into a strain-energy density $\psi^e$, a plastic energy density $\psi^p$, a fracture energy density $\psi^f$, and a thermal energy density $\psi^h$:
+\begin{align}
+  \psi = \psi^e(\defgrad, \defgrad^p, d, T) + \psi^p(\ep, d, T) + \psi^f(d, \grad d, T) + \psi^h(T).
+\end{align}
+
+To maintain a variational structure, the viscous forces are supposed to derived from dual kinetic potentials.
+
+\begin{example}[The elastic dual kinetic potential]
+  \vspace{-0.5em}
+  Suppose there exist a potential $\zeta(\bfP^\text{vis})$ such that
+  \begin{align}
+    \dot{\defgrad} = \zeta_{,\bfP^\text{vis}}.
+  \end{align}
+  The dual kinetic potential is introduced by applying the Legendre transformation:
+  \begin{align}
+    {\psi^e}^*(\dot{\defgrad}) = \sup_{\bfP^\text{vis}}\left[ \bfP^\text{vis}:\dot{\defgrad} - \zeta \right],
+  \end{align}
+  where it follows immediately that
+  \begin{align}
+    \bfP^\text{vis} = {\psi^e}^*_{,\dot{\defgrad}}.
+  \end{align}
+  Note that the symbol ${\psi^e}^*$ is chosen in line with the energetic counterpart of the potential, not to imply that ${\psi^e}^*$ is the Legendre transformation of $\psi^e$. In fact, ${\psi^e}^*$ is the Legendre transformation of $\zeta$.
+\end{example}
+
+Following the foregoing example, the viscous forces are defined as
+\begin{align}
+  \bfP^\text{vis} = {\psi^e}^*_{,\dot{\defgrad}}, \quad \bfT^\text{vis} = {\psi^p}^*_{,\dot{\defgrad}^p}, \quad Y^\text{vis} = {\psi^p}^*_{,\epdot}, \quad f^\text{vis} = {\psi^f}^*_{,\dot{d}}, \quad \bs{\xi}^\text{vis} = {\psi^f}^*_{,\grad\dot{d}},
+\end{align}
+where ${\psi^e}^*$ is the elastic dual kinetic potential describing rate-sensitivity of the deformation, e.g. Newtonian viscosity; ${\psi^p}^*$ is the plastic dual kinetic potential describing the rate-sentivity of cold work, e.g. viscoplasticity; ${\psi^f}^*$ is the fracture dual kinetic potential describing viscous regularization of fracture propagation.
+
+To satisfy the second law \eqref{eq: dissipation inequality 2}, the material is assumed to be \emph{strictly dissipative} in the sense that every thermodynamic process results in an increase in entropy for nonzero rates, i.e.\ $\mathcal{F}^\text{dis}\cdot\dot{\Lambda} > \bs{0}$, $\forall \dot{\Lambda} \neq 0$. These constraints are subject to later verification.
+
+The external power expenditure $\mathcal{P}^\text{ext}(\dot{\bs{\upphi}}, T)$ is defined as
+\begin{align}
+  \mathcal{P}^\text{ext} = & \ \underbrace{\int\limits_{\body_0} \rho_0 \btb \cdot \dot{\bs{\upphi}} \diff{V}}_\text{body force} + \underbrace{\int\limits_{\partial_t\body_0} \btt \cdot \dot{\bs{\upphi}} \diff{A}}_\text{surface traction} + \underbrace{\int\limits_{\partial_h\body_0} \bar{\bth}\ln\left( \dfrac{T}{T_0} \right) \diff{A}}_\text{external heat flux} \\
+                           & + \underbrace{\int\limits_{\partial_r\body_0} h\left[ T - T_0 \ln\left( \dfrac{T}{T_0} \right) \right] \diff{A}}_\text{external heat convection} - \underbrace{\int\limits_{\body_0} \rho_0 q \ln\left( \dfrac{T}{T_0} \right) \diff{V}}_\text{heat source},
+\end{align}
+where the subscripts in $\partial_t$, $\partial_h$ and $\partial_r$ denote the corresponding subsets of the surface with the associated Neumann/Robin boundary conditions.
+
+Since there is no external power expenditure, the total potential can then be constructed as
+\begin{align}
+  L(\dot{\bs{\phi}}, \dot{\bfF}^c, \dot{\varepsilon}^c, \dot{d}) = \int\limits_{\body_0} \left( \dot{\psi} + \Delta^* \right) \diff{V}. \label{eq: total potential 1}
+\end{align}
+Substitute the definition of the free energy \eqref{eq: energies}, the definition of the dual kinetic potential \eqref{eq: dual kinetic potentials}, the flow rule \eqref{eq: flow rule}, and the constitutive restrictions \eqref{eq: constitutive restrictions} into \eqref{eq: total potential 1} to obtain
+\begin{align}
+  L(\dot{\bs{\phi}}, \bfN^c, \dot{\varepsilon}^c, \dot{d}) = \int\limits_{\body_0} \left( \bfP:\dot{\bfF} + \bfT:\dot{\varepsilon}^c\bfN^c\bfF^c + f^\text{en}\dot{d} + \bs{\xi}\cdot\grad d + \Pi^* + \Phi^* \right) \diff{V}. \label{eq: total potential 2}
+\end{align}
+The thermodynamic equations of state can then be derived by finding the infimum of \eqref{eq: total potential 2}, subject to constraints \eqref{eq: flow direction constraints}, \eqref{eq: irreversibility constraints}, and Dirichlet boundary conditions. The balance of linear momentum is obtained by minimizing $L$ with respect to $\dot{\bs{\phi}}$:
+\begin{align}
+  \divergence\bfP = \bs{0}. \label{eq: linear momentum balance}
+\end{align}
+Minimization of $L$ with respect to $\bfN^c$, subject to \eqref{eq: flow direction constraints}, determines the flow direction
+\begin{align}
+  \bfN^c = \sqrt{\dfrac{3}{2}}\dfrac{\dev(\bfM)}{\norm{\dev(\bfM)}}, \label{eq: flow direction}
+\end{align}
+where $\bfM = -\bfT{\bfF^c}^T$ is the Mandel stress. Minimization of $L$ with respect to $\dot{\varepsilon}^c$, subject to constraint \eqref{eq: irreversibility constraints}, invokes the KKT condition:
+\begin{align}
+  \phi^c \equiv \bar{\sigma} - Y \leqslant 0, \quad \dot{\varepsilon}^c \geqslant 0, \quad \phi^c\dot{\varepsilon}^c = 0, \label{eq: yield surface}
+\end{align}
+where $\bar{\sigma} \equiv \bfM:\bfN^c$ is the effective stress. To recover a Perzyna type viscoplasticity model, the plastic dual kinetic potential shall take the form
+\begin{align}
+  \Pi^* = \bar{\sigma}\dot{\varepsilon}^c - \Upsilon^*(\dot{\varepsilon}^c; \Lambda),
+\end{align}
+where $\Upsilon^*$ is the creep potential, as shall be seen momentarily it determines the update formula for the effective creep strain rate. The force conjugate to $\dot{\varepsilon}^c$ hence can be written as
+\begin{align}
+  Y = \Pi^*_{,\dot{\varepsilon}^c} = \bar{\sigma} - \Upsilon^*_{,\dot{\varepsilon}^c}.
+\end{align}
+Assume $\Upsilon^*$ is convex in $\dot{\varepsilon}^c$, inserting this identity into \eqref{eq: yield surface} simplifies the KKT conditions to a single update formula $-\Upsilon^*_{,\dot{\varepsilon}^c} = 0$.
+
+Finally, the minimization with respect to $\dot{d}$ leads to the so-called fracture evolution equations
+\begin{align}
+  \phi^f \equiv \divergence \bs{\xi} - (f^\text{en} + f^\text{dis}) \leqslant 0, \quad \dot{d} \geqslant 0, \quad \phi^f\dot{d} = 0. \label{eq: fracture envolope}
+\end{align}
