@@ -20,7 +20,7 @@ We begin this section by summarizing the strong form of the general initial boun
                                        & \bth \cdot \normal_0 = h(T - T_0),                                      &  & \partial_r\body_0 \times ]t_0, t[, \\
                                        & T = T_g,                                                                &  & \partial_T\body_0 \times ]t_0, t[, \\
     \text{Initial conditions: }        & \bs{\upphi} = \bs{\upphi}_0,                                            &  & \body_0, t = t_0, \\
-                                       & \dot{\bs{\upphi}} = \btv_0,                                             &  & \body_0, t = t_0, \\
+                                       & \defrate = \btv_0,                                             &  & \body_0, t = t_0, \\
                                        & d = d_0,                                                                &  & \body_0, t = t_0, \\
                                        & T = T_0,                                                                &  & \body_0, t = t_0.
   \end{align*}
@@ -66,7 +66,7 @@ The weak form can be derived as:
   \begin{subequations}
   \begin{align}
       \left( \btw, \bs{\upphi} - \bs{\upphi}_0 \right) &= 0, \\
-      \left( \btw, \dot{\bs{\upphi}} - \btv_0 \right) &= 0, \\
+      \left( \btw, \defrate - \btv_0 \right) &= 0, \\
       \left( c, d - d_0 \right) &= 0, \\
       \left( e, T - T_0 \right) &= 0.
   \end{align}
@@ -95,7 +95,7 @@ Using the Galerkin method, with finite dimensional function spaces $\widetilde{\
   \begin{subequations}
   \begin{align}
       \left( \btw^h, \bs{\upphi}^h - \bs{\upphi}_0 \right) &= 0, \\
-      \left( \btw^h, \dot{\bs{\upphi}} - \btv_0 \right) &= 0, \\
+      \left( \btw^h, \defrate - \btv_0 \right) &= 0, \\
       \left( c^h, d^h - d_0 \right) &= 0, \\
       \left( e^h, T^h - T_0 \right) &= 0.
   \end{align}

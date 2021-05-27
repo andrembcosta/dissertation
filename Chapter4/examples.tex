@@ -138,7 +138,7 @@ The underlying elastic layer is assumed to be much thicker than the film, i.e.\ 
 The total energy of the simplified plane-stress model can then be written as
 \begin{equation}
   \begin{split}
-    \Psi_\total = &\ -\underbrace{\left( \int\limits_\bodyboundary \bs{\tau} \cdot \bs{u} \diff{A} + \int\limits_\body \bs{b} \cdot \bs{u} \diff{V} \right)}_{\text{external energy}} + \underbrace{\int\limits_\body g(d)\psi_\elastic^\activeenergy \diff{V} + \int\limits_\body\psi_\elastic^\inactiveenergy \diff{V}}_{\text{degraded elastic energy}} \\
+    \Psi_\total = &\ -\underbrace{\left( \int\limits_\bodyboundary \bs{\tau} \cdot \bs{u} \diff{A} + \int\limits_\body \bs{b} \cdot \bs{u} \diff{V} \right)}_{\text{external energy}} + \underbrace{\int\limits_\body g(d)\psi_\elastic^\activepart \diff{V} + \int\limits_\body\psi_\elastic^\inactivepart \diff{V}}_{\text{degraded elastic energy}} \\
     &\ + \underbrace{\int\limits_\body g(d)\dfrac{1}{2}\dfrac{\mu}{mh^2}\norm{\bs{u}}^2 \diff{V}}_{\text{degraded interfacial energy}} + \underbrace{\int\limits_\body \dfrac{3\mathcal{G}_c}{8l} \left( d + l^2 \norm{\grad d}^2 \right) \diff{V}}_{\text{approx. fracture energy}}
   \end{split}
 \end{equation}

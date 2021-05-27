@@ -19,24 +19,24 @@ The Euler-Lagrange equations for this unconstrained minimization problem state t
 For the quasi-static fracture problems (under the small strain assumption) studied in this work, the total energy can be written in terms of displacements $\bs{u}$ and damage $d$ as:
 \begin{equation}
   \begin{split}
-    \Psi_\total = & -\underbrace{\left( \int\limits_\bodyboundary \bs{\tau} \cdot \bs{u} \diff{A} + \int\limits_\body \bs{b} \cdot \bs{u} \diff{V} \right)}_{\text{external energy}} + \underbrace{\int\limits_\body g(d)\psi_\elastic^\activeenergy \diff{V} + \int\limits_\body \psi_\elastic^\inactiveenergy \diff{V}}_{\text{degraded elastic energy}} \\ & + \underbrace{\int\limits_\body \dfrac{\Gc}{c_0l} \left( w(d) + l^2 \norm{\grad d}^2 \right) \diff{V}}_{\text{approx. fracture energy}},
+    \Psi_\total = & -\underbrace{\left( \int\limits_\bodyboundary \bs{\tau} \cdot \bs{u} \diff{A} + \int\limits_\body \bs{b} \cdot \bs{u} \diff{V} \right)}_{\text{external energy}} + \underbrace{\int\limits_\body g(d)\psi_\elastic^\activepart \diff{V} + \int\limits_\body \psi_\elastic^\inactivepart \diff{V}}_{\text{degraded elastic energy}} \\ & + \underbrace{\int\limits_\body \dfrac{\Gc}{c_0l} \left( w(d) + l^2 \norm{\grad d}^2 \right) \diff{V}}_{\text{approx. fracture energy}},
   \end{split}
 \end{equation}
 where $\bs{\tau}$ is the surface traction and $\bs{b}$ is the body force. Substituting the total energy into the Euler-Lagrange equations, we obtain the necessary conditions of the minimizer, which are essentially the governing equations of the given system together with boundary conditions:
 \begin{align}
   - \divergence \xstress - \bs{b}                                      & = \bs{0} , \quad \text{in }\body,             \\
-  - \divergence \bs{\xi} +  M w'(d) + g'(d)\psi_\elastic^\activeenergy & = 0, \quad \text{in } \body ,                 \\
+  - \divergence \bs{\xi} +  M w'(d) + g'(d)\psi_\elastic^\activepart & = 0, \quad \text{in } \body ,                 \\
   \xstress \cdot \normal                                               & = \bs{\tau}, \quad \text{on } \bodyboundary , \\
   \bs{\xi} \cdot \normal                                               & = 0, \quad \text{on } \bodyboundary,
 \end{align}
 with constitutive relations
 \begin{align}
-  \xstress & = g(d)\dfrac{\delta \psi_\elastic^\activeenergy}{\delta \grad\bs{u}} + \dfrac{\delta \psi_\elastic^\inactiveenergy}{\delta \grad\bs{u}},              \\
-  \bs{\xi} & = M \kappa \grad d + g(d) \dfrac{\delta \psi_\elastic^\activeenergy }{\delta \grad d} + \dfrac{\delta \psi_\elastic^\inactiveenergy}{\delta \grad d},
+  \xstress & = g(d)\dfrac{\delta \psi_\elastic^\activepart}{\delta \grad\bs{u}} + \dfrac{\delta \psi_\elastic^\inactivepart}{\delta \grad\bs{u}},              \\
+  \bs{\xi} & = M \kappa \grad d + g(d) \dfrac{\delta \psi_\elastic^\activepart }{\delta \grad d} + \dfrac{\delta \psi_\elastic^\inactivepart}{\delta \grad d},
 \end{align}
-where $\xstress$ is the degraded stress tensor, $\bs{\xi}$ is the thermodynamic conjugate to $\grad d$ (the dependence of $\psi_\elastic^\activeenergy$ and $\psi_\elastic^\inactiveenergy$ on $\grad d$ is defined in \Cref{s: theory/traction_free} ), $\kappa = 2l^2$ is the interfacial coefficient, and $M = \dfrac{\Gc}{c_0l}$ is often referred to the mobility in keeping with general Allen-Cahn phase-field models. According to \eqref{eq: general phase-field evolution}, and due to the fact that $\bs{\xi}\evalover{d=0} = \bs{0}$, the damage begins to accumulate as soon as:
+where $\xstress$ is the degraded stress tensor, $\bs{\xi}$ is the thermodynamic conjugate to $\grad d$ (the dependence of $\psi_\elastic^\activepart$ and $\psi_\elastic^\inactivepart$ on $\grad d$ is defined in \Cref{s: theory/traction_free} ), $\kappa = 2l^2$ is the interfacial coefficient, and $M = \dfrac{\Gc}{c_0l}$ is often referred to the mobility in keeping with general Allen-Cahn phase-field models. According to \eqref{eq: general phase-field evolution}, and due to the fact that $\bs{\xi}\evalover{d=0} = \bs{0}$, the damage begins to accumulate as soon as:
 \begin{align}
-  \psi_\elastic^\activeenergy > \psi_c = -M\dfrac{w'(0)}{g'(0)} ,
+  \psi_\elastic^\activepart > \psi_c = -M\dfrac{w'(0)}{g'(0)} ,
 \end{align}
 where $\psi_c$ is a model-specific energy threshold for damage initiation. For example, a brittle fracture model that uses $w(d) = d^2$ results in a critical energy $\psi_c = 0$, and cohesive-type fracture models that use $w(d) = d$ have a critical energy $\psi_c = -M/g'(0)$.  In this work, we adopt a cohesive fracture model that uses the local dissipation function $w(d) = d$ in conjunction with the degradation function proposed by Lorentz \cite{lorentz2011convergence, lorentz2017nonlocal} such that the critical fracture energy is not necessarily correlated with the other material properties and model parameters, i.e.\ the fracture toughness $\Gc$ and the length scale $l$:
 \begin{align}
@@ -56,7 +56,7 @@ For quasi-static mechanical-fracture coupling, the energy balance and thus the c
 \end{equation}
 A typical assumption in fracture mechanics is that only tensile/expansive components of the elastic energy contribute to crack initiation and growth. Therefore, the degraded elastic energy is often split into an active part that is coupled with fracture, and an inactive part that is independent of fracture. According to the split of elastic energy, we have:
 \begin{align}
-  \widetilde{\Psi}_\elastic = \int\limits_\body g(d)\psi_\elastic^\activeenergy \diff{V} + \int\limits_\body \psi_\elastic^\inactiveenergy \diff{V} .
+  \widetilde{\Psi}_\elastic = \int\limits_\body g(d)\psi_\elastic^\activepart \diff{V} + \int\limits_\body \psi_\elastic^\inactivepart \diff{V} .
 \end{align}
 Widely used active/inactive splits are spectral split \cite{miehe_2010_p1, miehe_2010_p2} and volumetric-deviatoric split \cite{amor_2009}.  Unfortunately, neither the spectral split nor the volumetric-deviatoric split completely prevent tensile or shear tractions from being transmitted across fully-damaged surfaces.  Accordingly, we now develop a split that is motivated by the consideration of frictionless contact conditions along fully damaged surfaces.
 
@@ -88,26 +88,26 @@ In the vicinity of the regularized crack surface, we then propose the use of a s
 that takes the form:
 \begin{subequations}
   \begin{align}
-     & \psi_\elastic = \psi_\elastic^\activeenergy + \psi_\elastic^\inactiveenergy , \label{eq: odd begin}                                                          \\
-     & \psi_\elastic^\activeenergy = \dfrac{1}{2}\stress^\activeenergy:\strain, \quad \psi_\elastic^\inactiveenergy = \dfrac{1}{2}\stress^\inactiveenergy:\strain , \\
-     & \stress^\activeenergy = \stress_n^+ + \stress_t, \quad \stress^\inactiveenergy = \stress_n^-.
+     & \psi_\elastic = \psi_\elastic^\activepart + \psi_\elastic^\inactivepart , \label{eq: odd begin}                                                          \\
+     & \psi_\elastic^\activepart = \dfrac{1}{2}\stress^\activepart:\strain, \quad \psi_\elastic^\inactivepart = \dfrac{1}{2}\stress^\inactivepart:\strain , \\
+     & \stress^\activepart = \stress_n^+ + \stress_t, \quad \stress^\inactivepart = \stress_n^-.
   \end{align}
 \end{subequations}
 The corresponding constitutive relation follows as:
 \begin{subequations}
   \begin{align}
-    \widetilde{\stress} & = \dfrac{\delta\widetilde{\psi}_\elastic}{\delta\strain} = g(d)\dfrac{\delta\psi_\elastic^\activeenergy}{\delta\strain} + \dfrac{\delta\psi_\elastic^\inactiveenergy}{\delta\strain} ,  \\
-                        & = g(d)\dfrac{\delta}{\delta\strain}\left( \dfrac{1}{2}\stress^\activeenergy:\strain \right) + \dfrac{\delta}{\delta\strain}\left( \dfrac{1}{2}\stress^\inactiveenergy:\strain \right) , \\
-                        & = g(d)\stress^\activeenergy + \stress^\inactiveenergy , \label{eq: odd end}
+    \widetilde{\stress} & = \dfrac{\delta\widetilde{\psi}_\elastic}{\delta\strain} = g(d)\dfrac{\delta\psi_\elastic^\activepart}{\delta\strain} + \dfrac{\delta\psi_\elastic^\inactivepart}{\delta\strain} ,  \\
+                        & = g(d)\dfrac{\delta}{\delta\strain}\left( \dfrac{1}{2}\stress^\activepart:\strain \right) + \dfrac{\delta}{\delta\strain}\left( \dfrac{1}{2}\stress^\inactivepart:\strain \right) , \\
+                        & = g(d)\stress^\activepart + \stress^\inactivepart , \label{eq: odd end}
   \end{align}
 \end{subequations}
 and
 \begin{align}
-  \bs{\xi} & = M \kappa \grad d + g(d) \dfrac{\delta \psi_\elastic^\activeenergy}{\delta \grad d} + \dfrac{\delta \psi_\elastic^\inactiveenergy}{\delta \grad d} ,
+  \bs{\xi} & = M \kappa \grad d + g(d) \dfrac{\delta \psi_\elastic^\activepart}{\delta \grad d} + \dfrac{\delta \psi_\elastic^\inactivepart}{\delta \grad d} ,
 \end{align}
 where
 \begin{align}
-  \dfrac{\delta \psi_\elastic^\activeenergy}{\delta \grad d} = -\dfrac{\delta \psi_\elastic^\inactiveenergy}{\delta \grad d} = \dfrac{1}{\norm{\grad d}} \left[ 2 \macaulay{-t_N}_- \varepsilon_N \xnormal - H(t_N) \varepsilon_N \stress \cdot \xnormal - \macaulay{-t_N}_- \strain \cdot \xnormal \right],
+  \dfrac{\delta \psi_\elastic^\activepart}{\delta \grad d} = -\dfrac{\delta \psi_\elastic^\inactivepart}{\delta \grad d} = \dfrac{1}{\norm{\grad d}} \left[ 2 \macaulay{-t_N}_- \varepsilon_N \xnormal - H(t_N) \varepsilon_N \stress \cdot \xnormal - \macaulay{-t_N}_- \strain \cdot \xnormal \right],
 \end{align}
 and $H$ denotes the Heaviside function.
 

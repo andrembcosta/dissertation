@@ -1,6 +1,185 @@
 \section{Theory}
 \label{section: brittle/theory}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Constitutive choices}
 
+Following the variational framework presented in \Cref{chapter: framework}, to account for elastic deformation and fracture in polycrystalline materials, the Helmholtz free energy density is decomposed as
+\begin{align}
+  \psi = \psi^e + \psi^f. \label{eq: chapter 3 helmholtz}
+\end{align}
+Recall that $\psi^e$ is the strain energy density, and $\psi^f$ is the fracture energy density.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Strain energy density}
+
+For small deformation elasticity considered in this chapter, the state variable $\bs{\upphi}$ enters the strain energy density only through the infinitesimal strain tensor
+\begin{align}
+  \strain = \dfrac{1}{2}\left( \grad \bs{\upphi} + \grad^T \bs{\upphi} \right).
+\end{align}
+The material is assumed to be isotropic, characterized the Lam\'{e} parameter $\lambda$ and the shear modulus $G$. The strain energy density is defined as
+\begin{subequations}
+  \begin{align}
+    \psi^e               & = g \psi^e_\activepart + \psi^e_\inactivepart,                              \label{eq: chapter 3 strain energy density} \\
+    \psi^e_\activepart   & = \dfrac{1}{2} \lambda \macaulay{\tr(\strain)}_+^2 + G \strain^+:\strain^+,                                             \\
+    \psi^e_\inactivepart & = \dfrac{1}{2} \lambda \macaulay{\tr(\strain)}_-^2 + G \strain^-:\strain^-,                                             
+  \end{align}
+\end{subequations}
+where $g = \hat{g}(d)$ is the degradation function to be defined in \Cref{section: chapter3/theory/fracture}, and $\strain^\pm$ denotes the positive or the negative part of the strain projected onto the spectrum associated with positive or negative eigenvalues. In the context of small deformation, the Cauchy stress $\stress$ can be viewed as the thermodynamic conjugate to the infinitesimal strain $\strain$, and can be written as
+\begin{subequations}
+  \begin{align}
+    \stress               & = \psi^e_{,\strain} = g \stress_\activepart + \stress_\inactivepart, \label{eq: chapter 3 stress strain relation} \\
+    \stress_\activepart   & = \lambda \macaulay{\tr(\strain)}_+ \bfI + 2 G \strain^+,                                                         \\
+    \stress_\inactivepart & = \lambda \macaulay{\tr(\strain)}_- \bfI + 2 G \strain^-.                                                         
+  \end{align}
+\end{subequations}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Fracture energy density}
+\label{section: chapter3/theory/fracture}
+
+With a sharp crack set $\crackset$, the fracture energy is defined as $\Psi^f = \int\limits_\crackset \Gc \diff{A}$, where $\Gc$ is the fracture toughness. An approximation of the sharp crack set using a phase-field can be written as
+\begin{align}
+  \Psi^f \approx \int\limits_{\body_0} \Gc \gamma_l(d, \grad d) \diff{V}, \label{eq: fracture energy density}
+\end{align}
+where $\gamma_l$ is often referred to as the crack surface density parameterized by a regularization length $l$. An Allen-Cahn type approximation can be expressed as
+\begin{align}
+  \gamma_l(d, \grad d) = \dfrac{1}{c_0 l}\left( \alpha + l^2 \grad d \cdot \grad d \right), \label{eq: crack surface density}
+\end{align}
+where $\alpha = \hat{\alpha}(d)$ is the crack geometric function. According to the discussion in \Cref{chapter: framework}, existence requires $\hat{\alpha}(d)$ to be convex in $d$, and the phase-field irreversibility condition \eqref{eq: fracture irreversibility} assumes $\hat{\alpha}(d)$ attains its minimum at $d = 0$.
+
+In the current variational framework, the fracture response, e.g. the critical fracture strength and the softening behavior, is determined by the crack geometric function and the degradation function. In this chapter, to model brittle fracture, where crack only nucleates at stress singularities, i.e. $\psi_c \to \infty$, the following combination of crack geometric function and degradation function is used,
+\begin{align}
+  \alpha = d^2, \quad g = (1-d)^2.
+\end{align}
+To model quasi-brittle fracture in polycrystalline materials, where the post-fracture behavior can be characterized by certain softening law, the following combination is used,
+\begin{align}
+  \alpha = \xi d- (1-\xi) d^2, \quad g = \dfrac{1}{1+\phi}, \quad \phi = \dfrac{a_1d + a_1a_2d^2 + a_1a_2a_3d^3}{(1-c)^p},
+\end{align}
+where $\psi_c$ is the critical fracture energy density, $\alpha$ is parameterized by $\xi$ ($\xi$ is conveniently its derivative at $d = 0$), and the degradation function $g$ is parameterized by $p$, $a_1$, $a_2$ and $a_3$. Based on 1-D analyses, the optimal profile of the phase-field is controlled by $\xi$. For a given $\xi$, the approximated traction-separation law is determined by $p$, $a_1$, $a_2$ and $a_3$. In this chapter, the following parameters are chosen:
+\begin{align}
+  \xi = 2, \quad p = 2, \quad a_1 = \dfrac{\Gc}{c_0 l \psi_c}, \quad a_2 = -\dfrac{1}{2}, \quad a_3 = 0,
+\end{align}
+such that the phase-field is compactly supported by a constant half interfacial width of $D_u = \dfrac{\pi}{2}l$, and a linear traction-separation law is approximated with a slope of $-\dfrac{E\psi_c}{\Gc}$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Approximation of the pressure boundary condition}
+
+Starting from the sharp representation of the crack set, the external power expenditure on the crack set due to pressure can be written as
+\begin{align}
+  \mathcal{P}^\text{ext} = \int\limits_{\crackset} \bar{p}\normal_0\cdot\defrate \diff{A},
+\end{align}
+where $\bar{p}$ is the magnitude of the pressure. Following \cite{CHUKWUDOZIE2019957}, the external work is approximated as per:
+\begin{equation}
+  \begin{aligned}
+    \mathcal{P}^\text{ext} & = \int\limits_{\body_0} \uprho^\text{ext} \diff{V} = \int\limits_{\body_0} \bar{p} \left( -\dfrac{\grad d}{\norm{\grad d}} \right) \cdot \defrate \norm{\grad I} \diff{V} \\
+                           & = \int\limits_{\body_0} \bar{p} \left( -\dfrac{\grad d}{\norm{\grad d}} \right) \cdot \defrate \norm{\grad d} I_{,d} \diff{V}                                             
+    = - \int\limits_{\body_0} \bar{p} \grad d \cdot \defrate I_{,d} \diff{V}
+  \end{aligned}
+  \label{eq: pressure power}
+\end{equation}
+where the surface normal $\normal$ is approximated using the gradient of the phase-field, and a crack indicator function $I(d) \in C^1([0,1])$ is introduced so that the approximation respects the $\Gamma$-convergence properties.
+
+\begin{remark}
+  Based on \eqref{eq: pressure power}, the effective pressure approximated by the phase-field can be defined as:
+  \begin{align}
+    \widetilde{p} = \int\limits_{\body_0} \dfrac{\partial \uprho^\text{ext}}{\partial \defrate} \cdot \left( -\dfrac{\grad d}{\norm{\grad d}} \right) \diff{V} = \int\limits_{\body_0} \bar{p} \norm{\grad I} \diff{V}
+    \label{eq:pressure_approx}
+  \end{align}
+\end{remark}
+
+Assuming that $I(0)=0$ and $I(1)=1$, the proof of $\Gamma$-convergence can be sketched via the following method. Consider the approximated external power expenditure due to pressure (parameterized by the phase-field regularization length $l$). The phase-field profile can always be expressed by $d = \bar{d}(d_\Gamma(\btX)/l)$, where $d_\Gamma(\btX)$ is the unsigned distance function for the crack set $\Gamma$ \cite{JYWu2017}. Substituting the phase-field profile into \eqref{eq: pressure power} yields:
+\begin{equation}
+  \begin{aligned}
+    \mathcal{P}^\text{ext} & = - \int\limits_{\body_0} \bar{p} \grad \widetilde{d} \cdot \defrate I_{,d}(\widetilde{d}) \diff{V} = - \int\limits_{\body_0} \bar{p} \grad I \cdot \defrate \diff{V} \\
+                           & = - \int\limits_{\body_0} \bar{p} \dfrac{\diff{I}}{\diff{(d_\Gamma/l)}} \dfrac{1}{l} \grad d_\Gamma(\btX) \cdot \defrate \diff{V}.                                    
+  \end{aligned}
+\end{equation}
+The domain integral can be converted to a set of path integrals along the level set (phase-field), using the co-area formula, as follows:
+\begin{align}
+  \mathcal{P}^\text{ext} & = - \int\limits_0^\infty \int\limits_{\{ \btX\in{\body_0}, d_\Gamma(\btX)=r \}} \bar{p} \dfrac{\diff{I}}{\diff{(r/l)}} \dfrac{1}{l} \grad d_\Gamma(\btX) \cdot \defrate \diff{s} \diff{r} 
+\end{align}
+A simple change of variables with $\widetilde{r}=r/l$ yields:
+\begin{equation}
+  \begin{aligned}
+    \mathcal{P}^\text{ext} & = - \int\limits_0^\infty \left( \int\limits_{\{ \btX\in{\body_0}, d_\Gamma(\btX)=r \}} \bar{p} \grad d_\Gamma(\btX) \cdot \defrate \diff{s} \right) \dfrac{\diff{I}}{\diff{(r/l)}} \dfrac{1}{l} \diff{r}                     \\
+                           & = - \int\limits_0^\infty \left( \int\limits_{\{ \btX\in{\body_0}, d_\Gamma(\btX)=l\widetilde{r} \}} \bar{p} \grad d_\Gamma(\btX) \cdot \defrate \diff{s} \right) \dfrac{\diff{I}}{\diff{\widetilde{r}}} \diff{\widetilde{r}} 
+  \end{aligned}
+\end{equation}
+Next, as the phase-field regularization length diminishes (i.e., $l \to 0$), the approximation of the pressure power expenditure converges to:
+\begin{subequations}
+  \begin{align}
+    \lim_{l \to 0} \mathcal{P}^\text{ext} & = - \int\limits_0^\infty \dfrac{\diff{I}}{\diff{\widetilde{r}}} \diff{\widetilde{r}} \left[ \int\limits_{\Gamma^+} \bar{p} (-\normal_0) \cdot \defrate \diff{A} + \int\limits_{\Gamma^-} \bar{p} (-\normal_0) \cdot \defrate \diff{A} \right] 
+  \end{align}
+\end{subequations}
+where it is apparent that the path integral along the level set converges to the surface integral on two opposite sides of the crack surface, while the gradient of the unsigned distance function converges to the normal on the crack surfaces $\Gamma$ (i.e., $\lim_{l \to 0} \grad d_\Gamma(\btX) = -\normal_0(\btX)$). Recall that the support of the phase-field depends on the form of the crack geometric function $\alpha$ \cite{JYWu2017}; the integral shall be split according to the the ultimate phase-field half interfacial width $D_u$:
+\begin{equation}
+  \begin{aligned}
+     & \quad \lim_{l \to 0} \mathcal{P}^\text{ext}                                                                                                                                                                                                                                                                                                            \\
+     & = - \left( \int\limits_0^{D_u/l} \dfrac{\diff{I}}{\diff{\widetilde{r}}} \diff{\widetilde{r}} + \int\limits_{D_u/l}^\infty \dfrac{\diff{I}}{\diff{\widetilde{r}}} \diff{\widetilde{r}} \right) \left[ \int\limits_{\Gamma^+} \bar{p} (-\normal_0) \cdot \defrate \diff{A} + \int\limits_{\Gamma^-} \bar{p} (-\normal_0) \cdot \defrate \diff{A} \right] \\
+     & = - \left[ I\left( \widetilde{r}=\dfrac{D_u}{l} \right) - I(\widetilde{r}=0) \right] \left[ \int\limits_{\Gamma^+} \bar{p} (-\normal_0) \cdot \defrate \diff{A} + \int\limits_{\Gamma^-} \bar{p} (-\normal_0) \cdot \defrate \diff{A} \right]                                                                                                          \\
+     & = - \left[ I(0) - I(1) \right] \left[ \int\limits_{\Gamma^+} \bar{p} (-\normal_0) \cdot \defrate \diff{A} + \int\limits_{\Gamma^-} \bar{p} (-\normal_0) \cdot \defrate \diff{A} \right]                                                                                                                                                                
+  \end{aligned}
+\end{equation}
+Finally, recall our previous restrictions on the indicator function $I(c)$; the limit reduces to:
+\begin{align}
+  \lim_{l \to 0} \mathcal{P}^\text{ext} = \int\limits_{\Gamma^+} \bar{p} (-\normal_0) \cdot \defrate \diff{A} + \int\limits_{\Gamma^-} \bar{p} (-\normal_0) \cdot \defrate \diff{A}.
+\end{align}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Governing equations}
+
+Following the variational framework, substituting \eqref{eq: chapter 3 helmholtz}, \eqref{eq: chapter 3 strain energy density}, \eqref{eq: fracture energy density}, \eqref{eq: crack surface density}, and \eqref{eq: pressure power} into the problem statement \eqref{eq: inf sup problem}, under the isothermal conditions, the governing equations can be obtained as
+\begin{align}
+  \divergence \stress - \bar{p} \grad d I_{,d} & = \bs{0}, \\
+  \divergence \bs{\xi} - f                     & = 0,      
+\end{align}
+supplemented by the constitutive relations \eqref{eq: chapter 3 stress strain relation} and
+\begin{align}
+  \bs{\xi} = \dfrac{2\Gc l}{c_0}, \quad f = g_{,d}\psi^e_\activepart + \dfrac{\Gc}{c_0l}\alpha_{,d}.
+\end{align}
