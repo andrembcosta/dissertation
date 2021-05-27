@@ -1,65 +1,48 @@
 \section{Discretization}
 \label{section: framework/discretization}
 
-We begin this section by summarizing the strong form of the initial boundary value problem of interest:
+We begin this section by summarizing the strong form of the general initial boundary value problem of interest:
 \begin{mdframed}[
-    frametitle={The initial boundary value problem},
+    frametitle={The initial boundary value problem for the time interval $t \in I = [t_0, t_f]$},
     frametitlebackgroundcolor=gray!20,
     backgroundcolor=gray!5,
     linewidth=0pt,
     nobreak=true
   ]
   \begin{align*}
-    \text{linear momentum balance: }   & \divergence \bfP + \rho_0 \bfB = \bs{0},            &  & \forall \btX \in \body,           \\
-                                       & \bfP \cdot \bfN = \bfT,                             &  & \forall \btX \in \bodyboundary_t, \\
-                                       & \bfu = \bfu_g,                                      &  & \forall \btX \in \bodyboundary_u, \\
-    \text{stress-strain relations: }   & \bfP = \bs{\tau}\defgrad^{-T},                      &  & \forall \btX \in \body,           \\
-    \text{KKT system for plasticity: } & \phi^p \leqslant 0,                                 &  & \forall \btX \in \body,           \\
-                                       & \epdot \geqslant 0,                                 &  & \forall \btX \in \body,           \\
-                                       & \phi^p \epdot = 0,                                  &  & \forall \btX \in \body,           \\
-    \text{plastic flow rule: }         & \dot{\defgrad}^p {\defgrad^p}^{-1} = \epdot \bfN^p, &  & \forall \btX \in \body,           \\
-    \text{KKT system for fracture: }   & f_{, \grad d}(d, \grad d) \cdot \bfN = 0 ,          &  & \forall \btX \in \bodyboundary,   \\
-                                       & \phi^f \leqslant 0,                                 &  & \forall \btX \in \body,           \\
-                                       & \dot{d} \geqslant 0,                                &  & \forall \btX \in \body,           \\
-                                       & \phi^f \dot{d} = 0,                                 &  & \forall \btX \in \body,           \\
-    \text{initial conditions: }        & \defgrad^p(t=0) = \bfI,                             &  & \forall \btX \in \body,           \\
-                                       & \ep(t=0) = 0,                                       &  & \forall \btX \in \body,           \\
-                                       & d(t=0) = 0,                                         &  & \forall \btX \in \body,
+    \text{Linear momentum balance: }   & \rho_0 \bta = \divergence \bfP + \rho_0 \btb,                           &  & \body_0 \times ]t_0, t[,           \\
+                                       & \bfP \normal_0 = \btt,                                                  &  & \partial_t\body_0 \times ]t_0, t[, \\
+                                       & \bs{\upphi} = \bs{\upphi}_g,                                            &  & \partial_u\body_0 \times ]t_0, t[, \\
+    \text{Fracture evolution: }        & \divergence \bs{\xi} - f = 0,                                           &  & \mathcal{I}_t(\body_0) \times ]t_0, t[, \\
+                                       & \bs{\xi}\cdot\normal_0 = 0,                                             &  & \mathcal{I}_t(\partial_d\body_0) \times ]t_0, t[, \\
+    \text{Heat transfer: }             & \rho_0c_v\dot{T} = \rho_0 q - \divergence \bth + \delta + \delta_T,     &  & \body_0 \times ]t_0, t[, \\
+                                       & \bth \cdot \normal_0 = \bar{h}_n,                                       &  & \partial_h\body_0 \times ]t_0, t[, \\
+                                       & \bth \cdot \normal_0 = h(T - T_0),                                      &  & \partial_r\body_0 \times ]t_0, t[, \\
+                                       & T = T_g,                                                                &  & \partial_T\body_0 \times ]t_0, t[, \\
+    \text{Initial conditions: }        & \bs{\upphi} = \bs{\upphi}_0,                                            &  & \body_0, t = t_0, \\
+                                       & \dot{\bs{\upphi}} = \btv_0,                                             &  & \body_0, t = t_0, \\
+                                       & d = d_0,                                                                &  & \body_0, t = t_0, \\
+                                       & T = T_0,                                                                &  & \body_0, t = t_0.
   \end{align*}
 \end{mdframed}
-supplemented by detailed definitions of the Kirchhoff stress $\bs{\tau}$ \eqref{eq: stress-strain}, the yield surface $\phi^p$ \eqref{eq: yield surface}, the plastic flow direction $\bfN^p$ \eqref{eq: flow rule}, and the fracture envelope $\phi^f$ \eqref{eq: fracture yield surface}.
+The yield surface and the flow rule (and their corresponding constitutive updates) are defined only after specific constitutive assumptions are made in the following chapters.
 
-The stress-strain relations, the KKT system for plasticity and the plastic flow rule are satisfied during constitutive updates within the finite element method, consistent with standard practice. Therefore, the field equations (together with their initial and boundary conditions) to be discretized are:
-
-\begin{mdframed}[
-    frametitle={The strong form},
-    frametitlebackgroundcolor=gray!20,
-    backgroundcolor=gray!5,
-    linewidth=0pt,
-    nobreak=true
-  ]
-  \vspace{-0.5em}
-  \begin{align*}
-    \text{governing equations: } & \divergence \bfP + \rho_0 \bfB = \bs{0},                                                                                                       &  & \forall \btX \in \body,           \\
-                                 & -\phi^f = \eta \dot{d} - \divergence \left( \dfrac{2 \Gc l}{c_0} \grad d \right) + \dfrac{\widehat{\Gc}}{c_0 l}\alpha_{,d} + \chi \geqslant 0, &  & \forall \btX \in \body,           \\
-    \text{boundary conditions: } & \bfP \cdot \bfN = \bfT,                                                                                                                        &  & \forall \btX \in \bodyboundary_t, \\
-                                 & \bfu = \bfu_g,                                                                                                                                 &  & \forall \btX \in \bodyboundary_u, \\
-                                 & f_{, \grad d} \cdot \bfN = 0 ,                                                                                                                 &  & \forall \btX \in \bodyboundary,   \\
-    \text{initial condition: }   & d(t=0) = 0,                                                                                                                                    &  & \forall \btX \in \body,           \\
-    \text{constraints: }         & \dot{d} \geqslant 0,                                                                                                                           &  & \forall \btX \in \body,           \\
-                                 & \phi^f \dot{d} = 0,                                                                                                                            &  & \forall \btX \in \body.
-  \end{align*}
-\end{mdframed}
-
-To develop the weak form, we begin by introducing the trial spaces $\bs{\fspace{U}}_t$ and $\fspace{D}_t$ as:
+To derive the weak form, we begin by introducing the trial spaces $\bs{\mathcal{U}}_t$, $\mathcal{D}_t$ and $\mathcal{T}_t$
+\begin{subequations}
 \begin{align}
-  \bs{\fspace{U}}_t = \{ \bfu \in \fspace{H}^1(\body)^d \mid \bfu(t) = \bfu_g \text{ on } \bodyboundary_u \}, \quad \fspace{D}_t = \{ d \in \fspace{H}^1(\body) \mid \dot{d} \geqslant 0, \phi^f \dot{d} = 0 \},
+  \bs{\mathcal{U}}_t &= \{ \bs{\upphi} \in \mathcal{H}^1(\body_0)^d \mid \bfu = \bfu_g \text{ on } \partial_u\body_0 \}, \\
+  \mathcal{D}_t &= \{ d \in \mathcal{H}^1(\body_0) \mid \dot{d} > 0 \text{ on } \mathcal{I}_t(\body_0) \}, \\
+  \mathcal{T}_t &= \{ T \in \mathcal{H}^1(\body_0) \mid T = T_g \text{ on } \partial_T\body_0 \},
 \end{align}
-and the weighting spaces $\bs{\fspace{V}}$ and $\fspace{Q}$ as:
+\end{subequations}
+and the weighting spaces $\bs{\mathcal{V}}$, $\mathcal{C}$ and $\mathcal{E}$
+\begin{subequations}
 \begin{align}
-  \bs{\fspace{V}} = \{ \bfw \in \fspace{H}^1(\body)^d \mid \bfw(t) = \bs{0} \text{ on } \bodyboundary_u \}, \quad \fspace{Q} = \{ q \in \fspace{H}^1(\body) \}.
+  \bs{\mathcal{V}} &= \{ \btw \in \mathcal{H}^1(\body_0)^d \mid \btw = \bs{0} \text{ on } \partial_u\body_0 \}, \\
+  \mathcal{C} &= \{ c \in \mathcal{H}^1(\body_0) \}, \\
+  \mathcal{E} &= \{ e \in \mathcal{H}^1(\body_0) \mid T = 0 \text{ on } \partial_T\body_0 \}.
 \end{align}
-
+\end{subequations}
 The weak form can be derived as:
 \begin{mdframed}[
     frametitle={The weak form},
@@ -68,17 +51,28 @@ The weak form can be derived as:
     linewidth=0pt,
     nobreak=true
   ]
-  Given $\bfu_g$, $\bfT$ and $d_0$, find $\bfu(t) \in \bs{\fspace{U}}_t$ and $d(t) \in \fspace{D}_t$, $t \in [0, t']$, such that $\forall \bfw \in \bs{\fspace{V}}$ and $\forall q \in \fspace{Q}$,
+  Given parameters in the IBVP, find $\bs{\upphi} \in \bs{\mathcal{U}}_t$, $d \in \mathcal{D}_t$ and $T \in \mathcal{T}_t$, $t \in [t_0, t_f]$, such that $\forall \btw \in \bs{\mathcal{V}}$, $\forall c \in \mathcal{C}$ and $\forall e \in \mathcal{E}$,
   \begin{subequations}
     \begin{align}
-      \left< \bfw, \bfT \right>_{\bodyboundary_t} - \left( \grad \bfw, \bfP \right) + \left( \bfw, \rho_0 \bfB \right)                                                             & = \bs{0},    \\
-      \left( q, \eta \dot{d} \right) + \left( \grad q, \dfrac{2 \Gc l}{c_0} \grad d \right) + \left( q, \dfrac{\widehat{\Gc}}{c_0 l} \alpha_{, d} \right) + \left( q, \chi \right) & \geqslant 0, \\
-      \left( q, d(0) \right) - \left( q, d_0 \right)                                                                                                                               & = 0.
+      \left( \btw, \rho_0\bta \right) + \left( \grad \btw, \bfP \right) - \left( \btw, \rho_0 \btb \right) - \left< \btw, \btt \right>_{\partial_t\body_0} &= 0,    \\
+      \left( \grad c, \bs{\xi} \right) + \left( c, f \right) &= 0, \\
+      \begin{split}
+        - \left( e, \rho_0c_v\dot{T} \right) + \left( e, \rho_0q \right) + \left( \grad e, \bth \right) + \left( e, \delta+\delta_T \right)& \\
+        - \left< e, \bar{h}_n \right>_{\partial_h\body_0} - \left< e, h(T-T_0) \right>_{\partial_r\body_0} &= 0,
+      \end{split} 
     \end{align}
   \end{subequations}
+  with projections of initial conditions
+  \begin{subequations}
+  \begin{align}
+      \left( \btw, \bs{\upphi} - \bs{\upphi}_0 \right) &= 0, \\
+      \left( \btw, \dot{\bs{\upphi}} - \btv_0 \right) &= 0, \\
+      \left( c, d - d_0 \right) &= 0, \\
+      \left( e, T - T_0 \right) &= 0.
+  \end{align}
+  \end{subequations}
 \end{mdframed}
-
-Using the Galerkin method, with finite dimensional function spaces $\widetilde{\bs{\fspace{U}}}_t \subset \bs{\fspace{U}}_t$, $\widetilde{\bs{\fspace{V}}} \subset \bs{\fspace{V}}$, $\widetilde{\fspace{D}}_t \subset \fspace{D}_t$, $\widetilde{\fspace{Q}} \subset \fspace{Q}$, we arrive at the spatially discrete form of the problem:
+Using the Galerkin method, with finite dimensional function spaces $\widetilde{\bs{\mathcal{U}}}_t \subset \bs{\mathcal{U}}_t$, $\widetilde{\bs{\mathcal{V}}} \subset \bs{\mathcal{V}}$, $\widetilde{\mathcal{D}}_t \subset \mathcal{D}_t$, $\widetilde{\mathcal{C}} \subset \mathcal{C}$, $\widetilde{\mathcal{T}}_t \subset \mathcal{T}_t$, $\widetilde{\mathcal{E}} \subset \mathcal{E}$, we arrive at the spatially discrete form of the problem:
 \begin{mdframed}[
     frametitle={The Galerkin form},
     frametitlebackgroundcolor=gray!20,
@@ -86,14 +80,25 @@ Using the Galerkin method, with finite dimensional function spaces $\widetilde{\
     linewidth=0pt,
     nobreak=true
   ]
-  Given $\bfu_g$, $\bfT$ and $d_0$, find $\bfu^h(t) \in \widetilde{\bs{\fspace{U}}}_t$ and $d^h(t) \in \widetilde{\fspace{D}}_t$, $t \in [0, t']$, such that $\forall \bfw^h \in \widetilde{\bs{\fspace{V}}}$ and $\forall q^h \in \widetilde{\fspace{Q}}$,
+  Given parameters in the IBVP, find $\bs{\upphi}^h \in \widetilde{\bs{\mathcal{U}}}_t$, $d^h \in \widetilde{\mathcal{D}}_t$ and $T^h \in \widetilde{\mathcal{T}}_t$, $t \in [t_0, t_f]$, such that $\forall \btw^h \in \widetilde{\bs{\mathcal{V}}}$, $\forall q^h \in \widetilde{\mathcal{C}}$ and $\forall e^h \in \widetilde{\mathcal{E}}$,
   \begin{subequations}
     \begin{align}
-      \left< \bfw^h, \bfT \right>_{\bodyboundary_t} - \left( \grad \bfw^h, \bfP \right) + \left( \bfw^h, \rho_0 \bfB \right)                                                                 & = \bs{0},    \label{eq: galerkin mechanics} \\
-      \left( q^h, \eta \dot{d} \right) + \left( \grad q^h, \dfrac{2 \Gc l}{c_0} \grad d^h \right) + \left( q^h, \dfrac{\widehat{\Gc}}{c_0 l} \alpha_{, d} \right) + \left( q^h, \chi \right) & \geqslant 0, \label{eq: galerkin damage}    \\
-      \left( q^h, d^h(0) \right) - \left( q^h, d_0 \right)                                                                                                                                   & = 0. \label{eq: galerkin bound}
+      \left( \btw^h, \rho_0\bta \right) + \left( \grad \btw^h, \bfP \right) - \left( \btw^h, \rho_0 \btb \right) - \left< \btw^h, \btt \right>_{\partial_t\body_0} &= 0,    \\
+      \left( \grad c^h, \bs{\xi} \right) + \left( c^h, f \right) &= 0, \\
+      \begin{split}
+        - \left( e^h, \rho_0c_v\dot{T} \right) + \left( e^h, \rho_0q \right) + \left( \grad e^h, \bth \right) + \left( e^h, \delta+\delta_T \right)& \\
+        - \left< e^h, \bar{h}_n \right>_{\partial_h\body_0} - \left< e^h, h(T^h-T_0) \right>_{\partial_r\body_0} &= 0,
+      \end{split} 
     \end{align}
   \end{subequations}
+  with projections of initial conditions
+  \begin{subequations}
+  \begin{align}
+      \left( \btw^h, \bs{\upphi}^h - \bs{\upphi}_0 \right) &= 0, \\
+      \left( \btw^h, \dot{\bs{\upphi}} - \btv_0 \right) &= 0, \\
+      \left( c^h, d^h - d_0 \right) &= 0, \\
+      \left( e^h, T^h - T_0 \right) &= 0.
+  \end{align}
+  \end{subequations}
 \end{mdframed}
-
-The discrete inequality for crack irreversibility is satisfied node-wise with a primal-dual active set strategy. See e.g.\  \citet{heister2015primal} for implementational details of such a solver. The solver is also generally available in numerical toolboxes, e.g.\  PETSc \cite{petsc-web-page}. The discrete approximation is calculated using a fixed-point iterative solution scheme outlined from \cite{HuGary2020}. The KKT system for plasticity with the plastic flow rule constraints are enforced using the return mapping algorithm from \cite{borden2016phase}, where the F-bar approach (e.g. \cite{neto2005f}) is adopted to circumvent volumetric locking.
+The discrete inequality for crack irreversibility is satisfied node-wise with a primal-dual active set strategy. See e.g.\  \citet{heister2015primal} for implementational details of such a solver. The solver is also generally available in numerical toolboxes, e.g.\  PETSc \cite{petsc-web-page}. The discrete approximation is calculated using a fixed-point iterative solution scheme outlined from \cite{HuGary2020}.

@@ -33,7 +33,7 @@ All the above conservation and thermodynamic laws hold for any arbitrary subbody
 \begin{subequations}
   \begin{align}
      & \dot{\rho_0} = 0,                                                                                                                \\
-     & \rho_0 \dot{\bs{\upphi}} = \divergence \bfP + \rho_0\btb,                                                                        \\
+     & \rho_0 \bta = \divergence \bfP + \rho_0\btb,                                                                        \\
      & \bfP\defgrad = \defgrad\bfP^T,                                                                                                   \\
      & \dot{u} + \dot{k} = \mathcal{P}^\text{ext} + \rho_0 q - \divergence \bth,                                                        \\
      & \dot{s}^\text{int} = \dot{s} - \dfrac{\rho_0 q}{T} + \divergence \dfrac{\bth}{T} \geqslant 0. \label{eq: dissipation inequality}
@@ -76,11 +76,11 @@ The internal power expenditure $\mathcal{P}^\text{int}$ can be expressed in term
 It is assumed that each of the generalized forces can be additively decomposed into an equilibrium part, thermodynamically conjugate to the Helmholtz free energy density, and a viscous part, i.e.
 \begin{subequations}
   \begin{align}
-    \bfP     & = \bfP^\text{eq}(\Lambda, T) + \bfP^\text{vis}(\dot{\defgrad}; \Lambda, T),       \\
-    \bfT     & = \bfT^\text{eq}(\Lambda, T) + \bfT^\text{vis}(\dot{\defgrad}^p; \Lambda, T),     \\
-    Y        & = Y^\text{eq}(\Lambda, T) + Y^\text{vis}(\epdot; \Lambda, T),                     \\
-    f        & = f^\text{eq}(\Lambda, T) + f^\text{vis}(\dot{d}; \Lambda, T),                    \\
-    \bs{\xi} & = \bs{\xi}^\text{eq}(\Lambda, T) + \bs{\xi}^\text{vis}(\grad\dot{d}; \Lambda, T),
+    \bfP     & = \bfP^\text{eq}(\Lambda, T) + \bfP^\text{vis}(\dot{\defgrad}, T; \Lambda),       \\
+    \bfT     & = \bfT^\text{eq}(\Lambda, T) + \bfT^\text{vis}(\dot{\defgrad}^p, T; \Lambda),     \\
+    Y        & = Y^\text{eq}(\Lambda, T) + Y^\text{vis}(\epdot, T; \Lambda),                     \\
+    f        & = f^\text{eq}(\Lambda, T) + f^\text{vis}(\dot{d}, T; \Lambda),                    \\
+    \bs{\xi} & = \bs{\xi}^\text{eq}(\Lambda, T) + \bs{\xi}^\text{vis}(\grad\dot{d}, T; \Lambda),
   \end{align}
 \end{subequations}
 where the viscous forces vanish as the rate diminishes to preclude viscous dissipation in quasi-static processes, i.e.
@@ -113,18 +113,18 @@ Substituting \eqref{eq: constitutive restrictions} and \eqref{eq: rate of helmho
 
 Using the identities \eqref{eq: rate of helmholtz} and \eqref{eq: constitutive restrictions}, the rate of the entropy density can be expanded as
 \begin{align}
-  \dot{s} = -\dot{\psi}_{,T} = - \bfP^\text{eq}_{,T}:\dot{\defgrad} - \bfT^\text{eq}_{,T}:\dot{\defgrad}^p - Y^\text{eq}_{,T}\epdot - f^\text{eq}_{,T}\dot{d} - \bs{\xi}^\text{eq}_{,T}\cdot\grad d - \psi_{,TT} \dot{T}.
+  \dot{s} = -\dot{\psi}_{,T} = - \bfP^\text{eq}_{,T}:\dot{\defgrad} - \bfT^\text{eq}_{,T}:\dot{\defgrad}^p - Y^\text{eq}_{,T}\epdot - f^\text{eq}_{,T}\dot{d} - \bs{\xi}^\text{eq}_{,T}\cdot\grad d - \psi_{,TT} \dot{T}. \label{eq: expanding s dot}
 \end{align}
 By introducing the heat capacity per unit mass at constant $\Lambda$:
 \begin{align}
-  \rho_0c_v = -T\psi_{,TT},
+  \rho_0c_v = -T\psi_{,TT}, \label{eq: heat capacity}
 \end{align}
 the energy balance \eqref{eq: energy balance entropy form} can be rewritten as
 \begin{align}
-  \rho_0 c_v \dot{T} = \rho_0 q - \divergence \bth + \delta + \delta_T,
+  \rho_0 c_v \dot{T} = \rho_0 q - \divergence \bth + \delta + \delta_T, \label{eq: energy balance temperature form}
 \end{align}
 where $\delta_T$ is the dissipation density accounting for the thermal effects in the thermodynamic conjugates:
 \begin{align}
-  \delta_T = \bfP^\text{eq}_{,T}:\dot{\defgrad} + \bfT^\text{eq}_{,T}:\dot{\defgrad}^p + Y^\text{eq}_{,T}\epdot + f^\text{eq}_{,T}\dot{d} + \bs{\xi}^\text{eq}_{,T}\cdot\grad d,
+  \delta_T = T\left( \bfP^\text{eq}_{,T}:\dot{\defgrad} + \bfT^\text{eq}_{,T}:\dot{\defgrad}^p + Y^\text{eq}_{,T}\epdot + f^\text{eq}_{,T}\dot{d} + \bs{\xi}^\text{eq}_{,T}\cdot\grad d \right),
 \end{align}
-e.g. $\bfP^\text{eq}_{,T}:\dot{\defgrad}$ is the dissipation accounting for thermoelastic effects, and $Y^\text{eq}_{,T}\epdot$ is the dissipation accounting for thermoplastic softening.
+e.g. $T\bfP^\text{eq}_{,T}:\dot{\defgrad}$ is the dissipation accounting for thermoelastic effects, and $TY^\text{eq}_{,T}\epdot$ is the dissipation accounting for thermoplastic softening.

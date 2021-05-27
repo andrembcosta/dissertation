@@ -3,7 +3,7 @@
 
 In this section, we construct a potential such that \emph{all} the conservation and thermodynamic laws can be derived (if not implied by construction) from a minimization problem. First, we assume that the Helmholtz free energy density $\psi$ can be additively decomposed into a strain-energy density $\psi^e$, a plastic energy density $\psi^p$, a fracture energy density $\psi^f$, and a thermal energy density $\psi^h$:
 \begin{align}
-  \psi = \psi^e(\defgrad, \defgrad^p, d, T) + \psi^p(\ep, d, T) + \psi^f(d, \grad d, T) + \psi^h(T).
+  \psi = \psi^e(\defgrad, \defgrad^p, d, T) + \psi^p(\ep, d, T) + \psi^f(d, \grad d, T) + \psi^h(T). \label{eq: energies}
 \end{align}
 
 To maintain a variational structure, the viscous forces are supposed to derived from dual kinetic potentials.
@@ -34,43 +34,103 @@ where ${\psi^e}^*$ is the elastic dual kinetic potential describing rate-sensiti
 To satisfy the second law \eqref{eq: dissipation inequality 2}, the material is assumed to be \emph{strictly dissipative} in the sense that every thermodynamic process results in an increase in entropy for nonzero rates, i.e.\ $\mathcal{F}^\text{dis}\cdot\dot{\Lambda} > \bs{0}$, $\forall \dot{\Lambda} \neq 0$. These constraints are subject to later verification.
 
 The external power expenditure $\mathcal{P}^\text{ext}(\dot{\bs{\upphi}}, T)$ is defined as
-\begin{align}
-  \mathcal{P}^\text{ext} = & \ \underbrace{\int\limits_{\body_0} \rho_0 \btb \cdot \dot{\bs{\upphi}} \diff{V}}_\text{body force} + \underbrace{\int\limits_{\partial_t\body_0} \btt \cdot \dot{\bs{\upphi}} \diff{A}}_\text{surface traction} + \underbrace{\int\limits_{\partial_h\body_0} \bar{\bth}\ln\left( \dfrac{T}{T_0} \right) \diff{A}}_\text{external heat flux} \\
+\begin{equation}
+\begin{aligned}
+  \mathcal{P}^\text{ext} = & \ \underbrace{\int\limits_{\body_0} \rho_0 \btb \cdot \dot{\bs{\upphi}} \diff{V}}_\text{body force} + \underbrace{\int\limits_{\partial_t\body_0} \btt \cdot \dot{\bs{\upphi}} \diff{A}}_\text{surface traction} + \underbrace{\int\limits_{\partial_h\body_0} \bar{h}_n\ln\left( \dfrac{T}{T_0} \right) \diff{A}}_\text{external heat flux} \\
                            & + \underbrace{\int\limits_{\partial_r\body_0} h\left[ T - T_0 \ln\left( \dfrac{T}{T_0} \right) \right] \diff{A}}_\text{external heat convection} - \underbrace{\int\limits_{\body_0} \rho_0 q \ln\left( \dfrac{T}{T_0} \right) \diff{V}}_\text{heat source},
-\end{align}
-where the subscripts in $\partial_t$, $\partial_h$ and $\partial_r$ denote the corresponding subsets of the surface with the associated Neumann/Robin boundary conditions.
+\end{aligned}\label{eq: external power}
+\end{equation}
+where the subscripts in $\partial_t$, $\partial_h$ and $\partial_r$ denote the corresponding subsets of the surface with the associated Neumann/Robin boundary conditions. $\bar{h}_n$ is the heat flux, $h$ is the heat transfer coefficient, and $T_0$ is the reference or the ambient temperature.
 
-Since there is no external power expenditure, the total potential can then be constructed as
+To account for heat generation due to dissipations (i.e. from dual kinetic potentials), it is necessary to introduce the concept of the \emph{equilibrium temperature} corresponding to the thermodynamic state $\{ \Lambda, s \}$ defined as
 \begin{align}
-  L(\dot{\bs{\phi}}, \dot{\bfF}^c, \dot{\varepsilon}^c, \dot{d}) = \int\limits_{\body_0} \left( \dot{\psi} + \Delta^* \right) \diff{V}. \label{eq: total potential 1}
+    T^\text{eq} = u_{,s}(\Lambda, s),
 \end{align}
-Substitute the definition of the free energy \eqref{eq: energies}, the definition of the dual kinetic potential \eqref{eq: dual kinetic potentials}, the flow rule \eqref{eq: flow rule}, and the constitutive restrictions \eqref{eq: constitutive restrictions} into \eqref{eq: total potential 1} to obtain
-\begin{align}
-  L(\dot{\bs{\phi}}, \bfN^c, \dot{\varepsilon}^c, \dot{d}) = \int\limits_{\body_0} \left( \bfP:\dot{\bfF} + \bfT:\dot{\varepsilon}^c\bfN^c\bfF^c + f^\text{en}\dot{d} + \bs{\xi}\cdot\grad d + \Pi^* + \Phi^* \right) \diff{V}. \label{eq: total potential 2}
-\end{align}
-The thermodynamic equations of state can then be derived by finding the infimum of \eqref{eq: total potential 2}, subject to constraints \eqref{eq: flow direction constraints}, \eqref{eq: irreversibility constraints}, and Dirichlet boundary conditions. The balance of linear momentum is obtained by minimizing $L$ with respect to $\dot{\bs{\phi}}$:
-\begin{align}
-  \divergence\bfP = \bs{0}. \label{eq: linear momentum balance}
-\end{align}
-Minimization of $L$ with respect to $\bfN^c$, subject to \eqref{eq: flow direction constraints}, determines the flow direction
-\begin{align}
-  \bfN^c = \sqrt{\dfrac{3}{2}}\dfrac{\dev(\bfM)}{\norm{\dev(\bfM)}}, \label{eq: flow direction}
-\end{align}
-where $\bfM = -\bfT{\bfF^c}^T$ is the Mandel stress. Minimization of $L$ with respect to $\dot{\varepsilon}^c$, subject to constraint \eqref{eq: irreversibility constraints}, invokes the KKT condition:
-\begin{align}
-  \phi^c \equiv \bar{\sigma} - Y \leqslant 0, \quad \dot{\varepsilon}^c \geqslant 0, \quad \phi^c\dot{\varepsilon}^c = 0, \label{eq: yield surface}
-\end{align}
-where $\bar{\sigma} \equiv \bfM:\bfN^c$ is the effective stress. To recover a Perzyna type viscoplasticity model, the plastic dual kinetic potential shall take the form
-\begin{align}
-  \Pi^* = \bar{\sigma}\dot{\varepsilon}^c - \Upsilon^*(\dot{\varepsilon}^c; \Lambda),
-\end{align}
-where $\Upsilon^*$ is the creep potential, as shall be seen momentarily it determines the update formula for the effective creep strain rate. The force conjugate to $\dot{\varepsilon}^c$ hence can be written as
-\begin{align}
-  Y = \Pi^*_{,\dot{\varepsilon}^c} = \bar{\sigma} - \Upsilon^*_{,\dot{\varepsilon}^c}.
-\end{align}
-Assume $\Upsilon^*$ is convex in $\dot{\varepsilon}^c$, inserting this identity into \eqref{eq: yield surface} simplifies the KKT conditions to a single update formula $-\Upsilon^*_{,\dot{\varepsilon}^c} = 0$.
+and the \emph{external temperature} $T$, along with a dummy integration factor $T/T^\text{eq}$. It will be shown later that the equilibrium temperature will be equal to the external temperature at equilibrium, and that the integration factor brings the effect of dissipation mechanisms into heat generation.
 
-Finally, the minimization with respect to $\dot{d}$ leads to the so-called fracture evolution equations
+The total potential is constructed such that given the current kinematic state variables $\Lambda$ and the current temperature, the velocities $\mathcal{V}$ and the rate of temperature change can be obtained as a critical point following the first variations, which can then be used to update the state variables. The total potential $L$ is constructed as
+\begin{subequations}
 \begin{align}
-  \phi^f \equiv \divergence \bs{\xi} - (f^\text{en} + f^\text{dis}) \leqslant 0, \quad \dot{d} \geqslant 0, \quad \phi^f\dot{d} = 0. \label{eq: fracture envolope}
+  L(\dot{\Lambda}, \dot{s}, T) &= \int\limits_{\body_0} \varphi(\dot{\Lambda}, \dot{s}, T) \diff{V} - \mathcal{P}^\text{ext}(\dot{\Lambda}, T), \label{eq: total potential 1}\\
+  \varphi(\dot{\Lambda}, \dot{s}, T) &= \dot{u}(\dot{\Lambda}, \dot{s}) + \Delta^*\left( \dfrac{T}{T^\text{eq}}\dot{\Lambda}, T^\text{eq} \right) - T\dot{s} - \chi(\btg), \label{eq: local energy density}
+\end{align}
+\end{subequations}
+where $\dot{u}$ is the rate of change in the internal energy, $\dot{s}$ is the rate of change in the entropy, $\Delta^*$ is the sum of dual kinetic potentials:
+\begin{align}
+    \Delta^*(\dot{\Lambda}, T; \Lambda) = {\psi^e}^*(\dot{\defgrad}, T; \Lambda) + {\psi^p}^*(\dot{\defgrad}^p, \epdot, T; \Lambda) + {\psi^f}^*(\dot{d}, \grad \dot{d}, T; \Lambda), \label{eq: dual kinetic potentials}
+\end{align}
+and $\chi$ is the Fourier potential defined in terms of  the normalized temperature gradient $\btg = -\dfrac{1}{T}\grad T$, with the property $-\bth = \chi_{,\btg}$.
+Finally, the entire problem can be cast variational into the following inf-sup problem as
+\begin{align}
+     \left( \mathcal{V}, \dot{s}, T \right) = \arg \left[ \inf_{\mathcal{V}, \dot{s}} \sup_T L(\dot{\Lambda}, \dot{s}, T) \right]. \label{eq: inf sup problem}
+\end{align}
+Owing to \cite{dal2012introduction,yang2006variational}, the solutions of \eqref{eq: inf sup problem} have the following properties: Assume $\body_0$ is open and bounded with only Dirichlet boundary conditions, and let $\hat{T} \equiv \ln(T/T_0)$, $\hat{T} \in \mathbb{R}$. If $\chi$ is convex in $\grad \hat{T}$ and grows as a power $\abs{\grad \hat{T}}^p$, $1 < p < \infty$, then $L(\dot{\Lambda}, \dot{s}, T)$ attains its supremum $L(\dot{\Lambda}, \dot{s})$ in the Sobolev space $W^{1,p}(\body_0)$. If $\chi$ is \emph{strictly convex} in $\grad u$, then the solution $T$ is unique. The existence of the solution $\dot{\Lambda}$ is endorsed by the polyconvexity of the potentials $\dot{u}(\dot{\Lambda}, \dot{s})$ and $\Delta^*(\dot{\Lambda})$. In addition, the dissipation inequality (e.g. \eqref{eq: dissipation inequality}) is satisfied if $\Delta^*(\dot{\Lambda}, T)$ attains its infimum for every $\dot{\Lambda}$ when the rate is zero.
+
+\begin{remark}
+One may attempt to state the variational inf-sup problem without relying on the concept of the equilibrium temperature, the external temperature, and the integration factor:
+\begin{align}
+    \left( \mathcal{V}, \dot{s}, T \right) &= \arg \left[ \inf_{\mathcal{V}, \dot{s}} \sup_T L'(\dot{\Lambda}, \dot{s}, T) \right], \label{eq: inf sup problem bad} \\
+    L'(\dot{\Lambda}, \dot{s}, T) &= \int\limits_{\body_0} \left[ \dot{u}(\dot{\Lambda}, \dot{s}) + \Delta^*\left( \dot{\Lambda}, T \right) - T\dot{s} - \chi(\btg) \right] \diff{V} - \mathcal{P}^\text{ext}(\dot{\Lambda}, T).
+\end{align}
+However, it immediately follows that the supremum of \eqref{eq: inf sup problem bad} in $T$ does not include contributions from dissipation mechanisms:
+\begin{align}
+    \rho_0 c_v \dot{T} = \rho_0 q - \divergence \bth,
+\end{align}
+which clearly violates the first law of thermodynamics \eqref{eq: energy balance temperature form}.
+\end{remark}
+
+To find the critical points of the inf-sup problem \eqref{eq: inf sup problem}, we first isolate the local state variables from the global state variables. That is, \eqref{eq: inf sup problem} can be reorganized as
+\begin{align}
+    \left( \mathcal{V}, \dot{s}, T \right) = \arg \left[ \inf_{\dot{\bs{\upphi}}, \dot{d}} \sup_T L\left( \inf_{\dot{\defgrad}^p, \epdot, \dot{s}} \varphi \right) \right],
+\end{align}
+since the update of $\defgrad^p$, $\ep$ and $s$ can be down point-wise. Expanding $\dot{u}$ in \eqref{eq: local energy density} and substituting the constitutive restrictions \eqref{eq: constitutive restrictions} yield
+\begin{equation}
+\begin{aligned}
+    \varphi(\dot{\Lambda}, \dot{s}, T) =&\ \bfP^\text{eq}:\dot{\defgrad} + \bfT^\text{eq}:\dot{\defgrad}^p + Y^\text{eq}\epdot + f^\text{eq}\dot{d} + \bs{\xi}^\text{eq}\cdot\grad\dot{d} + T^\text{eq}\dot{s} \\
+    &\ + \Delta^*\left( \dfrac{T}{T^\text{eq}}\dot{\Lambda}, T^\text{eq} \right) - T\dot{s} - \chi(\btg).
+\end{aligned}
+\end{equation}
+The minimizer in $\dot{s}$ follows as
+\begin{align}
+    T^\text{eq} - T = 0.
+\end{align}
+The infimum in $\dot{\defgrad}^p$ and $\epdot$ shall follow from the joint minimization problem subject to the flow rule \eqref{eq: general internal variable constraint}, i.e.
+\begin{equation}
+\begin{aligned}
+    \left( \dot{\defgrad}^p, \epdot \right) = &\ \arg\inf_{\dot{\defgrad}^p, \epdot} \left[ \bfT^\text{eq}:\dot{\defgrad}^p + Y^\text{eq}\epdot + \Delta^* \right] \\
+    &\ \text{subject to }\quad \bfL(\bfZ)\dot{\bfZ} = \bs{0}.
+\end{aligned}
+\end{equation}
+To find the infimum in $T$, substitute the definition of the free energy \eqref{eq: energies}, the definition of the dual kinetic potential \eqref{eq: dual kinetic potentials}, the definition of the external power \eqref{eq: external power}, and the constitutive restrictions \eqref{eq: constitutive restrictions} into \eqref{eq: total potential 1} to obtain
+\begin{equation}
+\begin{aligned}
+  L(\dot{\Lambda}, \dot{s}, T) =&\ \int\limits_{\body_0} \left[ \bfP^\text{eq}:\dot{\defgrad} + \bfT^\text{eq}:\dot{\defgrad}^p + Y^\text{eq}\epdot + f^\text{eq}\dot{d} + \bs{\xi}^\text{eq}\cdot\grad\dot{d} + T^\text{eq}\dot{s} \right.\\
+  &\ \left. + \Delta^*\left( \dfrac{T^\text{eq}}{T}\dot{\Lambda}, T^\text{eq} \right) - T\dot{s} - \chi(\btg) \right] \diff{V} - \int\limits_{\body_0} \rho_0 \btb \cdot \dot{\bs{\upphi}} \diff{V} \\
+  &\ - \int\limits_{\partial_t\body_0} \btt \cdot \dot{\bs{\upphi}} \diff{A} - \int\limits_{\partial_h\body_0} \bar{h}_n\ln\left( \dfrac{T}{T_0} \right) \diff{A} \\
+  &\ - \int\limits_{\partial_r\body_0} h\left[ T - T_0 \ln\left( \dfrac{T}{T_0} \right) \right] \diff{A} + \int\limits_{\body_0} \rho_0 q \ln\left( \dfrac{T}{T_0} \right) \diff{V} 
+\end{aligned}\label{eq: total potential 2}
+\end{equation}
+The variation of \eqref{eq: total potential 2} in $T$ in the admissible space (admissible with respect to Dirichlet boundary conditions) is
+\begin{subequations}
+\begin{align}
+    T\dot{s} = \rho_0 q - \divergence \bth + \delta, &\quad \forall \btX \in \body_0, \\
+    \bth \cdot \normal_0 = \bar{h}_n, &\quad \forall \btX \in \partial_h\body_0, \\
+    \bth \cdot \normal_0 = h(T - T_0), &\quad \forall \btX \in \partial_r\body_0.
+\end{align}
+\end{subequations}
+With the substitution of \eqref{eq: expanding s dot} and the definition of heat capacity \eqref{eq: heat capacity}, the first law in the form of \eqref{eq: energy balance temperature form} is recovered
+\begin{align}
+    \rho_0 c_v \dot{T} = \rho_0 q - \divergence \bth + \delta + \delta_T.
+\end{align}
+Next, the balance of linear momentum and traction boundary conditions are recovered from variations in the admissible fields of $\dot{\bs{\upphi}}$:
+\begin{subequations}
+\begin{align}
+  \divergence\bfP + \btb = \bs{0}, &\quad \forall \btX \in \body_0, \\
+  \bfP\normal_0 = \btt, &\quad \forall \btX \in \partial_t\body_0.
+\end{align}
+\end{subequations}
+Finally, variation in the admissible space of $\dot{d}$ yields the fracture evolution equation on the inactive set
+\begin{align}
+  \divergence \bs{\xi} - f = 0, &\quad \forall \btX \in \mathcal{I}(\body_0), \\
+  \bs{\xi}\cdot\normal_0 = 0, &\quad \forall \btX \in \mathcal{I}(\partial_d\body_0).
 \end{align}
