@@ -51,8 +51,8 @@ and the \emph{external temperature} $T$, along with a dummy integration factor $
 The total potential is constructed such that given the current kinematic state variables $\Lambda$ and the current temperature, the velocities $\mathcal{V}$ and the rate of temperature change can be obtained as a critical point following the first variations, which can then be used to update the state variables. The total potential $L$ is constructed as
 \begin{subequations}
 \begin{align}
-  L(\dot{\Lambda}, \dot{s}, T) &= \int\limits_{\body_0} \varphi(\dot{\Lambda}, \dot{s}, T) \diff{V} - \mathcal{P}^\text{ext}(\dot{\Lambda}, T), \label{eq: total potential 1}\\
-  \varphi(\dot{\Lambda}, \dot{s}, T) &= \dot{u}(\dot{\Lambda}, \dot{s}) + \Delta^*\left( \dfrac{T}{T^\text{eq}}\dot{\Lambda}, T^\text{eq} \right) - T\dot{s} - \chi(\btg), \label{eq: local energy density}
+  L(\dot{\Lambda}, \dot{s}, T, \grad T) &= \int\limits_{\body_0} \varphi(\dot{\Lambda}, \dot{s}, T) \diff{V} - \mathcal{P}^\text{ext}(\dot{\Lambda}, T), \label{eq: total potential 1}\\
+  \varphi(\dot{\Lambda}, \dot{s}, T, \grad T) &= \dot{k}(\dot{\bs{\upphi}}) + \dot{u}(\dot{\Lambda}, \dot{s}) + \Delta^*\left( \dfrac{T}{T^\text{eq}}\dot{\Lambda}, T^\text{eq} \right) - T\dot{s} - \chi(\btg), \label{eq: local energy density}
 \end{align}
 \end{subequations}
 where $\dot{u}$ is the rate of change in the internal energy, $\dot{s}$ is the rate of change in the entropy, $\Delta^*$ is the sum of dual kinetic potentials:
@@ -62,16 +62,19 @@ where $\dot{u}$ is the rate of change in the internal energy, $\dot{s}$ is the r
 and $\chi$ is the Fourier potential defined in terms of  the normalized temperature gradient $\btg = -\dfrac{1}{T}\grad T$, with the property $-\bth = \chi_{,\btg}$.
 Finally, the entire problem can be cast variational into the following inf-sup problem as
 \begin{align}
-     \left( \mathcal{V}, \dot{s}, T \right) = \arg \left[ \inf_{\mathcal{V}, \dot{s}} \sup_T L(\dot{\Lambda}, \dot{s}, T) \right]. \label{eq: inf sup problem}
+     \left( \mathcal{V}, \dot{s}, T \right) = \arg \left[ \inf_{\mathcal{V}, \dot{s}} \sup_T L(\dot{\Lambda}, \dot{s}, T, \grad T) \right]. \label{eq: inf sup problem}
 \end{align}
 Owing to \cite{dal2012introduction,yang2006variational}, the solutions of \eqref{eq: inf sup problem} have the following properties: Assume $\body_0$ is open and bounded with only Dirichlet boundary conditions, and let $\hat{T} \equiv \ln(T/T_0)$, $\hat{T} \in \mathbb{R}$. If $\chi$ is convex in $\grad \hat{T}$ and grows as a power $\abs{\grad \hat{T}}^p$, $1 < p < \infty$, then $L(\dot{\Lambda}, \dot{s}, T)$ attains its supremum $L(\dot{\Lambda}, \dot{s})$ in the Sobolev space $W^{1,p}(\body_0)$. If $\chi$ is \emph{strictly convex} in $\grad u$, then the solution $T$ is unique. The existence of the solution $\dot{\Lambda}$ is endorsed by the polyconvexity of the potentials $\dot{u}(\dot{\Lambda}, \dot{s})$ and $\Delta^*(\dot{\Lambda})$. In addition, the dissipation inequality (e.g. \eqref{eq: dissipation inequality}) is satisfied if $\Delta^*(\dot{\Lambda}, T)$ attains its infimum for every $\dot{\Lambda}$ when the rate is zero.
 
 \begin{remark}
 One may attempt to state the variational inf-sup problem without relying on the concept of the equilibrium temperature, the external temperature, and the integration factor:
+\begin{subequations}
 \begin{align}
-    \left( \mathcal{V}, \dot{s}, T \right) &= \arg \left[ \inf_{\mathcal{V}, \dot{s}} \sup_T L'(\dot{\Lambda}, \dot{s}, T) \right], \label{eq: inf sup problem bad} \\
-    L'(\dot{\Lambda}, \dot{s}, T) &= \int\limits_{\body_0} \left[ \dot{u}(\dot{\Lambda}, \dot{s}) + \Delta^*\left( \dot{\Lambda}, T \right) - T\dot{s} - \chi(\btg) \right] \diff{V} - \mathcal{P}^\text{ext}(\dot{\Lambda}, T).
+    \left( \mathcal{V}, \dot{s}, T \right) &= \arg \left[ \inf_{\mathcal{V}, \dot{s}} \sup_T L'(\dot{\Lambda}, \dot{s}, T, \grad T) \right], \label{eq: inf sup problem bad} \\
+    L'(\dot{\Lambda}, \dot{s}, T, \grad T) &= \int\limits_{\body_0} \varphi'(\dot{\Lambda}, \dot{s}, T, \grad T) \diff{V} - \mathcal{P}^\text{ext}(\dot{\Lambda}, T), \\
+    \varphi'(\dot{\Lambda}, \dot{s}, T, \grad T) &= \dot{k}(\dot{\bs{\upphi}}) + \dot{u}(\dot{\Lambda}, \dot{s}) + \Delta^*\left( \dot{\Lambda}, T \right) - T\dot{s} - \chi(\btg).
 \end{align}
+\end{subequations}
 However, it immediately follows that the supremum of \eqref{eq: inf sup problem bad} in $T$ does not include contributions from dissipation mechanisms:
 \begin{align}
     \rho_0 c_v \dot{T} = \rho_0 q - \divergence \bth,
@@ -83,11 +86,11 @@ To find the critical points of the inf-sup problem \eqref{eq: inf sup problem}, 
 \begin{align}
     \left( \mathcal{V}, \dot{s}, T \right) = \arg \left[ \inf_{\dot{\bs{\upphi}}, \dot{d}} \sup_T L\left( \inf_{\dot{\defgrad}^p, \epdot, \dot{s}} \varphi \right) \right],
 \end{align}
-since the update of $\defgrad^p$, $\ep$ and $s$ can be down point-wise. Expanding $\dot{u}$ in \eqref{eq: local energy density} and substituting the constitutive restrictions \eqref{eq: constitutive restrictions} yield
+since the updates of $\defgrad^p$, $\ep$ and $s$ can be performed point-wise. Expanding $\dot{u}$ in \eqref{eq: local energy density} and substituting the constitutive restrictions \eqref{eq: constitutive restrictions} yield
 \begin{equation}
 \begin{aligned}
-    \varphi(\dot{\Lambda}, \dot{s}, T) =&\ \bfP^\text{eq}:\dot{\defgrad} + \bfT^\text{eq}:\dot{\defgrad}^p + Y^\text{eq}\epdot + f^\text{eq}\dot{d} + \bs{\xi}^\text{eq}\cdot\grad\dot{d} + T^\text{eq}\dot{s} \\
-    &\ + \Delta^*\left( \dfrac{T}{T^\text{eq}}\dot{\Lambda}, T^\text{eq} \right) - T\dot{s} - \chi(\btg).
+    \varphi(\dot{\Lambda}, \dot{s}, T, \grad T) =&\ \rho_0\bta\cdot\dot{\bs{\upphi}} + \bfP^\text{eq}:\dot{\defgrad} + \bfT^\text{eq}:\dot{\defgrad}^p + Y^\text{eq}\epdot + f^\text{eq}\dot{d} + \bs{\xi}^\text{eq}\cdot\grad\dot{d} \\
+    &\ + T^\text{eq}\dot{s} + \Delta^*\left( \dfrac{T}{T^\text{eq}}\dot{\Lambda}, T^\text{eq} \right) - T\dot{s} - \chi(\btg).
 \end{aligned}
 \end{equation}
 The minimizer in $\dot{s}$ follows as
@@ -104,9 +107,9 @@ The infimum in $\dot{\defgrad}^p$ and $\epdot$ shall follow from the joint minim
 To find the infimum in $T$, substitute the definition of the free energy \eqref{eq: energies}, the definition of the dual kinetic potential \eqref{eq: dual kinetic potentials}, the definition of the external power \eqref{eq: external power}, and the constitutive restrictions \eqref{eq: constitutive restrictions} into \eqref{eq: total potential 1} to obtain
 \begin{equation}
 \begin{aligned}
-  L(\dot{\Lambda}, \dot{s}, T) =&\ \int\limits_{\body_0} \left[ \bfP^\text{eq}:\dot{\defgrad} + \bfT^\text{eq}:\dot{\defgrad}^p + Y^\text{eq}\epdot + f^\text{eq}\dot{d} + \bs{\xi}^\text{eq}\cdot\grad\dot{d} + T^\text{eq}\dot{s} \right.\\
-  &\ \left. + \Delta^*\left( \dfrac{T^\text{eq}}{T}\dot{\Lambda}, T^\text{eq} \right) - T\dot{s} - \chi(\btg) \right] \diff{V} - \int\limits_{\body_0} \rho_0 \btb \cdot \dot{\bs{\upphi}} \diff{V} \\
-  &\ - \int\limits_{\partial_t\body_0} \btt \cdot \dot{\bs{\upphi}} \diff{A} - \int\limits_{\partial_h\body_0} \bar{h}_n\ln\left( \dfrac{T}{T_0} \right) \diff{A} \\
+  L(\dot{\Lambda}, \dot{s}, T, \grad T) =&\ \int\limits_{\body_0} \left[ \rho_0\bta\cdot\dot{\bs{\upphi}} + \bfP^\text{eq}:\dot{\defgrad} + \bfT^\text{eq}:\dot{\defgrad}^p + Y^\text{eq}\epdot + f^\text{eq}\dot{d} \right.\\
+  &\ \left. + \bs{\xi}^\text{eq}\cdot\grad\dot{d} + T^\text{eq}\dot{s} + \Delta^*\left( \dfrac{T^\text{eq}}{T}\dot{\Lambda}, T^\text{eq} \right) - T\dot{s} - \chi(\btg) \right] \diff{V} \\
+  &\ - \int\limits_{\body_0} \rho_0 \btb \cdot \dot{\bs{\upphi}} \diff{V} - \int\limits_{\partial_t\body_0} \btt \cdot \dot{\bs{\upphi}} \diff{A} - \int\limits_{\partial_h\body_0} \bar{h}_n\ln\left( \dfrac{T}{T_0} \right) \diff{A} \\
   &\ - \int\limits_{\partial_r\body_0} h\left[ T - T_0 \ln\left( \dfrac{T}{T_0} \right) \right] \diff{A} + \int\limits_{\body_0} \rho_0 q \ln\left( \dfrac{T}{T_0} \right) \diff{V} 
 \end{aligned}\label{eq: total potential 2}
 \end{equation}
@@ -125,7 +128,7 @@ With the substitution of \eqref{eq: expanding s dot} and the definition of heat 
 Next, the balance of linear momentum and traction boundary conditions are recovered from variations in the admissible fields of $\dot{\bs{\upphi}}$:
 \begin{subequations}
 \begin{align}
-  \divergence\bfP + \btb = \bs{0}, &\quad \forall \btX \in \body_0, \\
+  \rho_0\bta = \divergence\bfP + \btb, &\quad \forall \btX \in \body_0, \\
   \bfP\normal_0 = \btt, &\quad \forall \btX \in \partial_t\body_0.
 \end{align}
 \end{subequations}

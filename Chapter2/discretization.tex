@@ -25,7 +25,7 @@ We begin this section by summarizing the strong form of the general initial boun
                                        & T = T_0,                                                                &  & \body_0, t = t_0.
   \end{align*}
 \end{mdframed}
-The yield surface and the flow rule (and their corresponding constitutive updates) are defined only after specific constitutive assumptions are made in the following chapters.
+The yield surface and the flow rule (and their corresponding constitutive updates) are defined only after specific constitutive assumptions are made in the following chapters (e.g. \Cref{chapter: ductile}).
 
 To derive the weak form, we begin by introducing the trial spaces $\bs{\mathcal{U}}_t$, $\mathcal{D}_t$ and $\mathcal{T}_t$
 \begin{subequations}
@@ -74,7 +74,7 @@ The weak form can be derived as:
 \end{mdframed}
 Using the Galerkin method, with finite dimensional function spaces $\widetilde{\bs{\mathcal{U}}}_t \subset \bs{\mathcal{U}}_t$, $\widetilde{\bs{\mathcal{V}}} \subset \bs{\mathcal{V}}$, $\widetilde{\mathcal{D}}_t \subset \mathcal{D}_t$, $\widetilde{\mathcal{C}} \subset \mathcal{C}$, $\widetilde{\mathcal{T}}_t \subset \mathcal{T}_t$, $\widetilde{\mathcal{E}} \subset \mathcal{E}$, we arrive at the spatially discrete form of the problem:
 \begin{mdframed}[
-    frametitle={The Galerkin form},
+    frametitle={The semidiscrete Galerkin form},
     frametitlebackgroundcolor=gray!20,
     backgroundcolor=gray!5,
     linewidth=0pt,
@@ -83,12 +83,12 @@ Using the Galerkin method, with finite dimensional function spaces $\widetilde{\
   Given parameters in the IBVP, find $\bs{\upphi}^h \in \widetilde{\bs{\mathcal{U}}}_t$, $d^h \in \widetilde{\mathcal{D}}_t$ and $T^h \in \widetilde{\mathcal{T}}_t$, $t \in [t_0, t_f]$, such that $\forall \btw^h \in \widetilde{\bs{\mathcal{V}}}$, $\forall q^h \in \widetilde{\mathcal{C}}$ and $\forall e^h \in \widetilde{\mathcal{E}}$,
   \begin{subequations}
     \begin{align}
-      \left( \btw^h, \rho_0\bta \right) + \left( \grad \btw^h, \bfP \right) - \left( \btw^h, \rho_0 \btb \right) - \left< \btw^h, \btt \right>_{\partial_t\body_0} &= 0,    \\
-      \left( \grad c^h, \bs{\xi} \right) + \left( c^h, f \right) &= 0, \\
+      \left( \btw^h, \rho_0\bta \right) + \left( \grad \btw^h, \bfP \right) - \left( \btw^h, \rho_0 \btb \right) - \left< \btw^h, \btt \right>_{\partial_t\body_0} &= 0, \label{eq: semidiscrete momentum balance}    \\
+      \left( \grad c^h, \bs{\xi} \right) + \left( c^h, f \right) &= 0, \label{eq: semidiscrete fracture evolution} \\
       \begin{split}
         - \left( e^h, \rho_0c_v\dot{T} \right) + \left( e^h, \rho_0q \right) + \left( \grad e^h, \bth \right) + \left( e^h, \delta+\delta_T \right)& \\
         - \left< e^h, \bar{h}_n \right>_{\partial_h\body_0} - \left< e^h, h(T^h-T_0) \right>_{\partial_r\body_0} &= 0,
-      \end{split} 
+      \end{split} \label{eq: semidiscrete heat conduction}
     \end{align}
   \end{subequations}
   with projections of initial conditions
@@ -101,4 +101,4 @@ Using the Galerkin method, with finite dimensional function spaces $\widetilde{\
   \end{align}
   \end{subequations}
 \end{mdframed}
-The discrete inequality for crack irreversibility is satisfied node-wise with a primal-dual active set strategy. See e.g.\  \citet{heister2015primal} for implementational details of such a solver. The solver is also generally available in numerical toolboxes, e.g.\  PETSc \cite{petsc-web-page}. The discrete approximation is calculated using a fixed-point iterative solution scheme outlined from \cite{HuGary2020}.
+The discrete inequality for crack irreversibility is satisfied node-wise with a primal-dual active set strategy. See e.g.\  \citet{heister2015primal} for implementational details of such a solver. The solver is also generally available in numerical toolboxes, e.g.\  PETSc \cite{petsc-web-page}. The discrete approximation is calculated using a fixed-point iterative solution scheme outlined from \cite{HuGary2020}. The semidiscrete momentum balance equation \eqref{eq: semidiscrete momentum balance} is further discretized using the generalized-$\alpha$ method. The semidiscrete fracture evolution equation \eqref{eq: semidiscrete fracture evolution} and the heat conduction equation \eqref{eq: semidiscrete heat conduction} are further discretized using the backward-Euler time integration. Discretizations of the plasticity constitutive updates are discussed in \Cref{chapter: ductile}.
