@@ -86,7 +86,7 @@ The variations in the critical fracture strength (\Cref{fig_bubble_geo_stress}) 
         \label{single_ini}
       \end{subfigure}
     \end{tabular}
-     &
+     &                         
     \begin{subfigure}{0.4\textwidth}
       \centering
       \begin{tikzpicture}
@@ -498,22 +498,22 @@ All bubbles have a radius of $\dfrac{1}{12}L$. Results are shown in \Cref{fig:co
 
 \begin{figure}[htb!]
   \centering
-  \begin{subfigure}[t]{0.49\linewidth}
+  \begin{subfigure}[t]{0.4\linewidth}
     \centering
     \includegraphics[width=\linewidth]{Chapter3/figures/two_bubbles_bnd}
     \caption{}
   \end{subfigure}
-  \begin{subfigure}[t]{0.49\linewidth}
+  \begin{subfigure}[t]{0.4\linewidth}
     \centering
     \includegraphics[width=\linewidth]{Chapter3/figures/two_bubbles_stress}
     \caption{}
   \end{subfigure} \\
-  \begin{subfigure}[t]{0.49\linewidth}
+  \begin{subfigure}[t]{0.4\linewidth}
     \centering
     \includegraphics[width=\linewidth]{Chapter3/figures/three_bubbles_bnd}
     \caption{}
   \end{subfigure}
-  \begin{subfigure}[t]{0.49\linewidth}
+  \begin{subfigure}[t]{0.4\linewidth}
     \centering
     \includegraphics[width=\linewidth]{Chapter3/figures/three_bubbles_stress}
     \caption{}
@@ -534,50 +534,41 @@ All bubbles have a radius of $\dfrac{1}{12}L$. Results are shown in \Cref{fig:co
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Partial HBS}
 
-Lastly, we incorporate defect evolution and recrystallization into the quasi-brittle fracture model. The voronoi structure is obtained from HBS formation simulations. In this case, the initial condition is generated from the phase field simulations that explicitly model the defect evolution, and recrystallization behavior leading to HBS formation. A detailed description of the model can be found in \cite{Aagesen2020}. Considering that fragmentation has been observed in partially recrystallized zones, we focused on the fracture behavior of the partial HBS obtained from these simulations.
-Three HBS at different recrystallization stages with 25$\%$, 60$\%$, and 100$\%$ recrystallization fraction were considered. A linearly increasing pressure was applied. For all three cases, crack initiation occurred at around 60 MPa, thanks to their similar bubble sizes. Crack initiation locations varied among the three cases, since more grains form around the bubble during recrystallization and their points of intersection with the bubble can become possible initiation sites. In addition, the recrystallized grain structures change the grain boundary morphology, thus altering crack propagation directions and paths.
+Lastly, we incorporate defect evolution and recrystallization into the quasi-brittle fracture model. A phase-field model is used to simulate the defect evolution and the recrystallization behavior leading to HBS formation. A detailed description of the phase-field model is available in \cite{Aagesen2020}. The quasi-brittle fracture model is applied directly on the microstructure resulting from simulations of the HBS formation process. Considering the fact that fragmentation can be observed in partially recrystallized zones, we focus on the fracture behavior of partial HBS.
+Three HBS at different recrystallization stages with $25\%$, $60\%$, and $100\%$ recrystallization fraction are considered. A linearly increasing gas pressure is applied. Results are shown in \Cref{fig:partial_hbs}. In all three cases, cracks nucleate at around 60 MPa, owing to their similar defect sizes. Crack nucleation locations vary among the three cases, as more grains form around the defect during recrystallization and their intersections with the defect become possible nucleation sites. Furthermore, recrystallization changes the grain morphology, leading to different crack paths.
 
 \begin{figure}[htb!]
   \centering
-  \begin{subfigure}[t]{0.49\linewidth}
+  \begin{subfigure}[t]{0.4\linewidth}
     \centering
     \includegraphics[width=\linewidth]{Chapter3/figures/partial_hbs_1}
     \caption{}
   \end{subfigure}
-  \begin{subfigure}[t]{0.49\linewidth}
+  \begin{subfigure}[t]{0.4\linewidth}
     \centering
     \includegraphics[width=\linewidth]{Chapter3/figures/partial_hbs_1_stress}
     \caption{}
-  \end{subfigure}
-  \caption{\label{fig:partial_hbs_1}  25 $\%$ recrystallization stage: (a) Crack propagation; (b) Maximum principal stress.}
-\end{figure}
-
-\begin{figure}[htb!]
-  \centering
-  \begin{subfigure}[t]{0.49\linewidth}
+  \end{subfigure}\\
+  \begin{subfigure}[t]{0.4\linewidth}
     \centering
     \includegraphics[width=\linewidth]{Chapter3/figures/partial_hbs_2}
     \caption{}
   \end{subfigure}
-  \begin{subfigure}[t]{0.49\linewidth}
+  \begin{subfigure}[t]{0.4\linewidth}
     \centering
     \includegraphics[width=\linewidth]{Chapter3/figures/partial_hbs_2_stress}
     \caption{}
-  \end{subfigure}
-  \caption{\label{fig:partial_hbs_2} 60 $\%$ recrystallization stage: (a) Crack propagation; (b) Maximum principal stress.}
-\end{figure}
-
-\begin{figure}[htb!]
-  \centering
-  \begin{subfigure}[t]{0.49\linewidth}
+  \end{subfigure}\\
+  \begin{subfigure}[t]{0.4\linewidth}
     \centering
     \includegraphics[width=\linewidth]{Chapter3/figures/partial_hbs_3}
     \caption{}
   \end{subfigure}
-  \begin{subfigure}[t]{0.49\linewidth}
+  \begin{subfigure}[t]{0.4\linewidth}
     \centering
     \includegraphics[width=\linewidth]{Chapter3/figures/partial_hbs_3_stress}
     \caption{}
   \end{subfigure}
-  \caption{\label{fig:partial_hbs_3} 100 $\%$ recrystallization stage: (a) Crack propagation; (b) Maximum principal stress.}
+  \caption{ (a, c, e) Crack paths superimposed on the microstructure and (b, d, f) contour plots of the maximum principal stress assuming different recrystallization stages: (a-b) $25\%$ recrystallization, (c-d) $60\%$ recrystallization, (e-f) $100\%$ recrystallization. }
+  \label{fig:partial_hbs}
 \end{figure}
