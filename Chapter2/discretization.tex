@@ -3,45 +3,46 @@
 
 We begin this section by summarizing the strong form of the general initial boundary value problem of interest:
 \begin{mdframed}[
-    frametitle={The initial boundary value problem for the time interval $t \in I = [t_0, t_f]$},
-    frametitlebackgroundcolor=gray!20,
-    backgroundcolor=gray!5,
-    linewidth=0pt,
-    nobreak=true
+  frametitle={The initial boundary value problem for the time interval $t \in I = [t_0, t_f]$},
+  frametitlebackgroundcolor=gray!20,
+  backgroundcolor=gray!5,
+  linewidth=0pt,
+  nobreak=true
   ]
+  \vspace{-1em}
   \begin{align*}
-    \text{Linear momentum balance: }   & \rho_0 \bta = \divergence \bfP + \rho_0 \btb,                           &  & \body_0 \times ]t_0, t[,           \\
-                                       & \bfP \normal_0 = \btt,                                                  &  & \partial_t\body_0 \times ]t_0, t[, \\
-                                       & \bs{\upphi} = \bs{\upphi}_g,                                            &  & \partial_u\body_0 \times ]t_0, t[, \\
-    \text{Fracture evolution: }        & \divergence \bs{\xi} - f = 0,                                           &  & \mathcal{I}_t(\body_0) \times ]t_0, t[, \\
-                                       & \bs{\xi}\cdot\normal_0 = 0,                                             &  & \mathcal{I}_t(\partial_d\body_0) \times ]t_0, t[, \\
-    \text{Heat transfer: }             & \rho_0c_v\dot{T} = \rho_0 q - \divergence \bth + \delta + \delta_T,     &  & \body_0 \times ]t_0, t[, \\
-                                       & \bth \cdot \normal_0 = \bar{h}_n,                                       &  & \partial_h\body_0 \times ]t_0, t[, \\
-                                       & \bth \cdot \normal_0 = h(T - T_0),                                      &  & \partial_r\body_0 \times ]t_0, t[, \\
-                                       & T = T_g,                                                                &  & \partial_T\body_0 \times ]t_0, t[, \\
-    \text{Initial conditions: }        & \bs{\upphi} = \bs{\upphi}_0,                                            &  & \body_0, t = t_0, \\
-                                       & \defrate = \btv_0,                                             &  & \body_0, t = t_0, \\
-                                       & d = d_0,                                                                &  & \body_0, t = t_0, \\
-                                       & T = T_0,                                                                &  & \body_0, t = t_0.
+    \text{Linear momentum balance: } & \rho_0 \bta = \divergence \bfP + \rho_0 \btb,                       &  & \body_0 \times ]t_0, t[,                          \\
+                                     & \bfP \normal_0 = \btt,                                              &  & \partial_t\body_0 \times ]t_0, t[,                \\
+                                     & \bs{\upphi} = \bs{\upphi}_g,                                        &  & \partial_u\body_0 \times ]t_0, t[,                \\
+    \text{Fracture evolution: }      & \divergence \bs{\xi} - f = 0,                                       &  & \mathcal{I}_t(\body_0) \times ]t_0, t[,           \\
+                                     & \bs{\xi}\cdot\normal_0 = 0,                                         &  & \mathcal{I}_t(\partial_d\body_0) \times ]t_0, t[, \\
+    \text{Heat transfer: }           & \rho_0c_v\dot{T} = \rho_0 q - \divergence \bth + \delta + \delta_T, &  & \body_0 \times ]t_0, t[,                          \\
+                                     & \bth \cdot \normal_0 = \bar{h}_n,                                   &  & \partial_h\body_0 \times ]t_0, t[,                \\
+                                     & \bth \cdot \normal_0 = h(T - T_0),                                  &  & \partial_r\body_0 \times ]t_0, t[,                \\
+                                     & T = T_g,                                                            &  & \partial_T\body_0 \times ]t_0, t[,                \\
+    \text{Initial conditions: }      & \bs{\upphi} = \bs{\upphi}_0,                                        &  & \body_0, t = t_0,                                 \\
+                                     & \defrate = \btv_0,                                                  &  & \body_0, t = t_0,                                 \\
+                                     & d = d_0,                                                            &  & \body_0, t = t_0,                                 \\
+                                     & T = T_0,                                                            &  & \body_0, t = t_0.                                 
   \end{align*}
 \end{mdframed}
 The yield surface and the flow rule (and their corresponding constitutive updates) are defined only after specific constitutive assumptions are made in the following chapters (e.g. \Cref{chapter: ductile}).
 
 To derive the weak form, we begin by introducing the trial spaces $\bs{\mathcal{U}}_t$, $\mathcal{D}_t$ and $\mathcal{T}_t$
 \begin{subequations}
-\begin{align}
-  \bs{\mathcal{U}}_t &= \{ \bs{\upphi} \in \mathcal{H}^1(\body_0)^d \mid \bfu = \bfu_g \text{ on } \partial_u\body_0 \}, \\
-  \mathcal{D}_t &= \{ d \in \mathcal{H}^1(\body_0) \mid \dot{d} > 0 \text{ on } \mathcal{I}_t(\body_0) \}, \\
-  \mathcal{T}_t &= \{ T \in \mathcal{H}^1(\body_0) \mid T = T_g \text{ on } \partial_T\body_0 \},
-\end{align}
+  \begin{align}
+    \bs{\mathcal{U}}_t & = \{ \bs{\upphi} \in \mathcal{H}^1(\body_0)^d \mid \bfu = \bfu_g \text{ on } \partial_u\body_0 \}, \\
+    \mathcal{D}_t      & = \{ d \in \mathcal{H}^1(\body_0) \mid \dot{d} > 0 \text{ on } \mathcal{I}_t(\body_0) \},          \\
+    \mathcal{T}_t      & = \{ T \in \mathcal{H}^1(\body_0) \mid T = T_g \text{ on } \partial_T\body_0 \},                   
+  \end{align}
 \end{subequations}
 and the weighting spaces $\bs{\mathcal{V}}$, $\mathcal{C}$ and $\mathcal{E}$
 \begin{subequations}
-\begin{align}
-  \bs{\mathcal{V}} &= \{ \btw \in \mathcal{H}^1(\body_0)^d \mid \btw = \bs{0} \text{ on } \partial_u\body_0 \}, \\
-  \mathcal{C} &= \{ c \in \mathcal{H}^1(\body_0) \}, \\
-  \mathcal{E} &= \{ e \in \mathcal{H}^1(\body_0) \mid T = 0 \text{ on } \partial_T\body_0 \}.
-\end{align}
+  \begin{align}
+    \bs{\mathcal{V}} & = \{ \btw \in \mathcal{H}^1(\body_0)^d \mid \btw = \bs{0} \text{ on } \partial_u\body_0 \}, \\
+    \mathcal{C}      & = \{ c \in \mathcal{H}^1(\body_0) \},                                                       \\
+    \mathcal{E}      & = \{ e \in \mathcal{H}^1(\body_0) \mid T = 0 \text{ on } \partial_T\body_0 \}.              
+  \end{align}
 \end{subequations}
 The weak form can be derived as:
 \begin{mdframed}[
@@ -54,22 +55,22 @@ The weak form can be derived as:
   Given parameters in the IBVP, find $\bs{\upphi} \in \bs{\mathcal{U}}_t$, $d \in \mathcal{D}_t$ and $T \in \mathcal{T}_t$, $t \in [t_0, t_f]$, such that $\forall \btw \in \bs{\mathcal{V}}$, $\forall c \in \mathcal{C}$ and $\forall e \in \mathcal{E}$,
   \begin{subequations}
     \begin{align}
-      \left( \btw, \rho_0\bta \right) + \left( \grad \btw, \bfP \right) - \left( \btw, \rho_0 \btb \right) - \left< \btw, \btt \right>_{\partial_t\body_0} &= 0,    \\
-      \left( \grad c, \bs{\xi} \right) + \left( c, f \right) &= 0, \\
+      \left( \btw, \rho_0\bta \right) + \left( \grad \btw, \bfP \right) - \left( \btw, \rho_0 \btb \right) - \left< \btw, \btt \right>_{\partial_t\body_0} & = 0, \\
+      \left( \grad c, \bs{\xi} \right) + \left( c, f \right)                                                                                               & = 0, \\
       \begin{split}
         - \left( e, \rho_0c_v\dot{T} \right) + \left( e, \rho_0q \right) + \left( \grad e, \bth \right) + \left( e, \delta+\delta_T \right)& \\
         - \left< e, \bar{h}_n \right>_{\partial_h\body_0} - \left< e, h(T-T_0) \right>_{\partial_r\body_0} &= 0,
-      \end{split} 
+      \end{split}
     \end{align}
   \end{subequations}
   with projections of initial conditions
   \begin{subequations}
-  \begin{align}
-      \left( \btw, \bs{\upphi} - \bs{\upphi}_0 \right) &= 0, \\
-      \left( \btw, \defrate - \btv_0 \right) &= 0, \\
-      \left( c, d - d_0 \right) &= 0, \\
-      \left( e, T - T_0 \right) &= 0.
-  \end{align}
+    \begin{align}
+      \left( \btw, \bs{\upphi} - \bs{\upphi}_0 \right) & = 0, \\
+      \left( \btw, \defrate - \btv_0 \right)           & = 0, \\
+      \left( c, d - d_0 \right)                        & = 0, \\
+      \left( e, T - T_0 \right)                        & = 0. 
+    \end{align}
   \end{subequations}
 \end{mdframed}
 Using the Galerkin method, with finite dimensional function spaces $\widetilde{\bs{\mathcal{U}}}_t \subset \bs{\mathcal{U}}_t$, $\widetilde{\bs{\mathcal{V}}} \subset \bs{\mathcal{V}}$, $\widetilde{\mathcal{D}}_t \subset \mathcal{D}_t$, $\widetilde{\mathcal{C}} \subset \mathcal{C}$, $\widetilde{\mathcal{T}}_t \subset \mathcal{T}_t$, $\widetilde{\mathcal{E}} \subset \mathcal{E}$, we arrive at the spatially discrete form of the problem:
@@ -83,8 +84,8 @@ Using the Galerkin method, with finite dimensional function spaces $\widetilde{\
   Given parameters in the IBVP, find $\bs{\upphi}^h \in \widetilde{\bs{\mathcal{U}}}_t$, $d^h \in \widetilde{\mathcal{D}}_t$ and $T^h \in \widetilde{\mathcal{T}}_t$, $t \in [t_0, t_f]$, such that $\forall \btw^h \in \widetilde{\bs{\mathcal{V}}}$, $\forall q^h \in \widetilde{\mathcal{C}}$ and $\forall e^h \in \widetilde{\mathcal{E}}$,
   \begin{subequations}
     \begin{align}
-      \left( \btw^h, \rho_0\bta \right) + \left( \grad \btw^h, \bfP \right) - \left( \btw^h, \rho_0 \btb \right) - \left< \btw^h, \btt \right>_{\partial_t\body_0} &= 0, \label{eq: semidiscrete momentum balance}    \\
-      \left( \grad c^h, \bs{\xi} \right) + \left( c^h, f \right) &= 0, \label{eq: semidiscrete fracture evolution} \\
+      \left( \btw^h, \rho_0\bta \right) + \left( \grad \btw^h, \bfP \right) - \left( \btw^h, \rho_0 \btb \right) - \left< \btw^h, \btt \right>_{\partial_t\body_0} & = 0, \label{eq: semidiscrete momentum balance}   \\
+      \left( \grad c^h, \bs{\xi} \right) + \left( c^h, f \right)                                                                                                   & = 0, \label{eq: semidiscrete fracture evolution} \\
       \begin{split}
         - \left( e^h, \rho_0c_v\dot{T} \right) + \left( e^h, \rho_0q \right) + \left( \grad e^h, \bth \right) + \left( e^h, \delta+\delta_T \right)& \\
         - \left< e^h, \bar{h}_n \right>_{\partial_h\body_0} - \left< e^h, h(T^h-T_0) \right>_{\partial_r\body_0} &= 0,
@@ -93,12 +94,12 @@ Using the Galerkin method, with finite dimensional function spaces $\widetilde{\
   \end{subequations}
   with projections of initial conditions
   \begin{subequations}
-  \begin{align}
-      \left( \btw^h, \bs{\upphi}^h - \bs{\upphi}_0 \right) &= 0, \\
-      \left( \btw^h, \defrate - \btv_0 \right) &= 0, \\
-      \left( c^h, d^h - d_0 \right) &= 0, \\
-      \left( e^h, T^h - T_0 \right) &= 0.
-  \end{align}
+    \begin{align}
+      \left( \btw^h, \bs{\upphi}^h - \bs{\upphi}_0 \right) & = 0, \\
+      \left( \btw^h, \defrate - \btv_0 \right)             & = 0, \\
+      \left( c^h, d^h - d_0 \right)                        & = 0, \\
+      \left( e^h, T^h - T_0 \right)                        & = 0. 
+    \end{align}
   \end{subequations}
 \end{mdframed}
 The discrete inequality for crack irreversibility is satisfied node-wise with a primal-dual active set strategy. See e.g.\  \citet{heister2015primal} for implementational details of such a solver. The solver is also generally available in numerical toolboxes, e.g.\  PETSc \cite{petsc-web-page}. The discrete approximation is calculated using a fixed-point iterative solution scheme outlined from \cite{HuGary2020}. The semidiscrete momentum balance equation \eqref{eq: semidiscrete momentum balance} is further discretized using the generalized-$\alpha$ method. The semidiscrete fracture evolution equation \eqref{eq: semidiscrete fracture evolution} and the heat conduction equation \eqref{eq: semidiscrete heat conduction} are further discretized using the backward-Euler time integration. Discretizations of the plasticity constitutive updates are discussed in \Cref{chapter: ductile}.

@@ -17,7 +17,7 @@ Following the variational framework presented in \Cref{chapter: framework}, to a
 \begin{align}
   \psi = \psi^e + \psi^f. \label{eq: chapter 3 helmholtz}
 \end{align}
-Recall that $\psi^e$ is the strain energy density, and $\psi^f$ is the fracture energy density.
+Recall that $\psi^e$ is the strain-energy density, and $\psi^f$ is the fracture energy density.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -29,16 +29,16 @@ Recall that $\psi^e$ is the strain energy density, and $\psi^f$ is the fracture 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Strain energy density}
+\subsubsection{Strain-energy density}
 
-For small deformation elasticity considered in this chapter, the state variable $\bs{\upphi}$ enters the strain energy density only through the infinitesimal strain tensor
+For small deformation elasticity considered in this chapter, the state variable $\bs{\upphi}$ enters the strain-energy density only through the infinitesimal strain tensor
 \begin{align}
   \strain = \dfrac{1}{2}\left( \grad \bs{\upphi} + \grad^T \bs{\upphi} \right).
 \end{align}
-The material is assumed to be isotropic, characterized the Lam\'{e} parameter $\lambda$ and the shear modulus $G$. The strain energy density is defined as
+The material is assumed to be isotropic, characterized the Lam\'{e} parameter $\lambda$ and the shear modulus $G$. The strain-energy density is defined as
 \begin{subequations}
   \begin{align}
-    \psi^e               & = g \psi^e_\activepart + \psi^e_\inactivepart,                              \label{eq: chapter 3 strain energy density} \\
+    \psi^e               & = g \psi^e_\activepart + \psi^e_\inactivepart,                              \label{eq: chapter 3 strain-energy density} \\
     \psi^e_\activepart   & = \dfrac{1}{2} \lambda \macaulay{\tr(\strain)}_+^2 + G \strain^+:\strain^+,                                             \\
     \psi^e_\inactivepart & = \dfrac{1}{2} \lambda \macaulay{\tr(\strain)}_-^2 + G \strain^-:\strain^-,                                             
   \end{align}
@@ -174,7 +174,7 @@ Finally, recall our previous restrictions on the indicator function $I(c)$; the 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Governing equations}
 
-Following the variational framework, substituting \eqref{eq: chapter 3 helmholtz}, \eqref{eq: chapter 3 strain energy density}, \eqref{eq: fracture energy density}, \eqref{eq: crack surface density}, and \eqref{eq: pressure power} into the problem statement \eqref{eq: inf sup problem}, under the isothermal conditions, the governing equations can be obtained as
+Following the variational framework, substituting \eqref{eq: chapter 3 helmholtz}, \eqref{eq: chapter 3 strain-energy density}, \eqref{eq: fracture energy density}, \eqref{eq: crack surface density}, and \eqref{eq: pressure power} into the problem statement \eqref{eq: inf sup problem}, under quasi-static and isothermal conditions, the governing equations can be obtained as
 \begin{align}
   \divergence \stress - \bar{p} \grad d I_{,d} & = \bs{0}, \\
   \divergence \bs{\xi} - f                     & = 0,      

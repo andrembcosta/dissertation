@@ -33,10 +33,10 @@ All the above conservation and thermodynamic laws hold for any arbitrary subbody
 \begin{subequations}
   \begin{align}
      & \dot{\rho_0} = 0,                                                                                                                \\
-     & \rho_0 \bta = \divergence \bfP + \rho_0\btb,                                                                        \\
+     & \rho_0 \bta = \divergence \bfP + \rho_0\btb,                                                                                     \\
      & \bfP\defgrad = \defgrad\bfP^T,                                                                                                   \\
      & \dot{u} + \dot{k} = \mathcal{P}^\text{ext} + \rho_0 q - \divergence \bth,                                                        \\
-     & \dot{s}^\text{int} = \dot{s} - \dfrac{\rho_0 q}{T} + \divergence \dfrac{\bth}{T} \geqslant 0. \label{eq: dissipation inequality}
+     & \dot{s}^\text{int} = \dot{s} - \dfrac{\rho_0 q}{T} + \divergence \dfrac{\bth}{T} \geqslant 0. \label{eq: dissipation inequality} 
   \end{align}
 \end{subequations}
 Alternatively, local form of the second law can be written in terms of the internal energy density as
@@ -62,7 +62,7 @@ It is convenient to work with the Helmholtz free energy density (per unit volume
 \end{align}
 The local form of the second law can then be rewritten using the identity $\dot{\psi} = \dot{u} - \dot{T}s$ and the fact that $\mathcal{P}^\text{ext} = \mathcal{P}^\text{int}$:
 \begin{align}
-  \dot{s}^\text{int} & = \delta - \dfrac{1}{T} \bth \cdot \grad T,  \quad \delta = \mathcal{P}^\text{int} - \dot{\psi} - \dot{T}s. \label{eq: dissipation inequality 3}
+  \dot{s}^\text{int} & = \delta - \dfrac{1}{T} \bth \cdot \grad T,  \quad \delta = \mathcal{P}^\text{int} - \dot{\psi} - \dot{T}s. \label{eq: dissipation inequality 3} 
 \end{align}
 where $\delta$ shall be referred to as the internal dissipation density (per unit volume). Combining \eqref{eq: dissipation inequality} and \eqref{eq: dissipation inequality 3} yields the energy balance in the \emph{entropy form}:
 \begin{align}
@@ -80,7 +80,7 @@ It is assumed that each of the generalized forces can be additively decomposed i
     \bfT     & = \bfT^\text{eq}(\Lambda, T) + \bfT^\text{vis}(\dot{\defgrad}^p, T; \Lambda),     \\
     Y        & = Y^\text{eq}(\Lambda, T) + Y^\text{vis}(\epdot, T; \Lambda),                     \\
     f        & = f^\text{eq}(\Lambda, T) + f^\text{vis}(\dot{d}, T; \Lambda),                    \\
-    \bs{\xi} & = \bs{\xi}^\text{eq}(\Lambda, T) + \bs{\xi}^\text{vis}(\grad\dot{d}, T; \Lambda),
+    \bs{\xi} & = \bs{\xi}^\text{eq}(\Lambda, T) + \bs{\xi}^\text{vis}(\grad\dot{d}, T; \Lambda), 
   \end{align}
 \end{subequations}
 where the viscous forces vanish as the rate diminishes to preclude viscous dissipation in quasi-static processes, i.e.
@@ -90,7 +90,7 @@ where the viscous forces vanish as the rate diminishes to preclude viscous dissi
     \lim_{\norm{\dot{\defgrad}^p} \to 0^+}\bfT^\text{vis} & = 0, \\
     \lim_{\abs{\epdot} \to 0^+}Y^\text{vis}               & = 0, \\
     \lim_{\abs{\dot{d}} \to 0^+}f^\text{vis}              & = 0, \\
-    \lim_{\norm{\grad\dot{d}} \to 0^+}\bs{\xi}^\text{vis} & = 0.
+    \lim_{\norm{\grad\dot{d}} \to 0^+}\bs{\xi}^\text{vis} & = 0. 
   \end{align}
 \end{subequations}
 For convenience, the equilibrium forces and the viscous forces are collected in the sets
@@ -125,6 +125,6 @@ the energy balance \eqref{eq: energy balance entropy form} can be rewritten as
 \end{align}
 where $\delta_T$ is the dissipation density accounting for the thermal effects in the thermodynamic conjugates:
 \begin{align}
-  \delta_T = T\left( \bfP^\text{eq}_{,T}:\dot{\defgrad} + \bfT^\text{eq}_{,T}:\dot{\defgrad}^p + Y^\text{eq}_{,T}\epdot + f^\text{eq}_{,T}\dot{d} + \bs{\xi}^\text{eq}_{,T}\cdot\grad d \right),
+  \delta_T = T\left( \bfP^\text{eq}_{,T}:\dot{\defgrad} + \bfT^\text{eq}_{,T}:\dot{\defgrad}^p + Y^\text{eq}_{,T}\epdot + f^\text{eq}_{,T}\dot{d} + \bs{\xi}^\text{eq}_{,T}\cdot\grad d \right), \label{eq: heat generation due to energetic terms}
 \end{align}
-e.g. $T\bfP^\text{eq}_{,T}:\dot{\defgrad}$ is the dissipation accounting for thermoelastic effects, and $TY^\text{eq}_{,T}\epdot$ is the dissipation accounting for thermoplastic softening.
+e.g. $T\bfP^\text{eq}_{,T}:\dot{\defgrad}$ accounts for thermoelastic effects, and $TY^\text{eq}_{,T}\epdot$ accounts for thermoplastic softening.
