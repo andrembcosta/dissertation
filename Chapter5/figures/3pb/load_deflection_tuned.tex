@@ -1,0 +1,37 @@
+\begin{figure}[htb!]
+  \centering
+  \tikzsetnextfilenamesafe{Chapter5/3pb/load_deflection_tuned}
+  \begin{tikzpicture}
+    \begin{axis}[
+        width=0.45\textwidth,
+        height=0.45\textwidth,
+        xmin=0,xmax=25,
+        ymin=0,
+        xlabel=deflection(\SI{}{\milli\meter}),ylabel=load(\SI{}{\kilo\newton}),
+        scaled y ticks=false,
+        xticklabel style={
+            /pgf/number format/fixed,
+            /pgf/number format/precision=2
+          },
+        legend style={
+            at={(0.95,0.95)},
+            anchor=north east,
+            nodes={scale=0.8, transform shape},
+            fill=white,
+            fill opacity=0.8,
+            draw opacity=1,
+            text opacity=1,
+            cells={align=left}
+          },
+        legend cell align={left},
+        every axis plot/.append style={thick, no marks}
+      ]
+      \addplot [black,dashed] table[x expr=\thisrowno{0},y expr=\thisrowno{1}/1000,col sep=comma]{Chapter5/data/3pb/experiment1.csv};
+      \addplot [black,dashdotted] table[x expr=\thisrowno{0},y expr=\thisrowno{1}/1000,col sep=comma]{Chapter5/data/3pb/experiment2.csv};
+      \addplot [blue] table[x expr=\thisrowno{0},y expr=\thisrowno{1}/1000,col sep=comma]{Chapter5/data/3pb/force_disp_beta_0.6_e0_0.2.csv};
+      \legend{experiment 1, experiment 2, $\beta = 0.6$ $\varepsilon_0 = 0.2$}
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Comparison of load-deflection curves between simulations and experiments \cite{kubik2019ductile} with tuned $\beta$ and $\varepsilon_0$.}
+  \label{fig: Chapter5/3pb/load_deflection_tuned}
+\end{figure}

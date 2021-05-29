@@ -1,0 +1,130 @@
+\begin{figure}[htb!]
+  \centering
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \tikzsetnextfilenamesafe{Chapter5/homogenized/lu/EPD}
+    \begin{tikzpicture}
+      \begin{groupplot}[
+          group style={
+              group size=1 by 3,
+              xlabels at=edge bottom,
+              xticklabels at=edge bottom,
+              vertical sep=10pt
+            },
+          width=\textwidth,
+          height=0.6\textwidth,
+          xmin=0,
+          ymin=0,
+          yticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          xticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          scaled x ticks=false,scaled y ticks=false,
+          every axis plot/.append style={thick,no marks}
+        ]
+        \nextgroupplot[
+          ylabel=$\sigma/\sigma_y$,
+          ymax=1.4
+        ]
+        \path [name path=top] (current axis.north west) -- (current axis.north east);
+        \path [name path=bottom] (current axis.south west) -- (current axis.south east);
+        \addplot [fill=green,fill opacity=0.1] fill between[of=top and bottom,soft clip={domain=0:0.00440968}];
+        \addplot [fill=blue,fill opacity=0.1] fill between[of=top and bottom,soft clip={domain=0.00440968:0.02592768}];
+        \addplot [fill=brown,fill opacity=0.1] fill between[of=top and bottom,soft clip={domain=0.02592768:0.05125}];
+        \addplot +[black] table[x expr=\thisrowno{3},y expr=\thisrowno{2}/320,col sep=comma]{Chapter5/data/homogenized/homogenized_EPD_lu.csv};
+        \draw (0.0022,1.2) node {\textrm{E}};
+        \draw (0.015,1.2) node {\textrm{P}};
+        \draw (0.039,1.2) node {\textrm{D}};
+        \nextgroupplot[
+          ylabel=$\ep$
+        ]
+        \path [name path=top] (current axis.north west) -- (current axis.north east);
+        \path [name path=bottom] (current axis.south west) -- (current axis.south east);
+        \addplot [fill=green,fill opacity=0.1] fill between[of=top and bottom,soft clip={domain=0:0.00440968}];
+        \addplot [fill=blue,fill opacity=0.1] fill between[of=top and bottom,soft clip={domain=0.00440968:0.02592768}];
+        \addplot [fill=brown,fill opacity=0.1] fill between[of=top and bottom,soft clip={domain=0.02592768:0.05125}];
+        \addplot +[black] table[x expr=\thisrowno{3},y expr=\thisrowno{1},col sep=comma]{Chapter5/data/homogenized/homogenized_EPD_lu_ep_d.csv};
+        \nextgroupplot[
+          xlabel=$\varepsilon$,ylabel=$d$
+        ]
+        \path [name path=top] (current axis.north west) -- (current axis.north east);
+        \path [name path=bottom] (current axis.south west) -- (current axis.south east);
+        \addplot [fill=green,fill opacity=0.1] fill between[of=top and bottom,soft clip={domain=0:0.00440968}];
+        \addplot [fill=blue,fill opacity=0.1] fill between[of=top and bottom,soft clip={domain=0.00440968:0.02592768}];
+        \addplot [fill=brown,fill opacity=0.1] fill between[of=top and bottom,soft clip={domain=0.02592768:0.05125}];
+        \addplot +[black] table[x expr=\thisrowno{3},y expr=\thisrowno{0},col sep=comma]{Chapter5/data/homogenized/homogenized_EPD_lu_ep_d.csv};
+      \end{groupplot}
+    \end{tikzpicture}
+    \caption{}
+    \label{fig: Chapter5/homogenized/lu/EPD}
+  \end{subfigure}
+  \hspace{0.04\textwidth}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \tikzsetnextfilenamesafe{Chapter5/homogenized/lu/EPPD}
+    \begin{tikzpicture}
+      \begin{groupplot}[
+          group style={
+              group size=1 by 3,
+              xlabels at=edge bottom,
+              xticklabels at=edge bottom,
+              vertical sep=10pt
+            },
+          width=\textwidth,
+          height=0.6\textwidth,
+          xmin=0,
+          ymin=0,
+          yticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          xticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          scaled x ticks=false,scaled y ticks=false,
+          every axis plot/.append style={thick,no marks}
+        ]
+        \nextgroupplot[
+          ylabel=$\sigma/\sigma_y$,
+          ymax=1.4
+        ]
+        \path [name path=top] (current axis.north west) -- (current axis.north east);
+        \path [name path=bottom] (current axis.south west) -- (current axis.south east);
+        \addplot [fill=green,fill opacity=0.1] fill between[of=top and bottom,soft clip={domain=0:0.00440968}];
+        \addplot [fill=blue,fill opacity=0.1] fill between[of=top and bottom,soft clip={domain=0.00440968:0.01450368}];
+        \addplot [fill=brown,fill opacity=0.1] fill between[of=top and bottom,soft clip={domain=0.01450368:0.05125}];
+        \addplot +[black] table[x expr=\thisrowno{3},y expr=\thisrowno{2}/320,col sep=comma]{Chapter5/data/homogenized/homogenized_EPPD_lu.csv};
+        \draw (0.0022,1.2) node {\textrm{E}};
+        \draw (0.0095,1.2) node {\textrm{P}};
+        \draw (0.033,1.2) node {\textrm{PD}};
+        \nextgroupplot[
+          ylabel=$\ep$
+        ]
+        \path [name path=top] (current axis.north west) -- (current axis.north east);
+        \path [name path=bottom] (current axis.south west) -- (current axis.south east);
+        \addplot [fill=green,fill opacity=0.1] fill between[of=top and bottom,soft clip={domain=0:0.00440968}];
+        \addplot [fill=blue,fill opacity=0.1] fill between[of=top and bottom,soft clip={domain=0.00440968:0.01450368}];
+        \addplot [fill=brown,fill opacity=0.1] fill between[of=top and bottom,soft clip={domain=0.01450368:0.05125}];
+        \addplot +[black] table[x expr=\thisrowno{3},y expr=\thisrowno{1},col sep=comma]{Chapter5/data/homogenized/homogenized_EPPD_lu_ep_d.csv};
+        \nextgroupplot[
+          xlabel=$\varepsilon$,ylabel=$d$
+        ]
+        \path [name path=top] (current axis.north west) -- (current axis.north east);
+        \path [name path=bottom] (current axis.south west) -- (current axis.south east);
+        \addplot [fill=green,fill opacity=0.1] fill between[of=top and bottom,soft clip={domain=0:0.00440968}];
+        \addplot [fill=blue,fill opacity=0.1] fill between[of=top and bottom,soft clip={domain=0.00440968:0.01450368}];
+        \addplot [fill=brown,fill opacity=0.1] fill between[of=top and bottom,soft clip={domain=0.01450368:0.05125}];
+        \addplot +[black] table[x expr=\thisrowno{3},y expr=\thisrowno{0},col sep=comma]{Chapter5/data/homogenized/homogenized_EPPD_lu_ep_d.csv};
+      \end{groupplot}
+    \end{tikzpicture}
+    \caption{}
+    \label{fig: Chapter5/homogenized/lu/EPPD}
+  \end{subfigure}
+  \caption{Characteristic loading and unloading curves of (a) the E-P-D model and (b) the E-P-PD model. }
+  \label{fig: Chapter5/homogenized/lu}
+\end{figure}

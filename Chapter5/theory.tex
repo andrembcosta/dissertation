@@ -1,5 +1,5 @@
 \section{Theory}
-\label{section: ductile/theory}
+\label{section: chapter5/theory}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -144,6 +144,7 @@ where $\phi^p$ is referred to as the yield function or the yield surface, i.e.
 \begin{align}
   \phi^p & = \norm{\dev(\bfM)} - \sqrt{\dfrac{2}{3}} Y = \norm{\dev(\bfM)} - \sqrt{\dfrac{2}{3}} \left( Y^\text{eq} + Y^\text{vis} \right).  \label{eq: yield surface} 
 \end{align}
+It is convenient to define $\bar{\sigma} = \norm{\dev(\bfM)}$ as the effective stress for the following discussions.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -222,7 +223,7 @@ The second term introduces a novel representation of the dissipation (hereinafte
 
 It is assumed that the fracture process can be decomposed into an energetic part and a dissipative part, i.e.
 \begin{align}
-  \psi^f = \dfrac{\Gc}{c_0 l} \left( C\alpha(d) + l^2 \grad d \cdot \grad d \right), \\
+  \psi^f = \dfrac{\Gc}{c_0 l} \left( C\alpha(d) + l^2 \grad d \cdot \grad d \right), \label{eq: modified fracture energy} \\
 \end{align}
 where $C$ denotes the fraction of the fracture process that is energetic. The dissipative part is the third term in \eqref{eq: fracture dual kinetic potential}.
 
@@ -276,10 +277,11 @@ Following the variational framework, substituting \eqref{eq: chapter 5 helmholtz
 \end{align}
 supplemented by the constitutive relations including the stress-strain relations presented in \Cref{section: chapter5/theory/elasticity}, the yield surface and loading/unloading conditions presented in \Cref{section: chapter5/theory/plastic_flow,section: chapter5/theory/flow_stress}, the modified fracture thermodynamic conjugates \Cref{section: chapter5/theory/fracture}, and the conductive heat flux \eqref{eq: conductive heat flux}. Substituting all of them into the governing equations, the fracture evolution equation can be expanded as
 \begin{align}
-  v\dot{d}      & =\divergence \dfrac{2\Gc l}{c_0} \grad d - \left( \dfrac{\widehat{\Gc}}{c_0 l}\alpha_{,d} + \psi^e_{,d} + \psi^p_{,d} \right), \\
-  \widehat{\Gc} & = g^c \Gc, \quad g^c = 1-(1-\beta)\left( 1-e^{-\ep/\varepsilon_0} \right),                                                     
+  v\dot{d}      & =\divergence \dfrac{2\Gc l}{c_0} \grad d - \left( \dfrac{\widehat{\Gc}}{c_0 l}\alpha_{,d} + \psi^d \right), \label{eq: modified fracture evolution} \\
+  \psi^d        & = \psi^e_{,d} + \psi^p_{,d}, \label{eq: fracture driving energy}                                                                                    \\
+  \widehat{\Gc} & = g^c \Gc, \quad g^c = 1-(1-\beta)\left( 1-e^{-\ep/\varepsilon_0} \right),                                                                          
 \end{align}
-and the heat conduction equation can be expanded as
+where $\psi^d$ is referred to as the fracture driving energy density. The heat conduction equation can be expanded as
 \begin{align}
   \rho_0c_v\dot{T} & = \rho_0 q + \divergence \kappa \grad T + \delta + \delta_T,                 \\
   \delta           & = \bfP^\text{vis}:\dot{\defgrad} + Y^\text{vis}\epdot + f^\text{vis}\dot{d}, \\
@@ -299,6 +301,38 @@ Note that $\delta_T$ is only present if thermal softening in the flow stress is 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{A power-law approximation to the yield surface}
 
+A common task in engineering applications is to account for the dependence of yield surface on the strain-rate. To that end, consistent viscoplasticity models and Perzyna viscoplasticity models are proposed. The consistent viscoplasticity model has been presented in \Cref{section: chapter5/theory/flow_stress} by incorporating a plastic dual kinetic potential. The Perzyna viscoplasticity models typically employ a relation between the effective plastic strain rate and the effective stress of the following general form:
+\begin{align}
+  \epdot = \mathscr{P}(\bar{\sigma}).
+\end{align}
+A commonly used temperature dependent Perzyna viscoplasticity model is
+\begin{align}
+  \epdot = A\left( \dfrac{\bar{\sigma}}{\sigma_0} \right)^n\exp\left( -\dfrac{Q}{RT} \right). \label{eq: common perzyna model}
+\end{align}
+It is particularly difficult, if not impossible, to introduce a functional whose variation in $\epdot$ leads to this widely used model. However, it is straight-forward to show that the a form similar to \eqref{eq: common perzyna model} is an \emph{approximation} to the consistent plasticity model with Arrhenius-law temperature dependence \eqref{eq: temperature dependent flow stress}. Consider the following power-law relation between $\epdot$ and $\bar{\sigma}$,
+\begin{align}
+  \epdot = A\left( \dfrac{\bar{\sigma}}{\sigma_y} \right)^n, \label{eq: power law approximation}
+\end{align}
+where $A$ is the reference strain rate and $\sigma_y$ is the yield stress. It can be shown that \eqref{eq: power law approximation} is equivalent to the following KKT conditions
+\begin{align}
+  \phi^p = \bar{\sigma} - \sigma_y \leqslant 0, \quad \epdot \geqslant 0, \quad \phi^p\epdot = 0, \label{eq: consistent KKT}
+\end{align}
+as $n \to \infty$. To sketch that, first introduce the semidiscrete form of the effective stress: Given the state at $t = t_1$, and the total deformation gradient at $t = t_2$, performing the point-wise plasticity update from $t_1$ to $t_2$ requires the following discretization of the effective stress (where the time discretization can be arbitrary):
+\begin{align}
+  \bar{\sigma} = \norm{\dev(\widehat{\bfM}(\defgrad))} - \widehat{\bfM}\left( \int\limits_{t_1}^{t_2} \epdot N^p \diff{t} \right) : \bfN^p, \label{eq: semidiscrete yield surface}
+\end{align}
+where $\bfM = \widehat{\bfM}(\defgrad^e)$ is the Mandel stress. Consider the following three cases:
+\begin{itemize}
+  \item $\bar{\sigma} < \sigma_y$: it is immediate that $\lim_{n\to\infty} \epdot = 0$ assuming the relation \eqref{eq: power law approximation};
+  \item $\bar{\sigma} = \sigma_y$: $\epdot = A$ according to \eqref{eq: power law approximation}.
+  \item Suppose $\bar{\sigma} > \sigma_y$, then $\epdot \to \infty$ as $n \to \infty$. Then, according to \eqref{eq: semidiscrete yield surface} (and recall the growth conditions on $\psi^e$), $\bar{\sigma} \to -\infty$, which contradicts with the assumption that $\bar{\sigma} > \sigma_y > 0$. Hence $\bar{\sigma} \leqslant \sigma_y$.
+\end{itemize}
+Summarizing the aforementioned cases recovers the KKT conditions \eqref{eq: consistent KKT} as $n \to \infty$. Next, substitute the flow stress with Arrhenius-law temperature dependence into \eqref{eq: power law approximation}, we arrive at the following Perzyna model:
+\begin{align}
+  \epdot = A \left( \dfrac{\bar{\sigma}}{g^p \sigma_0} \right)^n \exp\left( -\dfrac{nQ}{RT} \right). \label{eq: variational perzyna}
+\end{align}
+Note that the only difference between \eqref{eq: common perzyna model} and \eqref{eq: variational perzyna} is in the numerator of the exponential term. Therefore, it only requires a straight-forward re-calibration to fit the existing materials with calibrated Perzyna models in the form of \eqref{eq: common perzyna model} into the current variational framework, knowing that the KKT conditions \eqref{eq: consistent KKT} are relaxed with a finite value of $n$.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -310,3 +344,44 @@ Note that $\delta_T$ is only present if thermal softening in the flow stress is 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Variational constitutive updates}
+
+In this section, we present the variational constitutive update using the Hencky-type elasticity model. A similar plasticity constitutive update for the compressible Neo-Hookean material can be found in \cite{borden2016phase}.
+
+Since $\defgrad^p$ and $\ep$ are local, i.e. confined to a material point, the variational constitutive updates can be performed point-wise considering the incremental form of the local energy density \eqref{eq: local energy density}: Given the state $\Lambda_n$ at time $t_n$, the incremental local energy density can be expressed as
+\begin{equation}
+  \begin{aligned}
+    I_n(\Lambda_{n+1}, T_{n+1}; \Lambda_n, T_n) = & \ \psi^e(\strain^e_{n+1}, d_{n+1}) + \psi^p(\ep_{n+1}, d_{n+1}, T_{n+1})            \\
+                                                  & \ - \left( \psi^e(\strain^e_n, d_n) + \psi^p(\ep_n, d_n, T_n) \right)               \\
+                                                  & \ + \Delta t {\psi^p}^*\left( \dfrac{\Delta \ep}{\Delta t}, T_{n+1}; d_{n} \right). 
+  \end{aligned}
+\end{equation}
+Note that only relevant terms are included. Using the exponential integration rule \cite{weber1990finite}
+\begin{align}
+  \defgrad^p_{n+1} = \exp\left( \Delta\ep \bfN^p_{n+1} \right) \defgrad^p_n,
+\end{align}
+the elastic deformation gradient can be written as
+\begin{align}
+  \defgrad^e_{n+1} = \defgrad^{e,\text{tr}}\exp\left( \Delta\ep \bfN^p_{n+1} \right), \quad \defgrad^{e,\text{tr}} = \defgrad_{n+1} {\defgrad^p_n}^{-1},
+\end{align}
+where $\defgrad^{e,\text{tr}}$ is the trial elastic deformation gradient assuming no plastic flow over the time step. Similarly, it can shown that the elastic right Cauchy-Green strain can be defined as
+\begin{align}
+  \bfC^e_{n+1} = \bfC^{e,\text{tr}} \exp\left( -2\Delta\ep\bfN^p_{n+1} \right).
+\end{align}
+Then, the elastic Hencky strain can be written as
+\begin{align}
+  \strain^e_{n+1} = \strain^{e,\text{tr}} - \Delta\ep\bfN^p_{n+1}, \quad \strain^{e,\text{tr}} = \dfrac{1}{2}\ln\left( \bfC^{e,\text{tr}} \right),
+\end{align}
+and the trial conjugate stress can be derived as
+\begin{align}
+  \bfM^\text{tr} = \psi^e_{,\strain^{e,\text{tr}}} = \widehat{\bfM}\left( \strain^{e,\text{tr}}, d_{n+1} \right).
+\end{align}
+Next, minimizing the incremental local energy density subject the flow rule constraints (similar to the derivation in \Cref{section: chapter5/theory/plastic_flow}) yields
+\begin{subequations}
+  \begin{align}
+    \begin{split}
+      \phi^p(\Delta\ep) = &\ \bfM^\text{tr}:\bfN^p_{n+1} - \widehat{\bfM}\left( \Delta\ep \bfN^p_{n+1} \right):\bfN^p_{n+1} \\
+      &\ - Y^\text{eq}\left( \ep_n + \Delta\ep, d_{n+1}, T_{n+1} \right) - Y^\text{vis}\left( \dfrac{\Delta \ep}{\Delta t}; d_{n} \right) ,
+    \end{split}                                                                                                                                                                      \\
+    \bfN^p_{n+1} = & \  \dfrac{3}{2} \dfrac{\dev\left( \bfM^\text{tr} \right)}{\bar{\sigma}^\text{tr}}, \quad \bar{\sigma}^\text{tr} = \sqrt{\dfrac{3}{2}}\norm{\dev\left( \bfM^\text{tr} \right)}, 
+  \end{align}
+\end{subequations}

@@ -1,0 +1,140 @@
+\begin{figure}[htb!]
+  \centering
+  \begin{subfigure}[b]{0.29\textwidth}
+    \centering
+    \tikzsetnextfilenamesafe{Chapter5/homogenized/compare_degradation/EPPD_quad}
+    \begin{tikzpicture}
+      \begin{axis}[
+          colormap/jet,
+          cycle list={[of colormap,samples of colormap=4]},
+          width=1\textwidth,
+          height=2\textwidth,
+          xmin=0,
+          ymin=0,
+          ymax=1.6,
+          xlabel=$\varepsilon$,ylabel=$\sigma/\sigma_y$,
+          scaled x ticks=false,
+          yticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          xticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          legend style={
+              at={(0.05,0.95)},
+              anchor=north west,
+              nodes={scale=0.8, transform shape},
+              fill=white,
+              fill opacity=0.8,
+              draw opacity=1,
+              text opacity=1,
+              cells={align=left}
+            },
+          legend cell align={left},
+          every axis plot/.append style={thick,no marks}
+        ]
+        \addplot table[x expr=\thisrowno{3},y expr=\thisrowno{2}/320,col sep=comma]{Chapter5/data/homogenized/homogenized_EPPD_quad_xi_1_a_1000_R_1.csv};
+        \addplot table[x expr=\thisrowno{3},y expr=\thisrowno{2}/320,col sep=comma]{Chapter5/data/homogenized/homogenized_EPPD_quad_xi_1_a_1000_R_2.csv};
+        \addplot table[x expr=\thisrowno{3},y expr=\thisrowno{2}/320,col sep=comma]{Chapter5/data/homogenized/homogenized_EPPD_quad_xi_1_a_1000_R_3.csv};
+        \addplot table[x expr=\thisrowno{3},y expr=\thisrowno{2}/320,col sep=comma]{Chapter5/data/homogenized/homogenized_EPPD_quad_xi_1_a_1000_R_4.csv};
+        \draw[dashed, thick] (0,1) -- (0.12,1);
+        \legend{$l / a = 1$, $l / a = 2$, $l / a = 3$, $l / a = 4$}
+      \end{axis}
+    \end{tikzpicture}
+    \vspace{-12pt}
+    \caption{}
+    \label{fig: Chapter5/homogenized/compare_degradation/EPPD_quad}
+  \end{subfigure}
+  \hspace{0.04\textwidth}
+  \begin{subfigure}[b]{0.29\textwidth}
+    \centering
+    \tikzsetnextfilenamesafe{Chapter5/homogenized/compare_degradation/EPPD_lorentz}
+    \begin{tikzpicture}
+      \begin{axis}[
+          colormap/jet,
+          cycle list={[of colormap,samples of colormap=4]},
+          width=1\textwidth,
+          height=2\textwidth,
+          xmin=0,
+          ymin=0,
+          ymax=1.6,
+          xlabel=$\varepsilon$,ylabel=$\sigma/\sigma_y$,
+          scaled x ticks=false,
+          xticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          legend style={
+              at={(0.05,0.95)},
+              anchor=north west,
+              nodes={scale=0.8, transform shape},
+              fill=white,
+              fill opacity=0.8,
+              draw opacity=1,
+              text opacity=1,
+              cells={align=left}
+            },
+          legend cell align={left},
+          every axis plot/.append style={thick,no marks}
+        ]
+        \addplot table[x expr=\thisrowno{3},y expr=\thisrowno{2}/320,col sep=comma]{Chapter5/data/homogenized/homogenized_EPPD_xi_1_psic_4_a_250_R_1.csv};
+        \addplot table[x expr=\thisrowno{3},y expr=\thisrowno{2}/320,col sep=comma]{Chapter5/data/homogenized/homogenized_EPPD_xi_1_psic_4_a_250_R_2.csv};
+        \addplot table[x expr=\thisrowno{3},y expr=\thisrowno{2}/320,col sep=comma]{Chapter5/data/homogenized/homogenized_EPPD_xi_1_psic_4_a_250_R_3.csv};
+        \addplot table[x expr=\thisrowno{3},y expr=\thisrowno{2}/320,col sep=comma]{Chapter5/data/homogenized/homogenized_EPPD_xi_1_psic_4_a_250_R_4.csv};
+        \draw[dashed, thick] (0,1) -- (0.12,1);
+        \legend{$l / a = 1$, $l / a = 2$, $l / a = 3$, $l / a = 4$}
+      \end{axis}
+    \end{tikzpicture}
+    \vspace{-12pt}
+    \caption{}
+    \label{fig: Chapter5/homogenized/compare_degradation/EPPD_lorentz}
+  \end{subfigure}
+  \hspace{0.04\textwidth}
+  \begin{subfigure}[b]{0.29\textwidth}
+    \centering
+    \tikzsetnextfilenamesafe{Chapter5/homogenized/compare_degradation/EPD_lorentz}
+    \begin{tikzpicture}
+      \begin{axis}[
+          colormap/jet,
+          cycle list={[of colormap,samples of colormap=4]},
+          width=1\textwidth,
+          height=2\textwidth,
+          xmin=0,
+          ymin=0,
+          ymax=1.6,
+          xlabel=$\varepsilon$,ylabel=$\sigma/\sigma_y$,
+          scaled x ticks=false,
+          xticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          legend style={
+              at={(0.05,0.95)},
+              anchor=north west,
+              nodes={scale=0.8, transform shape},
+              fill=white,
+              fill opacity=0.8,
+              draw opacity=1,
+              text opacity=1,
+              cells={align=left}
+            },
+          legend cell align={left},
+          every axis plot/.append style={thick,no marks}
+        ]
+        \addplot table[x expr=\thisrowno{3},y expr=\thisrowno{2}/320,col sep=comma]{Chapter5/data/homogenized/homogenized_EPD_xi_1_psic_0.81_a_2500_R_1.csv};
+        \addplot table[x expr=\thisrowno{3},y expr=\thisrowno{2}/320,col sep=comma]{Chapter5/data/homogenized/homogenized_EPD_xi_1_psic_0.81_a_2500_R_2.csv};
+        \addplot table[x expr=\thisrowno{3},y expr=\thisrowno{2}/320,col sep=comma]{Chapter5/data/homogenized/homogenized_EPD_xi_1_psic_0.81_a_2500_R_3.csv};
+        \addplot table[x expr=\thisrowno{3},y expr=\thisrowno{2}/320,col sep=comma]{Chapter5/data/homogenized/homogenized_EPD_xi_1_psic_0.81_a_2500_R_4.csv};
+        \draw[dashed, thick] (0,1) -- (0.12,1);
+        \legend{$l / a = 1$, $l / a = 2$, $l / a = 3$, $l / a = 4$}
+      \end{axis}
+    \end{tikzpicture}
+    \vspace{-12pt}
+    \caption{}
+    \label{fig: Chapter5/homogenized/compare_degradation/EPD_lorentz}
+  \end{subfigure}
+  \caption{Stress-strain curves obtained with the linear crack geometric function $\alpha = d$ and (a) the quadratic degradation function (b-c) a Lorentz-type degradation function. Both (b) the E-P-PD model ($\psi_c c_0 a / \Gc = 0.019$) and (c) the E-P-D model ($\psi_c c_0 a / \Gc = 0.039$) show a regularization-length-independent critical fracture strength $\sigma_c$.}
+  \label{fig: Chapter5/homogenized/compare_degradation}
+\end{figure}
