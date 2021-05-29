@@ -1,8 +1,8 @@
 \chapter{The flooding algorithm for counting fragments}
 \label{appendix: flooding}
 
-We describe the algorithm for clustering various elements in a mesh to individual fragments, as delineated by a damage field.
-The algorithm assigns each element a cluster order parameter, and different clusters are separated by a band of ``broken'' elements where the damage is above a threshold, i.e.\ $d > d_{\text{th}}$. Figure \ref{fig: clustering} provides an example of this algorithm for a representative damage field.
+We describe the algorithm for clustering various elements in a mesh to individual fragments, as delineated by a phase field.
+The algorithm assigns each element a cluster order parameter, and different clusters are separated by a band of ``broken'' elements where the damage is above a threshold, i.e.\ $d > d_{\text{th}}$. Figure \ref{fig: clustering} provides an example of this algorithm for a representative phase field.
 
 \begin{figure}[htb!]
   \centering
@@ -15,7 +15,7 @@ The algorithm assigns each element a cluster order parameter, and different clus
     \vspace{-0.06in}
     \caption{}
   \end{subfigure}
-  \caption{ (a) Final damage field obtained using a spatially correlated random $\Gc$ and $\psi_c$. (b) Corresponding clusters labeled by the flooding algorithm. Cluster boundaries are marked in black. }
+  \caption{ (a) Final phase field obtained using a spatially correlated random $\Gc$ and $\psi_c$. (b) Corresponding clusters labeled by the flooding algorithm. Cluster boundaries are marked in black. }
   \label{fig: clustering}
 \end{figure}
 

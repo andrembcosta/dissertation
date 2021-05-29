@@ -12,18 +12,18 @@ Although the variational framework allows the use of a variety of fracture model
 \begin{align*}
   \alpha = d, \quad g^e = g^\text{Lorentz}(d), \quad g^p = 1, \quad \beta \in (0,1], \quad \varepsilon_0 > 0,
 \end{align*}
-where plasticity and fracture are not strongly coupled, but the evolution of plastic deformation results in a ``degraded'' fracture toughness. For this E-P-D model, the corresponding generalized fracture driving energy consists of only the active elastic energy $\psi^e_\activepart$, and the critical fracture energy $\psi_c$ is pictorially depicted in \Cref{fig: Chapter5/terminology/EPD}.
+where plasticity and fracture are not strongly coupled, but the evolution of plastic deformation results in a ``degraded'' fracture toughness. For this E-P-D model, the corresponding generalized fracture driving energy consists of only the active strain energy $\psi^e_\activepart$, and the critical fracture energy $\psi_c$ is pictorially depicted in \Cref{fig: Chapter5/terminology/EPD}.
 
 In what follows, we will compare the behavior of the E-P-D model to an existing phase-field model for ductile fracture presented in \cite{brandon2020cohesive}.  The existing model,
 which we refer to as the E-P-PD model,  is recovered by selecting
 \begin{align*}
   \alpha = d, \quad g^e = g^p = g^\text{Lorentz}(d), \quad \beta = 1.
 \end{align*}
-These choices give rise to a model in which plasticity and fracture are strongly coupled, i.e.\ the yield surface is degraded by the phase field and the plastic energy contributes to fracture. For this E-P-PD model, the corresponding generalized fracture driving energy $\chi$ consists of both the active elastic energy $\psi^e_\activepart$ and the plastic energy $\psi^p$.  The corresponding critical fracture energy $\psi_c$ is pictorially depicted in \Cref{fig: Chapter5/terminology/EPPD}.
+These choices give rise to a model in which plasticity and fracture are strongly coupled, i.e.\ the yield surface is degraded by the phase field and the plastic energy contributes to fracture. For this E-P-PD model, the corresponding generalized fracture driving energy $\chi$ consists of both the active strain energy $\psi^e_\activepart$ and the plastic energy $\psi^p$.  The corresponding critical fracture energy $\psi_c$ is pictorially depicted in \Cref{fig: Chapter5/terminology/EPPD}.
 
-In this section, we demonstrate through numerical examples the motivations behind the various modeling choices. The naming of each model is explained \Cref{s: Chapter5/homogenized/characteristics} by investigating their characteristic loading and unloading behavior. \Cref{s: Chapter5/homogenized/alpha} motivates the use of a linear crack geometric function, and \Cref{s: Chapter5/homogenized/degradation} motivates the use of the Lorentz-type degradation functions.
-The effect of the coalescence dissipation in a homogenized setting is demonstrated in \Cref{s: Chapter5/homogenized/coalescence}.
-\Cref{s: Chapter5/nonhomogeneous} presents an example demonstrating that the nonhomogeneous model response is independent of the regularization length for different values of $\beta$.
+In this section, we demonstrate through numerical examples the motivations behind the various modeling choices. The naming of each model is explained \Cref{section: Chapter5/verification/homogenized/characteristics} by investigating their characteristic loading and unloading behavior. \Cref{section: Chapter5/verification/homogenized/alpha} motivates the use of a linear crack geometric function, and \Cref{section: Chapter5/verification/homogenized/degradation} motivates the use of the Lorentz-type degradation functions.
+The effect of the coalescence dissipation in a homogenized setting is demonstrated in \Cref{section: Chapter5/verification/homogenized/coalescence}.
+\Cref{section: Chapter5/verification/nonhomogeneous} presents an example demonstrating that the nonhomogeneous model response is independent of the regularization length for different values of $\beta$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -36,7 +36,7 @@ The effect of the coalescence dissipation in a homogenized setting is demonstrat
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{A homogeneous example: uniaxial constitutive response}
-\label{s: Chapter5/homogenized}
+\label{section: Chapter5/verification/homogenized}
 
 We begin by considering a problem in which the damage is spatially constant and so nonlocal features are effectively suppressed.  This is effected by considering the response of a single element subjected to uniaxial tension.  Examining this relatively simple system allows us to introduce the effect of different modeling choices.
 
@@ -55,7 +55,7 @@ The single element is loaded in uniaxial tension with displacement control. Repr
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Characteristic loading and unloading behavior}
-\label{s: Chapter5/homogenized/characteristics}
+\label{section: Chapter5/verification/homogenized/characteristics}
 
 Consider $\beta = 1$, the proposed E-P-D model yields an E-P-D loading and unloading response (\Cref{fig: Chapter5/homogenized/lu/EPD}), and the E-P-PD model yields an E-P-PD loading and unloading response (\Cref{fig: Chapter5/homogenized/lu/EPPD}).
 
@@ -74,7 +74,7 @@ We note that if the critical fracture strength is chosen to be smaller than the 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{The crack geometric function}
-\label{s: Chapter5/homogenized/alpha}
+\label{section: Chapter5/verification/homogenized/alpha}
 
 Next, two crack geometric functions, $\alpha = d^2$ and $\alpha = d$, are compared. The corresponding stress-strain curves are shown in \Cref{fig: Chapter5/homogenized/compare_alpha}.
 In \Cref{fig: Chapter5/homogenized/compare_alpha/EPPD_xi_0}, we observe that  the stress-strain response enters a damage softening stage \textit{before} the stress reaches the yield stress. In essence, what happens is that a small amount of damage is accumulated during the elastic loading stage due to the nature of the specific crack geometric function $\alpha = d^2$.
@@ -95,7 +95,7 @@ By adopting a crack geometric potential with a linear term, e.g. $\xi > 0$, a fi
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{The degradation functions}
-\label{s: Chapter5/homogenized/degradation}
+\label{section: Chapter5/verification/homogenized/degradation}
 
 Next, we focus attention on the critical fracture strength $\sigma_c$. The Lorentz-type degradation is compared with the widely used quadratic degradation function $g^\text{quad} = (1-d)^2$.
 As shown in \Cref{fig: Chapter5/homogenized/compare_degradation/EPPD_quad}, in conjunction with $\alpha = d$, the quadratic degradation function still relates the critical fracture energy (or equivalently the critical fracture strength) to the phase-field regularization length.  As a result, as the regularization length is decreased, the stress at which the softening begins increases.
@@ -117,9 +117,9 @@ We conclude this subsection by noting that while the observations regarding the 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{The coalescence dissipation}
-\label{s: Chapter5/homogenized/coalescence}
+\label{section: Chapter5/verification/homogenized/coalescence}
 
-With clear justification for the modeling choices of the crack geometric function (\Cref{s: Chapter5/homogenized/alpha}) and the degradation functions (\Cref{s: Chapter5/homogenized/degradation}), we now examine the effect of the coalescence dissipation in this homogenized setting.
+With clear justification for the modeling choices of the crack geometric function (\Cref{section: Chapter5/verification/homogenized/alpha}) and the degradation functions (\Cref{section: Chapter5/verification/homogenized/degradation}), we now examine the effect of the coalescence dissipation in this homogenized setting.
 
 \textit{Without} fracture dual kinetic potential, i.e.\ $C = \beta = 1$, the E-P-PD model and the E-P-D model have some shortcomings.
 First, the E-P-PD model introduces a strong coupling between plasticity and fracture, as both the active part of the strain energy and the plastic energy contribute to damage evolution (according to \eqref{eq: fracture driving energy}, or see \Cref{fig: Chapter5/terminology/EPPD} for a graphical illustration). As a result, the use of a large critical fracture energy $\psi_c$ may be required to calibrate the E-P-PD model against experimental measurements. However, due to convexity concerns, the Lorentz-type degradation functions typically impose an upper-bound on the regularization length that scales inversely with the critical fracture energy:
@@ -135,7 +135,7 @@ Second, the plastic energy contributes to the fracture driving energy in the E-P
 
 In this work, the coalescence dissipation is proposed to address the aforementioned issues. According to \eqref{eq: modified fracture evolution}, the coalescence dissipation introduces a dependency of the effective fracture toughness on the plastic strain.
 To demonstrate the influence, the stress-strain curve and the corresponding energy balance when $C = \beta = 1$ (i.e.\ no coalesence dissipation) are first shown in \Cref{fig: Chapter5/homogenized/compare_beta/beta_1/stress_strain,fig: Chapter5/homogenized/compare_beta/beta_1/energy}.  Without any coalescence dissipation, there is no degradation of the fracture toughness.
-The sum of the elastic energy, the plastic energy and the fracture energy equals the accumulated power expenditure due to external work.
+The sum of the strain energy, the plastic energy and the fracture energy equals the accumulated power expenditure due to external work.
 
 \Cref{fig: Chapter5/homogenized/compare_beta/beta_0.5/stress_strain,fig: Chapter5/homogenized/compare_beta/beta_0.5/energy} show the stress strain curve and the corresponding energy balance when $C = \beta = 0.5$ and $\varepsilon_0 = 0.001 \ll \ep_c$.
 In this case, $\Gc$ and $\psi_c$ are scaled such that $\beta\Gc$ and $\beta\psi_c$ remains the same for comparison purposes.
@@ -183,8 +183,9 @@ It bears emphasis that the presence of the fracture dual kinetic potential does 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{A nonhomogeneous example: uniaxial load-displacement curves}
+\label{section: Chapter5/verification/nonhomogeneous}
 
-In the homogenized example (\Cref{s: Chapter5/homogenized}), we have demonstrated that the use of a linear crack geometric function enables an unperturbed elastic-plastic behavior, and that the Lorentz-type degradation functions lead to a regularization-length-independent critical fracture strength. In this section, we demonstrate that as a consequence of these modeling choices the underlying softening response is also independent of the regularization-length. In particular, the force-displacement response converges as the regularization-length is decreased.
+In the homogenized example (\Cref{section: Chapter5/verification/homogenized}), we have demonstrated that the use of a linear crack geometric function enables an unperturbed elastic-plastic behavior, and that the Lorentz-type degradation functions lead to a regularization-length-independent critical fracture strength. In this section, we demonstrate that as a consequence of these modeling choices the underlying softening response is also independent of the regularization-length. In particular, the force-displacement response converges as the regularization-length is decreased.
 
 \input{Chapter5/figures/nonhomogeneous/schematics}
 

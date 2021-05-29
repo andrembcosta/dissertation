@@ -80,7 +80,7 @@
         // fracture
         \addplot [draw=none,name path=EPF,forget plot] table[x expr=\thisrowno{8},y expr=(\thisrowno{1}+\thisrowno{5}+\thisrowno{3})/12937500000,col sep=comma]{Chapter5/data/homogenized/C_1_beta_1_e0_0.001.csv};
         \addplot [fill=brown,fill opacity=0.5] fill between[of=EXT and EP];
-        \legend{external work, elastic energy, plastic energy, fracture energy}
+        \legend{external work, strain energy, plastic energy, fracture energy}
       \end{axis}
     \end{tikzpicture}
     \vspace{-12pt}
@@ -170,7 +170,7 @@
         \addplot [fill=brown,fill opacity=0.5] fill between[of=EXT and EP];
         // coalescence
         \addplot [fill=black,fill opacity=1, pattern=north west lines] fill between[of=EPF and EXT];
-        \legend{external work, elastic energy, plastic energy, fracture energy, fracture dissipation}
+        \legend{external work, strain energy, plastic energy, fracture energy, fracture dissipation}
       \end{axis}
     \end{tikzpicture}
     \vspace{-12pt}

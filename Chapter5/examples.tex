@@ -1,7 +1,7 @@
 \section{Numerical examples}
-\label{section: ductile/examples}
+\label{section: Chapter5/examples}
 
-Finally, both the proposed E-P-D model and the E-P-PD model are applied to simulate a three-point bending experiment in \Cref{s: Chapter5/3pb} and the experiment adopted for the Sandia Fracture Challenge in \Cref{s: Chapter5/SFC}.
+Finally, both the proposed E-P-D model and the E-P-PD model are applied to simulate a three-point bending experiment in \Cref{section: Chapter5/examples/3pb} and the experiment adopted for the Sandia Fracture Challenge in \Cref{section: Chapter5/examples/SFC}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -14,9 +14,9 @@ Finally, both the proposed E-P-D model and the E-P-PD model are applied to simul
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Three-point bending}
-\label{s: Chapter5/3pb}
+\label{section: Chapter5/examples/3pb}
 
-With modeling choices motivated and demonstrated in \Cref{s: Chapter5/homogenized,s: Chapter5/nonhomogeneous}, the model is now applied to simulate a three-point bending experiment for a specimen composed of an aluminum alloy \cite{kubik2019ductile}. In particular, we focus attention on the comparison of the E-P-PD model and the proposed E-P-D model with coalescence dissipation.
+With modeling choices motivated and demonstrated in \Cref{section: Chapter5/verification/homogenized,section: Chapter5/verification/nonhomogeneous}, the model is now applied to simulate a three-point bending experiment for a specimen composed of an aluminum alloy \cite{kubik2019ductile}. In particular, we focus attention on the comparison of the E-P-PD model and the proposed E-P-D model with coalescence dissipation.
 
 First, material properties and model parameters are calibrated against a tension test of a notched cylindrical specimen (R13 notch). Details of the specimen geometry, experimental setup and force-displacement data are provided in \cite{kubik2018notched}. Our calculations employ a cylindrical coordinate system, and symmetry is assumed about both the centerline and the half-plane of the specimen. The finite element mesh for this problem is shown in \Cref{fig: Chapter5/3pb/mesh}. \texttt{QUAD4} elements are used to discretize the domain with a structured mesh. The maximum and the minumum element sizes are \SI{1}{\milli\meter} and \SI{0.0625}{\milli\meter}, respectively.
 
@@ -24,7 +24,7 @@ First, material properties and model parameters are calibrated against a tension
 
 Calibrated material properties and model parameters are summarized in \Cref{tab: Chapter5/3pb}. The E-P-D model is calibrated using a range of $\beta$ and $\varepsilon_0$ values. The corresponding force-displacement curves are shown in \Cref{fig: Chapter5/3pb/force_disp}.
 
-We note that a significantly larger critical fracture energy $\psi_c$ is required for the E-P-PD model for the onset of damage to match the experiment. This is expected as the generalized fracture driving energy for the E-P-PD model includes contributions from plasticity, while only the active elastic energy contributes to crack growth in the E-P-D model. According to \eqref{eq: upper bound}, polyconvexity requires a phase-field regularization length $l \leq \SI{0.01}{\milli\meter}$.
+We note that a significantly larger critical fracture energy $\psi_c$ is required for the E-P-PD model for the onset of damage to match the experiment. This is expected as the generalized fracture driving energy for the E-P-PD model includes contributions from plasticity, while only the active strain energy contributes to crack growth in the E-P-D model. According to \eqref{eq: upper bound}, polyconvexity requires a phase-field regularization length $l \leq \SI{0.01}{\milli\meter}$.
 
 \begin{table}[htb!]
   \scriptsize
@@ -73,7 +73,7 @@ In the experiment, the crack surface first originates from the half cylindrical 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Two-dimensional results}
-\label{s: Chapter5/3pb/2D}
+\label{section: Chapter5/examples/3pb/2D}
 
 First, we focus attention on the initiation and propagation of the first crack, i.e.\ the crack connecting the notch to the left smaller hole. The calculations are performed in two dimensions under plane-strain assumptions. The experimental crack path and the contours of the equivalent plastic strain are shown in \Cref{fig: Chapter5/3pb/plastic_strain}. Due to the nature of the linear crack geometric function, both the E-P-PD model and the E-P-D model has the same ductile response up to damage initiation: the equivalent plastic strain localizes around the middle of the bottom cylindrical notch, and two wakes of plastic deformation form at $\ang{45}$ angle towards the lower surfaces of the left smaller cylindrical hole and the right larger cylindrical hole.
 
@@ -117,7 +117,7 @@ For the E-P-PD model, due to the strong coupling between plasticity and fracture
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Three-dimensional results}
-\label{s: Chapter5/3pb/3D}
+\label{section: Chapter5/examples/3pb/3D}
 
 With a qualitative understanding of the predicted trajectory of the first crack, a subset of the calibrated E-P-D models are now used in three-dimensional simulations of the three-point bending experiment.   The calculated load-deflection curves are compared to experimental measurements.
 
@@ -154,6 +154,7 @@ The final crack surfaces obtained using $\beta = 0.1$ and $\varepsilon_0 = 0.2$ 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{The Sandia Fracture Challange}
+\label{section: Chapter5/examples/SFC}
 
 Next, we examine the capabilities of the proposed E-P-D model by simulating an experiment from a Sandia Fracture Challenge \cite{boyce2014sandia}.  The specimen is composed of Al-5052 H34.  The hardening model is first calibrated against  tensile test data for a smooth round bar \cite{guo2013experimental}. The calibrated material properties and model constants are summarized in \Cref{tab: Chapter5/SFC}. Based on the calibrated tensile test results, the crack should initiate at a critical equivalent plastic strain of $\varepsilon^p_c = 0.8$. The fracture toughness $\Gc$ is then scaled accordingly, such that $\widehat{\Gc}$ matches experimental measurements.
 
@@ -192,7 +193,7 @@ The specimen is loaded in tension via two pins that connect to the specimen thro
 The resulting force-displacement curves are shown in \Cref{fig: Chapter5/SFC/force_disp}. The response predicted by our proposed E-P-D model indicates an excellent agreement with the experimental measurements. Force-displacement curves from \cite{ambati_phase-field_2016} are also included for comparison.  The proposed E-P-D model clearly provides the best quantitative and qualitative match with the experiment.
 
 Contour plots of the phase field $d$ are shown in \Cref{fig: Chapter5/SFC/d_1,fig: Chapter5/SFC/d_2,fig: Chapter5/SFC/d_3}. The first crack nucleates on the left side of the middle hole, and then connects with the round notch. After a while, the second crack nucleates on the right side of the middle hole and propagates to the right, with a nearly horizontal orientation.
-The active part of the elastic energy is shown in \Cref{fig: Chapter5/SFC/We_1,fig: Chapter5/SFC/We_2,fig: Chapter5/SFC/We_3}, where the stress concentration at the crack tips and a stress release after the first crack can be clearly observed.
+The active part of the strain energy is shown in \Cref{fig: Chapter5/SFC/We_1,fig: Chapter5/SFC/We_2,fig: Chapter5/SFC/We_3}, where the stress concentration at the crack tips and a stress release after the first crack can be clearly observed.
 The plastic energy is shown in \Cref{fig: Chapter5/SFC/Wp_1,fig: Chapter5/SFC/Wp_2,fig: Chapter5/SFC/Wp_3}, and the coalescence degradation is shown in \Cref{fig: Chapter5/SFC/gc_1,fig: Chapter5/SFC/gc_2,fig: Chapter5/SFC/gc_3}. The fracture toughness is substantially degraded in the regions with high plastic localization.
 
 \input{Chapter5/figures/SFC/force_disp}

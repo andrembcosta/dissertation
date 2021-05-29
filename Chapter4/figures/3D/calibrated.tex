@@ -6,12 +6,13 @@
     \begin{tikzpicture}
       \begin{axis}[
           width=\textwidth,
-          height=0.8\textwidth,
+          height=1\textwidth,
           xlabel=$l^*$,ylabel=estimated PDF,
-          ymin=0,ymax=0.4,
+          ymin=0,ymax=0.5,
           xmin=0,xmax=15,
           legend style={at={(0.95,0.95)},anchor=north east},
           legend style={nodes={scale=1, transform shape}},
+          legend style={fill=none, draw=none},
           legend cell align={left},
           every axis plot/.append style={thick}
         ]
@@ -25,11 +26,13 @@
   \begin{subfigure}[b]{0.27\textwidth}
     \centering
     \includegraphics[width=\textwidth]{Chapter4/figures/3D/d_4.png}
+    \vspace{10pt}
     \caption{}
   \end{subfigure}
   \begin{subfigure}[b]{0.25\textwidth}
     \centering
     \includegraphics[width=\textwidth]{Chapter4/figures/3D/4mm_exp.png}
+    \vspace{12pt}
     \caption{}
   \end{subfigure}
   \caption{(a) Estimated PDFs of the dimensionless fragment sizes extracted from the experimental result and the calibrated stochastic model. (b) Fracture morphology obtained using the calibrated fracture properties. (c) Photograph of cracks in the mining waste. }

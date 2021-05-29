@@ -6,7 +6,7 @@
     \begin{tikzpicture}
       \begin{axis}[
           width=0.9\textwidth,
-          height=0.9\textwidth,
+          height=1.1\textwidth,
           ymode=log,
           log ticks with fixed point,
           ylabel=$\underline{l^*}$,xlabel=$\mathcal{D}^*$,
@@ -15,9 +15,8 @@
               at={(0.05,0.05)},
               anchor=south west,
               nodes={scale=1, transform shape},
-              fill=white,
-              fill opacity=0.8,
-              draw opacity=1,
+              fill=none,
+              draw=none,
               text opacity=1,
               cells={align=left}
             },
@@ -42,12 +41,13 @@
     \begin{tikzpicture}
       \begin{axis}[
           width=0.9\textwidth,
-          height=0.9\textwidth,
+          height=1.1\textwidth,
           xlabel=$l^*$,ylabel=estimated PDF,
           ymin=0,ymax=0.012,
           xmin=0,xmax=1000,
           legend style={at={(0.95,0.95)},anchor=north east},
           legend style={nodes={scale=1, transform shape}},
+          legend style={fill=none,draw=none},
           legend cell align={left},
           every axis plot/.append style={thick}
         ]
@@ -60,14 +60,14 @@
     \caption{}
     \label{fig: Chapter4/2D/distribution_correlation_length_sqexp}
   \end{subfigure}
-
+  
   \begin{subfigure}[b]{0.475\textwidth}
     \centering
     \tikzsetnextfilenamesafe{Chapter4/2D/dimensionless_curve_correlation_length_exp}
     \begin{tikzpicture}
       \begin{axis}[
           width=0.9\textwidth,
-          height=0.9\textwidth,
+          height=1.1\textwidth,
           ymode=log,
           log ticks with fixed point,
           ylabel=$\underline{l^*}$,xlabel=$\mathcal{D}^*$,
@@ -76,9 +76,8 @@
               at={(0.05,0.05)},
               anchor=south west,
               nodes={scale=1, transform shape},
-              fill=white,
-              fill opacity=0.8,
-              draw opacity=1,
+              fill=none,
+              draw=none,
               text opacity=1,
               cells={align=left}
             },
@@ -103,12 +102,13 @@
     \begin{tikzpicture}
       \begin{axis}[
           width=0.9\textwidth,
-          height=0.9\textwidth,
+          height=1.1\textwidth,
           xlabel=$l^*$,ylabel=estimated PDF,
           ymin=0,ymax=0.012,
           xmin=0,xmax=300,
           legend style={at={(0.95,0.95)},anchor=north east},
           legend style={nodes={scale=1, transform shape}},
+          legend style={fill=none,draw=none},
           legend cell align={left},
           every axis plot/.append style={thick}
         ]

@@ -7,7 +7,7 @@
       \begin{axis}[
           cycle list name=exotic,
           width=\textwidth,
-          height=\textwidth,
+          height=1.2\textwidth,
           xlabel=$u_y^*$,ylabel=$f_y^*$,
           xmin=0,
           xmax=0.006,
@@ -15,6 +15,7 @@
           ymax=0.45,
           legend style={at={(0.05,0.95)},anchor=north west},
           legend style={nodes={scale=0.8, transform shape}},
+          legend style={draw=none, fill=none},
           legend style={cells={align=left}},
           every axis plot/.append style={thick}
         ]
@@ -35,7 +36,7 @@
       \begin{axis}[
           cycle list name=exotic,
           width=\textwidth,
-          height=\textwidth,
+          height=1.2\textwidth,
           xlabel=$u_y^*$,ylabel=$f_y^*$,
           xmin=0,
           xmax=0.006,
@@ -43,6 +44,7 @@
           ymax=0.45,
           legend style={at={(0.05,0.95)},anchor=north west},
           legend style={nodes={scale=0.8, transform shape}},
+          legend style={draw=none, fill=none},
           legend cell align={left},
           every axis plot/.append style={thick}
         ]
@@ -52,7 +54,7 @@
         \addplot +[mark=none] table[x expr=\thisrowno{2},y expr=\thisrowno{1}*20.9036/2500] {Chapter4/data/mode1_intact_plate_odd_0.4.csv};
         \addplot +[mark=none] table[x expr=\thisrowno{2},y expr=\thisrowno{1}*20.9036/2500] {Chapter4/data/mode1_intact_plate_odd_0.6.csv};
         \addplot +[mark=none] table[x expr=\thisrowno{2},y expr=\thisrowno{1}*20.9036/2500] {Chapter4/data/mode1_intact_plate_odd_0.8.csv};
-        \legend{geometric notch $d_{\text{critical}}=0.4$,geometric notch $d_{\text{critical}}=0.6$,geometric notch $d_{\text{critical}}=0.8$,initial damage $d_{\text{critical}}=0.4$,initial damage $d_{\text{critical}}=0.6$,initial damage $d_{\text{critical}}=0.8$}
+        \legend{geometric notch $d_c=0.4$,geometric notch $d_c=0.6$,geometric notch $d_c=0.8$,initial damage $d_c=0.4$,initial damage $d_c=0.6$,initial damage $d_c=0.8$}
       \end{axis}
     \end{tikzpicture}
     \caption{}

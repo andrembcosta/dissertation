@@ -7,7 +7,7 @@
       \begin{axis}[
           cycle list name=exotic,
           width=\textwidth,
-          height=1.3\textwidth,
+          height=1.5\textwidth,
           xlabel=$u_x^*$,ylabel=$f_x^*$,
           xmin=0,
           xmax=0.02,
@@ -17,9 +17,8 @@
               at={(0.05,0.98)},
               anchor=north west,
               nodes={scale=0.8, transform shape},
-              fill=white,
-              fill opacity=0.8,
-              draw opacity=1,
+              fill=none,
+              draw=none,
               text opacity=1,
               cells={align=left}
             },
@@ -45,7 +44,7 @@
       \begin{axis}[
           cycle list name=exotic,
           width=\textwidth,
-          height=1.3\textwidth,
+          height=1.5\textwidth,
           xlabel=$u_x^*$,ylabel=$f_x^*$,
           xmin=0,
           xmax=0.02,
@@ -55,9 +54,8 @@
               at={(0.98,0.98)},
               anchor=north east,
               nodes={scale=0.8, transform shape},
-              fill=white,
-              fill opacity=0.8,
-              draw opacity=1,
+              fill=none,
+              draw=none,
               text opacity=1
             },
           legend cell align={left},
@@ -74,7 +72,7 @@
         \addplot +[mark=none] table[x expr=\thisrowno{2},y expr=\thisrowno{1}*20.9036/2500] {Chapter4/data/mode2_intact_plate_odd_0.4.csv};
         \addplot +[mark=none] table[x expr=\thisrowno{2},y expr=\thisrowno{1}*20.9036/2500] {Chapter4/data/mode2_intact_plate_odd_0.6.csv};
         \addplot +[mark=none] table[x expr=\thisrowno{2},y expr=\thisrowno{1}*20.9036/2500] {Chapter4/data/mode2_intact_plate_odd_0.8.csv};
-        \legend{geometric notch $d_{\text{critical}}=0.2$,geometric notch $d_{\text{critical}}=0.4$,geometric notch $d_{\text{critical}}=0.6$,geometric notch $d_{\text{critical}}=0.8$,initial damage $d_{\text{critical}}=0.2$,initial damage $d_{\text{critical}}=0.4$,initial damage $d_{\text{critical}}=0.6$,initial damage $d_{\text{critical}}=0.8$}
+        \legend{geometric notch $d_c=0.2$,geometric notch $d_c=0.4$,geometric notch $d_c=0.6$,geometric notch $d_c=0.8$,initial damage $d_c=0.2$,initial damage $d_c=0.4$,initial damage $d_c=0.6$,initial damage $d_c=0.8$}
       \end{axis}
     \end{tikzpicture}
     \caption{}
