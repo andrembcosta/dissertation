@@ -1,5 +1,5 @@
 \section{Kinematics and Constraints}
-\label{section: framework/kinematics}
+\label{section: Chapter2/kinematics}
 
 Let us start by defining degrees of freedom in the system. Let $\body$ be a body consisting of a continuous collection of material points. Let $\body_0 \subset \mathbb{R}^d$ be the reference configuration at some time $t = t_0$, whose particles are identified by their position $\btX$, and $\body_t \subset \mathbb{R}^d$ be the current configuration at a time $t > t_0$, with particles at position $\btx$. Let $\bs{\upphi}: \body_0 \times [t_0, t] \mapsto \mathbb{R}^d$ be the deformation map.
 The deformation gradient is denoted as $\defgrad = \grad \bs{\upphi}$, where the operator $\grad$ denotes differentiaton with respect to $\btX$ (in the reference configuration $\body_0$). The Jacobian determinant of the deformation gradient is written as $J = \det\defgrad$.
@@ -31,7 +31,7 @@ The specific form of the constraint depends on physical requirements and the mat
 \begin{subequations}
   \begin{align}
     \tr\left( \dot{\bfF}^p {\bfF^p}^{-1} \right)                     & = 0, \label{eq: prandtl-reuss isochoric} \\
-    \norm{\dot{\bfF}^p {\bfF^p}^{-1}}^2 - \dfrac{3}{2}\abs{\epdot}^2 & = 0, \label{eq: prandtl-reuss uniaxial}
+    \norm{\dot{\bfF}^p {\bfF^p}^{-1}}^2 - \dfrac{3}{2}\abs{\epdot}^2 & = 0, \label{eq: prandtl-reuss uniaxial}  
   \end{align}
 \end{subequations}
 where \eqref{eq: prandtl-reuss isochoric} requires the plastic flow to be isochoric, and \eqref{eq: prandtl-reuss uniaxial} normalizes the effective plastic strain $\ep$ to be uniaxial. Furthermore, the plastic flow is assumed to be irreversible in the sense
