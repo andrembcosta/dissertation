@@ -13,7 +13,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Constitutive choices}
 
-Following the variational framework presented in \Cref{chapter: framework}, to account for elastic deformation and fracture in polycrystalline materials, the Helmholtz free energy density is decomposed as
+Following the variational framework presented in \Cref{section: Chapter2}, to account for elastic deformation and fracture in polycrystalline materials, the Helmholtz free energy density is decomposed as
 \begin{align}
   \psi = \psi^e + \psi^f. \label{eq: chapter 3 helmholtz}
 \end{align}
@@ -73,7 +73,7 @@ where $\gamma_l$ is often referred to as the crack surface density parameterized
 \begin{align}
   \gamma_l(d, \grad d) = \dfrac{1}{c_0 l}\left( \alpha + l^2 \grad d \cdot \grad d \right), \label{eq: crack surface density}
 \end{align}
-where $\alpha = \hat{\alpha}(d)$ is the crack geometric function. According to the discussion in \Cref{chapter: framework}, existence requires $\hat{\alpha}(d)$ to be convex in $d$, and the phase-field irreversibility condition \eqref{eq: fracture irreversibility} assumes $\hat{\alpha}(d)$ attains its minimum at $d = 0$.
+where $\alpha = \hat{\alpha}(d)$ is the crack geometric function. According to the discussion in \Cref{section: Chapter2}, existence requires $\hat{\alpha}(d)$ to be convex in $d$, and the phase-field irreversibility condition \eqref{eq: fracture irreversibility} assumes $\hat{\alpha}(d)$ attains its minimum at $d = 0$.
 
 In the current variational framework, the fracture response, e.g. the critical fracture strength and the softening behavior, is determined by the crack geometric function and the degradation function. In this chapter, to model brittle fracture, where crack only nucleates at stress singularities, i.e. $\psi_c \to \infty$, the following combination of crack geometric function and degradation function is used,
 \begin{align}
