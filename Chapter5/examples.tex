@@ -210,3 +210,71 @@ The plastic energy is shown in \Cref{fig: Chapter5/SFC/Wp_1,fig: Chapter5/SFC/Wp
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Spallation of oxidation scale}
+
+Next, in this section, we extend the ductile fracture model within the variational framework to construct a coupled thermo-elasto-creep model to simulate spallation of oxide scale on high temperature heat exchangers.
+
+High temperature heat exchangers (HTHXs) are key components of many power conversion systems, including advanced nuclear power generation systems. HTHXs typically operate in the inlet temperature range of 750-1100 \SI{}{\celsius} and are subject to unique material challenges including oxidation, corrosion, creep and fracture.  We focus on modeling the mechanical response of the metal operating at high temperatures, with the objective of developing physics-based models for predicting fracture and spallation of the scale, which will provide insight into the lifetime performance of the heat exchanger.
+
+\input{Chapter5/figures/spallation/schematics}
+
+Consider a \SI{200}{\milli\meter}-long section of a metal tube with inner radius \SI{14}{\milli\meter} and outer radius \SI{25}{\milli\meter} (\Cref{fig: Chapter5/spallation/schematics}), steam flows through the tube, and the tube is surround by flue gas. Both the steam and the flue gas are assumed to have a homogeneous temperature and pressure within the control volume at a given instant. Oxide growth on the inner surface of the metal tube is of particular interest. In this section, oxide is assumed to grow following the relation
+\begin{align}
+  \tau = \sqrt{2A_\text{ox}\exp\left( -\dfrac{Q_\text{ox}}{RT} \right) t},
+\end{align}
+where $\tau$ is the thickness of the oxide layer, $A_\text{ox}$ is the growth coefficient, $Q_\text{ox}$ is the oxidation activation energy, $R$ is the ideal gas constant, and $T$ is the temperature on the inner surface of the tube.
+
+The power-law creep model presented in \Cref{section: Chapter5/theory} is used to model the mechanical response of the metal. In particular, no viscous effects are incorporated, i.e. ${\psi^e}^* = {\psi^p}^* = {\psi^f}^* = 0$. It is assumed that the metal does not fracture during the spallation process, therefore $\psi^f = 0$. The interface between the oxide and the metal is modeled together with the oxide, and they are represented as a lower-dimensional manifold attached on the inner surface of the metal tube. Under the assumption that the thickness of the oxide is much smaller than that of the metal tube, both in-plane transverse cracks and out-of-plane debonding at the oxide-metal interface could be represented on the same lower-dimensional manifold, with proper enrichment to the constitutive model.
+
+The modified fracture energy density of the oxide is extended to consider debonding at the oxide-metal interface. Debonding at the interface is associated with the release of energy, i.e. $\int\limits_D \mathcal{G} \diff{A}$, where $D$ is the debonded region, and $\mathcal{G}$ is the energy release rate per unit debonded area. Under the assumption that the oxide layer is sufficiently thin, the interface energy can be smeared by an auxiliary field $c$ and distributed throughout the thickness of the oxide, i.e.
+\begin{align}
+  \psi^f = \dfrac{\Gc}{c_0 l} \left( C\alpha(d) + l^2 \grad d \cdot \grad d \right) + \dfrac{1}{\tau} \mathcal{G} \omega(c),
+\end{align}
+where $\omega(c)$ is a characteristic function for the debonding area, and $\omega(0) = 0$, $\omega(1) = 1$.
+
+The strain-energy density of the oxide is defined in the local coordinate system attached to each material point. The global coordinate system is transformed such that the local $z$-axis aligns with the exterior normal of the oxide. The transformation tensor $\bfT$ is computed using the Rodrigues formula:
+\begin{align}
+  T_{ij}(\hat{\normal}, \theta) = \cos(\theta)\delta_{ij} + \left[ 1-\cos(\theta) \right] n_in_j + \sin(\theta)\epsilon_{ijk}n_k,
+\end{align}
+where $\hat{\normal}$ is the axis of rotation, $\theta$ is the rotation angle, and $\bs{\epsilon}$ is the permutation tensor. The Hencky-type logarithmic strain measure is used for the oxide. The strain is first transformed into the local coordinate system by ${\strain^e}' = \bfT {\strain^e} \bfT^T$ and decomposed into in-plane and out-of-plane components
+\begin{subequations}
+  \begin{align}
+    {\strain^e_\text{ip}}' & = \bfE_\text{ip} {\strain^e}' \bfE_\text{ip}^T,                      \\
+    {\strain^e_\text{op}}' & = \strain' - \bfE_\text{ip}^T {\strain^e_\text{ip}}' \bfE_\text{ip}, 
+  \end{align}
+\end{subequations}
+where $\bfE_\text{ip}$ is the embedding matrix for the in-plane components, defined as
+\begin{align}
+  \bfE_\text{ip} =
+  \begin{bmatrix}
+    1 & 0 & 0 \\
+    0 & 1 & 0 
+  \end{bmatrix}.
+\end{align}
+The modified strain-energy density is then defined as
+\begin{subequations}
+  \begin{align}
+    \psi^e                            & =  g^e_\text{ip} \psi^e_{\text{ip}, \activepart} + \psi^e_{\text{ip}, \inactivepart} + g^e_\text{op} \psi^e_{\text{op}, \activepart} + \psi^e_{\text{ip}, \inactivepart},                                                                           \\
+    \psi^e_{\text{ip}, \activepart}   & = \dfrac{1}{2} K \macaulay{\tr({\strain^e_\text{ip}}')}_+^2 + G \dev{{\strain^e_\text{ip}}'} : \dev{{\strain^e_\text{ip}}'},                                                                                                                        \\
+    \psi^e_{\text{ip}, \inactivepart} & = \dfrac{1}{2} K \macaulay{\tr({\strain^e_\text{ip}}')}_-^2,                                                                                                                                                                                        \\
+    \psi^e_{\text{op}, \activepart}   & = \dfrac{1}{2} K \macaulay{{\varepsilon^e_\text{op}}'}_+^2 + G \left( {\strain^e_\text{op}}' - {\varepsilon^e_\text{op}}' \bte_3 \otimes \bte_3 \right) : \left( {\strain^e_\text{op}}' - {\varepsilon^e_\text{op}}' \bte_3 \otimes \bte_3 \right), \\
+    \psi^e_{\text{op}, \inactivepart} & = \dfrac{1}{2} K \macaulay{{\varepsilon^e_\text{op}}'}_-^2.,                                                                                                                                                                                        \\
+    {\varepsilon^e_\text{op}}'        & = \bte_3 \cdot {\strain^e_\text{op}}' \bte_3,                                                                                                                                                                                                       
+  \end{align}
+\end{subequations}
+where $g^e_\text{ip}$ and $g^e_\text{op}$ are the in-plane and the out-of-plane degradation functions, respectively.
+
+Following the variational framework, the minimizing with respect to $c$ (together with the irreversibility condition $\dot{c} \geqslant 0$) leads to the following KKT conditions:
+\begin{align}
+  \phi^i = - \dfrac{1}{\tau} \mathcal{G} \omega_{,c} - \psi^e_{,c} \leqslant 0, \quad \dot{c} \geqslant 0, \quad \phi^i \dot{c} = 0.
+\end{align}
+
+The following constitutive functions are chosen in this section, such that both the in-plane transverse fracture and the out-of-plane debonding are characterized by a linear traction-separation law:
+\begin{subequations}
+  \begin{align}
+     & \alpha = d, \quad \omega = c, \quad g^p = 1,                                                           \\
+     & g^e = g^e_\text{ip} = \dfrac{(1-d)^2}{(1-d)^2 + m_\text{ip} d (1 - 0.5 d)},                            \\
+     & g^e_\text{op} = \dfrac{(1-c)^2}{(1-c)^2 + m_\text{op} c (1 - 0.5 c)},                                  \\
+     & m_\text{ip} = \dfrac{3}{8l}\dfrac{\Gc}{\psi_c}, \quad m_\text{op} = \dfrac{\mathcal{G}}{\tau\psi^i_c}, 
+  \end{align}
+\end{subequations}
+where $\psi^c$ is the (in-plane) critical fracture energy density, and $\psi^i_c$ is the (out-of-plane) critical fracture energy density.
