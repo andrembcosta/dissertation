@@ -4,10 +4,10 @@
 
 % my preferred alternative environment
 \theoremstyle{definition}
-\newtheorem{mdalternative}{Alternative}
+\newtheorem*{mdalternative}{Alternative}
 \definecolor{alternativegray}{gray}{0.95}
 \newenvironment{alternative}%
-{\begin{mdframed}[backgroundcolor=alternativegray,nobreak=true,linewidth=0pt,startinnercode={\baselineskip=0.8cm}]\begin{mdalternative}}
+{\begin{mdframed}[backgroundcolor=alternativegray,nobreak=true,linewidth=0pt,startinnercode={\baselineskip=0.8cm}]\begin{mdalternative}\vspace{-0.5em}}
       {\end{mdalternative}\end{mdframed}}
 
 % my preferred example environment
@@ -15,7 +15,7 @@
 \newtheorem{mdexample}{Example}
 \definecolor{examplegray}{gray}{0.95}
 \newenvironment{example}%
-{\begin{mdframed}[backgroundcolor=examplegray,nobreak=true,linewidth=0pt,startinnercode={\baselineskip=0.8cm}]\begin{mdexample}}
+{\begin{mdframed}[backgroundcolor=examplegray,nobreak=true,linewidth=0pt,startinnercode={\baselineskip=0.8cm}]\begin{mdexample}\vspace{-0.5em}}
       {\end{mdexample}\end{mdframed}}
 
 % my preferred remark environment

@@ -20,16 +20,16 @@ Only the phase fields obtained using the spectral decomposition are shown in the
 
 Secondly, we use an initial phase field $d(t = 0) = d_0$ to represent the initial crack, where $d_0$ is given by:
 \begin{align}
-  d_0(\bs{x})  & =                                           
+  d_0(\btX)   & =                                            
   \begin{cases}
-    \left( 1-\dfrac{\tau(\bs{x})}{2l} \right)^2, \quad \tau(\bs{x}) \leqslant 2l \\
-    0, \quad  \tau(\bs{x}) > 2l
+    \left( 1-\dfrac{\tau(\btX)}{2l} \right)^2, \quad \tau(\btX) \leqslant 2l \\
+    0, \quad  \tau(\btX) > 2l
   \end{cases} \label{eq: mode1 initial damage} \\
-  \mbox{with}  &                                             \\
-  \tau(\bs{x}) & =                                           
+  \mbox{with} &                                              \\
+  \tau(\btX)  & =                                            
   \begin{cases}
-    \left\vert \bs{x}\cdot\bs{e}_2 \right\vert, \quad \bs{x}\cdot\bs{e}_1 \leqslant 0, \\
-    \norm{\bs{x}}, \quad \bs{x}\cdot\bs{e}_1 > 0,
+    \left\vert \btX\cdot\bs{e}_2 \right\vert, \quad \btX\cdot\bs{e}_1 \leqslant 0, \\
+    \norm{\btX}, \quad \btX\cdot\bs{e}_1 > 0,
   \end{cases}
 \end{align}
 with an origin for the coordinate system at the center of the plate. The initial phase field is resolved using the locally refined mesh of linear triangular elements shown in \Cref{fig: Chapter4/mode1_initial_mesh}. The resulting initial phase field is shown in \Cref{fig: Chapter4/intact_plate_initial}.  Once again, the contour plots of the phase field obtained using a spectral decomposition and the contact split were found to be indistinguishable.

@@ -1,5 +1,5 @@
 \section{Numerical examples}
-\label{section: brittle/examples}
+\label{section: Chapter3/examples}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -32,7 +32,7 @@ This phase-field for brittle fracture model is readily applicable to three dimen
 \end{table}
 
 Without further calibration, to facilitate intergranular crack propagation, the fracture toughness of grain need to satisfy $\Gc^g \gg \Gc^b$
-so that crack propagation is predominately driven by intergranular strain energy. In this chapter, the polycrystalline microstructure is described by a set of non-conserved variables in a diffuse manner, obtained from a phase field grain growth model \cite{Moelans2008}. The phase-field $\phi_i = 1$ within the $i$-th grain, and $\phi_i = 0$ elsewhere. Regions where $\phi_i$ varies between 0 and 1 correspond to grain boundaries. The grain boundaries are computed as $B = \sum\phi_i^2$. The fracture toughness $\Gc$ is then defined as
+so that crack propagation is predominately driven by intergranular strain energy. The polycrystalline microstructure is described by a set of non-conserved variables in a diffuse manner, obtained from a phase-field grain growth model \cite{Moelans2008}. The phase field $\phi_i = 1$ within the $i$-th grain, and $\phi_i = 0$ elsewhere. Regions where $\phi_i$ varies between 0 and 1 correspond to grain boundaries. The grain boundary indicator is computed as $B = \sum\phi_i^2$. The fracture toughness $\Gc$ is then defined as
 \begin{align}
   \Gc(\btX) =
   \begin{cases}
@@ -40,7 +40,7 @@ so that crack propagation is predominately driven by intergranular strain energy
     \Gc^g, \quad B(\btX) \geqslant \bar{B},
   \end{cases}
 \end{align}
-where $\bar{B}$ is the threshold to distinguish between grains and grain boundaries. For simulations considered in this chapter, $\bar{B} = 0.75$ has been observed to be an appropriate choice. In this chapter, the elastic properties for the grain is assumed to be isotropic, e.g. independent of the crystal orientations. An arbitrarily small Young's modulus of $10^{-9}E$ is assigned to the bubbles to remove zero energy modes. The domain is uniformly discretized with \texttt{HEX8} elements with element size of $\SI{0.25}{\micro\meter}$.
+where $\bar{B}$ is the threshold to distinguish between grains and grain boundaries. For simulations considered in this chapter, $\bar{B} = 0.75$ has been observed to be an appropriate choice. The elastic properties for the grain is assumed to be isotropic, e.g. independent of the crystal orientations. An arbitrarily small Young's modulus of $10^{-9}E$ is assigned to the bubbles to remove zero energy modes. The domain is uniformly discretized with \texttt{HEX8} elements with element size of $\SI{0.25}{\micro\meter}$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -56,7 +56,7 @@ where $\bar{B}$ is the threshold to distinguish between grains and grain boundar
 
 Gas bubbles on the grain boundaries act as crack initiators, and an accurate representation of their geometry is necessary to capture the stress concentration on the interface between the bubbles and the grain boundaries.
 
-In equilibrium, gas bubbles on the grain boundaries have a lenticular shape. A 2D schematic of the lenticular bubble is shown in \Cref{bubble_geo}. The lenticular geometry is characterized by its length, thickness and dihedral angle. The dihedral angle is determined by the ratio of grain boundary energy to surface energy and it can vary over a wide range for UO$_2$ \cite{HODKIN19807,REYNOLDS1971112}.
+In equilibrium, gas bubbles on the grain boundaries have a lenticular shape. A 2D schematic of the lenticular bubble is shown in \Cref{bubble_geo}. The lenticular geometry is characterized by its length $L$, thickness $S$ and dihedral angle $\phi$. The dihedral angle is determined by the ratio of grain boundary energy to surface energy and it can vary over a wide range for UO$_2$ \cite{HODKIN19807,REYNOLDS1971112}.
 
 To study the effect of gas bubble geometry on the critical fracture strength, three frequently adopted geometries are considered:
 \begin{enumerate}[label=(\roman*)]
@@ -287,7 +287,7 @@ To describe the porosity, average gas bubble and grain size effect on fracture s
 \begin{align}
   \dfrac{\sigma_c}{\sigma_0} = \exp(-a \times \text{porosity})
 \end{align}
-The critical fracture strength is normalized with respect to $\sigma_0$. To benchmark with experiments, $\sigma_0$ is obtained by substituting the average grain and bubble size of \SI{9.4}{\micro\meter} and \SI{5.2}{\micro\meter}. To give proper error bounds on our numerical predictions, five trial calculations were performed on five different realizations of the spatial distribution of bubbles for each porosity level. The fracture strength obtained from 15 realizations of 3 porosity levels is summarized in \Cref{fs15}. The obtained $\sigma_0$ is \SI{198}{\mega\pascal}, \SI{693}{\mega\pascal} and \SI{697.8}{\mega\pascal} and the coefficient $a$ is 0.057, 0.14 and 0.04, for experiment, 2D simulations and 3D simulations, respectively.
+The critical fracture strength is normalized with respect to $\sigma_0$. To benchmark with experiments, $\sigma_0$ is obtained by substituting the average grain and bubble size of \SI{9.4}{\micro\meter} and \SI{5.2}{\micro\meter}. To give proper error bounds on our numerical predictions, five trial calculations were performed on five different realizations of the spatial distribution of bubbles for each porosity level. The fracture strength values obtained from 15 realizations of 3 porosity levels are summarized in \Cref{fs15}. The fitted $\sigma_0$ is \SI{198}{\mega\pascal}, \SI{693}{\mega\pascal} and \SI{697.8}{\mega\pascal} and the coefficient $a$ is 0.057, 0.14 and 0.04, for experiment, 2D simulations and 3D simulations, respectively.
 A comparison of the experimental model, previous 2D simulations \cite{pritam_2016} and current 3D simulations is shown in \Cref{fig_rfit_porosity}. In particular, the $95\%$ confidence interval for the 3D simulations is shown in stripes. It shows that the 3D simulation has significant improvement towards the prediction of the dependence of the critical fracture strength on porosity. It is worth mentioning that the difference between simulation predictions of $\sigma_0$ and experimental values could be due to the fact that the transgranular fracture observed in experiments \cite{evans_1969} has not been incorporated into the current numerical model.
 
 \begin{table}[!htb]
@@ -352,7 +352,7 @@ A comparison of the experimental model, previous 2D simulations \cite{pritam_201
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{High burnup structure fragmentation}
 
-Next, we adopt the quasi-brittle fracture model to simulate fission-gas-induced intergranular fracture of UO$_2$ HBS. A two-dimensional REV with side length $L = \SI{3}{\micro\meter}$ is considered, and plane-strain conditions are assumed to hold. The material properties and model parameters are summarized in \Cref{table: HBS material properties}. The critical fracture energy of UO$_2$ is taken to be \SI{0.022}{\milli\joule\per\cubic\milli\meter} \cite{OGUMA1982}.
+Next, we adopt the quasi-brittle fracture model to simulate fission-gas-induced intergranular fracture of UO$_2$ HBS. A two-dimensional REV with side length $L = \SI{3}{\micro\meter}$ is considered, and plane-strain conditions are assumed to hold. The material properties and model parameters are summarized in \Cref{table: HBS material properties}. The critical fracture energy of UO$_2$ is taken to be \SI{0.022}{\milli\joule\per\cubic\milli\meter} \cite{oguma_1982}.
 Due to the lack of experimental data, the fracture toughness $\Gc^g$ is assumed to be \SI{1.2e-6}{\milli\joule\per\cubic\milli\meter} and the Griffith's characteristic length $l_\text{ch} = \dfrac{\Gc}{2\psi_c} \approx \SI{22.78}{\nano\meter}$. The domain is uniformly discretized with \texttt{QUAD4} elements with element size of $\SI{0.005}{\micro\meter}$.
 
 \begin{table}[!htb]
@@ -364,7 +364,7 @@ Due to the lack of experimental data, the fracture toughness $\Gc^g$ is assumed 
     \textbf{Property}                 & \textbf{Symbol} & \textbf{Value} & \textbf{Unit}                             & \textbf{Reference} \\
     \midrule
     Young's modulus                   & $E$             & 385            & \SI{}{\giga\pascal}                       & \cite{govers_2007} \\
-    Critical fracture energy          & $\psi_c$        & 0.022          & \SI{}{\milli\joule\per\cubic\milli\meter} & \cite{OGUMA1982}   \\
+    Critical fracture energy          & $\psi_c$        & 0.022          & \SI{}{\milli\joule\per\cubic\milli\meter} & \cite{oguma_1982}   \\
     Grain boundary fracture toughness & $\Gc^g$         & \SI{1.2e-6}{}  & \SI{}{\milli\joule\per\cubic\milli\meter} &                    \\
     Grain fracture toughness          & $\Gc^b$         & \SI{1.2e-5}{}  & \SI{}{\milli\joule\per\cubic\milli\meter} &                    \\
     Phase-field regularization length & $l$             & 0.01           & \SI{}{\micro\meter}                       &                    \\

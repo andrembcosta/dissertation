@@ -1,5 +1,5 @@
 \section{Verification}
-\label{section brittle/verification}
+\label{section: Chapter3/verification}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -12,6 +12,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Uniaxial traction of a bar}
+\label{section: Chapter3/verification/bar}
 
 We first verify the uniaxial response of the quasi-brittle fracture model with pressurization. Consider a bar of length $L = \SI{400}{\milli\meter}$ and width $W = \SI{2}{\milli\meter}$ that is subject to uniaxial tension. Plane strain conditions are assumed to hold. A similar example without crack pressurization can be found in \cite{JYWu2017}. Boundary conditions are shown in \Cref{fig:bar}. Both ends of the bar are subject to monotonically increasing horizontal displacements. Only a quarter of the domain is simulated utilizing the two symmetry conditions. The domain is uniformly discretized using \texttt{QUAD4} elements, with 200 elements along the length and 1 element along the width. Included are the Young's modulus $E = \SI{3e4}{\mega\pascal}$, Poisson's ratio $\nu = 0.2$, critical fracture strength $\psi_c = \SI{1.5e-4}{\milli\joule\per\cubic\milli\meter}$, fracture toughness $\Gc = \SI{0.12}{\milli\joule\per\square\milli\meter}$, and the Griffith’s characteristic length $l_\text{ch} = \dfrac{\Gc}{2\psi_c} = \SI{400}{\milli\meter}$.
 
@@ -22,14 +23,7 @@ We first verify the uniaxial response of the quasi-brittle fracture model with p
   \label{fig:bar}
 \end{figure}
 
-\begin{figure}[!ht]
-  \centering
-  \includegraphics[width=0.9\textwidth]{Chapter3/figures/bar_c}
-  \caption{Phase-field variable in initial conditions (for internal length scale $l=\SI{20}{\milli\meter}$). The red and blue color correspond to value of $10^{-3}$ and 0, respectively.}
-  \label{fig:bar_c}
-\end{figure}
-
-An arbitrarily small imperfection, $d_0 = \mathcal{O}(\epsilon)$, is introduced on the left side of the computational domain to induce localization (\Cref{fig:bar_c}).
+An arbitrarily small imperfection, $d_0 = \mathcal{O}(\epsilon)$, is introduced on the left side of the computational domain to induce localization.
 To study the effect of the pressure, different pressure values
 \begin{align*}
   \bar{p} \in \left\{ \SI{0.2}{\mega\pascal}, \SI{0.4}{\mega\pascal}, \SI{0.6}{\mega\pascal}, \SI{0.8}{\mega\pascal}, \SI{1}{\mega\pascal} \right\}
@@ -84,9 +78,10 @@ with a fixed pressure of $\bar{p}=\SI{0.4}{\mega\pascal}$. \Cref{fig:bar_length}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Pressurized crack propagation}
+\label{section: Chapter3/verification/propagation}
 
 Next, we verify fracture propagation conditions predicted by the quasi-brittle fracture model using a benchmark problem proposed by \citet{WILSON2016264}. This problem serves to verify whether cracks should propagate once a critical pressure loading is applied. In \Cref{fig:sneddon_c}, an initial crack is prescribed in the center with a length of $2a$. As shown in \Cref{fig:sneddon_c0}, the phase-field is initialized to be 1.0 only for those nodes on the bottom boundary belonging to the crack set, the phase-field variable is regularized to satisfy the governing equations, as shown in \Cref{fig:sneddon_c1}. Note that this differs from the approach suggested in \cite{WILSON2016264,YOSHIOKA2020113210} which involves imposing initial values for a set of elements.
-Utilizing the symmetry, only half of the domain with size $L \times L/2$ is used (\Cref{fig:sneddon_mesh}). The ratio $L/a$ is taken to be 20. All outer surfaces are fixed. A prescribed pressure is increased until the crack starts to propagate. The propagation of the crack at fixed pressure conditions is unstable. According to the linear elastic fracture mechanics (LEFM) solution, the normalized critical pressure is given as:
+Utilizing the symmetry, only half of the domain with size $L \times L/2$ is used (\Cref{fig:sneddon_mesh}). The ratio $L/a$ is taken to be 20. All outer surfaces are fixed. A prescribed pressure is increased until the crack starts to propagate. The propagation of the crack right after the critical pressure is attained is unstable. According to the linear elastic fracture mechanics (LEFM) solution, the normalized critical pressure is given as:
 \begin{equation}
   \dfrac{p_c}{\sigma_0} = \sqrt{\dfrac{l}{\pi a}}, \quad \sigma_0=\sqrt{\dfrac{E}{(1-\nu^2)} \dfrac{\Gc^\text{eff}}{l}},
 \end{equation}

@@ -12,12 +12,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Constitutive choices}
+\label{section: Chapter5/theory/constitutive}
 
 Following the variational framework (\Cref{section: Chapter2}), the Helmholtz free energy density is decomposed as
 \begin{align}
   \psi = \psi^e + (1-\tqf) \psi^p + \psi^f, \label{eq: chapter 5 helmholtz}
 \end{align}
-where $\psi^e$, $\psi^p$ and $\psi^f$ are the strain-energy density, plastic energy density, and fracture energy density, respectively. The strain-energy density for large deformation and the plastic energy density, along with the flow rule constraints and their thermodynamic conjugates, are presented in the following sections. The same Allen-Cahn type fracture energy density (as per \Cref{section: Chapter3,section: Chapter4}) is used in this chapter.
+where $\psi^e$, $\psi^p$ and $\psi^f$ are the strain energy density, plastic energy density, and fracture energy density, respectively. The strain energy density for large deformation and the plastic energy density, along with the flow rule constraints and their thermodynamic conjugates, are presented in the following sections. The same Allen-Cahn type fracture energy density (as per \Cref{section: Chapter3,section: Chapter4}) is used in this chapter.
 
 The Taylor-Quinney factor $\tqf \in [0, 1]$ is introduced to split the flow stress into an equilibrium (energetic) part and a viscous (dissipative) part. The dual kinetic potential characterizing dissipation mechanisms is decomposed as
 \begin{align}
@@ -35,10 +36,10 @@ where ${\psi^e}^*$, ${\psi^p}^*$ and ${\psi^f}^*$ are viscous dissipations of th
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Strain-energy density and Newtonian viscosity}
-\label{section: Chapter5/theory/elasticity}
+\subsubsection{strain energy density and Newtonian viscosity}
+\label{section: Chapter5/theory/constitutive/elasticity}
 
-Two types of strain-energy density functions are considered in this chapter: one for compressible Neo-Hookean materials, and the other for Hencky-type materials.
+Two types of strain energy density functions are considered in this chapter: one for compressible Neo-Hookean materials, and the other for Hencky-type materials.
 Following \cite{borden2016phase,ambati2016phase}, the strain energy is defined as
 \begin{subequations}
   \begin{align}
@@ -100,7 +101,7 @@ where $\zeta$ and $\eta$ are damping coefficients for volume change and isochori
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Flow rule constraints and the yield surface}
-\label{section: Chapter5/theory/plastic_flow}
+\label{section: Chapter5/theory/constitutive/plastic_flow}
 
 The flow rule for $J_2$-plasticity is defined as
 \begin{subequations}\label{eq: minimization}
@@ -157,9 +158,9 @@ It is convenient to define $\bar{\sigma} = \norm{\dev(\bfM)}$ as the effective s
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Plastic energy density and its rate sensitivity}
-\label{section: Chapter5/theory/flow_stress}
+\label{section: Chapter5/theory/constitutive/flow_stress}
 
-Three commonly used plastic energy density functions and their viscous counterparts are considered in this chapter. The first plastic energy density ressembles a simple linear hardening law:
+Three commonly used plastic energy density functions and their viscous counterparts are considered in this chapter. The first plastic energy density resembles a simple linear hardening law:
 \begin{subequations}
   \begin{align}
     \psi^p       & = g^p \left( \sigma_y \ep + \dfrac{1}{2} H \ep^2 \right), \\
@@ -225,7 +226,7 @@ where $m$ is the rate exponent, $\dot{\epsilon_0}$ is the characteristic plastic
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Viscous regularization of fracture propagation and the coalescence dissipation}
-\label{section: Chapter5/theory/fracture}
+\label{section: Chapter5/theory/constitutive/fracture}
 
 The fracture dual kinetic potential is defined as
 \begin{subequations}
@@ -291,7 +292,7 @@ Following the variational framework, substituting \eqref{eq: chapter 5 helmholtz
   v\dot{d}         & =\divergence \bs{\xi} - f          ,              \\
   \rho_0c_v\dot{T} & = \rho_0 q - \divergence \bth + \delta + \delta_T 
 \end{align}
-supplemented by the constitutive relations including the stress-strain relations presented in \Cref{section: Chapter5/theory/elasticity}, the yield surface and loading/unloading conditions presented in \Cref{section: Chapter5/theory/plastic_flow,section: Chapter5/theory/flow_stress}, the modified fracture thermodynamic conjugates \Cref{section: Chapter5/theory/fracture}, and the conductive heat flux \eqref{eq: conductive heat flux}. Substituting all of them into the governing equations, the fracture evolution equation can be expanded as
+supplemented by the constitutive relations including the stress-strain relations presented in \Cref{section: Chapter5/theory/constitutive/elasticity}, the yield surface and loading/unloading conditions presented in \Cref{section: Chapter5/theory/constitutive/plastic_flow,section: Chapter5/theory/constitutive/flow_stress}, the modified fracture thermodynamic conjugates \Cref{section: Chapter5/theory/constitutive/fracture}, and the conductive heat flux \eqref{eq: conductive heat flux}. Substituting all of them into the governing equations, the fracture evolution equation can be expanded as
 \begin{align}
   v\dot{d}      & =\divergence \dfrac{2\Gc l}{c_0} \grad d - \left( \dfrac{\widehat{\Gc}}{c_0 l}\alpha_{,d} + \psi^d \right), \label{eq: modified fracture evolution} \\
   \psi^d        & = \psi^e_{,d} + (1-\tqf) \psi^p_{,d}, \label{eq: fracture driving energy}                                                                           \\
@@ -317,7 +318,7 @@ Note that $\delta_T$ is only present if thermal softening in the flow stress is 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{A power-law approximation to the yield surface}
 
-A common task in engineering applications is to account for the dependence of yield surface on the strain-rate. To that end, consistent viscoplasticity models and Perzyna viscoplasticity models are proposed. The consistent viscoplasticity model has been presented in \Cref{section: Chapter5/theory/flow_stress} by incorporating a plastic dual kinetic potential. The Perzyna viscoplasticity models typically employ a relation between the effective plastic strain rate and the effective stress of the following general form:
+A common task in engineering applications is to account for the dependence of yield surface on the strain-rate. To that end, consistent viscoplasticity models and Perzyna viscoplasticity models are proposed. The consistent viscoplasticity model has been presented in \Cref{section: Chapter5/theory/constitutive/flow_stress} by incorporating a plastic dual kinetic potential. The Perzyna viscoplasticity models typically employ a relation between the effective plastic strain rate and the effective stress of the following general form:
 \begin{align}
   \epdot = \mathscr{P}(\bar{\sigma}).
 \end{align}
@@ -391,7 +392,7 @@ and the trial conjugate stress can be derived as
 \begin{align}
   \bfM^\text{tr} = \psi^e_{,\strain^{e,\text{tr}}} = \widehat{\bfM}\left( \strain^{e,\text{tr}}, d_{n+1} \right).
 \end{align}
-Next, minimizing the incremental local energy density subject the flow rule constraints (similar to the derivation in \Cref{section: Chapter5/theory/plastic_flow}) yields
+Next, minimizing the incremental local energy density subject the flow rule constraints (similar to the derivation in \Cref{section: Chapter5/theory/constitutive/plastic_flow}) yields
 \begin{subequations}
   \begin{align}
     \begin{split}

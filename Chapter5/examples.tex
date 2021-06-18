@@ -184,13 +184,13 @@ Next, we examine the capabilities of the proposed E-P-D model by simulating an e
   \label{tab: Chapter5/SFC}
 \end{table}
 
-The calibrated model is then applied to simulate crack initiation and growth in the specimen adopted for the Sandia Fracture Challenge. Drawings of the specimen with detailed dimensions are available in \cite{guo2013experimental,ambati_phase-field_2016}. The geometry and the mesh of the specimen is shown in \Cref{fig: Chapter5/SFC/schematics}. The three-dimensional geometry is discretized using tetrahedral elements (\texttt{TET10}). The mesh is locally refined near the round notch to sufficiently capture plastic and fracture localizations. It is assumed that the extension of the second crack is known a priori, and the region to the right of the middle hole is also refined to properly resolve the phase field. The resulting mesh consists of 10831 tetrahedra.
+The calibrated model is then applied to simulate crack initiation and growth in the specimen adopted for the Sandia Fracture Challenge. Drawings of the specimen with detailed dimensions are available in \cite{guo2013experimental,ambati2016phase}. The geometry and the mesh of the specimen is shown in \Cref{fig: Chapter5/SFC/schematics}. The three-dimensional geometry is discretized using tetrahedral elements (\texttt{TET10}). The mesh is locally refined near the round notch to sufficiently capture plastic and fracture localizations. It is assumed that the extension of the second crack is known a priori, and the region to the right of the middle hole is also refined to properly resolve the phase field. The resulting mesh consists of 10831 tetrahedra.
 
 The specimen is loaded in tension via two pins that connect to the specimen through the circular holes whose centers coincide with nodes $A$ and $B$ in \Cref{fig: Chapter5/SFC/schematics}.  Rather than apply the loads to the boundaries of the holes or employ a contact algorithm with the pins, here we simplify the model by explicitly meshing the pins and assuming they are perfectly bonded to the specimen at the hole locations.  The material of the pins is    assumed to be elastic with moduli that match the specimen.
 
 \input{Chapter5/figures/SFC/schematics}
 
-The resulting force-displacement curves are shown in \Cref{fig: Chapter5/SFC/force_disp}. The response predicted by our proposed E-P-D model indicates an excellent agreement with the experimental measurements. Force-displacement curves from \cite{ambati_phase-field_2016} are also included for comparison.  The proposed E-P-D model clearly provides the best quantitative and qualitative match with the experiment.
+The resulting force-displacement curves are shown in \Cref{fig: Chapter5/SFC/force_disp}. The response predicted by our proposed E-P-D model indicates an excellent agreement with the experimental measurements. Force-displacement curves from \cite{ambati2016phase} are also included for comparison.  The proposed E-P-D model clearly provides the best quantitative and qualitative match with the experiment.
 
 Contour plots of the phase field $d$ are shown in \Cref{fig: Chapter5/SFC/d_1,fig: Chapter5/SFC/d_2,fig: Chapter5/SFC/d_3}. The first crack nucleates on the left side of the middle hole, and then connects with the round notch. After a while, the second crack nucleates on the right side of the middle hole and propagates to the right, with a nearly horizontal orientation.
 The active part of the strain energy is shown in \Cref{fig: Chapter5/SFC/We_1,fig: Chapter5/SFC/We_2,fig: Chapter5/SFC/We_3}, where the stress concentration at the crack tips and a stress release after the first crack can be clearly observed.
@@ -243,7 +243,7 @@ The modified fracture energy density of the oxide is extended to consider debond
 \end{align}
 where $\omega(c)$ is a characteristic function for the debonding area, and $\omega(0) = 0$, $\omega(1) = 1$.
 
-The strain-energy density of the oxide is defined in the local coordinate system attached to each material point. The global coordinate system is transformed such that the local $z$-axis aligns with the exterior normal of the oxide. The transformation tensor $\bfT$ is computed using the Rodrigues formula:
+The strain energy density of the oxide is defined in the local coordinate system attached to each material point. The global coordinate system is transformed such that the local $z$-axis aligns with the exterior normal of the oxide. The transformation tensor $\bfT$ is computed using the Rodrigues formula:
 \begin{align}
   T_{ij}(\hat{\normal}, \theta) = \cos(\theta)\delta_{ij} + \left[ 1-\cos(\theta) \right] n_in_j + \sin(\theta)\epsilon_{ijk}n_k,
 \end{align}
@@ -262,7 +262,7 @@ where $\bfE_\text{ip}$ is the embedding matrix for the in-plane components, defi
     0 & 1 & 0 
   \end{bmatrix}.
 \end{align}
-The modified strain-energy density is then defined as
+The modified strain energy density is then defined as
 \begin{subequations}
   \begin{align}
     \psi^e                            & =  g^e_\text{ip} \psi^e_{\text{ip}, \activepart} + \psi^e_{\text{ip}, \inactivepart} + g^e_\text{op} \psi^e_{\text{op}, \activepart} + \psi^e_{\text{ip}, \inactivepart},                                                                           \\
