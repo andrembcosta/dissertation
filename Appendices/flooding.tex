@@ -21,7 +21,7 @@ The algorithm assigns each element a cluster order parameter, and different clus
 
 The algorithm has a fundamental ``flooding'' structure.  In particular, a seeding element broadcasts its information to all of its geometric neighbors, and each neighbor becomes a new seed for the next round of information propagation. In the context of counting fragments, the information of an element includes its state and the cluster it belongs to. An element is considered to be ``intact'' if all of its nodal damage values are below $d_{\text{th}}$, otherwise it is considered to be ``broken''.
 
-Three lists are managed by the algorithm. The first list \texttt{ALL} includes all elements that need to be classified. The second list \texttt{CANDIDATE}, optionally a first-in-first-out (FIfO) queue, includes all candidate elements for the current cluster. The third list \texttt{BROKEN} includes all ``broken'' elements. Each cluster $\texttt{CLUSTER}^i$ is essentially a list of elements that belong to the same parent cluster.
+Three lists are managed by the algorithm. The first list \texttt{ALL} includes all elements that need to be classified. The second list \texttt{CANDIDATE}, optionally a first-in-first-out (FIFO) queue, includes all candidate elements for the current cluster. The third list \texttt{BROKEN} includes all ``broken'' elements. Each cluster $\texttt{CLUSTER}^i$ is essentially a list of elements that belong to the same parent cluster.
 
 The algorithm consists of three stages. In the first stage, we update the damage values of all nodes and states of all elements. All elements that have a status change require reclassification. Therefore, any cluster that contains elements pending reclassification is pushed into \texttt{ALL} for future reclassification.
 
