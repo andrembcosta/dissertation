@@ -186,10 +186,12 @@ Finally, recall our previous restrictions on the indicator function $I(c)$; this
 \label{section: Chapter3/theory/governing}
 
 Following the variational framework, substituting \eqref{eq: chapter 3 helmholtz}, \eqref{eq: chapter 3 strain energy density}, \eqref{eq: fracture energy density}, \eqref{eq: crack surface density}, and \eqref{eq: pressure power} into the problem statement \eqref{eq: inf sup problem}, under quasi-static and isothermal conditions, the governing equations can be obtained as
-\begin{align}
-  \divergence \stress - \bar{p} \grad d I_{,d} & = \bs{0}, \\
-  \divergence \bs{\xi} - f                     & = 0,      
-\end{align}
+\begin{subequations}
+  \begin{align}
+    \divergence \stress - \bar{p} \grad d I_{,d} & = \bs{0}, \\
+    \divergence \bs{\xi} - f                     & = 0,      
+  \end{align}
+\end{subequations}
 supplemented by the constitutive relations \eqref{eq: chapter 3 stress strain relation} and
 \begin{align}
   \bs{\xi} = \dfrac{2\Gc l}{c_0} \grad d, \quad f = g_{,d}\psi^e_\activepart + \dfrac{\Gc}{c_0l}\alpha_{,d}.

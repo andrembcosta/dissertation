@@ -28,7 +28,7 @@ We begin this section by summarizing the strong form of the general initial boun
 \end{mdframed}
 The yield surface and the flow rule (and their corresponding constitutive updates) are defined only after specific constitutive assumptions are made in the following chapters (e.g. \Cref{section: Chapter5}).
 
-To derive the weak form, we begin by introducing the trial spaces $\bs{\mathcal{U}}_t$, $\mathcal{D}_t$ and $\mathcal{T}_t$
+To derive the weak form, we begin by introducing the trial spaces $\bs{\mathcal{U}}_t$, $\mathcal{D}_t$ and $\mathcal{T}_t$:
 \begin{subequations}
   \begin{align}
     \bs{\mathcal{U}}_t & = \{ \bs{\upphi} \in \mathcal{H}^1(\body_0)^d \mid \bfu = \bfu_g \text{ on } \partial_u\body_0 \}, \\
@@ -36,7 +36,7 @@ To derive the weak form, we begin by introducing the trial spaces $\bs{\mathcal{
     \mathcal{T}_t      & = \{ T \in \mathcal{H}^1(\body_0) \mid T = T_g \text{ on } \partial_T\body_0 \},                   
   \end{align}
 \end{subequations}
-and the weighting spaces $\bs{\mathcal{V}}$, $\mathcal{C}$ and $\mathcal{E}$
+and the weighting spaces $\bs{\mathcal{V}}$, $\mathcal{C}$ and $\mathcal{E}$:
 \begin{subequations}
   \begin{align}
     \bs{\mathcal{V}} & = \{ \btw \in \mathcal{H}^1(\body_0)^d \mid \btw = \bs{0} \text{ on } \partial_u\body_0 \}, \\
@@ -102,4 +102,4 @@ Using the Galerkin method, with finite dimensional function spaces $\widetilde{\
     \end{align}
   \end{subequations}
 \end{mdframed}
-The discrete inequality for crack irreversibility is satisfied node-wise with a primal-dual active set strategy. See e.g.\  \citet{heister2015primal} for implementational details of such a solver. The solver is also generally available in numerical toolboxes, e.g.\  PETSc \cite{petsc-web-page}. The discrete approximation is calculated using a fixed-point iterative solution scheme outlined from \cite{HuGary2020}. The semidiscrete momentum balance equation \eqref{eq: semidiscrete momentum balance} is further discretized using the generalized-$\alpha$ method. The semidiscrete fracture evolution equation \eqref{eq: semidiscrete fracture evolution} and the heat conduction equation \eqref{eq: semidiscrete heat conduction} are further discretized using the backward-Euler time integration. Discretizations of the plasticity constitutive updates are discussed in \Cref{section: Chapter5}.
+The discrete inequality for crack irreversibility is satisfied node-wise with a primal-dual active set strategy. See e.g.\  \citet{heister2015primal} for implementational details of such a solver. The solver is also generally available in numerical toolboxes, e.g.\  PETSc \cite{petsc-web-page}. The discrete approximation is calculated using a fixed-point iterative solution scheme outlined from \cite{HuGary2020}. The semidiscrete momentum balance equation \eqref{eq: semidiscrete momentum balance} is discretized using the generalized-$\alpha$ method. The semidiscrete fracture evolution equation \eqref{eq: semidiscrete fracture evolution} and the heat conduction equation \eqref{eq: semidiscrete heat conduction} are discretized using the backward-Euler time integration. Discretizations of the plasticity constitutive updates are discussed in \Cref{section: Chapter5}.

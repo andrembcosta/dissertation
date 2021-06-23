@@ -42,7 +42,7 @@ The external power expenditure $\mathcal{P}^\text{ext}(\defrate, T)$ is defined 
 \end{equation}
 where the subscripts in $\partial_t$, $\partial_h$ and $\partial_r$ denote the corresponding subsets of the surface with the associated Neumann/Robin boundary conditions. $\bar{h}_n$ is the heat flux, $h$ is the heat transfer coefficient, and $T_0$ is the reference or the ambient temperature.
 
-To account for heat generation due to dissipations (i.e. from dual kinetic potentials), \citet{yang2006variational} introduced the concept of the \emph{equilibrium temperature} corresponding to the thermodynamic state $\{ \Lambda, s \}$ defined as
+To account for heat generation due to dissipation (i.e. from dual kinetic potentials), \citet{yang2006variational} introduced the concept of the \emph{equilibrium temperature} corresponding to the thermodynamic state $\{ \Lambda, s \}$ defined as
 \begin{align}
   T^\text{eq} = u_{,s}(\Lambda, s),
 \end{align}
@@ -59,8 +59,8 @@ where $\dot{u}$ is the rate of change in the internal energy, $\dot{s}$ is the r
 \begin{align}
   \Delta^*(\dot{\Lambda}, T; \Lambda) = {\psi^e}^*(\dot{\defgrad}, T; \Lambda) + {\psi^p}^*(\dot{\defgrad}^p, \epdot, T; \Lambda) + {\psi^f}^*(\dot{d}, \grad \dot{d}, T; \Lambda), \label{eq: dual kinetic potentials}
 \end{align}
-and $\chi$ is the Fourier potential defined in terms of  the normalized temperature gradient $\btg = -\dfrac{1}{T}\grad T$, with the property $-\bth = \chi_{,\btg}$.
-Finally, the entire problem can be cast variational into the following inf-sup problem as
+and $\chi$ is the Fourier potential defined in terms of  the normalized temperature gradient $\btg = -\dfrac{1}{T}\grad T$, with the identity $-\bth = \chi_{,\btg}$.
+Finally, the entire problem can be variationally cast into the following inf-sup problem:
 \begin{align}
   \left( \mathcal{V}, \dot{s}, T \right) = \arg \left[ \inf_{\mathcal{V}, \dot{s}} \sup_T L(\dot{\Lambda}, \dot{s}, T, \grad T) \right]. \label{eq: inf sup problem}
 \end{align}
@@ -89,7 +89,7 @@ To find the critical points of the inf-sup problem \eqref{eq: inf sup problem}, 
 \begin{align}
   \left( \mathcal{V}, \dot{s}, T \right) = \arg \left[ \inf_{\defrate, \dot{d}} \sup_T L\left( \inf_{\dot{\defgrad}^p, \epdot, \dot{s}} \varphi \right) \right],
 \end{align}
-since the updates of $\defgrad^p$, $\ep$ and $s$ can be performed point-wise. Expanding $\dot{u}$ in \eqref{eq: local energy density} and substituting the constitutive restrictions \eqref{eq: constitutive restrictions} yield
+since the updates of $\defgrad^p$, $\ep$ and $s$ can be performed point-wise. Expanding $\dot{u}$ in \eqref{eq: local energy density} and substituting the constitutive restrictions \eqref{eq: constitutive restrictions} yields
 \begin{equation}
   \begin{aligned}
     \varphi(\dot{\Lambda}, \dot{s}, T, \grad T) = & \ \rho_0\bta\cdot\defrate + \bfP^\text{eq}:\dot{\defgrad} + \bfT^\text{eq}:\dot{\defgrad}^p + Y^\text{eq}\epdot + f^\text{eq}\dot{d} + \bs{\xi}^\text{eq}\cdot\grad\dot{d} \\
