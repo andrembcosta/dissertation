@@ -32,9 +32,9 @@ Recall that $\psi^e$ is the strain energy density, and $\psi^f$ is the fracture 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{strain energy density}
 
-For small deformation elasticity considered in this chapter, the state variable $\bs{\upphi}$ enters the strain energy density only through the infinitesimal strain tensor
+For small deformation elasticity considered in this chapter, the state variable $\btu = \bs{\upphi} - \btX$ enters the strain energy density only through the infinitesimal strain tensor
 \begin{align}
-  \strain = \dfrac{1}{2}\left( \grad \bs{\upphi} + \grad^T \bs{\upphi} \right).
+  \strain = \dfrac{1}{2}\left( \grad \btu + \grad^T \btu \right).
 \end{align}
 The material is assumed to be isotropic, characterized by the Lam\'{e} parameter $\lambda$ and the shear modulus $G$. The strain energy density (with the spectral split \cite{miehe_2010_p1, miehe_2010_p2}) is defined as
 \begin{subequations}
@@ -84,7 +84,7 @@ To model quasi-brittle fracture in polycrystalline materials, where the post-fra
 \begin{align}
   \alpha = \xi d- (1-\xi) d^2, \quad g = \dfrac{1}{1+\phi}, \quad \phi = \dfrac{a_1d + a_1a_2d^2 + a_1a_2a_3d^3}{(1-c)^p},
 \end{align}
-where $\psi_c$ is the critical fracture energy density, $\alpha$ is parameterized by $\xi$ ($\xi$ is conveniently its derivative at $d = 0$), and the degradation function $g$ is parameterized by $p$, $a_1$, $a_2$ and $a_3$. Based on some 1-D analyses \cite{wu2017unified}, the optimal profile of the phase-field is controlled by $\xi$. For a given $\xi$, the approximated traction-separation law is determined by $p$, $a_1$, $a_2$ and $a_3$. In this chapter, the following parameters are chosen:
+where $\psi_c$ is the critical fracture energy density, $\alpha$ is parameterized by $\xi$ ($\xi$ is conveniently the derivative of $\alpha$ at $d = 0$), and the degradation function $g$ is parameterized by $p$, $a_1$, $a_2$ and $a_3$. Based on some 1-D analyses \cite{wu2017unified}, the optimal profile of the phase-field is controlled by $\xi$. For a given $\xi$, the approximated traction-separation law is determined by $p$, $a_1$, $a_2$ and $a_3$. In this chapter, the following parameters are chosen:
 \begin{align}
   \xi = 2, \quad p = 2, \quad a_1 = \dfrac{\Gc}{c_0 l \psi_c}, \quad a_2 = -\dfrac{1}{2}, \quad a_3 = 0,
 \end{align}

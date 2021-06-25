@@ -1,0 +1,103 @@
+\begin{figure}[htb!]
+  \centering
+  \begin{subfigure}[b]{0.95\textwidth}
+    \centering
+    \tikzsetnextfilenamesafe{Chapter3/verification/compare_ts/p}
+    \begin{tikzpicture}[spy using outlines={rectangle, magnification=3, width=10cm, height=2cm, connect spies}]
+      \begin{axis}[
+          colormap/jet,
+          cycle list={[of colormap,samples of colormap=5]},
+          width=\textwidth,
+          height=0.6\textwidth,
+          xmin=0,
+          xmax=0.1,
+          ymin=0,
+          xlabel=$\omega$ (\SI{}{\milli\meter}),
+          ylabel=$t$ (\SI{}{\newton}),
+          scaled x ticks=false,
+          yticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          xticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          legend style={
+              at={(0.97,0.97)},
+              anchor=north east,
+              nodes={scale=1, transform shape},
+              fill=none,
+              draw=none,
+              text opacity=1,
+              cells={align=left}
+            },
+          legend cell align={left},
+          every axis plot/.append style={no marks}
+        ]
+        \addplot table[x=separation,y expr=-\thisrowno{1},col sep=comma]{Chapter3/data/force_disp_p_0_r_5.csv};
+        \addplot table[x=separation,y expr=-\thisrowno{1},col sep=comma]{Chapter3/data/force_disp_p_0.25_r_5.csv};
+        \addplot table[x=separation,y expr=-\thisrowno{1},col sep=comma]{Chapter3/data/force_disp_p_0.5_r_5.csv};
+        \addplot table[x=separation,y expr=-\thisrowno{1},col sep=comma]{Chapter3/data/force_disp_p_0.75_r_5.csv};
+        \addplot table[x=separation,y expr=-\thisrowno{1},col sep=comma]{Chapter3/data/force_disp_p_1_r_5.csv};
+        \coordinate (spypoint) at (axis cs:0.05,0.175);
+        \coordinate (magnifyglass) at (axis cs:0.06,1.5);
+        \legend{$p=\SI{0}{\mega\pascal}$,$p=\SI{0.25}{\mega\pascal}$,$p=\SI{0.5}{\mega\pascal}$,$p=\SI{0.75}{\mega\pascal}$,$p=\SI{1}{\mega\pascal}$}
+      \end{axis}
+      \spy [black] on (spypoint) in node[fill=white] at (magnifyglass);
+    \end{tikzpicture}
+    \caption{}
+    \label{fig: Chapter3/verification/compare_ts/p}
+  \end{subfigure}
+  
+  \begin{subfigure}[b]{0.95\textwidth}
+    \centering
+    \tikzsetnextfilenamesafe{Chapter3/verification/compare_ts/l}
+    \begin{tikzpicture}[spy using outlines={rectangle, magnification=3, width=2cm, height=5cm, connect spies}]
+      \begin{axis}[
+          colormap/jet,
+          cycle list={[of colormap,samples of colormap=5]},
+          width=\textwidth,
+          height=0.6\textwidth,
+          xmin=0,
+          xmax=0.1,
+          ymin=0,
+          xlabel=$\omega$ (\SI{}{\milli\meter}),
+          ylabel=$t$ (\SI{}{\newton}),
+          scaled x ticks=false,
+          yticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          xticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          legend style={
+              at={(0.97,0.97)},
+              anchor=north east,
+              nodes={scale=1, transform shape},
+              fill=none,
+              draw=none,
+              text opacity=1,
+              cells={align=left}
+            },
+          legend cell align={left},
+          every axis plot/.append style={no marks}
+        ]
+        \addplot table[x=separation,y expr=-\thisrowno{1},col sep=comma]{Chapter3/data/force_disp_p_0.25_r_5_l_2.csv};
+        \addplot table[x=separation,y expr=-\thisrowno{1},col sep=comma]{Chapter3/data/force_disp_p_0.25_r_5_l_5.csv};
+        \addplot table[x=separation,y expr=-\thisrowno{1},col sep=comma]{Chapter3/data/force_disp_p_0.25_r_5_l_10.csv};
+        \addplot table[x=separation,y expr=-\thisrowno{1},col sep=comma]{Chapter3/data/force_disp_p_0.25_r_5_l_20.csv};
+        \addplot table[x=separation,y expr=-\thisrowno{1},col sep=comma]{Chapter3/data/force_disp_p_0.25_r_5_l_50.csv};
+        \coordinate (spypoint) at (axis cs:0.008,1.75);
+        \coordinate (magnifyglass) at (axis cs:0.06,1.5);
+        \legend{$l=\SI{2}{\milli\meter}$,$l=\SI{5}{\milli\meter}$,$l=\SI{10}{\milli\meter}$,$l=\SI{20}{\milli\meter}$,$l=\SI{50}{\milli\meter}$}
+      \end{axis}
+      \spy [black] on (spypoint) in node[fill=white] at (magnifyglass);
+    \end{tikzpicture}
+    \caption{}
+    \label{fig: Chapter3/verification/compare_ts/l}
+  \end{subfigure}
+  \caption{The apparent traction-separation relations (a) for different values of pressure with a fixed regularization length $l = \SI{5}{\milli\meter}$ and (b) for different values of regularization length with a fixed pressure $p = \SI{0.25}{\mega\pascal}$. The level of mesh refinement is chosen to be $l / h^e = 5$. }
+\end{figure}

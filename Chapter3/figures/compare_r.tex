@@ -1,0 +1,520 @@
+\begin{figure}[htb!]
+  \captionsetup{font=footnotesize}
+  \centering
+  \begin{subfigure}[b]{0.31\textwidth}
+    \caption*{$R_x^\text{left}$ (\SI{}{\newton})}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.31\textwidth}
+    \caption*{$R_x^\text{right}$ (\SI{}{\newton})}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.31\textwidth}
+    \caption*{$\widetilde{p}$ (\SI{}{\mega\pascal})}
+  \end{subfigure}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  % r = 5
+  
+  \begin{subfigure}[b]{0.31\textwidth}
+    \centering
+    \tikzsetnextfilenamesafe{Chapter3/verification/compare_r/Rx_left_r_5}
+    \begin{tikzpicture}
+      \begin{axis}[
+          colormap/jet,
+          cycle list={[of colormap,samples of colormap=5]},
+          width=\textwidth,
+          height=0.75\textwidth,
+          xmin=0,
+          xmax=0.05,
+          ymin=-3.2,
+          ymax=0,
+          scaled x ticks=false,
+          yticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          xticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          legend style={
+              at={(1,0)},
+              anchor=south east,
+              nodes={scale=0.4, transform shape},
+              fill=none,
+              draw=none,
+              text opacity=1,
+              cells={align=left}
+            },
+          legend cell align={left},
+          every axis plot/.append style={thick,no marks}
+        ]
+        \addplot table[x=time,y=Rx_left,col sep=comma]{Chapter3/data/force_disp_p_0_r_5.csv};
+        \addplot table[x=time,y=Rx_left,col sep=comma]{Chapter3/data/force_disp_p_0.25_r_5.csv};
+        \addplot table[x=time,y=Rx_left,col sep=comma]{Chapter3/data/force_disp_p_0.5_r_5.csv};
+        \addplot table[x=time,y=Rx_left,col sep=comma]{Chapter3/data/force_disp_p_0.75_r_5.csv};
+        \addplot table[x=time,y=Rx_left,col sep=comma]{Chapter3/data/force_disp_p_1_r_5.csv};
+        \legend{$p=\SI{0}{\mega\pascal}$,$p=\SI{0.25}{\mega\pascal}$,$p=\SI{0.5}{\mega\pascal}$,$p=\SI{0.75}{\mega\pascal}$,$p=\SI{1}{\mega\pascal}$}
+      \end{axis}
+    \end{tikzpicture}
+    \caption{$l/h^e = 5$}
+    \label{fig: Chapter3/verification/compare_r/Rx_left_r_5}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.31\textwidth}
+    \centering
+    \tikzsetnextfilenamesafe{Chapter3/verification/compare_r/Rx_right_r_5}
+    \begin{tikzpicture}
+      \begin{axis}[
+          colormap/jet,
+          cycle list={[of colormap,samples of colormap=5]},
+          width=\textwidth,
+          height=0.75\textwidth,
+          xmin=0,
+          xmax=0.05,
+          ymin=-1.2,
+          ymax=3.2,
+          scaled x ticks=false,
+          yticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          xticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          every axis plot/.append style={thick,no marks}
+        ]
+        \addplot table[x=time,y=Rx_right,col sep=comma]{Chapter3/data/force_disp_p_0_r_5.csv};
+        \addplot table[x=time,y=Rx_right,col sep=comma]{Chapter3/data/force_disp_p_0.25_r_5.csv};
+        \addplot table[x=time,y=Rx_right,col sep=comma]{Chapter3/data/force_disp_p_0.5_r_5.csv};
+        \addplot table[x=time,y=Rx_right,col sep=comma]{Chapter3/data/force_disp_p_0.75_r_5.csv};
+        \addplot table[x=time,y=Rx_right,col sep=comma]{Chapter3/data/force_disp_p_1_r_5.csv};
+      \end{axis}
+    \end{tikzpicture}
+    \caption{$l/h^e = 5$}
+    \label{fig: Chapter3/verification/compare_r/Rx_right_r_5}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.31\textwidth}
+    \centering
+    \tikzsetnextfilenamesafe{Chapter3/verification/compare_r/p_r_5}
+    \begin{tikzpicture}
+      \begin{axis}[
+          colormap/jet,
+          cycle list={[of colormap,samples of colormap=5]},
+          width=\textwidth,
+          height=0.75\textwidth,
+          xmin=0,
+          xmax=0.05,
+          ymin=-0.2,
+          ymax=1.2,
+          scaled x ticks=false,
+          yticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          xticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          every axis plot/.append style={thick,no marks}
+        ]
+        \addplot table[x=time,y=p,col sep=comma]{Chapter3/data/force_disp_p_0_r_5.csv};
+        \addplot table[x=time,y=p,col sep=comma]{Chapter3/data/force_disp_p_0.25_r_5.csv};
+        \addplot table[x=time,y=p,col sep=comma]{Chapter3/data/force_disp_p_0.5_r_5.csv};
+        \addplot table[x=time,y=p,col sep=comma]{Chapter3/data/force_disp_p_0.75_r_5.csv};
+        \addplot table[x=time,y=p,col sep=comma]{Chapter3/data/force_disp_p_1_r_5.csv};
+      \end{axis}
+    \end{tikzpicture}
+    \caption{$l/h^e = 5$}
+    \label{fig: Chapter3/verification/compare_r/p_r_5}
+  \end{subfigure}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  % r = 10
+  
+  \begin{subfigure}[b]{0.31\textwidth}
+    \centering
+    \tikzsetnextfilenamesafe{Chapter3/verification/compare_r/Rx_left_r_10}
+    \begin{tikzpicture}
+      \begin{axis}[
+          colormap/jet,
+          cycle list={[of colormap,samples of colormap=5]},
+          width=\textwidth,
+          height=0.75\textwidth,
+          xmin=0,
+          xmax=0.05,
+          ymin=-3.2,
+          ymax=0,
+          scaled x ticks=false,
+          yticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          xticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          legend style={
+              at={(0.05,0.95)},
+              anchor=north west,
+              nodes={scale=0.7, transform shape},
+              fill=white,
+              fill opacity=0.8,
+              draw opacity=1,
+              text opacity=1,
+              cells={align=left}
+            },
+          legend cell align={left},
+          every axis plot/.append style={thick,no marks}
+        ]
+        \addplot table[x=time,y=Rx_left,col sep=comma]{Chapter3/data/force_disp_p_0_r_10.csv};
+        \addplot table[x=time,y=Rx_left,col sep=comma]{Chapter3/data/force_disp_p_0.25_r_10.csv};
+        \addplot table[x=time,y=Rx_left,col sep=comma]{Chapter3/data/force_disp_p_0.5_r_10.csv};
+        \addplot table[x=time,y=Rx_left,col sep=comma]{Chapter3/data/force_disp_p_0.75_r_10.csv};
+        \addplot table[x=time,y=Rx_left,col sep=comma]{Chapter3/data/force_disp_p_1_r_10.csv};
+      \end{axis}
+    \end{tikzpicture}
+    \caption{$l/h^e = 10$}
+    \label{fig: Chapter3/verification/compare_r/Rx_left_r_10}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.31\textwidth}
+    \centering
+    \tikzsetnextfilenamesafe{Chapter3/verification/compare_r/Rx_right_r_10}
+    \begin{tikzpicture}
+      \begin{axis}[
+          colormap/jet,
+          cycle list={[of colormap,samples of colormap=5]},
+          width=\textwidth,
+          height=0.75\textwidth,
+          xmin=0,
+          xmax=0.05,
+          ymin=-1.2,
+          ymax=3.2,
+          scaled x ticks=false,
+          yticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          xticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          every axis plot/.append style={thick,no marks}
+        ]
+        \addplot table[x=time,y=Rx_right,col sep=comma]{Chapter3/data/force_disp_p_0_r_10.csv};
+        \addplot table[x=time,y=Rx_right,col sep=comma]{Chapter3/data/force_disp_p_0.25_r_10.csv};
+        \addplot table[x=time,y=Rx_right,col sep=comma]{Chapter3/data/force_disp_p_0.5_r_10.csv};
+        \addplot table[x=time,y=Rx_right,col sep=comma]{Chapter3/data/force_disp_p_0.75_r_10.csv};
+        \addplot table[x=time,y=Rx_right,col sep=comma]{Chapter3/data/force_disp_p_1_r_10.csv};
+      \end{axis}
+    \end{tikzpicture}
+    \caption{$l/h^e = 10$}
+    \label{fig: Chapter3/verification/compare_r/Rx_right_r_10}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.31\textwidth}
+    \centering
+    \tikzsetnextfilenamesafe{Chapter3/verification/compare_r/p_r_10}
+    \begin{tikzpicture}
+      \begin{axis}[
+          colormap/jet,
+          cycle list={[of colormap,samples of colormap=5]},
+          width=\textwidth,
+          height=0.75\textwidth,
+          xmin=0,
+          xmax=0.05,
+          ymin=-0.2,
+          ymax=1.2,
+          scaled x ticks=false,
+          yticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          xticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          every axis plot/.append style={thick,no marks}
+        ]
+        \addplot table[x=time,y=p,col sep=comma]{Chapter3/data/force_disp_p_0_r_10.csv};
+        \addplot table[x=time,y=p,col sep=comma]{Chapter3/data/force_disp_p_0.25_r_10.csv};
+        \addplot table[x=time,y=p,col sep=comma]{Chapter3/data/force_disp_p_0.5_r_10.csv};
+        \addplot table[x=time,y=p,col sep=comma]{Chapter3/data/force_disp_p_0.75_r_10.csv};
+        \addplot table[x=time,y=p,col sep=comma]{Chapter3/data/force_disp_p_1_r_10.csv};
+      \end{axis}
+    \end{tikzpicture}
+    \caption{$l/h^e = 10$}
+    \label{fig: Chapter3/verification/compare_r/p_r_10}
+  \end{subfigure}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  % r = 20
+  
+  \begin{subfigure}[b]{0.31\textwidth}
+    \centering
+    \tikzsetnextfilenamesafe{Chapter3/verification/compare_r/Rx_left_r_20}
+    \begin{tikzpicture}
+      \begin{axis}[
+          colormap/jet,
+          cycle list={[of colormap,samples of colormap=5]},
+          width=\textwidth,
+          height=0.75\textwidth,
+          xmin=0,
+          xmax=0.05,
+          ymin=-3.2,
+          ymax=0,
+          scaled x ticks=false,
+          yticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          xticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          legend style={
+              at={(0.05,0.95)},
+              anchor=north west,
+              nodes={scale=0.7, transform shape},
+              fill=white,
+              fill opacity=0.8,
+              draw opacity=1,
+              text opacity=1,
+              cells={align=left}
+            },
+          legend cell align={left},
+          every axis plot/.append style={thick,no marks}
+        ]
+        \addplot table[x=time,y=Rx_left,col sep=comma]{Chapter3/data/force_disp_p_0_r_20.csv};
+        \addplot table[x=time,y=Rx_left,col sep=comma]{Chapter3/data/force_disp_p_0.25_r_20.csv};
+        \addplot table[x=time,y=Rx_left,col sep=comma]{Chapter3/data/force_disp_p_0.5_r_20.csv};
+        \addplot table[x=time,y=Rx_left,col sep=comma]{Chapter3/data/force_disp_p_0.75_r_20.csv};
+        \addplot table[x=time,y=Rx_left,col sep=comma]{Chapter3/data/force_disp_p_1_r_20.csv};
+      \end{axis}
+    \end{tikzpicture}
+    \caption{$l/h^e = 20$}
+    \label{fig: Chapter3/verification/compare_r/Rx_left_r_20}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.31\textwidth}
+    \centering
+    \tikzsetnextfilenamesafe{Chapter3/verification/compare_r/Rx_right_r_20}
+    \begin{tikzpicture}
+      \begin{axis}[
+          colormap/jet,
+          cycle list={[of colormap,samples of colormap=5]},
+          width=\textwidth,
+          height=0.75\textwidth,
+          xmin=0,
+          xmax=0.05,
+          ymin=-1.2,
+          ymax=3.2,
+          scaled x ticks=false,
+          yticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          xticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          every axis plot/.append style={thick,no marks}
+        ]
+        \addplot table[x=time,y=Rx_right,col sep=comma]{Chapter3/data/force_disp_p_0_r_20.csv};
+        \addplot table[x=time,y=Rx_right,col sep=comma]{Chapter3/data/force_disp_p_0.25_r_20.csv};
+        \addplot table[x=time,y=Rx_right,col sep=comma]{Chapter3/data/force_disp_p_0.5_r_20.csv};
+        \addplot table[x=time,y=Rx_right,col sep=comma]{Chapter3/data/force_disp_p_0.75_r_20.csv};
+        \addplot table[x=time,y=Rx_right,col sep=comma]{Chapter3/data/force_disp_p_1_r_20.csv};
+      \end{axis}
+    \end{tikzpicture}
+    \caption{$l/h^e = 20$}
+    \label{fig: Chapter3/verification/compare_r/Rx_right_r_20}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.31\textwidth}
+    \centering
+    \tikzsetnextfilenamesafe{Chapter3/verification/compare_r/p_r_20}
+    \begin{tikzpicture}
+      \begin{axis}[
+          colormap/jet,
+          cycle list={[of colormap,samples of colormap=5]},
+          width=\textwidth,
+          height=0.75\textwidth,
+          xmin=0,
+          xmax=0.05,
+          ymin=-0.2,
+          ymax=1.2,
+          scaled x ticks=false,
+          yticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          xticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          every axis plot/.append style={thick,no marks}
+        ]
+        \addplot table[x=time,y=p,col sep=comma]{Chapter3/data/force_disp_p_0_r_20.csv};
+        \addplot table[x=time,y=p,col sep=comma]{Chapter3/data/force_disp_p_0.25_r_20.csv};
+        \addplot table[x=time,y=p,col sep=comma]{Chapter3/data/force_disp_p_0.5_r_20.csv};
+        \addplot table[x=time,y=p,col sep=comma]{Chapter3/data/force_disp_p_0.75_r_20.csv};
+        \addplot table[x=time,y=p,col sep=comma]{Chapter3/data/force_disp_p_1_r_20.csv};
+      \end{axis}
+    \end{tikzpicture}
+    \caption{$l/h^e = 20$}
+    \label{fig: Chapter3/verification/compare_r/p_r_20}
+  \end{subfigure}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  % r = 50
+  
+  \begin{subfigure}[b]{0.31\textwidth}
+    \centering
+    \tikzsetnextfilenamesafe{Chapter3/verification/compare_r/Rx_left_r_50}
+    \begin{tikzpicture}
+      \begin{axis}[
+          colormap/jet,
+          cycle list={[of colormap,samples of colormap=5]},
+          width=\textwidth,
+          height=0.75\textwidth,
+          xmin=0,
+          xmax=0.05,
+          ymin=-3.2,
+          ymax=0,
+          xlabel=$u_x$ (\SI{}{\milli\meter}),
+          scaled x ticks=false,
+          yticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          xticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          legend style={
+              at={(0.05,0.95)},
+              anchor=north west,
+              nodes={scale=0.7, transform shape},
+              fill=white,
+              fill opacity=0.8,
+              draw opacity=1,
+              text opacity=1,
+              cells={align=left}
+            },
+          legend cell align={left},
+          every axis plot/.append style={thick,no marks}
+        ]
+        \addplot table[x=time,y=Rx_left,col sep=comma]{Chapter3/data/force_disp_p_0_r_50.csv};
+        \addplot table[x=time,y=Rx_left,col sep=comma]{Chapter3/data/force_disp_p_0.25_r_50.csv};
+        \addplot table[x=time,y=Rx_left,col sep=comma]{Chapter3/data/force_disp_p_0.5_r_50.csv};
+        \addplot table[x=time,y=Rx_left,col sep=comma]{Chapter3/data/force_disp_p_0.75_r_50.csv};
+        \addplot table[x=time,y=Rx_left,col sep=comma]{Chapter3/data/force_disp_p_1_r_50.csv};
+      \end{axis}
+    \end{tikzpicture}
+    \caption{$l/h^e = 50$}
+    \label{fig: Chapter3/verification/compare_r/Rx_left_r_50}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.31\textwidth}
+    \centering
+    \tikzsetnextfilenamesafe{Chapter3/verification/compare_r/Rx_right_r_50}
+    \begin{tikzpicture}
+      \begin{axis}[
+          colormap/jet,
+          cycle list={[of colormap,samples of colormap=5]},
+          width=\textwidth,
+          height=0.75\textwidth,
+          xmin=0,
+          xmax=0.05,
+          ymin=-1.2,
+          ymax=3.2,
+          xlabel=$u_x$ (\SI{}{\milli\meter}),
+          scaled x ticks=false,
+          yticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          xticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          every axis plot/.append style={thick,no marks}
+        ]
+        \addplot table[x=time,y=Rx_right,col sep=comma]{Chapter3/data/force_disp_p_0_r_50.csv};
+        \addplot table[x=time,y=Rx_right,col sep=comma]{Chapter3/data/force_disp_p_0.25_r_50.csv};
+        \addplot table[x=time,y=Rx_right,col sep=comma]{Chapter3/data/force_disp_p_0.5_r_50.csv};
+        \addplot table[x=time,y=Rx_right,col sep=comma]{Chapter3/data/force_disp_p_0.75_r_50.csv};
+        \addplot table[x=time,y=Rx_right,col sep=comma]{Chapter3/data/force_disp_p_1_r_50.csv};
+      \end{axis}
+    \end{tikzpicture}
+    \caption{$l/h^e = 50$}
+    \label{fig: Chapter3/verification/compare_r/Rx_right_r_50}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.31\textwidth}
+    \centering
+    \tikzsetnextfilenamesafe{Chapter3/verification/compare_r/p_r_50}
+    \begin{tikzpicture}
+      \begin{axis}[
+          colormap/jet,
+          cycle list={[of colormap,samples of colormap=5]},
+          width=\textwidth,
+          height=0.75\textwidth,
+          xmin=0,
+          xmax=0.05,
+          ymin=-0.2,
+          ymax=1.2,
+          xlabel=$u_x$ (\SI{}{\milli\meter}),
+          scaled x ticks=false,
+          yticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          xticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          every axis plot/.append style={thick,no marks}
+        ]
+        \addplot table[x=time,y=p,col sep=comma]{Chapter3/data/force_disp_p_0_r_50.csv};
+        \addplot table[x=time,y=p,col sep=comma]{Chapter3/data/force_disp_p_0.25_r_50.csv};
+        \addplot table[x=time,y=p,col sep=comma]{Chapter3/data/force_disp_p_0.5_r_50.csv};
+        \addplot table[x=time,y=p,col sep=comma]{Chapter3/data/force_disp_p_0.75_r_50.csv};
+        \addplot table[x=time,y=p,col sep=comma]{Chapter3/data/force_disp_p_1_r_50.csv};
+      \end{axis}
+    \end{tikzpicture}
+    \caption{$l/h^e = 50$}
+    \label{fig: Chapter3/verification/compare_r/p_r_50}
+  \end{subfigure}
+  \caption{Response of the bar with a pressurized crack. The phase-field regularization length is fixed to be \SI{5}{\milli\meter}. Different levels of mesh refinement are considered: (a-c) $l/h^e = 5$, (d-f) $l/h^e = 10$, (g-i) $l/h^e = 20$, (j-l) $l/h^e = 50$. The first column (a, d, g, j) shows the reaction force on the left symmetry plane; the second column (b, e, h, k) shows the reaction force on the right boundary where the displacement control is applied; the third column (c, f, i, l) shows the approximated pressure applied on the crack. For comparison purposes, all responses are plotted as a function of the prescribed displacement. }
+\end{figure}
