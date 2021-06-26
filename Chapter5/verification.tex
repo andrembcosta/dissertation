@@ -225,4 +225,96 @@ Two additional sets of load-displacement curves are generated for $\beta = 0.8$ 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Crack resistance curves}
+\subsection{Crack growth resistance curves}
+
+In this section, we demonstrate that, with the appropriate modeling choices made in \Cref{section: Chapter5/verification/homogenized}, crack growth resistance curves are insensitive to the phase-field regularization length. In order to compute the crack growth resistance and its sensitivity to the parameters of interest, a variation of the ``surfing'' problem devised by \cite{hossain_effective_2014,brandon2020cohesive} is used.
+The goal is to drive stable mode-I growth of a crack in a large (approximating infinite) domain.
+We fix a rectangular domain with width $W_0$ in the $X_1$-direction and height $H_0$ in the $X_2$-direction (see \Cref{fig:domain}).
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=11cm]{Chapter5/figures/JR/domain.png}
+  \caption{Schematic of domain for calculations. Actual dimensions are $W_0 = 150 l$, $H_0 = 72 l$, with pre-crack length $a_0 = 0.2 W_0$. Symmetry boundary conditions are applied on the dashed line.}
+  \label{fig:domain}
+\end{figure}
+The adopted values are
+\begin{equation}
+  \label{eq:domain_size}
+  W_0 / l = 150, \quad H_0 / l = 72.
+\end{equation}
+The origin is placed on the bottom edge, at a distance of $a_0$ from the left-hand side.
+The bottom edge is a symmetry plane, which is enforced with the boundary conditions
+\begin{equation}
+  u_y = 0 \quad \text{on $X_1 > 0, X_2 = 0$}.
+\end{equation}
+A pre-crack is represented with the boundary condition
+\begin{equation}
+  \label{eq:phase_bc}
+  d = 1 \quad \text{on $ -a_0 \leq X_1 \leq 0, X_2 = 0$},
+\end{equation}
+thus $a_0$ represents the length of the pre-crack, which will be taken as
+\begin{equation}
+  \label{eq:pre_crack_length}
+  a_0 = 0.2 W_0
+\end{equation}
+to keep the tip far from the boundary.
+
+On the external boundary $\partial B_0$ (the left, top, and right edges in \Cref{fig:domain}), we drive crack growth by prescribing a displacement field that matches the asymptotic plane strain $K_I$ field solution
+\begin{align}
+  \label{eq:surfing_bc}
+  \begin{Bmatrix}
+    \bar{u}_x
+    \\
+    \bar{u}_y
+  \end{Bmatrix}
+  = \frac{K_I(t)}{G} \sqrt{\frac{r(t)}{2 \pi}}
+  \begin{Bmatrix}
+    \left[ 1 - 2\nu + \sin^2 \left( \dfrac{\theta(t)}{2} \right) \right] \cos \left(\dfrac{\theta(t)}{2} \right)
+    \\[1em]
+    \left[ 2 - 2\nu - \cos^2 \left( \dfrac{\theta(t)}{2} \right) \right] \sin \left(\dfrac{\theta(t)}{2} \right)
+  \end{Bmatrix}.
+\end{align}
+We apply the loading in two stages: in the first, for $0 \leq t \leq 1$, the origin of the $K$-field boundary condition is fixed at the coordinate system origin, where the crack tip sits, and the amplitude of $K_I(t)$ is ramped up linearly; in the second stage $t > 1$, the origin of the $K$-field boundary condition is translated at a constant velocity $v$, while the amplitude of $K_I(t)$ is held fixed, which drives stable crack propagation.
+\begin{align}
+  r(t)      & =              
+  \begin{cases}
+    \sqrt{X_1^2 + X_2^2}, \quad t \leqslant 1, \\
+    \sqrt{\left( X_1 - v(t-1) \right)^2 + X_2^2}, \quad t > 1,
+  \end{cases} \\
+  \theta(t) & =              
+  \begin{cases}
+    \atan(\frac{X_2}{X_1 }), \quad t \leqslant 1, \\
+    \atan(\frac{X_2}{X_1 - v(t-1)}), \quad t > 1.
+  \end{cases} \\
+  K_I(t)    & =              
+  \begin{cases}
+    t \sqrt{\frac{E G_0}{1 - \nu^2}}, \quad t \leqslant 1, \\
+    K_I(t) = \sqrt{\frac{E G_0}{1 - \nu^2}}, \quad t > 1.
+  \end{cases}
+\end{align}
+To monitor the resistance as the crack propagates, the energy release rate $\Gr$ is computed via the $J$-integral on the boundary \citep{rice_path_1968}
+\begin{equation}
+  \label{eq:J_integral}
+  J = \int_{\partial B_0} \bte \cdot \bs{\Sigma} \normal \diff{A},
+\end{equation}
+where $\bte$ is the unit vector in the direction of crack growth (in our case, the unit vector in the $X_1$-direction), and $\normal_0$ is the unit normal to the boundary.
+The symbol $\bs{\Sigma}$ stands for the energy-momentum tensor
+\begin{equation}
+  \bs{\Sigma} \equiv \psi \bfI - \bfH^T \bfP, \quad \bfH \equiv \defgrad - \bfI,
+\end{equation}
+The system is always in equilibrium, so we assume $\Gr = J$, that is, that the resistance is always equal to the measured energy release rate.
+
+To construct resistance curves, the other necessary output is the crack extension. The total crack length is computed as
+\begin{equation}
+  \label{eq:crack_length_definition}
+  a = \int_{B_0} \gamma_l \diff{V},
+\end{equation}
+which is consistent with the fracture energy density \eqref{eq: modified fracture energy}.
+The crack extension is given by $\Delta a = a - a_0$.
+
+\input{Chapter5/figures/JR/compare_l}
+
+Using the E-P-D model with the following set of dimensionless parameters
+\begin{align}
+  \dfrac{\sigma_y}{E} = 0.005, \quad \dfrac{H}{E} = 0.5, \quad \nu = 0.3, \quad \dfrac{2E\psi_c}{\sigma_y^2} = 1,
+\end{align}
+the crack growth resistance curves with different values of $l/r_p$ for are plotted in \Cref{fig: Chapter5/JR/compare_l}, where $r_p \equiv \dfrac{1}{3\pi}\dfrac{E\Gc}{(1-\nu^2)\sigma_y^2}$ is the plastic zone size. The results suggest that the resistance curves are remarkably insensitive to $l/r_p$ -- the J-R curves for $l/r_p \leq 0.7$ are virtually indistinguishable. Similar results can be observed with the E-P-PD model. Note that the use of a non-Lorentz-type degradation function, e.g. the quadratic degradation function, results in a strong dependence of the J-R response on the phase-field regularization $l$ \cite{brandon2020cohesive}.
