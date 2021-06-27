@@ -82,7 +82,7 @@ In the current variational framework, the fracture response, e.g. the critical f
 \end{align}
 To model quasi-brittle fracture in polycrystalline materials, where the post-fracture behavior can be characterized by a certain softening law, the following combination is used,
 \begin{align}
-  \alpha = \xi d- (1-\xi) d^2, \quad g = \dfrac{1}{1+\phi}, \quad \phi = \dfrac{a_1d + a_1a_2d^2 + a_1a_2a_3d^3}{(1-c)^p},
+  \alpha = \xi d- (1-\xi) d^2, \quad g = \dfrac{1}{1+\phi}, \quad \phi = \dfrac{a_1d + a_1a_2d^2 + a_1a_2a_3d^3}{(1-d)^p},
 \end{align}
 where $\psi_c$ is the critical fracture energy density, $\alpha$ is parameterized by $\xi$ ($\xi$ is conveniently the derivative of $\alpha$ at $d = 0$), and the degradation function $g$ is parameterized by $p$, $a_1$, $a_2$ and $a_3$. Based on some 1-D analyses \cite{wu2017unified}, the optimal profile of the phase-field is controlled by $\xi$. For a given $\xi$, the approximated traction-separation law is determined by $p$, $a_1$, $a_2$ and $a_3$. In this chapter, the following parameters are chosen:
 \begin{align}
@@ -127,7 +127,7 @@ where $\bar{p}$ is the magnitude of the pressure. Following \cite{CHUKWUDOZIE201
 where the surface normal $\normal$ is approximated using the gradient of the phase-field, and a crack indicator function $I(d) \in C^1([0,1])$ is introduced so that the approximation respects the $\Gamma$-convergence properties.
 
 \begin{remark}
-  Based on \eqref{eq: pressure power}, the effective pressure approximated by the phase-field can be defined as:
+  Based on \eqref{eq: pressure power}, the effective pressure approximated by the phase field can be defined as:
   \begin{align}
     \widetilde{p} = \int\limits_{\body_0} \dfrac{\partial \uprho^\text{ext}}{\partial \defrate} \cdot \left( -\dfrac{\grad d}{\norm{\grad d}} \right) \diff{V} = \int\limits_{\body_0} \bar{p} \norm{\grad I} \diff{V}.
     \label{eq:pressure_approx}

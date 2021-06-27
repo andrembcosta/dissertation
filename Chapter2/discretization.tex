@@ -13,17 +13,17 @@ We begin this section by summarizing the strong form of the general initial boun
   \begin{align*}
     \text{Linear momentum balance: } & \rho_0 \bta = \divergence \bfP + \rho_0 \btb,                       &  & \body_0 \times ]t_0, t[,                          \\
                                      & \bfP \normal_0 = \btt,                                              &  & \partial_t\body_0 \times ]t_0, t[,                \\
-                                     & \bs{\upphi} = \bs{\upphi}_g,                                        &  & \partial_u\body_0 \times ]t_0, t[,                \\
+                                     & \btu = \btu_g,                                                      &  & \partial_u\body_0 \times ]t_0, t[,                \\
     \text{Fracture evolution: }      & \divergence \bs{\xi} - f = 0,                                       &  & \mathcal{I}_t(\body_0) \times ]t_0, t[,           \\
                                      & \bs{\xi}\cdot\normal_0 = 0,                                         &  & \mathcal{I}_t(\partial_d\body_0) \times ]t_0, t[, \\
     \text{Heat transfer: }           & \rho_0c_v\dot{T} = \rho_0 q - \divergence \bth + \delta + \delta_T, &  & \body_0 \times ]t_0, t[,                          \\
                                      & \bth \cdot \normal_0 = \bar{h}_n,                                   &  & \partial_h\body_0 \times ]t_0, t[,                \\
                                      & \bth \cdot \normal_0 = h(T - T_0),                                  &  & \partial_r\body_0 \times ]t_0, t[,                \\
                                      & T = T_g,                                                            &  & \partial_T\body_0 \times ]t_0, t[,                \\
-    \text{Initial conditions: }      & \bs{\upphi} = \bs{\upphi}_0,                                        &  & \body_0, t = t_0,                                 \\
-                                     & \defrate = \btv_0,                                                  &  & \body_0, t = t_0,                                 \\
+    \text{Initial conditions: }      & \btu = \btu_0,                                                      &  & \body_0, t = t_0,                                 \\
+                                     & \dot{\btu} = \btv_0,                                                &  & \body_0, t = t_0,                                 \\
                                      & d = d_0,                                                            &  & \body_0, t = t_0,                                 \\
-                                     & T = T_0,                                                            &  & \body_0, t = t_0.                                 
+                                     & T = \bar{T}_0,                                                      &  & \body_0, t = t_0.                                 
   \end{align*}
 \end{mdframed}
 The yield surface and the flow rule (and their corresponding constitutive updates) are defined only after specific constitutive assumptions are made in the following chapters (e.g. \Cref{section: Chapter5}).
@@ -66,10 +66,10 @@ The weak form can be derived as:
   with projections of initial conditions
   \begin{subequations}
     \begin{align}
-      \left( \btw, \bs{\upphi} - \bs{\upphi}_0 \right) & = 0, \\
-      \left( \btw, \defrate - \btv_0 \right)           & = 0, \\
-      \left( c, d - d_0 \right)                        & = 0, \\
-      \left( e, T - T_0 \right)                        & = 0. 
+      \left( \btw, \btu - \btu_0 \right)       & = 0, \\
+      \left( \btw, \dot{\btu} - \btv_0 \right) & = 0, \\
+      \left( c, d - d_0 \right)                & = 0, \\
+      \left( e, T - \bar{T}_0 \right)          & = 0. 
     \end{align}
   \end{subequations}
 \end{mdframed}
@@ -95,10 +95,10 @@ Using the Galerkin method, with finite dimensional function spaces $\widetilde{\
   with projections of initial conditions
   \begin{subequations}
     \begin{align}
-      \left( \btw^h, \bs{\upphi}^h - \bs{\upphi}_0 \right) & = 0, \\
-      \left( \btw^h, \defrate - \btv_0 \right)             & = 0, \\
-      \left( c^h, d^h - d_0 \right)                        & = 0, \\
-      \left( e^h, T^h - T_0 \right)                        & = 0. 
+      \left( \btw^h, \btu^h - \btu_0 \right)       & = 0, \\
+      \left( \btw^h, \dot{\btu^h} - \btv_0 \right) & = 0, \\
+      \left( c^h, d^h - d_0 \right)                & = 0, \\
+      \left( e^h, T^h - \bar{T}_0 \right)          & = 0. 
     \end{align}
   \end{subequations}
 \end{mdframed}
