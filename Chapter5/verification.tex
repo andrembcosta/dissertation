@@ -1,7 +1,7 @@
 \section{Verification}
 \label{section: Chapter5/verification}
 
-Unless otherwise stated, we choose $C = \beta$ for the modified fracture energy \eqref{eq: modified fracture energy} and the fracture dual kinetic potential\eqref{eq: fracture dual kinetic potential} to satisfy the second law of thermodynamics. All other model parameters and material constants are provided separately for each of the problems in this section, below.
+Unless otherwise stated, we choose $C = \beta$ for the modified fracture energy \eqref{eq: modified fracture energy} and the fracture dual kinetic potential \eqref{eq: fracture dual kinetic potential} to satisfy the second law of thermodynamics. All other model parameters and material constants are provided separately for each of the problems in this section, below.
 
 \input{Chapter5/figures/terminology}
 
@@ -121,7 +121,7 @@ We conclude this subsection by noting that while the observations regarding the 
 
 With clear justification for the modeling choices of the crack geometric function (\Cref{section: Chapter5/verification/homogenized/alpha}) and the degradation functions (\Cref{section: Chapter5/verification/homogenized/degradation}), we now examine the effect of the coalescence dissipation in this homogenized setting.
 
-\textit{Without} fracture dual kinetic potential, i.e.\ $C = \beta = 1$, the E-P-PD model and the E-P-D model have some shortcomings.
+\textit{Without} contributions from a fracture dual kinetic potential, i.e.\ when $C = \beta = 1$, the E-P-PD model and the E-P-D model have some shortcomings.
 First, the E-P-PD model introduces a strong coupling between plasticity and fracture, as both the active part of the strain energy and the plastic energy contribute to damage evolution (according to \eqref{eq: fracture driving energy}, or see \Cref{fig: Chapter5/terminology/EPPD} for a graphical illustration). As a result, the use of a large critical fracture energy $\psi_c$ may be required to calibrate the E-P-PD model against experimental measurements. However, due to convexity concerns, the Lorentz-type degradation functions typically impose an upper-bound on the regularization length that scales inversely with the critical fracture energy:
 \begin{align}
   l \leqslant l_u \propto \dfrac{1}{\psi_c}.

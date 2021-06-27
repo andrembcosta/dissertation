@@ -80,7 +80,7 @@ In the current variational framework, the fracture response, e.g. the critical f
 \begin{align}
   \alpha = d^2, \quad g = (1-d)^2.
 \end{align}
-To model quasi-brittle fracture in polycrystalline materials, where the post-fracture behavior can be characterized by certain softening law, the following combination is used,
+To model quasi-brittle fracture in polycrystalline materials, where the post-fracture behavior can be characterized by a certain softening law, the following combination is used,
 \begin{align}
   \alpha = \xi d- (1-\xi) d^2, \quad g = \dfrac{1}{1+\phi}, \quad \phi = \dfrac{a_1d + a_1a_2d^2 + a_1a_2a_3d^3}{(1-c)^p},
 \end{align}
@@ -115,12 +115,12 @@ Starting from the sharp representation of the crack set, the external power expe
 \begin{align}
   \mathcal{P}^\text{ext} = \int\limits_{\crackset} \bar{p}\normal_0\cdot\defrate \diff{A},
 \end{align}
-where $\bar{p}$ is the magnitude of the pressure. Following \cite{CHUKWUDOZIE2019957}, the external work is approximated as per:
+where $\bar{p}$ is the magnitude of the pressure. Following \cite{CHUKWUDOZIE2019957}, the external work is approximated as:
 \begin{equation}
   \begin{aligned}
     \mathcal{P}^\text{ext} & = \int\limits_{\body_0} \uprho^\text{ext} \diff{V} = \int\limits_{\body_0} \bar{p} \left( -\dfrac{\grad d}{\norm{\grad d}} \right) \cdot \defrate \norm{\grad I} \diff{V} \\
                            & = \int\limits_{\body_0} \bar{p} \left( -\dfrac{\grad d}{\norm{\grad d}} \right) \cdot \defrate \norm{\grad d} I_{,d} \diff{V}                                             
-    = - \int\limits_{\body_0} \bar{p} \grad d \cdot \defrate I_{,d} \diff{V}
+    = - \int\limits_{\body_0} \bar{p} \grad d \cdot \defrate I_{,d} \diff{V},
   \end{aligned}
   \label{eq: pressure power}
 \end{equation}
@@ -129,7 +129,7 @@ where the surface normal $\normal$ is approximated using the gradient of the pha
 \begin{remark}
   Based on \eqref{eq: pressure power}, the effective pressure approximated by the phase-field can be defined as:
   \begin{align}
-    \widetilde{p} = \int\limits_{\body_0} \dfrac{\partial \uprho^\text{ext}}{\partial \defrate} \cdot \left( -\dfrac{\grad d}{\norm{\grad d}} \right) \diff{V} = \int\limits_{\body_0} \bar{p} \norm{\grad I} \diff{V}
+    \widetilde{p} = \int\limits_{\body_0} \dfrac{\partial \uprho^\text{ext}}{\partial \defrate} \cdot \left( -\dfrac{\grad d}{\norm{\grad d}} \right) \diff{V} = \int\limits_{\body_0} \bar{p} \norm{\grad I} \diff{V}.
     \label{eq:pressure_approx}
   \end{align}
 \end{remark}
@@ -143,19 +143,19 @@ Assuming that $I(0)=0$ and $I(1)=1$, the proof of $\Gamma$-convergence can be sk
 \end{equation}
 The domain integral can be converted to a set of path integrals along the level set (phase-field), using the co-area formula, as follows:
 \begin{align}
-  \mathcal{P}^\text{ext} & = - \int\limits_0^\infty \int\limits_{\{ \btX\in{\body_0}, d_\Gamma(\btX)=r \}} \bar{p} \dfrac{\diff{I}}{\diff{(r/l)}} \dfrac{1}{l} \grad d_\Gamma(\btX) \cdot \defrate \diff{s} \diff{r} 
+  \mathcal{P}^\text{ext} & = - \int\limits_0^\infty \int\limits_{\{ \btX\in{\body_0}, d_\Gamma(\btX)=r \}} \bar{p} \dfrac{\diff{I}}{\diff{(r/l)}} \dfrac{1}{l} \grad d_\Gamma(\btX) \cdot \defrate \diff{s} \diff{r} . 
 \end{align}
 A simple change of variables with $\widetilde{r}=r/l$ yields:
 \begin{equation}
   \begin{aligned}
-    \mathcal{P}^\text{ext} & = - \int\limits_0^\infty \left( \int\limits_{\{ \btX\in{\body_0}, d_\Gamma(\btX)=r \}} \bar{p} \grad d_\Gamma(\btX) \cdot \defrate \diff{s} \right) \dfrac{\diff{I}}{\diff{(r/l)}} \dfrac{1}{l} \diff{r}                     \\
-                           & = - \int\limits_0^\infty \left( \int\limits_{\{ \btX\in{\body_0}, d_\Gamma(\btX)=l\widetilde{r} \}} \bar{p} \grad d_\Gamma(\btX) \cdot \defrate \diff{s} \right) \dfrac{\diff{I}}{\diff{\widetilde{r}}} \diff{\widetilde{r}} 
+    \mathcal{P}^\text{ext} & = - \int\limits_0^\infty \left( \int\limits_{\{ \btX\in{\body_0}, d_\Gamma(\btX)=r \}} \bar{p} \grad d_\Gamma(\btX) \cdot \defrate \diff{s} \right) \dfrac{\diff{I}}{\diff{(r/l)}} \dfrac{1}{l} \diff{r}                       \\
+                           & = - \int\limits_0^\infty \left( \int\limits_{\{ \btX\in{\body_0}, d_\Gamma(\btX)=l\widetilde{r} \}} \bar{p} \grad d_\Gamma(\btX) \cdot \defrate \diff{s} \right) \dfrac{\diff{I}}{\diff{\widetilde{r}}} \diff{\widetilde{r}} . 
   \end{aligned}
 \end{equation}
 Next, as the phase-field regularization length diminishes (i.e., $l \to 0$), the approximation of the pressure power expenditure converges to:
 \begin{subequations}
   \begin{align}
-    \lim_{l \to 0} \mathcal{P}^\text{ext} & = - \int\limits_0^\infty \dfrac{\diff{I}}{\diff{\widetilde{r}}} \diff{\widetilde{r}} \left[ \int\limits_{\Gamma^+} \bar{p} (-\normal_0) \cdot \defrate \diff{A} + \int\limits_{\Gamma^-} \bar{p} (-\normal_0) \cdot \defrate \diff{A} \right] 
+    \lim_{l \to 0} \mathcal{P}^\text{ext} & = - \int\limits_0^\infty \dfrac{\diff{I}}{\diff{\widetilde{r}}} \diff{\widetilde{r}} \left[ \int\limits_{\Gamma^+} \bar{p} (-\normal_0) \cdot \defrate \diff{A} + \int\limits_{\Gamma^-} \bar{p} (-\normal_0) \cdot \defrate \diff{A} \right] , 
   \end{align}
 \end{subequations}
 where it is apparent that the path integral along the level set converges to the surface integral on two opposite sides of the crack surface, while the gradient of the unsigned distance function converges to the normal on the crack surfaces $\Gamma$, i.e., $\lim_{l \to 0} \grad d_\Gamma(\btX) = -\normal_0(\btX)$. Recall that the support of the phase-field depends on the form of the crack geometric function $\alpha$ \cite{JYWu2017}; the integral shall be split according to the the ultimate phase-field half interfacial width $D_u$:
@@ -164,7 +164,7 @@ where it is apparent that the path integral along the level set converges to the
      & \quad \lim_{l \to 0} \mathcal{P}^\text{ext}                                                                                                                                                                                                                                                                                                            \\
      & = - \left( \int\limits_0^{D_u/l} \dfrac{\diff{I}}{\diff{\widetilde{r}}} \diff{\widetilde{r}} + \int\limits_{D_u/l}^\infty \dfrac{\diff{I}}{\diff{\widetilde{r}}} \diff{\widetilde{r}} \right) \left[ \int\limits_{\Gamma^+} \bar{p} (-\normal_0) \cdot \defrate \diff{A} + \int\limits_{\Gamma^-} \bar{p} (-\normal_0) \cdot \defrate \diff{A} \right] \\
      & = - \left[ I\left( \widetilde{r}=\dfrac{D_u}{l} \right) - I(\widetilde{r}=0) \right] \left[ \int\limits_{\Gamma^+} \bar{p} (-\normal_0) \cdot \defrate \diff{A} + \int\limits_{\Gamma^-} \bar{p} (-\normal_0) \cdot \defrate \diff{A} \right]                                                                                                          \\
-     & = - \left[ I(0) - I(1) \right] \left[ \int\limits_{\Gamma^+} \bar{p} (-\normal_0) \cdot \defrate \diff{A} + \int\limits_{\Gamma^-} \bar{p} (-\normal_0) \cdot \defrate \diff{A} \right]                                                                                                                                                                
+     & = - \left[ I(0) - I(1) \right] \left[ \int\limits_{\Gamma^+} \bar{p} (-\normal_0) \cdot \defrate \diff{A} + \int\limits_{\Gamma^-} \bar{p} (-\normal_0) \cdot \defrate \diff{A} \right].                                                                                                                                                               
   \end{aligned}
 \end{equation}
 Finally, recall our previous restrictions on the indicator function $I(c)$; this limit reduces to:

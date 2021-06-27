@@ -15,7 +15,7 @@
 \label{section: Chapter3/verification/bar}
 
 We first verify the uniaxial response of the quasi-brittle fracture model with a pressurized crack. Consider a bar of length $2L = \SI{400}{\milli\meter}$ and width $2W = \SI{2}{\milli\meter}$ that is subject to uniaxial tension. Plane strain conditions are assumed to hold. A similar example without crack pressurization can be found in \cite{JYWu2017}. Boundary conditions are shown in \Cref{fig:bar}. Both ends of the bar are subject to monotonically increasing horizontal displacements. Only a quarter of the domain is simulated utilizing the two symmetry conditions. The domain is uniformly discretized using \texttt{QUAD4} elements, with 200 elements along the length and 1 element along the width.
-Included are the Young's modulus $E = \SI{3e4}{\mega\pascal}$, Poisson's ratio $\nu = 0.2$, critical fracture strength $\psi_c = \SI{1.5e-4}{\milli\joule\per\cubic\milli\meter}$, fracture toughness $\Gc = \SI{0.12}{\milli\joule\per\square\milli\meter}$, and the Griffith’s characteristic length $l_\text{ch} = \dfrac{\Gc}{2\psi_c} = \SI{400}{\milli\meter}$.
+The material and model parameters are Young's modulus $E = \SI{3e4}{\mega\pascal}$, Poisson's ratio $\nu = 0.2$, critical fracture strength $\psi_c = \SI{1.5e-4}{\milli\joule\per\cubic\milli\meter}$, fracture toughness $\Gc = \SI{0.12}{\milli\joule\per\square\milli\meter}$, and the characteristic length $l_\text{ch} = \dfrac{\Gc}{2\psi_c} = \SI{400}{\milli\meter}$.
 
 \begin{figure}[!ht]
   \centering
@@ -33,14 +33,29 @@ are considered. In the context of fuel fracture, the pressure on the crack surfa
 
 \input{Chapter3/figures/compare_ts}
 
-\Cref{fig: Chapter3/verification/compare_ts/p} plots the apparent traction-separation law. The traction $t$ and the separation $\omega$ are approximated as $t = -R_x^\text{left}$ and $\omega = - \int\limits_{\body_0} \btu \cdot \grad I \diff{V}$, respectively. The apparent traction separation relations for different values of pressure are virtually indistinguishable. At a given load (prescribed displacement), with a larger pressure, the separation between the crack surfaces is larger, resulting in a smaller traction. \Cref{fig: Chapter3/verification/compare_ts/l} shows the convergence of the apparent traction-separation law as $l \to 0$.
+\Cref{fig: Chapter3/verification/compare_ts/p} plots the apparent traction-separation law. The traction $t$ and the separation $\omega$ are approximated as $t = -R_x^\text{left}$ and $\omega = - \int\limits_{\body_0} \btu \cdot \grad I \diff{V}$, respectively. The apparent traction separation relations for different values of pressure are virtually indistinguishable.
+\begin{remark}
+  In similar formulations of pressurized crack using phase-field (e.g. \cite{CHUKWUDOZIE2019957,Mikeli__2015,WILSON2016264}), the fact that the pressure work (or the pressure power in the current variational framework) is independent of the velocities of the phase-field, i.e. $\dot{d}, \grad \dot{d}$, is not respected. Leading to formulations of the following form:
+  \begin{subequations}
+    \begin{align}
+      \divergence \stress - \bar{p} \grad d I_{,d} & = \bs{0}, \\
+      \divergence \bs{\xi} - f                     & = 0,      
+    \end{align}
+  \end{subequations}
+  where
+  \begin{align}
+    \bs{\xi} = \dfrac{2\Gc l}{c_0} \grad d, \quad f = g_{,d}\psi^e_\activepart - \bar{p}\divergence\btu + \dfrac{\Gc}{c_0l}\alpha_{,d}.
+  \end{align}
+  Note that an additional contribution from the pressure arises in $f$, which leads to pressure-dependent traction-separation relations and critical fracture strength.
+\end{remark}
+At a given load (prescribed displacement), with a larger pressure, the separation between the crack surfaces is larger, resulting in a smaller traction. \Cref{fig: Chapter3/verification/compare_ts/l} shows the convergence of the apparent traction-separation law as $l \to 0$.
 
 \input{Chapter3/figures/compare_r}
 
 The reaction force on the left symmetry plane (\Cref{fig: Chapter3/verification/compare_r/Rx_left_r_5,fig: Chapter3/verification/compare_r/Rx_left_r_10,fig: Chapter3/verification/compare_r/Rx_left_r_20,fig: Chapter3/verification/compare_r/Rx_left_r_50}) shows that softening occurs at the same loading for different pressure values.
 
-As is seen in \Cref{fig: Chapter3/verification/compare_r/Rx_right_r_5,fig: Chapter3/verification/compare_r/Rx_right_r_10,fig: Chapter3/verification/compare_r/Rx_right_r_20,fig: Chapter3/verification/compare_r/Rx_right_r_50}, the reaction force on the right boundary is balanced with the prescribed pressure once the crack has fully developed.
-The approximated effective pressure $\widetilde{p}$ \eqref{eq:pressure_approx} (\Cref{fig: Chapter3/verification/compare_r/p_r_5,fig: Chapter3/verification/compare_r/p_r_10,fig: Chapter3/verification/compare_r/p_r_20,fig: Chapter3/verification/compare_r/p_r_50}) also shows good agreement with prescribed values $\bar{p}$.
+As is seen in \Cref{fig: Chapter3/verification/compare_r/Rx_right_r_5,fig: Chapter3/verification/compare_r/Rx_right_r_10,fig: Chapter3/verification/compare_r/Rx_right_r_20,fig: Chapter3/verification/compare_r/Rx_right_r_50}, the reaction force on the right boundary is balanced by the prescribed pressure once the crack has fully developed.
+The approximated effective pressure $\widetilde{p}$ \eqref{eq:pressure_approx} (\Cref{fig: Chapter3/verification/compare_r/p_r_5,fig: Chapter3/verification/compare_r/p_r_10,fig: Chapter3/verification/compare_r/p_r_20,fig: Chapter3/verification/compare_r/p_r_50}) also shows good agreement with the prescribed values $\bar{p}$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -55,7 +70,7 @@ The approximated effective pressure $\widetilde{p}$ \eqref{eq:pressure_approx} (
 \subsection{Pressurized crack propagation}
 \label{section: Chapter3/verification/propagation}
 
-Next, we verify fracture propagation conditions predicted by the quasi-brittle fracture model using a benchmark problem proposed by \citet{WILSON2016264}. This problem serves to verify the propagation conditions once a critical pressure is attained. In \Cref{fig:sneddon_c}, an initial crack is prescribed in the center with a length of $2a$. As shown in \Cref{fig:sneddon_c0}, the phase-field is initialized to be 1 only for those nodes on the bottom boundary belonging to the crack set, the phase-field variable is regularized to satisfy the governing equations, as shown in \Cref{fig:sneddon_c1}. Note that this differs from the approach suggested in \cite{WILSON2016264,YOSHIOKA2020113210} which involves imposing initial values for a set of elements.
+Next, we verify fracture propagation conditions predicted by the quasi-brittle fracture model using a benchmark problem proposed by \citet{WILSON2016264}. This problem serves to verify the propagation conditions once a critical pressure is attained. In \Cref{fig:sneddon_c}, an initial crack is prescribed in the center with a length of $2a$. As shown in \Cref{fig:sneddon_c0}, the phase-field is initialized to be 1 only for those nodes on the bottom boundary belonging to the crack set. The phase-field variable is then regularized to satisfy the governing equations, as shown in \Cref{fig:sneddon_c1}. Note that this differs from the approach suggested in \cite{WILSON2016264,YOSHIOKA2020113210} which involves imposing initial values for a set of elements.
 Utilizing the symmetry, only half of the domain with size $L \times L/2$ is used (\Cref{fig:sneddon_mesh}). The ratio $L/a$ is taken to be 20. All outer surfaces are fixed. The prescribed pressure is increased until the crack starts to propagate. The propagation of the crack right after the critical pressure is attained is unstable. According to the linear elastic fracture mechanics (LEFM) solution, the normalized critical pressure is given as:
 \begin{equation}
   \dfrac{p_c}{\sigma_0} = \sqrt{\dfrac{l}{\pi a}}, \quad \sigma_0=\sqrt{\dfrac{E}{(1-\nu^2)} \dfrac{\Gc^\text{eff}}{l}},
@@ -91,7 +106,7 @@ Note that the LEFM solution is based on a brittle fracture model. A comparison b
     \caption{}
     \label{fig:sneddon_c}
   \end{subfigure}
-  \caption[Sneddon benchmark problem.]{\label{fig:sneddon}Pressurized crack propagation problem: (a) Initial values are imposed on crack surface nodes (zoomed view). (b) Regularized phase-field variable after one time step (zoomed view). (c) Mesh with five levels of local refinement. (d) Pre-existing crack. The red and blue color correspond to value of 1.0 and 0, respectively.}
+  \caption[Sneddon benchmark problem.]{\label{fig:sneddon}Pressurized crack propagation problem: (a) Initial values are imposed on crack surface nodes (zoomed view). (b) Regularized phase-field variable after one time step (zoomed view). (c) Mesh with five levels of local refinement. (d) Pre-existing crack. The red and blue color correspond to value of 1 and 0, respectively.}
 \end{figure}
 
 \begin{figure}[!ht]
