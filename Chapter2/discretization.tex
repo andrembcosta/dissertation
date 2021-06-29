@@ -31,9 +31,9 @@ The yield surface and the flow rule (and their corresponding constitutive update
 To derive the weak form, we begin by introducing the trial spaces $\bs{\mathcal{U}}_t$, $\mathcal{D}_t$ and $\mathcal{T}_t$:
 \begin{subequations}
   \begin{align}
-    \bs{\mathcal{U}}_t & = \{ \bs{\upphi} \in \mathcal{H}^1(\body_0)^d \mid \bfu = \bfu_g \text{ on } \partial_u\body_0 \}, \\
-    \mathcal{D}_t      & = \{ d \in \mathcal{H}^1(\body_0) \mid \dot{d} > 0 \text{ on } \mathcal{I}_t(\body_0) \},          \\
-    \mathcal{T}_t      & = \{ T \in \mathcal{H}^1(\body_0) \mid T = T_g \text{ on } \partial_T\body_0 \},                   
+    \bs{\mathcal{U}}_t & = \{ \btu \in \mathcal{H}^1(\body_0)^d \mid \bfu = \bfu_g \text{ on } \partial_u\body_0 \}, \\
+    \mathcal{D}_t      & = \{ d \in \mathcal{H}^1(\body_0) \mid \dot{d} > 0 \text{ on } \mathcal{I}_t(\body_0) \},   \\
+    \mathcal{T}_t      & = \{ T \in \mathcal{H}^1(\body_0) \mid T = T_g \text{ on } \partial_T\body_0 \},            
   \end{align}
 \end{subequations}
 and the weighting spaces $\bs{\mathcal{V}}$, $\mathcal{C}$ and $\mathcal{E}$:
@@ -52,7 +52,7 @@ The weak form can be derived as:
     linewidth=0pt,
     nobreak=true
   ]
-  Given parameters in the IBVP, find $\bs{\upphi} \in \bs{\mathcal{U}}_t$, $d \in \mathcal{D}_t$ and $T \in \mathcal{T}_t$, $t \in [t_0, t_f]$, such that $\forall \btw \in \bs{\mathcal{V}}$, $\forall c \in \mathcal{C}$ and $\forall e \in \mathcal{E}$,
+  Given parameters in the IBVP, find $\btu \in \bs{\mathcal{U}}_t$, $d \in \mathcal{D}_t$ and $T \in \mathcal{T}_t$, $t \in [t_0, t_f]$, such that $\forall \btw \in \bs{\mathcal{V}}$, $\forall c \in \mathcal{C}$ and $\forall e \in \mathcal{E}$,
   \begin{subequations}
     \begin{align}
       \left( \btw, \rho_0\bta \right) + \left( \grad \btw, \bfP \right) - \left( \btw, \rho_0 \btb \right) - \left< \btw, \btt \right>_{\partial_t\body_0} & = 0, \\
@@ -81,7 +81,7 @@ Using the Galerkin method, with finite dimensional function spaces $\widetilde{\
     linewidth=0pt,
     nobreak=true
   ]
-  Given parameters in the IBVP, find $\bs{\upphi}^h \in \widetilde{\bs{\mathcal{U}}}_t$, $d^h \in \widetilde{\mathcal{D}}_t$ and $T^h \in \widetilde{\mathcal{T}}_t$, $t \in [t_0, t_f]$, such that $\forall \btw^h \in \widetilde{\bs{\mathcal{V}}}$, $\forall q^h \in \widetilde{\mathcal{C}}$ and $\forall e^h \in \widetilde{\mathcal{E}}$,
+  Given parameters in the IBVP, find $\btu^h \in \widetilde{\bs{\mathcal{U}}}_t$, $d^h \in \widetilde{\mathcal{D}}_t$ and $T^h \in \widetilde{\mathcal{T}}_t$, $t \in [t_0, t_f]$, such that $\forall \btw^h \in \widetilde{\bs{\mathcal{V}}}$, $\forall q^h \in \widetilde{\mathcal{C}}$ and $\forall e^h \in \widetilde{\mathcal{E}}$,
   \begin{subequations}
     \begin{align}
       \left( \btw^h, \rho_0\bta \right) + \left( \grad \btw^h, \bfP \right) - \left( \btw^h, \rho_0 \btb \right) - \left< \btw^h, \btt \right>_{\partial_t\body_0} & = 0, \label{eq: semidiscrete momentum balance}   \\
@@ -102,4 +102,44 @@ Using the Galerkin method, with finite dimensional function spaces $\widetilde{\
     \end{align}
   \end{subequations}
 \end{mdframed}
-The discrete inequality for crack irreversibility is satisfied node-wise with a primal-dual active set strategy. See e.g.\  \citet{heister2015primal} for implementational details of such a solver. The solver is also generally available in numerical toolboxes, e.g.\  PETSc \cite{petsc-web-page}. The discrete approximation is calculated using a fixed-point iterative solution scheme outlined from \cite{HuGary2020}. The semidiscrete momentum balance equation \eqref{eq: semidiscrete momentum balance} is discretized using the generalized-$\alpha$ method. The semidiscrete fracture evolution equation \eqref{eq: semidiscrete fracture evolution} and the heat conduction equation \eqref{eq: semidiscrete heat conduction} are discretized using the backward-Euler time integration. Discretizations of the plasticity constitutive updates are discussed in \Cref{section: Chapter5}.
+The semidiscrete momentum balance equation \eqref{eq: semidiscrete momentum balance} is discretized using the generalized-$\alpha$ method. The semidiscrete fracture evolution equation \eqref{eq: semidiscrete fracture evolution} and the heat conduction equation \eqref{eq: semidiscrete heat conduction} are discretized using the backward-Euler time integration. Discretizations of the plasticity constitutive updates are discussed in \Cref{section: Chapter5}.
+The discrete inequality for crack irreversibility is satisfied node-wise with a primal-dual active set (PDAS) strategy. See e.g.\  \citet{heister2015primal} for implementational details of such a solver. The solver is also generally available in numerical toolboxes, e.g.\  PETSc \cite{petsc-web-page}. The discrete approximation is calculated using a fixed-point iterative solution scheme outlined from \cite{HuGary2020}. A simple fixed-point iterative Newton-based PDAS solution algorithm is outlined in \Cref{alg: PDAS-newton}. The algorithm is observed to be effective for all numerical examples included in this dissertation. Note that notation is slightly abused in the algorithm for simplicity: all state variables with subscripts or superscripts represent their discrete counterpart; the time step is indexed by the counter $n$ in the subscript; the fixed-point iteration is indexed by the counter $a$ in the subscript; the Newton iteration is indexed by the counter $k$ in the superscript; the constant mass matrix is denoted by $M$; and $c$ is the numerical parameter controlling the update of the active set.
+
+\begin{algorithm}[!htb]
+  \small
+  \caption{A fixed-point iterative PDAS-Newton solution algorithm. }
+  \begin{algorithmic}[1]
+    \State Given $\btu_n$, $T_n$, $d_n$, ${\defgrad^p}_n$, $\ep_n$.
+    \State Set $a \leftarrow 0$.
+    \State Set $\btu_{n+1,a} \leftarrow \btu_n$, $T_{n+1,a} \leftarrow T_n$, $d_{n+1,a} \leftarrow d_n$, ${\defgrad^p}_{n+1,a} \leftarrow {\defgrad^p}_n$, $\ep_{n+1,a} \leftarrow \ep_n$.
+    \Repeat
+    \State Compute $\dot{d}$ using $d_{n+1,a}$ and $d_n$ with the appropriate time integrator.
+    \State Solve for $\btu_{n+1,a+1}$, ${\defgrad^p}_{n+1,a+1}$, $\ep_{n+1,a+1}$, and $T_{n+1,a+1}$ using the discretized incremental variational (sub-) problem
+    \begin{align*}
+      \inf_{\btu_{n+1,a+1}} \sup_{T_{n+1,a+1}} L_n\left( \inf_{{\defgrad^p}_{n+1,a+1}, \ep_{n+1,a+1}} \varphi_n \right).
+    \end{align*}
+    \State Compute $\dot{\btu}$ using $\btu_{n+1,a+1}$ and $\btu_n$ with the appropriate time integrator.
+    \State Set $k \leftarrow 0$.
+    \State Set $d_{n+1,a+1}^k \leftarrow d_{n+1,a}$.
+    \State Assemble the gradient $g$ and the hessian $H$ for the discretized incremental variational (sub-) problem
+    \begin{align*}
+      \inf_{d_{n+1,a+1}^k} L_n.
+    \end{align*}
+    \State Compute the initial Lagrange multiplier $\lambda = -M^{-1}g$.
+    \State Identify the initial active/inactive as $\mathcal{A} = \{ i \vert \lambda_i > 0 \}$, $\mathcal{I} = \{ i \vert \lambda_i \leqslant 0 \}$.
+    \Repeat
+    \State Eliminate dofs on $\mathcal{A}$ and $\mathcal{I}$ to obtain the reduced gradient $\widehat{g}$ and reduced Hessian $\widehat{\widehat{H}}$.
+    \State Compute the Newton update on the inactive set as $\widehat{p} = - \widehat{\widehat{H}}^{-1} \widehat{g}$.
+    \State Update the solution on the inactive set to obtain $d_{n+1,a+1}^{k+1}$.
+    \State Update $g$ and $H$.
+    \State Update $\lambda = -M^{-1}(g+Hp)$.
+    \State Update $\mathcal{A} = \{ i \vert (\lambda-cp)_i > 0 \}$, $\mathcal{I} = \{ i \vert (\lambda-cp)_i \leqslant 0 \}$.
+    \State Update $k \leftarrow k+1$.
+    \Until {$d_{n+1,a+1}$ and $\mathcal{A}$ have converged.}
+    \State Update $d_{n+1,a+1} \leftarrow d_{n+1,a+1}^k$.
+    \State Update $a \leftarrow a+1$.
+    \Until {$\btu_{n+1}$, $T_{n+1}$ and $d_{n+1}$ have converged.}
+    \State Update $\btu_{n+1} \leftarrow \btu_{n+1,a}$, $T_{n+1} \leftarrow T_{n+1,a}$, $d_{n+1} \leftarrow d_{n+1,a}$.
+  \end{algorithmic}
+  \label{alg: PDAS-newton}
+\end{algorithm}

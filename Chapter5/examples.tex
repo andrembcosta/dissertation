@@ -407,9 +407,31 @@ where $T_0$ is the reference stress-free temperature. Since the oxide mainly for
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Results}
+\subsubsection{Debonding around a single crack}
 
-The response of the heat exchanger is simulated for 5 years. Boundary conditions are generated following the operation schedule indicated in \Cref{table: Chapter5/spallation/schedule}. Shut-down events are scheduled to happen every half year, resulting in 10 shut-down events in total. The evolution of the effective plastic (creep) strain $\ep$, the coalescence degradation function $g_c$, the active strain energy density $\psi^e_\activepart$, the active interface energy density $\psi^i_\activepart$, and the debonding indicator $c$ are shown in \Cref{fig: Chapter5/spallation/animation_ep,fig: Chapter5/spallation/animation_gc,fig: Chapter5/spallation/animation_psie,fig: Chapter5/spallation/animation_psii,fig: Chapter5/spallation/animation_c}, respectively.
+The model for spallation is first verified by simulating debonding around a pre-existing crack. During normal operation conditions at high temperature, debonding is expected to occur in the vicinity of a crack.
+A small pre-existing crack is introduced as the initial condition of the phase-field. The crack set is defined by $\Gamma = \{ \btX \ \vert\ \frac{\pi}{6} \leqslant \theta \leqslant \frac{\pi}{3}, \quad \text{X}_3 = \SI{100}{\milli\meter} \}$, where $\theta = \atan(\frac{\text{X}_2}{\text{X}_1})$.
+All nodes within the crack set are initialized to have $d = 1$.
+The response of the heat exchanger is simulated for 140 days under normal operation conditions. The evolution of the phase field $d$, the debonding indicator $c$, and the effective creep strain $\ep$ are shown in \Cref{fig: Chapter5/spallation/animation_seed}. Only a section of the tube near the crack is shown. Debonding first occurs in the vicinity of crack tips due to localization of the out-of-plane strain energy density, followed by the debonding of a continuous region around the crack.
+
+\input{Chapter5/figures/spallation/animation_seed}
+
+The effective creep strain localizes around the crack tips along their horizontal extensions. As a result, the prescribed crack is expected to propagate along the horizontal direction during the following shut-down events.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Incorporating spatially-varying properties}
+
+The response of the heat exchanger is then simulated for 5 years. Boundary conditions are generated following the operation schedule indicated in \Cref{table: Chapter5/spallation/schedule}. Shut-down events are scheduled to happen every half year, resulting in 10 shut-down events in total. The Young's modulus and the fracture toughness are modeled as marginal-Gamma random fields with mean values shown in the table \Cref{tab: Chapter5/spallation/oxide} and coefficient of variance of $0.03$.
+The evolution of the effective creep strain $\ep$, the coalescence degradation function $g_c$, the active strain energy density $\psi^e_\activepart$, the active interface energy density $\psi^i_\activepart$, and the debonding indicator $c$ are shown in \Cref{fig: Chapter5/spallation/animation_ep,fig: Chapter5/spallation/animation_gc,fig: Chapter5/spallation/animation_psie,fig: Chapter5/spallation/animation_psii,fig: Chapter5/spallation/animation_c}, respectively.
 
 \input{Chapter5/figures/spallation/animation_ep}
 
