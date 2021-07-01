@@ -16,7 +16,7 @@ We examine two representations of the pre-existing crack. First, we use a ``geom
 The resulting phase fields as a function of boundary displacement are shown in \Cref{fig: Chapter4/mode1_notched_plate_damage_1,fig: Chapter4/mode1_notched_plate_damage_2,fig: Chapter4/mode1_notched_plate_damage_3}.
 Only the phase fields obtained using the spectral decomposition are shown in the Figures.  Contours of the phase field obtained using the contact split with a threshold were found to be indistinguishable.
 
-\input{Chapter4/figures/mode1_notched_plate.tex}
+\input{Chapter4/figures/mode1_notched_plate}
 
 Secondly, we use an initial phase field $d(t = 0) = d_0$ to represent the initial crack, where $d_0$ is given by:
 \begin{align}
@@ -34,11 +34,11 @@ Secondly, we use an initial phase field $d(t = 0) = d_0$ to represent the initia
 \end{align}
 with an origin for the coordinate system at the center of the plate. The initial phase field is resolved using the locally refined mesh of linear triangular elements shown in \Cref{fig: Chapter4/mode1_initial_mesh}. The resulting initial phase field is shown in \Cref{fig: Chapter4/intact_plate_initial}.  Once again, the contour plots of the phase field obtained using a spectral decomposition and the contact split were found to be indistinguishable.
 
-\input{Chapter4/figures/mode1_intact_plate.tex}
+\input{Chapter4/figures/mode1_intact_plate}
 
 Plots of the vertical component of the reaction force at the top boundary of the plate versus the prescribed y--displacement are shown in \Cref{fig: Chapter4/mode1_force_displacement}, for both representations of the initial crack and split strategies.  The reaction force is nondimensionalized with respect to the critical strength and the plate thickness, i.e. $f_y^* = f_y / (\sigma_c t)$, and the displacement is nondimensionalized by $u_y^* = u_y / a$, where $a$ is the side length of the square plate.  As expected, the contact split does not affect the material response in the uniaxial loading case (\Cref{fig: Chapter4/mode1_force_displacement_compare_decomposition}), and the results appear to be relatively insensitive to the choice of threshold for switching between the spectral split and the contact split (\Cref{fig: Chapter4/mode1_force_displacement_compare_dcritical}).
 
-\input{Chapter4/figures/mode1_force_displacement.tex}
+\input{Chapter4/figures/mode1_force_displacement}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -46,9 +46,9 @@ Plots of the vertical component of the reaction force at the top boundary of the
 
 The effect of the proposed energy split becomes readily apparent when the loading case is dominated by in--plane or out--of--plane shear. Let us consider the same edge--notched thick plate as in the last section, but subjected to a different loading. A schematic of the boundary conditions for this case and the corresponding meshes are shown in \Cref{fig: Chapter4/mode2_bcs,fig: Chapter4/mode2_notch_mesh,fig: Chapter4/mode2_initial_mesh}.
 
-\input{Chapter4/figures/mode2_crack_path.tex}
+\input{Chapter4/figures/mode2_crack_path}
 
-\input{Chapter4/figures/mode2_force_displacement.tex}
+\input{Chapter4/figures/mode2_force_displacement}
 
 Once again, the effect of the contact split is examined by comparing the results using two different representations of the initial crack, as shown in \Cref{fig: Chapter4/mode2_crack_path} and \Cref{fig: Chapter4/mode2_force_displacement_compare_decomposition}.
 Simulations that rely solely on the spectral decomposition result in dramatically different crack paths (\Cref{fig: Chapter4/mode2_notched_plate_spectral_intermediate,fig: Chapter4/mode2_notched_plate_spectral_final,fig: Chapter4/mode2_intact_plate_spectral_intermediate,fig: Chapter4/mode2_intact_plate_spectral_final})
@@ -81,18 +81,18 @@ With a view towards nondimensionalization, as will be discussed in \Cref{section
 \end{align}
 where $a$ is a characteristic size for the domain.  Here, we choose it to be the width of the plate.
 
-\input{Chapter4/figures/biaxial_schematic.tex}
+\input{Chapter4/figures/biaxial_schematic}
 
 We now compare simulation results obtained using three strain energy split techniques: a no-split approach, the spectral split, and the contact split. The phase fields obtained using the three different split techniques are shown in \Cref{fig: Chapter4/biaxial_crack_path} at representative magnitudes of the dimensionless driving force.
 
-\input{Chapter4/figures/biaxial_crack_path.tex}
+\input{Chapter4/figures/biaxial_crack_path}
 
 The no-split approach treats the entire strain energy as an active potential to be degraded, neglecting the tension-compression asymmetry. It is widely used in calculations of drying processes because the effective loading condition is assumed to be tensile: biaxial tension in 2D and triaxial tension in 3D. However, we note that tensile loading conditions do not necessarily lead to a tensile local stress/strain state everywhere in the domain, hence it is possible to have crack propagation under compression, as can be observed  in this example.   We will return to this issue after examining the results obtained using a spectral decomposition and a spectral decomposition with the contact split.
 
 The spectral decomposition prevents crack propagation under compression (\Cref{fig: Chapter4/biaxial_spectral_1}), but without enforcing the traction-free condition on the crack surfaces represented by the phase field, which may affect secondary crack paths that emerge from existing crack surfaces (\Cref{fig: Chapter4/biaxial_spectral_2,fig: Chapter4/biaxial_spectral_2}).
 Such artifacts can be removed by enforcing the traction-free condition on the regularized crack surfaces using the contact split (\Cref{fig: Chapter4/biaxial_odd_1,fig: Chapter4/biaxial_odd_2,fig: Chapter4/biaxial_odd_3}).
 
-\input{Chapter4/figures/biaxial_nosplit_stress.tex}
+\input{Chapter4/figures/biaxial_nosplit_stress}
 
 We now return to the issue of the possibility of crack growth under compression with a no-split approach.  Comparing the damage profiles shown in \Cref{fig: Chapter4/biaxial_nosplit_1,fig: Chapter4/biaxial_spectral_1,fig: Chapter4/biaxial_odd_1}
 one can observe that a damage bridge forms between the two vertical initial cracks only for the case of a no-split method.  To explore this region more precisely, we consider the fields immediately before the bridge forms, and examine contour plots of the normal pressure for an orientation that is orthogonal to the bridge (\Cref{fig: Chapter4/biaxial_nosplit_stress}). The contour plots clearly indicate that the region is loaded in compression immediately before the bridge forms.
