@@ -29,7 +29,7 @@ In the second stage, all ``intact'' elements in \texttt{ALL} are pushed into \te
 
 During the third stage, ``broken'' elements are grouped into their nearest cluster to preserve the total volume of the mesh. In our implementation,  ``broken'' elements are assigned to clusters based on the solution to a minimization problem of weighted Euclidean distance between the elements and cluster centroids.
 
-\begin{algorithm}[!htb]
+\begin{algorithm}[!htbp]
   \setstretch{1.2}
   \caption{An iterative flooding algorithm for fragmentation count}
   \begin{algorithmic}[1]

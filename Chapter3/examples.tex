@@ -69,7 +69,7 @@ Consider a representative elementary volume (REV) with side length \SI{120}{\mic
 
 The variations in the critical fracture strength (\Cref{fig_bubble_geo_stress}) suggest that the shape of the gas bubbles affects the predicted fracture properties. A lenticular-shaped bubble has higher stress concentration at the edges of grain boundary bubbles, which lowers the critical fracture strength.
 
-\begin{figure}[!htb]
+\begin{figure}[!htbp]
   \centering
   \begin{tabular}[t]{c c}
     \begin{tabular}{c}
@@ -137,7 +137,7 @@ The variations in the critical fracture strength (\Cref{fig_bubble_geo_stress}) 
 \subsubsection{Effect of loading}
 
 Next, we study the effect of different loading conditions. Uniaxial, biaxial and triaxial loading conditions are considered. The final crack configurations are shown in \Cref{final_loading}. A change in crack path due to a different loading condition is evident from the figure. For uniaxial loading, cracks propagate along the grain boundaries that are mainly perpendicular to the loading direction. For biaxial loading, crack branching occurs because biaxial loading results in two positive principal components of the strain tensor of the same order of magnitude. For triaxial loading, cracks propagate along all three directions.
-\begin{figure}[!htb]
+\begin{figure}[!htbp]
   \centering
   \begin{subfigure}{0.32\textwidth}
     \centering
@@ -209,7 +209,7 @@ The influence of the voronoi structure on fracture properties can be isolated by
 
 Final configurations of the approximated crack surfaces are shown in \Cref{ini_final_porosity}, where, in general, cracks propagate perpendicular to the direction of the applied load.
 It is worth noting that cracks keep propagating after initiation without any increase in the applied stress, which suggests that a snap-back is likely to take place after crack initiation and a mixed force-displacement control is necessary to follow the actual stress-strain curve without loss of information. However, we argue that the simple displacement control suffices to obtain the critical fracture strength -- the maximum stress value along the stress-strain curve. From \Cref{fig_porosity}, we conclude that an increase in porosity leads to a higher probability of crack initiation at a lower stress state and consequently a decrease in the critical fracture strength.
-\begin{figure}[!htb]
+\begin{figure}[!htbp]
   \centering
   \begin{subfigure}{0.32\textwidth}
     \centering
@@ -251,7 +251,7 @@ It is worth noting that cracks keep propagating after initiation without any inc
   \label{ini_final_porosity}
 \end{figure}
 
-\begin{figure}[!htb]
+\begin{figure}[!htbp]
   \centering
   \begin{tikzpicture}
     \begin{axis}[
@@ -427,47 +427,49 @@ In a fuel pellet system, external pressure can arise from fuel-cladding mechanic
 
 \begin{figure}[htb!]
   \centering
-  \begin{subfigure}[t]{0.32\linewidth}
+  \begin{subfigure}[t]{0.3\linewidth}
     \centering
     \includegraphics[width=\linewidth]{Chapter3/figures/bubble_pressure_r0.5_ext0_rod196}
     \caption{}
   \end{subfigure}
-  \begin{subfigure}[t]{0.32\linewidth}
+  \begin{subfigure}[t]{0.3\linewidth}
     \centering
     \includegraphics[width=\linewidth]{Chapter3/figures/r5_ext0}
     \caption{}
   \end{subfigure}
-  \begin{subfigure}[t]{0.32\linewidth}
+  \begin{subfigure}[t]{0.3\linewidth}
     \centering
     \includegraphics[width=\linewidth]{Chapter3/figures/r5_ext0_stress}
     \caption{}
-  \end{subfigure}\\
-  \begin{subfigure}[t]{0.32\linewidth}
+  \end{subfigure}
+  
+  \begin{subfigure}[t]{0.3\linewidth}
     \centering
     \includegraphics[width=\linewidth]{Chapter3/figures/bubble_pressure_r0.5_ext30_rod196}
     \caption{}
   \end{subfigure}
-  \begin{subfigure}[t]{0.32\linewidth}
+  \begin{subfigure}[t]{0.3\linewidth}
     \centering
     \includegraphics[width=\linewidth]{Chapter3/figures/r5_ext30}
     \caption{}
   \end{subfigure}
-  \begin{subfigure}[t]{0.32\linewidth}
+  \begin{subfigure}[t]{0.3\linewidth}
     \centering
     \includegraphics[width=\linewidth]{Chapter3/figures/r5_ext30_stress}
     \caption{}
-  \end{subfigure}\\
-  \begin{subfigure}[t]{0.32\linewidth}
+  \end{subfigure}
+  
+  \begin{subfigure}[t]{0.3\linewidth}
     \centering
     \includegraphics[width=\linewidth]{Chapter3/figures/bubble_pressure_r0.5_ext60_rod196}
     \caption{}
   \end{subfigure}
-  \begin{subfigure}[t]{0.32\linewidth}
+  \begin{subfigure}[t]{0.3\linewidth}
     \centering
     \includegraphics[width=\linewidth]{Chapter3/figures/r5_ext60}
     \caption{}
   \end{subfigure}
-  \begin{subfigure}[t]{0.32\linewidth}
+  \begin{subfigure}[t]{0.3\linewidth}
     \centering
     \includegraphics[width=\linewidth]{Chapter3/figures/r5_ext60_stress}
     \caption{}
@@ -497,22 +499,23 @@ All bubbles have a radius of $\dfrac{1}{12}L$. Results are shown in \Cref{fig:co
 
 \begin{figure}[htb!]
   \centering
-  \begin{subfigure}[t]{0.4\linewidth}
+  \begin{subfigure}[t]{0.35\linewidth}
     \centering
     \includegraphics[width=\linewidth]{Chapter3/figures/two_bubbles_bnd}
     \caption{}
   \end{subfigure}
-  \begin{subfigure}[t]{0.4\linewidth}
+  \begin{subfigure}[t]{0.35\linewidth}
     \centering
     \includegraphics[width=\linewidth]{Chapter3/figures/two_bubbles_stress}
     \caption{}
-  \end{subfigure} \\
-  \begin{subfigure}[t]{0.4\linewidth}
+  \end{subfigure}
+  
+  \begin{subfigure}[t]{0.35\linewidth}
     \centering
     \includegraphics[width=\linewidth]{Chapter3/figures/three_bubbles_bnd}
     \caption{}
   \end{subfigure}
-  \begin{subfigure}[t]{0.4\linewidth}
+  \begin{subfigure}[t]{0.35\linewidth}
     \centering
     \includegraphics[width=\linewidth]{Chapter3/figures/three_bubbles_stress}
     \caption{}
@@ -536,34 +539,36 @@ All bubbles have a radius of $\dfrac{1}{12}L$. Results are shown in \Cref{fig:co
 Lastly, we incorporate defect evolution and recrystallization into the quasi-brittle fracture model. A phase-field model is used to simulate the defect evolution and the recrystallization behavior leading to HBS formation. A detailed description of the phase-field model is available in \cite{Aagesen2020}. The quasi-brittle fracture model is applied directly on the microstructure resulting from simulations of the HBS formation process. Considering the fact that fragmentation can be observed in partially recrystallized zones, we focus on the fracture behavior of partial HBS.
 Three HBS at different recrystallization stages with $25\%$, $60\%$, and $100\%$ recrystallization fraction are considered. A linearly increasing gas pressure is applied. Results are shown in \Cref{fig:partial_hbs}. In all three cases, cracks nucleate at around 60 MPa, owing to their similar defect sizes. Crack nucleation locations vary among the three cases, as more grains form around the defect during recrystallization and their intersections with the defect become possible nucleation sites. Furthermore, recrystallization changes the grain morphology, leading to different crack paths.
 
-\begin{figure}[htb!]
+\begin{figure}[htbp!]
   \centering
-  \begin{subfigure}[t]{0.4\linewidth}
+  \begin{subfigure}[t]{0.35\linewidth}
     \centering
     \includegraphics[width=\linewidth]{Chapter3/figures/partial_hbs_1}
     \caption{}
   \end{subfigure}
-  \begin{subfigure}[t]{0.4\linewidth}
+  \begin{subfigure}[t]{0.35\linewidth}
     \centering
     \includegraphics[width=\linewidth]{Chapter3/figures/partial_hbs_1_stress}
     \caption{}
-  \end{subfigure}\\
-  \begin{subfigure}[t]{0.4\linewidth}
+  \end{subfigure}
+  
+  \begin{subfigure}[t]{0.35\linewidth}
     \centering
     \includegraphics[width=\linewidth]{Chapter3/figures/partial_hbs_2}
     \caption{}
   \end{subfigure}
-  \begin{subfigure}[t]{0.4\linewidth}
+  \begin{subfigure}[t]{0.35\linewidth}
     \centering
     \includegraphics[width=\linewidth]{Chapter3/figures/partial_hbs_2_stress}
     \caption{}
-  \end{subfigure}\\
-  \begin{subfigure}[t]{0.4\linewidth}
+  \end{subfigure}
+  
+  \begin{subfigure}[t]{0.35\linewidth}
     \centering
     \includegraphics[width=\linewidth]{Chapter3/figures/partial_hbs_3}
     \caption{}
   \end{subfigure}
-  \begin{subfigure}[t]{0.4\linewidth}
+  \begin{subfigure}[t]{0.35\linewidth}
     \centering
     \includegraphics[width=\linewidth]{Chapter3/figures/partial_hbs_3_stress}
     \caption{}
