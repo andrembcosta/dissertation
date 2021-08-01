@@ -109,9 +109,45 @@ Note that the LEFM solution is based on a brittle fracture model. A comparison b
   \caption[Sneddon benchmark problem.]{\label{fig:sneddon}Pressurized crack propagation problem: (a) Initial values are imposed on crack surface nodes (zoomed view). (b) Regularized phase-field variable after one time step (zoomed view). (c) Mesh with five levels of local refinement. (d) Pre-existing crack. The red and blue color correspond to value of 1 and 0, respectively.}
 \end{figure}
 
-\begin{figure}[!ht]
+\begin{figure}[htb!]
   \centering
-  \includegraphics[width=0.6\textwidth]{Chapter3/figures/critical_pressure}
+  \tikzsetnextfilenamesafe{Chapter3/verification/critical_pressure}
+  \begin{tikzpicture}
+    \begin{axis}[
+        width=0.9\textwidth,
+        height=0.7\textwidth,
+        xmin=0,
+        xmax=20,
+        ymin=0,
+        ymax=0.5,
+        xlabel=$a/l$,ylabel=$p/\sigma_0$,
+        scaled x ticks=false,
+        yticklabel style={
+            /pgf/number format/fixed,
+            /pgf/number format/precision=2
+          },
+        xticklabel style={
+            /pgf/number format/fixed,
+            /pgf/number format/precision=2
+          },
+        legend style={
+            at={(0.95,0.95)},
+            anchor=north east,
+            nodes={scale=0.8, transform shape},
+            fill=none,
+            draw=none,
+            cells={align=left}
+          },
+        legend cell align={left}
+      ]
+      \addplot +[black,thick,domain=0:20,samples=100,mark=none] {sqrt(0.001*1.12433979929/(1-0.2*0.2)/3.1415926/0.02/x)/0.237101223};
+      \addplot +[mark color=black,draw=none,mark size=3pt] table[x expr=\thisrowno{0}/0.02,y expr=\thisrowno{1}/0.237101223,col sep=comma]{Chapter3/data/critical_pressure_numerical.csv};
+      \addplot +[mark color=black,draw=none,mark size=3pt] table[x expr=\thisrowno{0}/0.02,y expr=\thisrowno{2}/0.237101223,col sep=comma]{Chapter3/data/critical_pressure_numerical.csv};
+      \addplot +[mark color=black,draw=none,mark size=3pt] table[x expr=\thisrowno{0}/0.02,y expr=\thisrowno{3}/0.237101223,col sep=comma]{Chapter3/data/critical_pressure_numerical.csv};
+      \addplot +[mark color=black,draw=none,mark size=3pt] table[x expr=\thisrowno{0}/0.02,y expr=\thisrowno{4}/0.237101223,col sep=comma]{Chapter3/data/critical_pressure_numerical.csv};
+      \legend{LEFM solution,$\sigma_c=\SI{0.05}{\mega\pascal}$,$\sigma_c=\SI{0.1}{\mega\pascal}$,$\sigma_c=\SI{0.15}{\mega\pascal}$,$\sigma_c=\SI{0.2}{\mega\pascal}$}
+    \end{axis}
+  \end{tikzpicture}
   \caption{Comparison between the numerical results and the LEFM solution for the critical pressure values.}
   \label{fig:critical_presssure}
 \end{figure}

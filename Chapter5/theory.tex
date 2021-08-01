@@ -195,13 +195,13 @@ where $\sigma_0$ is the reference yield stress, $Q$ is the activation energy, $R
 \end{align}
 
 \begin{remark}\label[remark]{remark: tqf}
-  Consider plastic dissipation in the thermodynamic process resulting from the temperature dependent plastic energy, the dissipation can be written as
+  Consider only the plastic dissipation in the thermodynamic process. The Taylor-Quinney factor should satisfy the following inequality to yield a positive heat generation:
   \begin{align}
-    \delta + \delta_T = g^p \tqf \sigma_y^T \epdot - g^p (1-\tqf) \dfrac{Q}{RT} \sigma_y^T \epdot \geqslant 0.
+    \delta + \delta_T = g^p \tqf \sigma_y^T \epdot - g^p (1-\tqf) \dfrac{Q}{RT} \sigma_y^T \epdot > 0.
   \end{align}
   Rearranging the above equation yields the lower bound on the Taylor-Quinney factor:
   \begin{align}
-    \tqf \geqslant \dfrac{Q}{Q+RT}.
+    \tqf > \dfrac{Q}{Q+RT}.
   \end{align}
   In many engineering applications, large activation energy $Q \gg RT$ mandates the use of a Taylor-Quinney factor of $\tqf \approx 1$, and several consequences follow from the variational framework, e.g. the contribution from plastic deformation in the fracture driving energy is negligible, and a large portion of the plastic deformation results in heat generation.
 \end{remark}

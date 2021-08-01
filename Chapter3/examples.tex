@@ -13,7 +13,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Predicting the critical fracture strength}
 
-This phase-field for brittle fracture model is readily applicable to three dimensional intergranular fracture. In this section, as an example, we simulate UO$_2$ intergranular fracture and compare with experimental results. Material properties and model parameters are summarized in \Cref{table: brittle material properties}. We show how the presence of gas bubbles can alter the critical fracture strength of the specimen. The fracture toughness $\Gc^b = \SI{2e-3}{\milli\joule\per\square\milli\meter}$ is calibrated based on molecular dynamics simulations \cite{pritam_2016}, and is assumed to be homogeneous over the grain boundaries.
+This phase-field model for brittle fracture is readily applicable to three dimensional intergranular fracture. In this section, as an example, we simulate UO$_2$ intergranular fracture and compare with experimental results. Material properties and model parameters are summarized in \Cref{table: brittle material properties}. We show how the presence of gas bubbles can alter the critical fracture strength of the specimen. The fracture toughness $\Gc^b = \SI{2e-3}{\milli\joule\per\square\milli\meter}$ is calibrated based on molecular dynamics simulations \cite{pritam_2016}, and is assumed to be homogeneous over the grain boundaries.
 
 \begin{table}[!htb]
   \centering
@@ -174,8 +174,13 @@ The stress-strain curves are shown in \Cref{fig_loading}. The difference in the 
         xmax=0.0025,
         ymin=0,
         ymax=700,
-        legend style={at={(0.05,0.95)},anchor=north west},
-        legend style={nodes={scale=0.8, transform shape}},
+        legend style={
+            at={(0.02,0.98)},
+            anchor=north west,
+            nodes={scale=0.8, transform shape},
+            draw=none,
+            fill=none
+          },
         legend cell align={left},
         every axis plot/.append style={line width=1pt}
       ]
@@ -317,8 +322,13 @@ A comparison of the experimental model, previous 2D simulations \cite{pritam_201
         xmax=10,
         ymin=0,
         ymax=1.2,
-        legend style={at={(0.05,0.05)},anchor=south west},
-        legend style={nodes={scale=0.8, transform shape}},
+        legend style={
+            at={(0.02,0.02)},
+            anchor=south west,
+            nodes={scale=0.8, transform shape},
+            draw=none,
+            fill=none
+          },
         legend cell align={left},
         every axis plot/.append style={line width=1pt}
       ]
@@ -391,7 +401,32 @@ Two bubble radii (\SI{0.25}{\micro\meter} and \SI{0.5}{\micro\meter}) are consid
   \centering
   \begin{subfigure}[t]{0.32\linewidth}
     \centering
-    \includegraphics[width=\linewidth]{Chapter3/figures/bubble_pressure_r0.25_ext0_rod196}
+    \tikzsetnextfilenamesafe{Chapter3/examples/bubble_pressure_r0.25}
+    \begin{tikzpicture}
+      \begin{axis}[
+          width=\textwidth,
+          height=0.9\textwidth,
+          xmin=0,
+          xmax=400,
+          ymin=0,
+          ymax=180,
+          xlabel=Time (\SI{}{\second}),ylabel=Pressure (\SI{}{\mega\pascal}),
+          label style={font=\tiny},
+          scaled x ticks=false,
+          yticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          xticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            }
+        ]
+        \addplot +[thick,color=black,mark=none] table[x expr=\thisrowno{0},y expr=\thisrowno{1},col sep=comma]{Chapter3/data/bubble_pressure_r0.25.csv};
+        \node[fill,circle,inner sep=0pt,minimum size=3pt] at (86, 120.17) {};
+        \node[anchor=west] at (86, 120.17) {\tiny $p_c = \SI{120.17}{\mega\pascal}$};
+      \end{axis}
+    \end{tikzpicture}
     \caption{}
   \end{subfigure}
   \begin{subfigure}[t]{0.32\linewidth}
@@ -406,7 +441,32 @@ Two bubble radii (\SI{0.25}{\micro\meter} and \SI{0.5}{\micro\meter}) are consid
   \end{subfigure}\\
   \begin{subfigure}[t]{0.32\linewidth}
     \centering
-    \includegraphics[width=\linewidth]{Chapter3/figures/bubble_pressure_r0.5_ext0_rod196}
+    \tikzsetnextfilenamesafe{Chapter3/examples/bubble_pressure_r0.5}
+    \begin{tikzpicture}
+      \begin{axis}[
+          width=\textwidth,
+          height=0.9\textwidth,
+          xmin=0,
+          xmax=400,
+          ymin=0,
+          ymax=180,
+          xlabel=Time (\SI{}{\second}),ylabel=Pressure (\SI{}{\mega\pascal}),
+          label style={font=\tiny},
+          scaled x ticks=false,
+          yticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          xticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            }
+        ]
+        \addplot +[thick,color=black,mark=none] table[x expr=\thisrowno{0},y expr=\thisrowno{1},col sep=comma]{Chapter3/data/bubble_pressure_r0.5.csv};
+        \node[fill,circle,inner sep=0pt,minimum size=3pt] at (18, 89.69) {};
+        \node[anchor=west] at (18, 89.69) {\tiny $p_c = \SI{89.69}{\mega\pascal}$};
+      \end{axis}
+    \end{tikzpicture}
     \caption{}
   \end{subfigure}
   \begin{subfigure}[t]{0.32\linewidth}
@@ -429,7 +489,32 @@ In a fuel pellet system, external pressure can arise from fuel-cladding mechanic
   \centering
   \begin{subfigure}[t]{0.3\linewidth}
     \centering
-    \includegraphics[width=\linewidth]{Chapter3/figures/bubble_pressure_r0.5_ext0_rod196}
+    \tikzsetnextfilenamesafe{Chapter3/examples/bubble_pressure_r0.5_ext0}
+    \begin{tikzpicture}
+      \begin{axis}[
+          width=\textwidth,
+          height=0.9\textwidth,
+          xmin=0,
+          xmax=400,
+          ymin=0,
+          ymax=180,
+          xlabel=Time (\SI{}{\second}),ylabel=Pressure (\SI{}{\mega\pascal}),
+          label style={font=\tiny},
+          scaled x ticks=false,
+          yticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          xticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            }
+        ]
+        \addplot +[thick,color=black,mark=none] table[x expr=\thisrowno{0},y expr=\thisrowno{1},col sep=comma]{Chapter3/data/bubble_pressure_r0.5.csv};
+        \node[fill,circle,inner sep=0pt,minimum size=3pt] at (18, 89.69) {};
+        \node[anchor=west] at (18, 89.69) {\tiny $p_c = \SI{89.69}{\mega\pascal}$};
+      \end{axis}
+    \end{tikzpicture}
     \caption{}
   \end{subfigure}
   \begin{subfigure}[t]{0.3\linewidth}
@@ -445,7 +530,32 @@ In a fuel pellet system, external pressure can arise from fuel-cladding mechanic
   
   \begin{subfigure}[t]{0.3\linewidth}
     \centering
-    \includegraphics[width=\linewidth]{Chapter3/figures/bubble_pressure_r0.5_ext30_rod196}
+    \tikzsetnextfilenamesafe{Chapter3/examples/bubble_pressure_r0.5_ext30}
+    \begin{tikzpicture}
+      \begin{axis}[
+          width=\textwidth,
+          height=0.9\textwidth,
+          xmin=0,
+          xmax=400,
+          ymin=0,
+          ymax=180,
+          xlabel=Time (\SI{}{\second}),ylabel=Pressure (\SI{}{\mega\pascal}),
+          label style={font=\tiny},
+          scaled x ticks=false,
+          yticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          xticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            }
+        ]
+        \addplot +[thick,color=black,mark=none] table[x expr=\thisrowno{0},y expr=\thisrowno{1},col sep=comma]{Chapter3/data/bubble_pressure_r0.5.csv};
+        \node[fill,circle,inner sep=0pt,minimum size=3pt] at (62.75, 119.56) {};
+        \node[anchor=west] at (62.75, 119.56) {\tiny $p_c = \SI{119.56}{\mega\pascal}$};
+      \end{axis}
+    \end{tikzpicture}
     \caption{}
   \end{subfigure}
   \begin{subfigure}[t]{0.3\linewidth}
@@ -461,7 +571,32 @@ In a fuel pellet system, external pressure can arise from fuel-cladding mechanic
   
   \begin{subfigure}[t]{0.3\linewidth}
     \centering
-    \includegraphics[width=\linewidth]{Chapter3/figures/bubble_pressure_r0.5_ext60_rod196}
+    \tikzsetnextfilenamesafe{Chapter3/examples/bubble_pressure_r0.5_ext60}
+    \begin{tikzpicture}
+      \begin{axis}[
+          width=\textwidth,
+          height=0.9\textwidth,
+          xmin=0,
+          xmax=400,
+          ymin=0,
+          ymax=180,
+          xlabel=Time (\SI{}{\second}),ylabel=Pressure (\SI{}{\mega\pascal}),
+          label style={font=\tiny},
+          scaled x ticks=false,
+          yticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            },
+          xticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/precision=2
+            }
+        ]
+        \addplot +[thick,color=black,mark=none] table[x expr=\thisrowno{0},y expr=\thisrowno{1},col sep=comma]{Chapter3/data/bubble_pressure_r0.5.csv};
+        \node[fill,circle,inner sep=0pt,minimum size=3pt] at (110.75, 151.36) {};
+        \node[anchor=west] at (110.75, 151.36) {\tiny $p_c = \SI{151.36}{\mega\pascal}$};
+      \end{axis}
+    \end{tikzpicture}
     \caption{}
   \end{subfigure}
   \begin{subfigure}[t]{0.3\linewidth}

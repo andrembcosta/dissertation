@@ -8,7 +8,7 @@ In this section, we construct a potential such that \emph{all} the conservation 
 
 To maintain a variational structure, the viscous forces are supposed to be derived from dual kinetic potentials.
 
-\begin{example}[The elastic dual kinetic potential]
+\begin{example}
   \vspace{-0.5em}
   Suppose there exist a potential $\zeta(\bfP^\text{vis})$ such that
   \begin{align}
@@ -136,7 +136,9 @@ Next, the balance of linear momentum and traction boundary conditions are recove
   \end{align}
 \end{subequations}
 Finally, variation in the admissible space of $\dot{d}$ yields the fracture evolution equation on the inactive set
-\begin{align}
-  \divergence \bs{\xi} - f = 0, & \quad \forall \btX \in \mathcal{I}(\body_0),           \\
-  \bs{\xi}\cdot\normal_0 = 0,   & \quad \forall \btX \in \mathcal{I}(\partial_d\body_0). 
-\end{align}
+\begin{subequations}
+  \begin{align}
+    \divergence \bs{\xi} - f = 0, & \quad \forall \btX \in \mathcal{I}(\body_0),           \\
+    \bs{\xi}\cdot\normal_0 = 0,   & \quad \forall \btX \in \mathcal{I}(\partial_d\body_0). 
+  \end{align}
+\end{subequations}
