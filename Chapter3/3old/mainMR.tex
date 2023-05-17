@@ -1,0 +1,87 @@
+\documentclass[12pt]{article}
+\usepackage{tabularx} 
+\usepackage{amsmath}  
+\usepackage{amsfonts}
+\usepackage{authblk}
+\usepackage{stmaryrd}
+\usepackage{parskip}
+\usepackage{floatrow}
+\usepackage{subcaption}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{mdframed}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{todonotes} 
+\usepackage{amssymb}
+\usepackage[section]{placeins}
+\usepackage{placeins}
+\usepackage{graphicx} 
+\usepackage[margin=1.0in]{geometry} 
+\usepackage[ruled,vlined]{algorithm2e}
+\usepackage{cite} 
+\usepackage[final]{hyperref} 
+\hypersetup{
+	colorlinks=true,       
+	linkcolor=blue,        
+	citecolor=blue,        
+	filecolor=magenta,     
+	urlcolor=black,   
+}
+
+\makeatletter
+\AtBeginDocument{%
+  \expandafter\renewcommand\expandafter\subsection\expandafter{%
+    \expandafter\@fb@secFB\subsection
+  }%
+}
+\makeatother
+\renewcommand*{\Affilfont}{\itshape\small}
+
+\begin{document}
+
+\title{A Multi-Resolution Approach \\ to Hydraulic Fracture Simulation}
+
+\author[a]{Andre Costa}
+\author[b]{Matteo Cusini}
+\author[c]{Tao Jin}
+\author[b]{Randolph Settgast}
+\author[a, *]{John E.\ Dolbow}
+
+\affil[a]{Department of Mechanical Engineering and Material Science, Duke University, Durham, 27708, NC, USA} 
+
+\affil[b]{Atmospheric, Earth and Energy Division, Lawrence Livermore National Laboratories, Livermore, 94550, CA, USA} 
+
+\affil[c]{Department of Mechanical Engineering, University of Ottawa, Ottawa, K1N6N5, ON, Canada} 
+
+\affil[*]{Corresponding author: John E.\ Dolbow, jdolbow@duke.edu}
+
+\date{ }
+\maketitle
+
+\begin{abstract}
+We present a multi-resolution approach for constructing model-based simulations of hydraulic fracturing, wherein flow through porous media is coupled with fluid-driven fracture.  The approach consists of a hybrid scheme that couples a discrete crack representation in a global domain to a phase-field representation in a local subdomain near the crack tip. 
+The multi-resolution approach addresses issues such as the computational expense of accurate hydraulic fracture simulations and the difficulties associated with reconstructing crack apertures from diffuse fracture representations. 
+In the global domain, a coupled system of equations for displacements and pressures is considered. The crack geometry is assumed to be fixed and the displacement field is enriched with discontinuous functions. Around the crack tips in the local subdomains, phase-field sub-problems are instantiated on the fly to propagate fractures in arbitrary, mesh independent directions. The governing equations and fields in the global and local domains are approximated using a combination of finite-volume and finite element discretizations.  The efficacy of the method is illustrated through various benchmark problems in hydraulic fracturing, as well as a new study of fluid-driven crack growth around a stiff inclusion.  
+
+\end{abstract}
+
+\input{intro.tex}
+\input{equations.tex}
+\input{method.tex}
+\input{results.tex}
+\input{concluding_remarks.tex}
+
+\section*{Acknowledgments}
+
+This work was performed under the auspices of the U.S.\ Department of Energy by Lawrence Livermore National Laboratory under Contract DE-AC52-07NA27344. This research was supported by the Exascale Computing Project (17-SC-20-SC), a collaborative effort of the U.S.\ Department of Energy Office of Science and the National Nuclear Security Administration. The support is gratefully acknowledged. 
+
+\section*{Compliance with Ethical Standards}
+
+The authors of this manuscript do not have any financial or other conflicts-of-interest to disclose.  
+
+
+\bibliographystyle{elsarticle-num} 
+\bibliography{ref_clean.bib}
+
+\end{document}

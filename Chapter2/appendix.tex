@@ -1,0 +1,149 @@
+% \appendix
+\section{Equivalence to SIF condition}\label{SIF_equivalence}
+
+In this appendix, the energy release rate for a single, straight crack under an arbitrary pressure load $p(x)$ is computed, assuming that infinitesimal crack increments are traction-free, as shown in Figure \ref{fig:dry_crack}. Griffith's criteria states that propagation should happen whenever this energy release rate, which will be denoted by $G$, reaches $G_c$. This will give rise to a condition for propagation based on the pressure distribution $p(x)$, the crack size $a$ and Young's modulus $E'$\footnote{assuming plane strain, $E'=E/(1-\nu^2)$}. The purpose of the following derivation is to demonstrate that this condition is equivalent to the stress intensity factor criteria \cite{irwin1957analysis}.
+
+Initially, consider the Sneddon-Lowengrub solution for the aperture of a pressure loaded crack in an infinite plate, under plane strain conditions,
+
+\begin{equation}
+    w(x) = \dfrac{4a}{\pi E'}\int^1_0p(sa)Z(x/a, s)\text{d}s
+\end{equation}
+
+\noindent where
+
+\begin{equation}
+    Z(r,s) = \log\left|\dfrac{\sqrt{1-r^2}+\sqrt{1-s^2}}{\sqrt{1-r^2}-\sqrt{1-s^2}}\right|
+\end{equation}
+
+\noindent is a convolution kernel. The work done by the pressure load is then,
+
+\begin{equation}
+    W_p = \int_{-a}^a p w \text{d}x = \int_{-a}^a p(y) \dfrac{4a}{\pi E'}\int^1_0p(sa)Z(x/a, s)\text{d}s\text{d}y.
+\end{equation}
+
+\noindent Clayperon's theorem \cite{fosdick2003} states that the potential energy is negative half of the work exerted in the boundary, which, in this case is only $W_p$. Hence
+
+\begin{equation}
+    U = -\dfrac{1}{2}W_p = -\dfrac{1}{2}\int_{-a}^a p w \text{d}x = -\dfrac{4a^2}{\pi E'}\int_{0}^1 p(ar)\int^1_0p(sa)Z(r, s)\text{d}s\text{d}r.
+\end{equation}
+
+% This expression is useful to compute $dU/\text{d}a$ for self-similar pressure fields.
+% It can also be rewritten as,
+
+% \begin{equation}
+%     U = -\dfrac{4}{\pi E'}\int_{0}^a p(x)\int_0^a p(y)Z(x/a, y/a) \text{d}y\text{\text{d}x}
+% \end{equation}
+
+\noindent Let's write the energy release rate, assuming that the pressure field doesn't vary as the crack advances by a small amount $\text{d}a$. That is,
+
+\begin{equation}
+    p^{a+\text{d}a}(x) = 
+    \begin{cases}
+      p^{a}(x), & \text{if}\ x\le a \\
+      0, & \text{if}\ a \le x \le a+\text{d}a
+    \end{cases} 
+\end{equation}
+
+\begin{equation}
+    dU = U(a+\text{d}a, p^{a+\text{d}a}) - U(a+\text{d}a, p^{a}), 
+\end{equation}
+
+\begin{equation}
+       dU =  -\dfrac{4}{\pi E'}\int_{0}^{a+\text{d}a} p^{a+\text{d}a}(x)\int_0^{a+\text{d}a} p^{a+\text{d}a}(y)Z(\frac{x}{a+\text{d}a}, \frac{y}{a+\text{d}a}) \text{d}y\text{d}x + \dfrac{4}{\pi E'}\int_{0}^a p^{a}(x)\int_0^a p^{a}(y)Z(x/a, y/a) \text{d}y\text{d}x.
+\end{equation}
+
+\noindent Using the definition of $p^{a+\text{d}a}$ given above,
+
+\begin{equation}
+       dU =  -\dfrac{4}{\pi E'}\int_{0}^{a} p^{a}(x)\int_0^{a} p^{a}(y)\left(Z(\frac{x}{a+\text{d}a}, \frac{y}{a+\text{d}a}) - Z(x/a, y/a)\right)\text{d}y\text{d}x.
+\end{equation}
+
+\noindent By symmetry, both tips of the crack propagate with the same energy release rate, so, one can write,
+
+\begin{equation}
+    2G = -\dfrac{dU}{\text{d}a} = \dfrac{4}{\pi E'}\int_{0}^{a} p^{a}(x)\int_0^{a} p^{a}(y)\dfrac{1}{\text{d}a}\left(Z(\frac{x}{a+\text{d}a}, \frac{y}{a+\text{d}a}) - Z(x/a, y/a)\right)\text{d}y\text{d}x.
+\end{equation}
+
+\noindent The term between parenthesis can be re-written as,
+
+\begin{multline}\label{Z_difference}
+    Z(\frac{x}{a+\text{d}a}, \frac{y}{a+\text{d}a}) - Z(x/a, y/a) = \\ \log\left|\dfrac{\sqrt{(a+\text{d}a)^2-x^2}+\sqrt{(a+\text{d}a)^2-y^2}}{\sqrt{(a+\text{d}a)^2-x^2}-\sqrt{(a+\text{d}a)^2-y^2}}\right| - 
+    \log\left|\dfrac{\sqrt{a^2-x^2}+\sqrt{a^2-y^2}}{\sqrt{a^2-x^2}-\sqrt{a^2-y^2}}\right|\\
+    = \log\left|\dfrac{\sqrt{(a+\text{d}a)^2-x^2}+\sqrt{(a+\text{d}a)^2-y^2}}{\sqrt{a^2-x^2}+\sqrt{a^2-y^2}}\right| \\ - 
+    \log\left|\dfrac{\sqrt{(a+\text{d}a)^2-x^2}-\sqrt{(a+\text{d}a)^2-y^2}}{\sqrt{a^2-x^2}-\sqrt{a^2-y^2}}\right|.
+\end{multline}
+
+\noindent The second term contains a singularity, which can be removed if one re-writes it as,
+
+\begin{multline}
+    \log\left|\dfrac{\sqrt{(a+\text{d}a)^2-x^2}-\sqrt{(a+\text{d}a)^2-y^2}}{\sqrt{a^2-x^2}-\sqrt{a^2-y^2}}\right| = \\
+    \log\left|\dfrac{\sqrt{(a+\text{d}a)^2-x^2}-\sqrt{(a+\text{d}a)^2-y^2}}{\sqrt{a^2-x^2}-\sqrt{a^2-y^2}} \dfrac{\sqrt{(a+\text{d}a)^2-x^2}+\sqrt{(a+\text{d}a)^2-y^2}}{\sqrt{a^2-x^2}+\sqrt{a^2-y^2}} \dfrac{\sqrt{a^2-x^2}+\sqrt{a^2-y^2}}{\sqrt{(a+\text{d}a)^2-x^2}+\sqrt{(a+\text{d}a)^2-y^2}} \right| \\
+    = \log\left|\dfrac{(a+\text{d}a)^2-x^2-(a+\text{d}a)^2+y^2}{a^2-x^2-a^2+y^2}  \dfrac{\sqrt{a^2-x^2}+\sqrt{a^2-y^2}}{\sqrt{(a+\text{d}a)^2-x^2}+\sqrt{(a+\text{d}a)^2-y^2}} \right|\\
+    = - \log\left|\dfrac{\sqrt{(a+\text{d}a)^2-x^2}+\sqrt{(a+\text{d}a)^2-y^2}}{\sqrt{a^2-x^2}+\sqrt{a^2-y^2}} \right|.
+\end{multline}
+
+\noindent This expression can be plugged back into \eqref{Z_difference} to obtain,
+
+\begin{multline}
+    Z(\frac{x}{a+\text{d}a}, \frac{y}{a+\text{d}a}) - Z(x/a, y/a) = \\ \log\left|\dfrac{\sqrt{(a+\text{d}a)^2-x^2}+\sqrt{(a+\text{d}a)^2-y^2}}{\sqrt{(a+\text{d}a)^2-x^2}-\sqrt{(a+\text{d}a)^2-y^2}}\right| - 
+    \log\left|\dfrac{\sqrt{a^2-x^2}+\sqrt{a^2-y^2}}{\sqrt{a^2-x^2}-\sqrt{a^2-y^2}}\right|\\
+    = 2\log\left|\dfrac{\sqrt{(a+\text{d}a)^2-x^2}+\sqrt{(a+\text{d}a)^2-y^2}}{\sqrt{a^2-x^2}+\sqrt{a^2-y^2}}\right|.
+\end{multline}
+
+\noindent Hence,
+
+\begin{equation}
+    \dfrac{1}{\text{d}a}\left(  Z(\frac{x}{a+\text{d}a}, \frac{y}{a+\text{d}a}) - Z(x/a, y/a) \right) = \dfrac{2}{\text{d}a}\log\left|\dfrac{\sqrt{(a+\text{d}a)^2-x^2}+\sqrt{(a+\text{d}a)^2-y^2}}{\sqrt{a^2-x^2}+\sqrt{a^2-y^2}}\right|. 
+\end{equation}
+
+\noindent Now, the terms in the numerator can be expanded with a Taylor series,
+
+\begin{equation}
+    \sqrt{(a+\text{d}a)^2-x^2} = \sqrt{a^2-x^2} + \dfrac{a}{\sqrt{a^2-x^2}}\text{d}a + O(\text{d}a^2),
+\end{equation}
+
+\noindent leading to, 
+
+\begin{multline}
+    \dfrac{1}{\text{d}a}\left(  Z(\frac{x}{a+\text{d}a}, \frac{y}{a+\text{d}a}) - Z(x/a, y/a) \right) = \\
+    = \dfrac{2}{\text{d}a}\log\left|\dfrac{\sqrt{a^2-x^2} + \dfrac{a}{\sqrt{a^2-x^2}}\text{d}a + O(\text{d}a^2)+\sqrt{a^2-y^2} + \dfrac{a}{\sqrt{a^2-y^2}}\text{d}a + O(\text{d}a^2)}{\sqrt{a^2-x^2}+\sqrt{a^2-y^2}}\right|,
+\end{multline}
+
+\noindent which, after using a Taylor expansion, simplifies to, 
+
+\begin{equation}
+    \dfrac{1}{\text{d}a}\left(  Z(\frac{x}{a+\text{d}a}, \frac{y}{a+\text{d}a}) - Z(x/a, y/a) \right) =  \dfrac{2a}{\sqrt{a^2-x^2}\sqrt{a^2-y^2}} + O(\text{d}a).
+\end{equation}
+
+% \begin{multline}
+%     \dfrac{1}{\text{d}a}\left(  Z(\frac{x}{a+\text{d}a}, \frac{y}{a+\text{d}a}) - Z(x/a, y/a) \right) = \\
+%     % = \dfrac{2}{\text{d}a}\log\left|\dfrac{\sqrt{a^2-x^2} + \dfrac{a}{\sqrt{a^2-x^2}}\text{d}a + O(\text{d}a^2)+\sqrt{a^2-y^2} + \dfrac{a}{\sqrt{a^2-y^2}}\text{d}a + O(\text{d}a^2)}{\sqrt{a^2-x^2}+\sqrt{a^2-y^2}}\right|
+% \end{multline}
+
+% \begin{multline}
+%     \dfrac{2}{\text{d}a}\log\left|1 + \text{d}a\dfrac{\dfrac{a}{\sqrt{a^2-x^2}} + \dfrac{a}{\sqrt{a^2-y^2}}}{\sqrt{a^2-x^2}+\sqrt{a^2-y^2}} + O(\text{d}a^2)\right| = \dfrac{2}{\text{d}a}\log\left|1 + \text{d}a\dfrac{a }{\sqrt{a^2-x^2}\sqrt{a^2-y^2}} + O(\text{d}a^2)\right| \\
+%     = \dfrac{2a}{\sqrt{a^2-x^2}\sqrt{a^2-y^2}}
+% \end{multline}
+     
+\noindent Now, we can finally go back to the energy release rate,
+    
+\begin{multline}
+    2G = -\dfrac{dU}{\text{d}a} = \dfrac{4}{\pi E'}\int_{0}^{a} p^{a}(x)\int_0^{a} p^{a}(y)\dfrac{2a}{\sqrt{a^2-x^2}\sqrt{a^2-y^2}} \text{d}y\text{d}x = \\
+    \dfrac{8a}{\pi E'}\int_{0}^{1}\dfrac{p^{a}(ar)}{\sqrt{1-r^2}}\int_0^{1} \dfrac{p^{a}(as)}{\sqrt{1-s^2}} \text{d}s\text{d}r
+    = \dfrac{8a}{\pi E'}\left( \int_{0}^{1}\dfrac{p^{a}(as)}{\sqrt{1-s^2}}\text{d}s\right)^2.
+\end{multline}
+
+\noindent From \cite{bazant2019fracture}, the stress intensity factor under these same conditions is,
+
+\begin{equation}
+    K_I = 2\sqrt{\dfrac{a}{\pi}}\left( \int_{0}^{1}\dfrac{p^{a}(as)}{\sqrt{1-s^2}}\text{d}s\right)
+\end{equation}
+
+\noindent From a simple inspection, one can see that $G = K_I^2/E'$, which guarantees the equivalence of the energy release rate criteria under the assumption in Figure \ref{fig:dry_crack} and the stress intensity factor condition. If instead, one assumes that the pressure load in the vicinity of a propagating crack behaves as in Figure \ref{fig:wet_crack}, this equivalence between the energetic criteria and the stress intensity factor may be violated.
+
+% For a constant pressure,
+
+% \begin{equation}
+%     \mathcal{Z} = \dfrac{8a}{\pi E'}\left( \int_{0}^{1}\dfrac{p^{a}(as)}{\sqrt{1-s^2}}\text{d}s\right)^2 = \dfrac{8ap^2}{\pi E'}\left( \int_{0}^{1}\dfrac{1}{\sqrt{1-s^2}}\text{d}s\right)^2 =  \dfrac{8ap^2}{\pi E'}\dfrac{\pi^2}{4}\\
+%     =  \dfrac{2\pi ap^2}{E'}
+% \end{equation}

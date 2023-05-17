@@ -1,0 +1,27 @@
+\section{Introduction}
+\label{section: brittle/intro}
+
+During the operation of commercial light water reactors, fission of uranium dioxide~(UO$_2$) produces a variety of fission products within the fuel matrix. The fracture behavior of brittle materials is strongly influenced by their underlying microstructural features such as gas bubbles, second-phase particles, pre-existing micro-cracks, grains, grain boundaries, and etc. For example, the bubbles at the grain boundaries alter the fracture properties, and subsequently affects the pellet-cladding mechanical interaction (PCMI), fission gas release and swelling. Therefore, it is important to develop a fracture model that incorporates the effects of microstructural features to better understand how fission changes the fracture response of the nuclear fuel.
+
+On the other hand, to improve the economics of commercial nuclear power production, utilities are seeking to increase the allowable burnup limit for UO$_2$ fuel. A main factor contributing to the current burnup limit in commercial light water reactors is the risk of fragmentation during a loss-of-coolant accident (LOCA). To allow the industry to pursue an increased burnup limit and develop mitigation strategies, an improved capability for predicting the onset of fragmentation is essential.
+
+% HBS fine fragmentation
+A thorough review of fuel fracture and high-burnup fuel fragmentation is provided in \cite{CAPPS2021152750}. In this chapter, we focus on the fine fragmentation that results in fuel fragments typically less than $\SI{0.1}{\milli\meter}$ in size. It has been reported that fine fragmentation primarily occurs at high burnups -- especially when the high-burnup structure (HBS) has formed. The HBS is typically characterized by small newly formed grains with sizes of 100--300 nm and round fission gas pores of micrometric size \cite{RONDINELLA201024}. It is hypothesized that over-pressurization of fission gas bubbles in the UO$_2$ HBS could result in fine fragmentation during typical LOCA transients.
+
+% models for fuel fracture
+In general, fuel fracture can be modeled using phenomenological \cite{Turnbull2015} and mechanical models \cite{JIANG2020106713}. Various criteria have been used to determine whether fine fragmentation will occur during a LOCA, but such criteria are all based on simple analytical models \cite{KULACSY2015409, JERNKVIST2020103188}. For additional insight into gas-bubble-induced fracture in polycrystalline materials and HBS fine fragmentation (including crack topology, fragment morphology, and fragment topography), a physics-based model is needed to simulate over-pressurization of fission gas bubbles.
+
+% phase-field models of fracture
+Recently, the phase-field fracture models have been applied to study gas-bubble-induced fracture in polycrystalline materials. Chakraborty et al. \cite{pritam_2016} developed a hierarchical multi-scale approach to model microstructure-sensitive brittle fracture, and 2D simulations were performed to relate fracture strength to porosity. A 2D approximation often over-simplifies the actual microstructure and results in an inaccurate measurement of porosity. Diehl et al. \cite{Diehl2017} proposed 3D models of damage evolution around a single bubble and investigated the influence of the bubble geometry on the fracture response. 3D simulations provide important insights into the influence of porosity on fracture. In this chapter, a phase-field model for brittle and quasi-brittle fracture is employed to address intergranular cracking with multiple bubbles on the grain boundaries in 3D and is used to model over-pressurized fission-gas-induced fragmentation at the microstructural level.
+
+% phase-field for pressurized cracks
+In HBS, following crack initiation, the cracks will be filled with fission gas, and the crack surfaces will become pressurized. To account for pressurized crack surfaces, we present an extension of the brittle/quasi-brittle fracture model by including regularized external work done by pressure. The regularized external work can be derived either based on a phase-field approximation of the sharp interface \cite{CHUKWUDOZIE2019957}, or by modifying the free energy in a Biot system via an indicator function based on the phase-field \cite{Mikeli__2015}. In this chapter, the former approach is used to derive the phase-field model for brittle and quasi-brittle fracture with pressurized cracks.
+
+% organization
+This chapter is organized as follows. Constitutive choices for the strain energy density and the fracture energy density are presented in \Cref{section: Chapter3/theory/constitutive}.
+The phase-field approximation of the external pressure and its derivation are provided in \Cref{section: Chapter3/theory/pressure}.
+Governing equations are summarized in \Cref{section: Chapter3/theory/governing}.
+The theory is followed by numerical verification and examples.
+The traction-separation behavior with the presence of pressure is studied in \Cref{section: Chapter3/verification/bar}.
+The numerical critical pressure associated with crack propagation is compared with the linear elastic fracture mechanics solution in \Cref{section: Chapter3/verification/propagation}.
+Finally, \Cref{section: Chapter3/examples} applies the model to investigate the relationship between the critical fracture strength and porosity, and to model fracture evolution in HBS.
