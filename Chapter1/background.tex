@@ -1,7 +1,53 @@
 \section{Background}
 
+%% Motivation for fluid-driven fracture
+
+    % Better fracking
+
+    % Carbon-storage and sequestration
+
+    % EGS
+
+%% Literature review on traditional approaches (including 3D)
+
+    % Detournay's analytical methods
+
+    % Armando's work
+
+    % Imperial College group
+
+    % Chinese group
+
+%% Phase-field method for hydraulic fracture
+
+    % A few paragraphs about the phase-field method and its advantages
+
+    % Bourdin and Wheeler's early work
+
+    % Other derived works coupling poromechanics
+
+    % Thorough comparision with tables and etc
+
+    % Some limitations and possible improvements
+
+%% Hybrid approaches
+
+    % Giovannardi including newest work from Formmagia on HF
+
+    % Rudy's continuous discontinuous
+
+    % Muixí's work
+
+    % Recent work from chinese group
+
+%% Commercial codes and intro on GEOSX
+
+    % Check review paper from Bin Chen
+
+    % Is there any review on HPC, GPU computing ?
+
 %% Fracture mechanics basics
-In this dissertation, four types of fracture are of interest: brittle fracture, quasi-brittle fracture, cohesive fracture, and ductile fracture. Brittle and quasi-brittle fracture center around the Griffith-type description of fracture, in the sense that the stress field at the crack tip is singular. In particular, brittle fracture is characterized with the complete loss of tensile strength upon crack nucleation. Under displacement-controlled uni-axial tension, a brittle specimen forms a through crack immediately after crack nucleation. Quasi-brittle fracture, in contrast, shows a gradual decay of tensile stress which is often measured in the form of a traction-separation law. Although the celebrated Griffith theory of fracture captures the behavior of a wide range of brittle and quasi-brittle materials, it bears emphasis that most materials are not perfectly brittle in the Griffith sense. Cohesive fracture, for example, describes materials that possess a \emph{fracture process zone} ahead of the crack tip. The fracture process zone (FPZ) is a lumped description of small-scale yielding, void coalescence, and micro-crack merging. Typically, the material inside the FPZ only partially loses its load-carrying capacity, and therefore cohesive fracture also displays a gradual decay of tensile stress after crack initiation. The boundary between the definitions of quasi-brittle fracture and cohesive fracture is inherently vague. In this dissertation, cohesive fracture is assumed to have a substantially larger fracture process zone than quasi-brittle fracture, and at the engineering scale, numerical models for these two types of fracture are often used interchangeably. Lastly, ductile fracture describes the softening due to fracture after a stage of plastic hardening. Most metals and fiber-reinforced cementitious composites are ductile and are subject to ductile failure,
+In this dissertation, four types of fracture are of interest: brittle fracture, quasi-brittle fracture, cohesive fracture, and ductile fracture. Brittle and quasi-brittle fracture center around the Griffith-type description of fracture, in the sense that the stress field at the crack tip is singular. In particular, brittle fracture is characterized with the complete loss of tensile strength upon cracsk nucleation. Under displacement-controlled uni-axial tension, a brittle specimen forms a through crack immediately after crack nucleation. Quasi-brittle fracture, in contrast, shows a gradual decay of tensile stress which is often measured in the form of a traction-separation law. Although the celebrated Griffith theory of fracture captures the behavior of a wide range of brittle and quasi-brittle materials, it bears emphasis that most materials are not perfectly brittle in the Griffith sense. Cohesive fracture, for example, describes materials that possess a \emph{fracture process zone} ahead of the crack tip. The fracture process zone (FPZ) is a lumped description of small-scale yielding, void coalescence, and micro-crack merging. Typically, the material inside the FPZ only partially loses its load-carrying capacity, and therefore cohesive fracture also displays a gradual decay of tensile stress after crack initiation. The boundary between the definitions of quasi-brittle fracture and cohesive fracture is inherently vague. In this dissertation, cohesive fracture is assumed to have a substantially larger fracture process zone than quasi-brittle fracture, and at the engineering scale, numerical models for these two types of fracture are often used interchangeably. Lastly, ductile fracture describes the softening due to fracture after a stage of plastic hardening. Most metals and fiber-reinforced cementitious composites are ductile and are subject to ductile failure,
 
 %% Briefly mention other methods to model fracture
 A number of models have been proposed to model fracture. What follows is a brief, non-comprehensive survey of numerical methods to model fracture. Particle-based and mesh-free discretization techniques, such as the discrete element method (DEM), lattice spring methods, and peridynamics, have been developed for fracture simulation. The key advantage of these methods lies in the fact that cracks can nucleate and grow in an unguided manner. However, the computational cost of these methods can be very high and the interface conditions are not straightforward to apply. Within the context of the finite element method (FEM), the most commonly used element techniques to model cracks are the extended finite element method (XFEM) and the cohesive zone method (CZM). Using XFEM, fracture are represented as discrete discontinuities and the solution space with discontinuities are enriched using the partition of unity method \cite{babuaka1997, Dolbow99}. Singularities associated with fracture can be represented using XFEM enrichment at relatively low cost. However, managing the data structure and tracking the evolution of complex fracture surfaces, particularly in 3D, are quite tedious. Using CZM, cracks are modeled by cohesive elements inserted between element boundaries, and softening is governed by a traction-separation law at crack surfaces \cite{needleman_1992, ortiz_1999}. For polycrystalline material, it is convenient to use CZM to model intergranular crack initiation and propagation \cite{KAMAYA2007, KAMAYA2009}. Nonetheless, CZM suffers from mesh dependency because the representation of crack propagation is restricted to element boundaries.

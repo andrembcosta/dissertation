@@ -94,12 +94,12 @@ In what follows, the formulation associated with Figure \ref{fig:dry_crack} will
 
 and, with the help of the divergence theorem, 
 
-\begin{multline}
-    \delta U(\bs{\epsilon},d) = \int\limits_{\Omega}\biggl(-\nabla \cdot \dfrac{\partial\psi_e}{\partial \bs \epsilon} + pI'(d) \nabla d\biggr)\cdot\delta\textbf{u}\ \text{dV} 
+\begin{align}
+    \delta U(\bs{\epsilon},d) =& \int\limits_{\Omega}\biggl(-\nabla \cdot \dfrac{\partial\psi_e}{\partial \bs \epsilon} + pI'(d) \nabla d\biggr)\cdot\delta\textbf{u}\ \text{dV} 
     + \int\limits_{\partial \Omega_N}\biggl( \dfrac{\partial\psi_e}{\partial \bs \epsilon}\cdot\textbf{n}  -\textbf{t}\biggr)\cdot\delta\textbf{u} \ \text{dA} \\
-    + \int\limits_{\Omega}\left(g'(d) \psi_e^+(\bs\epsilon)
+    +& \int\limits_{\Omega}\left(g'(d) \psi_e^+(\bs\epsilon)
     + \dfrac{G_c}{c_0\ell}\alpha'(d) - \nabla \cdot\dfrac{2G_c\ell}{c_0}\nabla d \right)\delta d\ \text{dV} + \int\limits_{\partial\Omega} \dfrac{2G_c\ell}{c_0}(\textbf{n}\cdot\nabla d)  \delta d\ \text{dA}.
-\end{multline}
+\end{align}
 
 The local minimization principle requires the variation of the potential energy $\delta U$ to be non-negative for any admissible state $\textbf{u},d$. In other words, $\delta U(\bs\epsilon, d) \ge 0$, giving rise to the following equation and boundary condition for $\textbf{u}$, since the variation of the displacement field $\delta \textbf{u}$ is arbitrary:
 
