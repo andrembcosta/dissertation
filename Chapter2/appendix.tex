@@ -48,9 +48,9 @@ Initially, consider the Sneddon-Lowengrub solution for the aperture of a pressur
     dU = U(a+\text{d}a, p^{a+\text{d}a}) - U(a+\text{d}a, p^{a}), 
 \end{equation}
 
-\begin{equation}
-       dU =  -\dfrac{4}{\pi E'}\int_{0}^{a+\text{d}a} p^{a+\text{d}a}(x)\int_0^{a+\text{d}a} p^{a+\text{d}a}(y)Z(\frac{x}{a+\text{d}a}, \frac{y}{a+\text{d}a}) \text{d}y\text{d}x + \dfrac{4}{\pi E'}\int_{0}^a p^{a}(x)\int_0^a p^{a}(y)Z(x/a, y/a) \text{d}y\text{d}x.
-\end{equation}
+\begin{multline}
+       dU =  -\dfrac{4}{\pi E'}\int_{0}^{a+\text{d}a} p^{a+\text{d}a}(x)\int_0^{a+\text{d}a} p^{a+\text{d}a}(y)Z(\frac{x}{a+\text{d}a}, \frac{y}{a+\text{d}a}) \text{d}y\text{d}x \\ + \dfrac{4}{\pi E'}\int_{0}^a p^{a}(x)\int_0^a p^{a}(y)Z(x/a, y/a) \text{d}y\text{d}x.
+\end{multline}
 
 \noindent Using the definition of $p^{a+\text{d}a}$ given above,
 
@@ -77,8 +77,8 @@ Initially, consider the Sneddon-Lowengrub solution for the aperture of a pressur
 
 \begin{multline}
     \log\left|\dfrac{\sqrt{(a+\text{d}a)^2-x^2}-\sqrt{(a+\text{d}a)^2-y^2}}{\sqrt{a^2-x^2}-\sqrt{a^2-y^2}}\right| = \\
-    \log\left|\dfrac{\sqrt{(a+\text{d}a)^2-x^2}-\sqrt{(a+\text{d}a)^2-y^2}}{\sqrt{a^2-x^2}-\sqrt{a^2-y^2}} \dfrac{\sqrt{(a+\text{d}a)^2-x^2}+\sqrt{(a+\text{d}a)^2-y^2}}{\sqrt{a^2-x^2}+\sqrt{a^2-y^2}} \dfrac{\sqrt{a^2-x^2}+\sqrt{a^2-y^2}}{\sqrt{(a+\text{d}a)^2-x^2}+\sqrt{(a+\text{d}a)^2-y^2}} \right| \\
-    = \log\left|\dfrac{(a+\text{d}a)^2-x^2-(a+\text{d}a)^2+y^2}{a^2-x^2-a^2+y^2}  \dfrac{\sqrt{a^2-x^2}+\sqrt{a^2-y^2}}{\sqrt{(a+\text{d}a)^2-x^2}+\sqrt{(a+\text{d}a)^2-y^2}} \right|\\
+    \log\biggl|\dfrac{\sqrt{(a+\text{d}a)^2-x^2}-\sqrt{(a+\text{d}a)^2-y^2}}{\sqrt{a^2-x^2}-\sqrt{a^2-y^2}} \\ \times \dfrac{\sqrt{(a+\text{d}a)^2-x^2}+\sqrt{(a+\text{d}a)^2-y^2}}{\sqrt{a^2-x^2}+\sqrt{a^2-y^2}} \\ \times \dfrac{\sqrt{a^2-x^2}+\sqrt{a^2-y^2}}{\sqrt{(a+\text{d}a)^2-x^2}+\sqrt{(a+\text{d}a)^2-y^2}} \biggr| \\
+    = \log\biggl|\dfrac{(a+\text{d}a)^2-x^2-(a+\text{d}a)^2+y^2}{a^2-x^2-a^2+y^2}  \\ \times \dfrac{\sqrt{a^2-x^2}+\sqrt{a^2-y^2}}{\sqrt{(a+\text{d}a)^2-x^2}+\sqrt{(a+\text{d}a)^2-y^2}} \biggr|\\
     = - \log\left|\dfrac{\sqrt{(a+\text{d}a)^2-x^2}+\sqrt{(a+\text{d}a)^2-y^2}}{\sqrt{a^2-x^2}+\sqrt{a^2-y^2}} \right|.
 \end{multline}
 
@@ -92,9 +92,10 @@ Initially, consider the Sneddon-Lowengrub solution for the aperture of a pressur
 
 \noindent Hence,
 
-\begin{equation}
-    \dfrac{1}{\text{d}a}\left(  Z(\frac{x}{a+\text{d}a}, \frac{y}{a+\text{d}a}) - Z(x/a, y/a) \right) = \dfrac{2}{\text{d}a}\log\left|\dfrac{\sqrt{(a+\text{d}a)^2-x^2}+\sqrt{(a+\text{d}a)^2-y^2}}{\sqrt{a^2-x^2}+\sqrt{a^2-y^2}}\right|. 
-\end{equation}
+\begin{multline}
+    \dfrac{1}{\text{d}a}\left(  Z(\frac{x}{a+\text{d}a}, \frac{y}{a+\text{d}a}) - Z(x/a, y/a) \right) \\
+    = \dfrac{2}{\text{d}a}\log\left|\dfrac{\sqrt{(a+\text{d}a)^2-x^2}+\sqrt{(a+\text{d}a)^2-y^2}}{\sqrt{a^2-x^2}+\sqrt{a^2-y^2}}\right|. 
+\end{multline}
 
 \noindent Now, the terms in the numerator can be expanded with a Taylor series,
 
@@ -106,7 +107,7 @@ Initially, consider the Sneddon-Lowengrub solution for the aperture of a pressur
 
 \begin{multline}
     \dfrac{1}{\text{d}a}\left(  Z(\frac{x}{a+\text{d}a}, \frac{y}{a+\text{d}a}) - Z(x/a, y/a) \right) = \\
-    = \dfrac{2}{\text{d}a}\log\left|\dfrac{\sqrt{a^2-x^2} + \dfrac{a}{\sqrt{a^2-x^2}}\text{d}a + O(\text{d}a^2)+\sqrt{a^2-y^2} + \dfrac{a}{\sqrt{a^2-y^2}}\text{d}a + O(\text{d}a^2)}{\sqrt{a^2-x^2}+\sqrt{a^2-y^2}}\right|,
+    \dfrac{2}{\text{d}a}\log\Biggl|\dfrac{\sqrt{a^2-x^2} + \dfrac{a}{\sqrt{a^2-x^2}}\text{d}a + O(\text{d}a^2)}{\sqrt{a^2-x^2}+\sqrt{a^2-y^2}} \\ + \dfrac{\sqrt{a^2-y^2} + \dfrac{a}{\sqrt{a^2-y^2}}\text{d}a + O(\text{d}a^2)}{\sqrt{a^2-x^2}+\sqrt{a^2-y^2}}\Biggr|,
 \end{multline}
 
 \noindent which, after using a Taylor expansion, simplifies to, 

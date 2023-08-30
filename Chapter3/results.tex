@@ -259,20 +259,20 @@ Injection rate ($Q$)&1.0$\times10^{-3}$&$\text{m}^2/\text{s}$\\
 
 The material properties used in this problem are given in Table~\ref{material properties miehe}, while the problem and model parameters are provided in Table~\ref{geometry properties miehe}.  The results reported in this section rely on the use of an eigen-decomposition of the strain energy, as described in Miehe et al. \cite{miehe2010phase}.  The subdomain size for the multi-resolution method was chosen to be proportional to the initial crack size, or $a_0 \times a_0$. The problem was discretized spatially using a uniform mesh  in the local domain with  $h_{local} = \ell/4$, while $h_{global} = 3h_{local}$ was used in the global domain. For the temporal discretization, a uniform time step of $\text{dt} = 0.125\text{ s}$ was used.  This level of spatial and temporal discretization was found to yield results that were sufficiently converged.  
 
-An important difference between the phase-field formulation used in Miehe and Mauthe \cite{miehe2015minimization, miehe2016phase} and that employed in the current multi-resolution method concerns the use of pressure-dependent driving forces.  We draw the reader's attention to the terms involving the pressure fields $p_m$ and $p_f$ in the evolution equation \eqref{damage equation} for the damage field.  In our studies of the KGD problem, we found these terms necessary to include in order to obtain sufficiently accurate simulations.  We refer to these terms as ``driving pressures" as the pressure fields contribute directly to the evolution of the damage field.  Importantly, the phase-field formulation of Miehe and Mauthe \cite{miehe2015minimization, miehe2016phase} does not include these terms in the damage evolution equation.   Accordingly, in what follows we find it useful to compare results from Miehe and Mauthe \cite{miehe2015minimization, miehe2016phase} to those obtained using our multi-resolution method with and without the driving pressures.  
+An important difference between the phase-field formulation used in Miehe and Mauthe \cite{miehe2015minimization, miehe2016phase} and that employed in the current multi-resolution method concerns the use of pressure-dependent driving forces.  We draw the reader's attention to the terms involving the pressure fields $p_m$ and $p_f$ in the evolution equation \eqref{damage equation ch3} for the damage field.  In our studies of the KGD problem, we found these terms necessary to include in order to obtain sufficiently accurate simulations.  We refer to these terms as ``driving pressures" as the pressure fields contribute directly to the evolution of the damage field.  Importantly, the phase-field formulation of Miehe and Mauthe \cite{miehe2015minimization, miehe2016phase} does not include these terms in the damage evolution equation.   Accordingly, in what follows we find it useful to compare results from Miehe and Mauthe \cite{miehe2015minimization, miehe2016phase} to those obtained using our multi-resolution method with and without the driving pressures.  
 
 \begin{figure}
 \centering
 \vspace{-\abovedisplayskip}
 \begin{subfigure}{.5\textwidth}
   \centering
-  \includegraphics[width=\linewidth]{img/comparison_prob/poroelastic_length_2}
+  \includegraphics[width=\linewidth]{img/comparison_prob/length.pdf}
   \caption{}
   \label{fig:results_size_miehe}
 \end{subfigure}%
 \begin{subfigure}{.5\textwidth}
   \centering
-  \includegraphics[width=\linewidth]{img/comparison_prob/poroelastic_pressure_2}
+  \includegraphics[width=\linewidth]{img/comparison_prob/pressures.pdf}
   \caption{}
   \label{fig:results_pressure_miehe}
 \end{subfigure}

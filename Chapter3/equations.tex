@@ -123,9 +123,9 @@ The strain energy density $W(\boldsymbol{\epsilon}(\textbf{u}), p_m)$ is postula
 with $K$ denoting the bulk modulus and $n$ the system's dimension (2 or 3). The phase-field regularization, based on the Ambrosio-Tortorelli \cite{ambrosio1990approximation} functional is then performed by the introduction of the damage parameter $d$ and the regularization length $\ell$,
 
 \begin{multline}\label{Poroelastic PF funcional}
-    \mathcal{E}_{\ell}(\textbf{u},d,p_m,p_f) = \int\limits_{\Omega }\widetilde{W}(\boldsymbol{\epsilon}(\textbf{u}), p_m, d)d\Omega - \int\limits_{\partial\Omega_N}\textbf{t} \cdot \textbf{u} ds
+    \mathcal{E}_{\ell}(\textbf{u},d,p_m,p_f) = \int\limits_{\Omega }\widetilde{W}(\boldsymbol{\epsilon}(\textbf{u}), p_m, d)d\Omega - \int\limits_{\partial\Omega_N}\textbf{t} \cdot \textbf{u} ds \\
     - \int\limits_{\Omega} \textbf{b} \cdot \textbf{u} d\Omega
-    + \int\limits_{\Omega}p_f \textbf{u} \cdot \nabla d d\Omega \\
+    + \int\limits_{\Omega}p_f \textbf{u} \cdot \nabla d d\Omega 
     + \dfrac{G_c}{c_0}\int\limits_{\Omega }\left(\dfrac{\zeta(d)}{\ell} + \ell\nabla d\cdot\nabla d  \right)d\Omega,
 \end{multline}
 
@@ -146,7 +146,7 @@ The following set of evolution equations can then be derived from the Karush–K
     \nabla \cdot \left( (1-d)^2\ \mathbb{C}:\boldsymbol\epsilon(\textbf{u}) -(1-d)\alpha p_m \mathbb{I}\right) + \textbf{b} = p_f\nabla d, 
 \end{equation}
 
-\begin{equation}\label{damage equation}
+\begin{equation}\label{damage equation ch3}
     S_d \coloneqq  \dfrac{2G_c\ell}{c_0}\Delta d - \dfrac{G_c}{c_0\ell}\zeta'(d)-g'(d)W(\boldsymbol{\epsilon}(\boldsymbol{\textbf{u}}),0) + \alpha p_m\nabla \cdot \textbf{u} + \nabla \cdot (p_f\textbf{u}) \le 0,
 \end{equation}
 
@@ -165,14 +165,14 @@ The following set of evolution equations can then be derived from the Karush–K
 
 with boundary conditions, $\boldsymbol\sigma \cdot \textbf{n} = \textbf{t}$ on $\partial \Omega_N$ and $(2G_c\ell\nabla d +c_0p_f\textbf{u})\cdot \textbf{n} \ge 0$ on $\partial \Omega$. The damaged stress is defined as $\boldsymbol\sigma = (1-d)^2\ \mathbb{C}:\boldsymbol\epsilon(\textbf{u}) -(1-d)\alpha p_m \mathbb{I}$.
 
-In some cases, it is useful to decompose the energy \eqref{damaged strain energy} into positive and negative parts, in order to provide asymmetry between tension and compression states. In most problems studied in this manuscript, we found this decomposition to be important, and, unless otherwise mentioned, the spectral decomposition introduced in Miehe et al.~\cite{miehe2010phase} is used. With this decomposition, the equations for the macro-scale force balance \eqref{basic u problem} and the micro-force balance \eqref{damage equation} are modified as
+In some cases, it is useful to decompose the energy \eqref{damaged strain energy} into positive and negative parts, in order to provide asymmetry between tension and compression states. In most problems studied in this manuscript, we found this decomposition to be important, and, unless otherwise mentioned, the spectral decomposition introduced in Miehe et al.~\cite{miehe2010phase} is used. With this decomposition, the equations for the macro-scale force balance \eqref{basic u problem} and the micro-force balance \eqref{damage equation ch3} are modified as
 
 \begin{equation}\label{basic u problem spectral}\tag{22a}
     \nabla \cdot \left( (1-d)^2\ \mathbb{C}:\boldsymbol\epsilon^+(\textbf{u}) + \mathbb{C}:\boldsymbol\epsilon^-(\textbf{u})-(1-d)\alpha p_m \mathbb{I}\right) + \textbf{b} = p_f\nabla d, 
 \end{equation}
 
 \begin{equation}\label{damage equation spectral}\tag{23a}
-    S_d \coloneqq  \dfrac{2G_c\ell}{c_0}\Delta d - \dfrac{G_c}{c_0\ell}\zeta'(d)-g'(d)W(\boldsymbol{\epsilon^+}(\boldsymbol{\textbf{u}}),0) + \alpha p_m\nabla \cdot \textbf{u} + \nabla \cdot (p_f\textbf{u}) \le 0,
+    S_d \coloneqq  \dfrac{2G_c\ell}{c_0}\Delta d - \dfrac{G_c}{c_0\ell}\zeta'(d)-g'(d)W(\boldsymbol{\epsilon^+}(\boldsymbol{\textbf{u}}),0) - \alpha p_m\nabla \cdot \textbf{u} + \nabla \cdot (p_f\textbf{u}) \le 0,
 \end{equation}
 
 and the damaged stress becomes $\boldsymbol\sigma = (1-d)^2\ \mathbb{C}:\boldsymbol\epsilon^+(\textbf{u}) + \mathbb{C}:\boldsymbol\epsilon^-(\textbf{u})-(1-d)\alpha p_m \mathbb{I}$. In the above, $\boldsymbol\epsilon^+$ and $\boldsymbol\epsilon^-$ denote the positive and negative parts of the strain tensor as described in \cite{miehe2010phase}. 

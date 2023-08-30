@@ -257,7 +257,7 @@ The symmetry of the problem is exploited to reduce the computational domain to t
 
 Intuitively, the magnitude of the pressure load required to initiate fracture in this problem is expected to be independent of whether or not the pressure follows the crack evolution. After initiation, the pressure effects become important and the fracture propagates unstably. Due to this unstable behavior, it is very difficult to numerically capture the crack path after the pressure $p_b$ is reached. In order to have a glimpse into what this path looks like, a viscous term $\eta \dot d$ is added to the phase-field equation, as in \cite{miehe2010phase}, with $\eta = 10^{-3}\  \text{mJ}\cdot\text{mm}^{-3}\cdot$s. 
 
-It bears emphasis that the equations \eqref{disp equation} and \eqref{damage equation} indicate that, in the absence of any damage, the proposed model for pressurized cracks reduces to the standard phase-field fracture model for traction-free cracks. Therefore, one should expect the proposed model to capture fracture initiation properly in this scenario. On the other hand, for the \eqref{lvc} formulation, this only occurs if the indicator function satisfies $I'(0) = 0$. Among the many works which use the \eqref{lvc} formulation, only a few such as \cite{jiang2022phase, peco2017influence} used an indicator function satisfying this condition. In \cite{jiang2022phase}, the authors were indeed able to predict fracture initiation from pressurized holes. To highlight the implications of having $I'(0) \neq 0$ in the model \eqref{lvc}, the results for this problem will also be presented using the  \eqref{lvc} formulation with the indicator function $I(d) = d$.
+It bears emphasis that the equations \eqref{disp equation} and \eqref{damage equation ch2} indicate that, in the absence of any damage, the proposed model for pressurized cracks reduces to the standard phase-field fracture model for traction-free cracks. Therefore, one should expect the proposed model to capture fracture initiation properly in this scenario. On the other hand, for the \eqref{lvc} formulation, this only occurs if the indicator function satisfies $I'(0) = 0$. Among the many works which use the \eqref{lvc} formulation, only a few such as \cite{jiang2022phase, peco2017influence} used an indicator function satisfying this condition. In \cite{jiang2022phase}, the authors were indeed able to predict fracture initiation from pressurized holes. To highlight the implications of having $I'(0) \neq 0$ in the model \eqref{lvc}, the results for this problem will also be presented using the  \eqref{lvc} formulation with the indicator function $I(d) = d$.
 
 % WHICH INDICATOR FUNCTION? HOW TO SEPARATE THE I(d) = d2 CASE
 %  Although it leads to the not so interesting case of unstable propagation, it illustrates a limitation of  the formulation \eqref{lvc}, which, in these conditions, will predict spurious damage growth in the domain boundaries. That happens due to the presence of the term $p\nabla\cdot u$ in equation \eqref{wet damage equation box 2}, even when the material is intact. This issue is circumvented when the formulation \eqref{uvc} is applied since no modification to the evolution equation for damage is made. 
@@ -520,32 +520,28 @@ The results using the traditional \eqref{lvc} formulation are presented in Figur
 %   \label{fig:prop_gary_zoom}
 % \end{figure}
 
-\begin{table}[ht]
-  \begin{minipage}[b]{0.6\linewidth}
-      \centering
-      \includegraphics[width=\linewidth]{images/2d_propagation/zoom_fine_gary_I_d.pdf}
-      \captionof{figure}{Convergence of the proposed formulation with $I(d) = d$.}
-      \label{fig:refined_gary_I_d}
-  \end{minipage}
-  \begin{minipage}[b]{0.35\linewidth}
-    \centering
-    \begin{tabular}{ccc}
-    \hline
-    $\ell/a$ &Error &$\text{Error}_{k+1}/\text{Error}_{k}$ \\
-    \hline
-    1/40  & 0.067 & --\\
-    1/80  & 0.052 & 0.78\\
-    1/160 & 0.040 & 0.77\\
-    1/320 & 0.031 & 0.77\\
-    \hline
-    \end{tabular}
-    \vspace{3cm}
-    \caption{Absolute error in $J$ vs.\ $G_c^{eff}$ for the pressurized crack propagation problem, as a function of regularization length.}
-    \label{table:convergence_check}
-  \end{minipage}
+\begin{figure}
+  \centering
+  \includegraphics[width=0.7\linewidth]{images/2d_propagation/zoom_fine_gary_I_d.pdf}
+  \captionof{figure}{Convergence of the proposed formulation with $I(d) = d$.}
+  \label{fig:refined_gary_I_d}
+\end{figure}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{ccc}
+\hline
+$\ell/a$ &Error &$\text{Error}_{k+1}/\text{Error}_{k}$ \\
+\hline
+1/40  & 0.067 & --\\
+1/80  & 0.052 & 0.78\\
+1/160 & 0.040 & 0.77\\
+1/320 & 0.031 & 0.77\\
+\hline
+\end{tabular}
+\caption{Absolute error in $J$ vs.\ $G_c^{eff}$ for the pressurized crack propagation problem, as a function of regularization length.}
+\label{table:convergence_check}
 \end{table}
-
-
 
 For the case of proposed formulation \eqref{uvc}, the results shown in Figure \ref{fig:prop_gary} indicate a slower convergence towards a 
 $J/G^{eff}_c = 1$ response. In contrast with the \eqref{lvc} formulation, the curves converge from above, and therefore, the fracture toughness is slightly overestimated when larger regularization lengths are used. Nevertheless, they all seem to approach a Griffith-like response in the limit $\ell \rightarrow 0$. In Figure \ref{fig:refined_gary_I_d}, an even finer result, using \eqref{uvc} with $I(d)=d$ and $\ell = a/320$ is added, to ensure that the convergence rates indicated in Figure \ref{fig:prop_gary} persist. In Table \ref{table:convergence_check}, the relative errors are provided, indicating a convergence rate of approximately $0.4$ with respect to $\ell$.

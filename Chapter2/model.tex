@@ -92,14 +92,15 @@ In what follows, the formulation associated with Figure \ref{fig:dry_crack} will
     + \int\limits_{\Omega}\dfrac{G_c}{c_0\ell}\bigg( \alpha'(d)\delta d + 2\ell^2\nabla d \cdot \nabla \delta d\bigg)\ \text{dV},
 \end{multline}
 
-and, with the help of the divergence theorem, 
+\noindent and, with the help of the divergence theorem, 
 
-\begin{align}
-    \delta U(\bs{\epsilon},d) =& \int\limits_{\Omega}\biggl(-\nabla \cdot \dfrac{\partial\psi_e}{\partial \bs \epsilon} + pI'(d) \nabla d\biggr)\cdot\delta\textbf{u}\ \text{dV} 
-    + \int\limits_{\partial \Omega_N}\biggl( \dfrac{\partial\psi_e}{\partial \bs \epsilon}\cdot\textbf{n}  -\textbf{t}\biggr)\cdot\delta\textbf{u} \ \text{dA} \\
-    +& \int\limits_{\Omega}\left(g'(d) \psi_e^+(\bs\epsilon)
-    + \dfrac{G_c}{c_0\ell}\alpha'(d) - \nabla \cdot\dfrac{2G_c\ell}{c_0}\nabla d \right)\delta d\ \text{dV} + \int\limits_{\partial\Omega} \dfrac{2G_c\ell}{c_0}(\textbf{n}\cdot\nabla d)  \delta d\ \text{dA}.
-\end{align}
+\begin{multline}
+    \delta U(\bs{\epsilon},d) = \int\limits_{\Omega}\biggl(-\nabla \cdot \dfrac{\partial\psi_e}{\partial \bs \epsilon} + pI'(d) \nabla d\biggr)\cdot\delta\textbf{u}\ \text{dV} \\
+    + \int\limits_{\Omega}\left(g'(d) \psi_e^+(\bs\epsilon)
+    + \dfrac{G_c}{c_0\ell}\alpha'(d) - \nabla \cdot\dfrac{2G_c\ell}{c_0}\nabla d \right)\delta d\ \text{dV} \\
+    + \int\limits_{\partial \Omega_N}\biggl( \dfrac{\partial\psi_e}{\partial \bs \epsilon}\cdot\textbf{n}  -\textbf{t}\biggr)\cdot\delta\textbf{u} \ \text{dA}
+    + \int\limits_{\partial\Omega} \dfrac{2G_c\ell}{c_0}(\textbf{n}\cdot\nabla d)  \delta d\ \text{dA}.
+\end{multline}
 
 The local minimization principle requires the variation of the potential energy $\delta U$ to be non-negative for any admissible state $\textbf{u},d$. In other words, $\delta U(\bs\epsilon, d) \ge 0$, giving rise to the following equation and boundary condition for $\textbf{u}$, since the variation of the displacement field $\delta \textbf{u}$ is arbitrary:
 
@@ -115,7 +116,7 @@ The local minimization principle requires the variation of the potential energy 
 
 For the damage variable, it is assumed that the process is irreversible, such that $\dot{d} \ge 0$.  As such, only positive variations in the damage are admissible, and $\delta U(\bs\epsilon, d) \ge 0$ implies
 
-\begin{equation}\label{damage equation}
+\begin{equation}\label{damage equation ch2}
     g'(d) \psi_e^+(\bs\epsilon)
     + \dfrac{G_c}{c_0\ell}\alpha'(d) - \nabla \cdot \dfrac{2G_c\ell}{c_0}\nabla d \ge 0 \text{ on }\Omega,
 \end{equation}
@@ -123,7 +124,7 @@ For the damage variable, it is assumed that the process is irreversible, such th
     \dfrac{2G_c\ell}{c_0}\textbf{n}\cdot \nabla d \ge 0 \text{ on }\partial\Omega.
 \end{equation}
 
-\noindent Equations \eqref{damage equation} and \eqref{damage bcs} are identical to those in the standard phase-field model for traction-free cracks. This is the main difference between the new formulation and existing ones derived from deriving from \cite{bourdin2012variational} and \cite{wheeler2014augmented}, in which the governing equation for the damage field contains additional terms to account for the pressure loads on the virtual cracks. In what follows, we refer to that as the Loaded Virtual Crack formulation, or LVC.  In the boxes below, the governing equations for the UVC are compared to those of the LVC.  
+\noindent Equations \eqref{damage equation ch2} and \eqref{damage bcs} are identical to those in the standard phase-field model for traction-free cracks. This is the main difference between the new formulation and existing ones derived from deriving from \cite{bourdin2012variational} and \cite{wheeler2014augmented}, in which the governing equation for the damage field contains additional terms to account for the pressure loads on the virtual cracks. In what follows, we refer to that as the Loaded Virtual Crack formulation, or LVC.  In the boxes below, the governing equations for the UVC are compared to those of the LVC.  
 
 \bigskip
 \noindent

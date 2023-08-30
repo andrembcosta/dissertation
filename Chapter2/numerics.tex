@@ -15,19 +15,44 @@ First, the strong form of the governing equations, derived from the general free
   nobreak=true
   ]
   \vspace{-1em}
+  %\small{
   \begin{align}
-    \text{Linear momentum balance: } & \nabla \cdot \bs\sigma -p\nabla d + \textbf{b} = 0,                       &  & \forall x \in \Omega,                          \\
-                                     & \bs\sigma = \frac{\partial\psi_e}{\partial \bs\epsilon},                   &  & \forall x \in \Omega, \\
-                                     & \bs\sigma\cdot \textbf{n} = \textbf{t},                                          &  & \partial_t\Omega,  
+    &\text{Linear momentum balance: }\nonumber \\ & \nabla \cdot \bs\sigma -p\nabla d + \textbf{b} = {\color{red} \bs 0},                       \hspace{2cm} \forall x \in \Omega, \\ 
+                                     & \bs\sigma = \frac{\partial\psi_e}{\partial \bs\epsilon},   \hspace{3.8cm}                 \forall x \in \Omega, \\
+                                     & \bs\sigma\cdot \textbf{n} = \textbf{t},                             \hspace{4.2cm}              \partial_t\Omega,  
                                      \\
-                                     & \textbf{u} = \textbf{u}_g,                                                      &  & \partial_u\Omega ,                \\
-    \text{Fracture evolution: }      & \dot d\left(\nabla\cdot\frac{2G_c\ell}{c_0}\nabla d - \frac{G_c}{c_0\ell}\alpha'(d) - g'(d)\psi_e^+ (\bs\epsilon)\right) = 0,                                       &  & \forall x \in \Omega,           \\
-    & \nabla \cdot \frac{2G_c\ell}{c_0}\nabla d - \frac{G_c}{c_0\ell}\alpha'(d) - g'(d)\psi_e^+ (\bs\epsilon) \le 0,                                       &  & \forall x \in \Omega,  \label{damage ineq}         \\
-                                     & \dot d \ge  0,                                         &  & \forall x \in \Omega, \\
-                                     & \nabla d\cdot\textbf{n}_0 = 0,                                         &  & \partial\Omega, \\
-                                         & d(0,\textbf{x}) = d_0,                                         &  & \Omega.                                  
+                                     & \textbf{u} = \textbf{u}_g,                                                  \hspace{4.4cm}     \partial_u\Omega ,                \\
+    &\text{Fracture evolution: }\nonumber \\      
+    & \dot d\left(\nabla\cdot\frac{2G_c\ell}{c_0}\nabla d - \frac{G_c}{c_0\ell}\alpha'(d) - g'(d)\psi_e^+ (\bs\epsilon)\right) = 0,                                        \forall x \in \Omega,           \\
+    & \nabla \cdot \frac{2G_c\ell}{c_0}\nabla d - \frac{G_c}{c_0\ell}\alpha'(d) - g'(d)\psi_e^+ (\bs\epsilon) \le 0,                                         \forall x \in \Omega,  \label{damage ineq}         \\
+                                     & \dot d \ge  0,                                     \hspace{4.4cm}     \forall x \in \Omega, \\
+                                     & \nabla d\cdot\textbf{n} = 0,                      \hspace{3.8cm}       \partial\Omega, \\
+                                         & d(0,\textbf{x}) = d_0,                         \hspace{3.9cm}           \Omega.                                  
     \end{align}
+    %}
 \end{mdframed}
+
+% \begin{mdframed}[
+%   frametitle={Strong form},
+%   frametitlebackgroundcolor=gray!20,
+%   backgroundcolor=gray!5,
+%   linewidth=0pt,
+%   nobreak=true
+%   ]
+%   \vspace{-1em}
+%   \begin{align}
+%     \text{Linear momentum balance: } & \nabla \cdot \bs\sigma -p\nabla d + \textbf{b} = 0,                       &  & \forall x \in \Omega,                          \\
+%                                      & \bs\sigma = \frac{\partial\psi_e}{\partial \bs\epsilon},                   &  & \forall x \in \Omega, \\
+%                                      & \bs\sigma\cdot \textbf{n} = \textbf{t},                                          &  & \partial_t\Omega,  
+%                                      \\
+%                                      & \textbf{u} = \textbf{u}_g,                                                      &  & \partial_u\Omega ,                \\
+%     \text{Fracture evolution: }      & \dot d\left(\nabla\cdot\frac{2G_c\ell}{c_0}\nabla d - \frac{G_c}{c_0\ell}\alpha'(d) - g'(d)\psi_e^+ (\bs\epsilon)\right) = 0,                                       &  & \forall x \in \Omega,           \\
+%     & \nabla \cdot \frac{2G_c\ell}{c_0}\nabla d - \frac{G_c}{c_0\ell}\alpha'(d) - g'(d)\psi_e^+ (\bs\epsilon) \le 0,                                       &  & \forall x \in \Omega,  \label{damage ineq}         \\
+%                                      & \dot d \ge  0,                                         &  & \forall x \in \Omega, \\
+%                                      & \nabla d\cdot\textbf{n}_0 = 0,                                         &  & \partial\Omega, \\
+%                                          & d(0,\textbf{x}) = d_0,                                         &  & \Omega.                                  
+%     \end{align}
+% \end{mdframed}
 
 For the derivation of an equivalent weak form, trial spaces for $\textbf{u}$ and $d$ are first defined.  Although the derivation is confined to quasi-static loadings, the spaces are indexed by a discrete load step parameter $t$.   The trial spaces are given by
 
@@ -83,7 +108,7 @@ Finally, these function spaces can be discretized over a finite element mesh, th
   Find $\textbf{u}^h \in \boldsymbol{\mathcal{U}}^h_t$ and $d^h \in \mathcal{D}^h_t$, such that $\forall \textbf{w}^h \in \boldsymbol{\mathcal{V}}^h$ and $\forall q^h \in \mathcal{C}^h$,
   \begin{subequations}
     \begin{align}
-      \left( \nabla \textbf{w}^h, \bs\sigma^h \right) - \left( \textbf{w}^h, p\nabla d^h \right) - \left( \textbf{w}^h, \textbf{b} \right) - \left< \textbf{w}^h, \textbf{t} \right>_{\partial_t\Omega} & = 0, \label{eq: semidiscrete momentum balance}   \\
+      \left( \nabla \textbf{w}^h, \bs\sigma^h \right) - \left( \textbf{w}^h, p\nabla d^h \right) - \left( \textbf{w}^h, \textbf{b} \right) - \left< \textbf{w}^h, \textbf{t} \right>_{\partial_t\Omega} & = 0, \label{eq: semidiscrete momentum balance ch2}   \\
       \frac{2\ell}{c_0}\left( \nabla c^h, G_c\nabla d^h \right) + \frac{1}{c_0\ell}\left( c^h, G_c\alpha'(d^h) \right) + \left( c^h, g'(d^h)\psi_e^+ (\bs\epsilon(\textbf{u}^h)) \right) & = 0, \label{eq: semidiscrete fracture evolution}
     \end{align}
   \end{subequations}
@@ -98,5 +123,5 @@ Finally, these function spaces can be discretized over a finite element mesh, th
 In this work, bilinear finite elements are used to approximate the damage and displacement fields. 
 % The crack irreversibility condition is enforced with a primal-dual active set (PDAS) strategy. 
 % A detailed description of the PDAS is given by Heister et al in \cite{heister2015primal}, and some additional details pertinent to phase-field for fracture discretizations can be found in Hu et al \cite{hu2020phase}.
-The coupling between the two discrete equations \ref{eq: semidiscrete momentum balance} and \ref{eq: semidiscrete fracture evolution} is handled by an alternating minimization scheme. A detailed description of this scheme is given in \cite{hu2020phase}.  {\color{blue} This solution scheme is implemented using RACCOON \cite{raccoon}, a massively parallel finite element code specializing in phase-field fracture problems. RACCOON is built upon the MOOSE framework \cite{gaston2009moose, permann2020moose} developed at the Idaho National Laboratory.}
+The coupling between the two discrete equations \ref{eq: semidiscrete momentum balance ch2} and \ref{eq: semidiscrete fracture evolution} is handled by an alternating minimization scheme. A detailed description of this scheme is given in \cite{hu2020phase}.  {\color{blue} This solution scheme is implemented using RACCOON \cite{raccoon}, a massively parallel finite element code specializing in phase-field fracture problems. RACCOON is built upon the MOOSE framework \cite{gaston2009moose, permann2020moose} developed at the Idaho National Laboratory.}
 

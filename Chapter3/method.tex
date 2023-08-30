@@ -88,7 +88,7 @@ $ \Pi^{\Omega_L}_mp_m^h({\bf{x}}_Q) = p^h_m (c_1)$.
 \subsection{Local problem discretization}
 
 With the local subdomain properly identified and initialized, we now describe the additional steps to discretize the displacement and damage fields in the local subdomain and solve for their approximations.
-The governing equations for the macro-force balance \eqref{basic u problem} and the damage evolution \eqref{damage equation} are both treated with the finite element method.  The damage and displacement fields are both approximated using four-node bilinear quadrilateral elements. 
+The governing equations for the macro-force balance \eqref{basic u problem} and the damage evolution \eqref{damage equation ch3} are both treated with the finite element method.  The damage and displacement fields are both approximated using four-node bilinear quadrilateral elements. 
 
 Let $\Omega_L$ denote the local domain. From the finite-element approximation $\textbf{u}_G^h$ computed in the global problem, we extract $\textbf{u}^h_G|_{\partial\Omega_L}$ and use it to constrain the displacements on the boundary of the subproblem \footnote{In the multi-resolution method of Muixi et al.\ \cite{muixi2021combined},  the displacement boundary conditions near the crack base were released. We did not find this to be necessary in our approach.}.  As such, the trial space $\boldsymbol{\mathcal{U}}^h$ is given by
 \begin{equation}\label{disp subspace}
@@ -114,10 +114,10 @@ The test spaces are given by $\boldsymbol{\mathcal{W}}^h = H_0^1(\Omega_L)^n$ fo
   Find $\textbf{u}_L^h \in \boldsymbol{\mathcal{U}}^h$ and $d^h \in \mathcal{D}^h$, such that $\forall \textbf{w}^h \in \boldsymbol{\mathcal{W}}^h$ and $\forall c^h \in \mathcal{C}^h$,
  
  \begin{align}
-  \left( \nabla \textbf{w}^h, \boldsymbol\sigma_L^h \right) - \left( \textbf{w}^h, \Pi^{\Omega_L}_f p_f^h \nabla d^h \right) - \left( \textbf{w}^h, \textbf{b} \right) - \left< \textbf{w}^h, \textbf{t} \right>_{\partial_t\Omega} &= 0, \label{eq: semidiscrete momentum balance}   \\
+  \left( \nabla \textbf{w}^h, \boldsymbol\sigma_L^h \right) - \left( \textbf{w}^h, \Pi^{\Omega_L}_f p_f^h \nabla d^h \right) - \left( \textbf{w}^h, \textbf{b} \right) - \left< \textbf{w}^h, \textbf{t} \right>_{\partial_t\Omega} &= 0, \label{eq: semidiscrete momentum balance ch3}   \\
   \begin{split}
     \frac{2G_c^h\ell}{c_0}\left( \nabla c^h, \nabla d^h \right) + \frac{G_c^h}{c_0\ell}\left( c^h, \zeta'(d^h) \right) + \left( c^h, 2(d^h-1)W(\boldsymbol{\epsilon^+}(\textbf{u}_L^h),0) \right) \\
-    - \left( c^h, \alpha \Pi^{\Omega_L}_m p_m^h\nabla \cdot \textbf{u}_L^h \right) + \left( \nabla c^h, \Pi^{\Omega_L}_f p_f^h\textbf{u}_L^h \right)  &= 0, \label{eq: semidiscrete damage evolution}    
+    + \left( c^h, \alpha \Pi^{\Omega_L}_m p_m^h\nabla \cdot \textbf{u}_L^h \right) + \left( \nabla c^h, \Pi^{\Omega_L}_f p_f^h\textbf{u}_L^h \right)  &= 0, \label{eq: semidiscrete damage evolution}    
   \end{split} 
 \end{align}
 
@@ -127,7 +127,7 @@ where we have used $(\cdot,\cdot)$ to denote the standard inner product in the $
     \boldsymbol\sigma^h_L = \left( (1-d^h)^2\ \mathbb{C}:\boldsymbol\epsilon(\textbf{u}_L^h) -(1-d^h)\alpha p_m^h \mathbb{I}\right).
 \end{equation}
 
-We employ an alternating minimization scheme to solve the coupled system of equations \eqref{eq: semidiscrete momentum balance}-\eqref{eq: semidiscrete damage evolution}. Convergence is measured with respect to the $L_2$-norms of the change in the damage $d^h$ and  displacement fields $\textbf{u}_L^h$, using a relative tolerance of $10^{-4}$. With this approach, each of the equations becomes linear with respect to its primary variable, simplifying the solution process.
+We employ an alternating minimization scheme to solve the coupled system of equations \eqref{eq: semidiscrete momentum balance ch3}-\eqref{eq: semidiscrete damage evolution}. Convergence is measured with respect to the $L_2$-norms of the change in the damage $d^h$ and  displacement fields $\textbf{u}_L^h$, using a relative tolerance of $10^{-4}$. With this approach, each of the equations becomes linear with respect to its primary variable, simplifying the solution process.
 
 We note that \eqref{eq: semidiscrete damage evolution} does not explicitly include the irreversibility constraint  \eqref{eq:ddot-strong}. Within the multi-resolution scheme, the Dirichlet condition $d^h=1$ on the crack set $\mathcal{K}$ is sufficient to prevent the healing of the fracture surface relative to the initial global crack.  It does not, however, enforce irreversibility of the damage throughout the local subdomain, and it is possible that some crack healing could occur if regions are loaded and unloaded during a single time step.  
 We did not find this to occur for the problems studied in this work, but it is possible that this could arise in more complex cases and the use of a more robust means of enforcing the constraint on the damage would be needed.  Options include, for example, the active set solver described in \cite{hu2020frictionless}.   
@@ -287,7 +287,7 @@ Having described the solution strategies for both the global and local problems 
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=16.5cm]{img/Section2/algorithm_fancy.png}
+    \includegraphics[width=\linewidth]{img/Section2/algorithm_fancy.png}
     \caption{Multi-resolution solution algorithm.}
     \label{fig:solution_algorithm}
 \end{figure}

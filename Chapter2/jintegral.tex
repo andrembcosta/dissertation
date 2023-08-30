@@ -115,17 +115,16 @@ Multiplying both sides by the crack direction $\textbf{r}$ and applying the chai
  
  The second step consists of showing that the term $R = \textbf{r}\cdot\int\limits_{\Lambda} q\nabla \cdot \textbf{T}_p\ \text{dA}$ is zero. Expanding the expression for $\textbf{T}_p$ and using the chain rule yields
 \begin{multline}
-    R = \textbf{r}\cdot\int\limits_{\Lambda} q\nabla \cdot \biggl( \psi_e(\bs\epsilon, d)\mathbb{I} -p\nabla d\cdot\textbf{u}I'(d)\mathbb{I}  - \nabla \textbf{u}^T\bs\sigma \biggr)\ \text{dA} = \\
-    \int\limits_{\Lambda} q\biggl( \dfrac{\partial \psi_e(\bs\epsilon, d)}{\partial\nabla^s\textbf{u}}\cdot(\nabla(\nabla^s\textbf{u})\textbf{r}) + \dfrac{\partial \psi_e(\bs\epsilon, d)}{\partial d}\nabla d\cdot \textbf{r} 
-    - (\nabla \cdot \bs\sigma)\cdot(\nabla\textbf{u}\textbf{r}) - \bs\sigma(\nabla (\nabla\textbf{u})\textbf{r})-p\nabla d\cdot(\nabla \textbf{u}\textbf{r})I'(d) - p\textbf{u}\nabla(I'(d)\nabla d)\textbf{r} \biggr)\ \text{dA}.
+    R = \textbf{r}\cdot\int\limits_{\Lambda} q\nabla \cdot \biggl( \psi_e(\bs\epsilon, d)\mathbb{I} -p\nabla d\cdot\textbf{u}I'(d)\mathbb{I}  - \nabla \textbf{u}^T\bs\sigma \biggr)\ \text{dA} \\ = \int\limits_{\Lambda} q\biggl( \dfrac{\partial \psi_e(\bs\epsilon, d)}{\partial\nabla^s\textbf{u}}\cdot(\nabla(\nabla^s\textbf{u})\textbf{r}) + \dfrac{\partial \psi_e(\bs\epsilon, d)}{\partial d}\nabla d\cdot \textbf{r}
+    - (\nabla \cdot \bs\sigma)\cdot(\nabla\textbf{u}\textbf{r}) \\ - \bs\sigma(\nabla (\nabla\textbf{u})\textbf{r})-p\nabla d\cdot(\nabla \textbf{u}\textbf{r})I'(d) - p\textbf{u}\nabla(I'(d)\nabla d)\textbf{r} \biggr)\ \text{dA}.
 \end{multline}
  Re-arranging some terms, one can write,
-\begin{equation}
+\begin{multline}
     R = \int\limits_{\Lambda} q\biggl[\biggl( \dfrac{\partial \psi_e(\bs\epsilon, d)}{\partial\nabla^s\textbf{u}}-\bs\sigma\biggr) \cdot(\nabla(\nabla^s\textbf{u})\textbf{r}) 
     -\biggl( \nabla \cdot \bs\sigma - pI'(d) \nabla d \biggr)\cdot (\nabla\textbf{u}\textbf{r})
-    + \dfrac{\partial \psi_e(\bs\epsilon, d)}{\partial d}\nabla d\cdot \textbf{r} 
+    \\ + \dfrac{\partial \psi_e(\bs\epsilon, d)}{\partial d}\nabla d\cdot \textbf{r}
     - p\textbf{u}\nabla(I'(d)\nabla d)\textbf{r} \biggr]\ \text{dA}.
-\end{equation}
+\end{multline}
 
 \noindent For any elastic material, the definition of stress implies $\dfrac{\partial \psi_e(\bs\epsilon, d)}{\partial\nabla^s\textbf{u}}-\bs\sigma = 0$, and due to equation \eqref{u_equation}, $\nabla \cdot \bs\sigma - p \nabla d = 0$, so, the expression above reduces to
 \begin{equation}
