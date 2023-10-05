@@ -20,18 +20,26 @@ If multiple front elements are cracked, this process is done for all of them. Th
 
 \subsection{Fracture front construction}
 
-The fracture front plays an important role in the propagation criteria. It greatly reduces the computational expense associated with the inspection of damage in the global elements while also serving to indicate a reference position to place the subdomains as the crack advances. It's construction happens during the initial discretization of the fracture in the global domain. One goes over all fractured elements and among its neighbors, adding those that share a fractured face but are not fracture to the front. This step is repeated every time the global fracture geometry is updated (i.e new fracture cells are inserted). Figure \ref{fig:lorem0} shows the fracture front for an initial discretization (and fairly coarse) of a penny shaped fractured.
+The fracture front plays an important role in the propagation criteria. It greatly reduces the computational expense associated with the inspection of damage in the global elements while also serving to indicate a reference position to place the subdomains as the crack advances. It's construction happens during the initial discretization of the fracture in the global domain. One goes over all fractured elements and among its neighbors, adding those that share a fractured face but are not fracture to the front. This step is repeated every time the global fracture geometry is updated (i.e new fracture cells are inserted). Figure \ref{fig:crack_front} shows the fracture front for an initial discretization (and fairly coarse) of a penny shaped fractured.
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.5\linewidth]{Chapter4/figures/blue_circle.png}
-    \caption{Multi-resolution solution algorithm.}
-    \label{fig:lorem0}
+    \includegraphics[width=0.4\linewidth]{Chapter4/figures/front_penny.png}
+    \caption{Front elements shown in green. Red elements represent discretized fracture.}
+    \label{fig:crack_front}
 \end{figure}
 
 \subsection{Tracking damage in the fracture front elements}
 
-The process of tracking the damage in the front elements also deserves a more detailed explanation. 
+The process of tracking the damage in the front elements also deserves a more detailed explanation. In the set of preliminary results shown next, a simplified method suitable for planar cracks in structured grids is used. It consists of first computing the cross sectional area of the element along the fracture plane. For example, for a fracture whose normal is in the x direction, one gets $H_yH_z$.\footnote{Assume that the global element has dimensions $H_x, H_y$ and $H_z$ whereas the local one has $h_x, h_y$ and $h_z$.} This is only possible when the structured grid is aligned with the fracture (either in $x, y$ or $z$).
+
+Then, assuming that the fully damaged region of a phase-field fracture consists of a single element \footnote{this is not so obvious} across the band width, one expects the fully cracked region to have a volume of $h_xH_yH_z$. A simple criteria then consists of measuring the volume of local elements that have reached an average damage beyond a threshold close to 1 (In the examples shown next, this threshold was set to 0.9). A global element is then considered fractured if this volume reaches $h_xH_yH_z$.
+
+This method contains multiple limitations, such as the need for planar fractures aligned with a structured grid and also the hypothesis that the damage band has a single fully degraded element along its width. An alternative method to circunvent these issues inspired by \cite{muixi2021combined} consists of evaluating the damage field in the edges of an element. It assumes that a fractured element has at least three fractured faces and that a fractured face is cut on two of its edges.
+
+For each global element in the crack front, the damage field, computed in the local mesh, is inspected on every edge. If damage above a threshold (typically 0.9 or 0.95) is identified in a given edge, that edge is considered cut. If any face contains two cut edges, it is marked as cut. An element is then marked as fracture when at least three of its faces are cut.
+
+This criteria circunvents some of the limitations of the simpliefied one, removing the need for structured grids. It is also applicable to nonplanar fractures as well. However, it is not perfectly robust and certain relative configurations between the damage field and the global element in the front can lead to unexpected results. This will be shown in Section \ref{section: Chapter4/nonplanar} that discusses the case of nonplanar fractures.
 
 
 % \begin{figure}[h]
