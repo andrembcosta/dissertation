@@ -21,12 +21,36 @@ If multiple front elements are cracked, this process is done for all of them. Th
 \subsection{Fracture front construction}
 
 The fracture front plays an important role in the propagation criteria. It greatly reduces the computational expense associated with the inspection of damage in the global elements while also serving to indicate a reference position to place the subdomains as the crack advances. It's construction happens during the initial discretization of the fracture in the global domain. One goes over all fractured elements and among its neighbors, adding those that share a fractured face but are not fracture to the front. This step is repeated every time the global fracture geometry is updated (i.e new fracture cells are inserted). Figure \ref{fig:crack_front} shows the fracture front for an initial discretization (and fairly coarse) of a penny shaped fractured.
+Figure \ref{fig:crack_prop_steps} shows the sequence of steps involved in the fracture propagation process, including the update of the fracture front.
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.4\linewidth]{Chapter4/figures/front_penny.png}
     \caption{Front elements shown in green. Red elements represent discretized fracture.}
     \label{fig:crack_front}
+\end{figure}
+
+\begin{figure}[h]
+    \begin{subfigure}{\textwidth}
+        \hspace*{1.85cm}\includegraphics[width=0.55\linewidth]{Chapter4/figures/penny_with_descriptions.png}
+        \caption{Initial state.}
+        \label{fig:lorem1}
+    \end{subfigure}
+
+    \begin{subfigure}{\textwidth}    
+        \hspace*{2.35cm}\includegraphics[width=0.51\linewidth]{Chapter4/figures/larger_penny_with_descriptions.png}
+        \caption{Damage advanced.}
+        \label{fig:lorem2}
+    \end{subfigure}
+    
+    \begin{subfigure}{\textwidth}
+        \centering
+        \includegraphics[width=0.33\linewidth]{Chapter4/figures/larger_penny.png}
+        \caption{Updated configuration.}
+        \label{fig:lorem3}
+    \end{subfigure}
+    \caption{Schematic of propagation steps.}
+    \label{fig:crack_prop_steps}
 \end{figure}
 
 \subsection{Tracking damage in the fracture front elements}
@@ -98,25 +122,5 @@ This criteria circunvents some of the limitations of the simpliefied one, removi
 %     \caption{Schematic of propagation steps.}
 % \end{figure}
 
-\begin{figure}[h]
-    \begin{subfigure}{\textwidth}
-        \hspace*{1.85cm}\includegraphics[width=0.55\linewidth]{Chapter4/figures/penny_with_descriptions.png}
-        \caption{Initial state.}
-        \label{fig:lorem1}
-    \end{subfigure}
 
-    \begin{subfigure}{\textwidth}    
-        \hspace*{2.35cm}\includegraphics[width=0.51\linewidth]{Chapter4/figures/larger_penny_with_descriptions.png}
-        \caption{Damage advanced.}
-        \label{fig:lorem2}
-    \end{subfigure}
-    
-    \begin{subfigure}{\textwidth}
-        \centering
-        \includegraphics[width=0.33\linewidth]{Chapter4/figures/larger_penny.png}
-        \caption{Updated configuration.}
-        \label{fig:lorem3}
-    \end{subfigure}
-    \caption{Schematic of propagation steps.}
-\end{figure}
 
