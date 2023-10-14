@@ -1,0 +1,60 @@
+\section{Numerical Examples}
+\label{section: Chapter4/examples}
+
+In this section, a set of example problems computed with the aforementioned method is presented. These examples illustrate the main capabilities of the approach, but also serve to demonstrate some of the limitations. They all consist of hydrulic fracture propagation in a poroelastic medium. However, different fracture geometries and boundary conditions are explored. The main goal is to ensure that the proposed algorithm works as expected and can handle different scenarios, such as multiple fractures and in-plane crack merging.
+
+Importantly, a true verification procedure is not performed here. For example, mesh convergence studies and comparisons with well-known solutions are yet to be performed. Those require a few enhancements in the solver technology that are currently under development. First, due to the high discrepancy between the scales of degrees of freedom (matrix displacements, fracture apertures and pressures), general purpose linear solvers struggle to converge when the meshes are refined past a certain point. In this case, special preconditioners that take into account the block structure of the system are recommended. CITE SOMEONE. Second, analytical solutions for poroelastic problems are scarce, so, a common verification procedure consists in solving them with vanishing small permeability coefficients to verify convergence towards the KGD solutions (Section XXX) for impermeable media. However, as the permeability decreses, the poromechanics problem starts to display KBB-type instabilities (CITE SOMETHING), which require either modifications to element types or a stabilized formulation, such as (CITE JOSH PAPER). This solver infrastructure enhancements are currently in progress.
+
+For the problems in this Section, the material properties used are listed in Table XX. 
+
+% add table
+
+\subsection{Single fracture under fluid injection with non-homogenous boundary conditions}
+
+In this problem, an initial penny-shaped fracture is injected with a viscous fluid and the boundary conditions are these shown in Figure XXX. Since the boundary conditions are different in the outer faces, the fracture tend to have a prefered propagation direction and therefore, loses its initial circular shape. 
+
+This
+
+% \begin{figure}[h]
+%     \centering
+%     \begin{subfigure}{.6\textwidth}
+%       \centering
+%       \input{Chapter4/figures/tikz/mergingFracPressure.tikz}
+%       \caption{}
+%       \label{}
+%     \end{subfigure}%
+%     \begin{subfigure}{.6\textwidth}
+%       \centering
+%       \input{Chapter4/figures/tikz/mergingFracAperture.tikz}
+%       \caption{}
+%       \label{}
+%     \end{subfigure}%
+%       \caption{Lorem Ipsum} 
+%       \label{fig:fd}
+% \end{figure}
+
+% \begin{figure}[h]
+%     \centering
+%     \begin{subfigure}{.6\textwidth}
+%       \centering
+%       \input{Chapter4/figures/tikz/parallelFracPressure.tikz}
+%       \caption{}
+%       \label{}
+%     \end{subfigure}%
+%     \begin{subfigure}{.6\textwidth}
+%       \centering
+%       \input{Chapter4/figures/tikz/parallelFracAperture.tikz}
+%       \caption{}
+%       \label{}
+%     \end{subfigure}%
+%       \caption{Lorem Ipsum} 
+%       \label{fig:fd}
+% \end{figure}
+
+\noindent\input{Chapter4/figures/tikz/mergingFracPressure.tikz}
+\hspace{0.5cm}
+\input{Chapter4/figures/tikz/mergingFracAperture.tikz}
+
+\noindent\input{Chapter4/figures/tikz/parallelFracPressure.tikz}
+\hspace{0.5cm}
+\input{Chapter4/figures/tikz/parallelFracAperture.tikz}
