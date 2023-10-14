@@ -51,13 +51,43 @@ This
 %       \label{fig:fd}
 % \end{figure}
 
-\noindent\input{Chapter4/figures/tikz/mergingFracPressure.tikz}
-\hspace{0.5cm}
-\input{Chapter4/figures/tikz/mergingFracAperture.tikz}
+\subsection{Two parallel circular fractures under fluid injection}
 
-\noindent\input{Chapter4/figures/tikz/parallelFracPressure.tikz}
-\hspace{0.5cm}
-\input{Chapter4/figures/tikz/parallelFracAperture.tikz}
+In this problem, a pair of parallel penny-shaped fractures is stimulated with the injection of a viscous fluid. Parallel fractures are very common in real-world fracking, in general, fracking sites will have dozens, if not hundreds of parallel fractures, which are stimualted simultaneously.
+
+Depending on the distance between the fractures, they may grow away from each other, forming a cup shaped geometry. This is a consequence of the interaction between the stress fields in the vicinity of the multiple fractures, this interaction is often called stress shadow effect.
+
+In this numerical example shown here, the initial fractures are placed far from each other to prevent this nonplanar behavior. The far-field boundary conditions are assumed to be homogenous for pressures and tractions. Figure XX illustrates the setup. 
+
+In this case, the fractures are expected to grow radially, preserving their circular shape. This feature is confirmed in the simulated results shown in Figure \ref{fig:parallel_snapshots}. In this figure, the right-side of the domain shows the pressure field computed in the global domain whereas the left side shows the discrete crack geometry, colored in gray scale indicating the aperture field. It also shows the subdomain around the crack front, colored by the damage field.
+
+The aperture and pressure at the injection sources are important quantities in this type of problem and their simulated time series are shown in Figure \ref{fig:parallel_fracs_charts}. Due to the symmetry, both fractures have the same pressure and aperture results. The reference values used to make the curves nondimensional are listed in Table XX.
+
+\begin{table}[ht]
+  \centering
+  \caption{Reference values}
+  \begin{tabular}[t]{lcc}
+  \hline
+  &Value &Unit \\
+  \hline
+  $p_{ref}$&0.2&MPa\\
+  $w_{ref}$&4.0&m\\
+  $t_{ref}$&30&$\text{s}$\\
+  \hline
+  \end{tabular}
+  \label{geometry properties miehe}
+\end{table}%
+
+
+\begin{figure}[h]
+  \noindent\input{Chapter4/figures/tikz/parallelFracPressure.tikz}
+  \hspace{0.5cm}
+  \input{Chapter4/figures/tikz/parallelFracAperture.tikz}
+  \caption{On the left, the time series of the pressure at the injection point, on the right, the fracture aperture. Both plots show results scaled by a reference value, calculated at the onset of propagation.}  
+  \label{fig:parallel_fracs_charts}
+\end{figure}
+
+
 \begin{figure}[h]
 \begin{subfigure}{.45\textwidth}
   \centering
@@ -90,6 +120,19 @@ This
   \caption{(a) time 1; (b) time 2; (c) time 3; and (d) time 4. } 
   \label{fig:parallel_snapshots}
 \end{figure}
+
+\subsection{Merging two circular fractures}
+
+In this problem, an initial penny-shaped fracture is injected with a viscous fluid and the boundary conditions are these shown in Figure XXX. Since the boundary conditions are different in the outer faces, the fracture tend to have a prefered propagation direction and therefore, loses its initial circular shape. 
+
+\begin{figure}[h]
+\noindent\input{Chapter4/figures/tikz/mergingFracPressure.tikz}
+\hspace{0.5cm}
+\input{Chapter4/figures/tikz/mergingFracAperture.tikz}
+\caption{merging}
+\label{fig:merging_charts}
+\end{figure}
+
 
 \begin{figure}[h]
 \begin{subfigure}{.45\textwidth}
