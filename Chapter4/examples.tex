@@ -61,7 +61,9 @@ In this numerical example shown here, the initial fractures are placed far from 
 
 In this case, the fractures are expected to grow radially, preserving their circular shape. This feature is confirmed in the simulated results shown in Figure \ref{fig:parallel_snapshots}. In this figure, the right-side of the domain shows the pressure field computed in the global domain whereas the left side shows the discrete crack geometry, colored in gray scale indicating the aperture field. It also shows the subdomain around the crack front, colored by the damage field.
 
-The aperture and pressure at the injection sources are important quantities in this type of problem and their simulated time series are shown in Figure \ref{fig:parallel_fracs_charts}. Due to the symmetry, both fractures have the same pressure and aperture results. The reference values used to make the curves nondimensional are listed in Table XX.
+The aperture and pressure at the injection sources are important quantities in this type of problem and their simulated time series are shown in Figure \ref{fig:parallel_fracs_charts}. Due to the symmetry, both fractures have the same pressure and aperture results. The reference values used to make the curves nondimensional are listed in Table \ref{parallel_refs}.
+
+Add details about meshing, subdomain size, time step and etc.
 
 \begin{table}[ht]
   \centering
@@ -75,15 +77,31 @@ The aperture and pressure at the injection sources are important quantities in t
   $t_{ref}$&30&$\text{s}$\\
   \hline
   \end{tabular}
-  \label{geometry properties miehe}
+  \label{parallel_refs}
 \end{table}%
+
+\begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}
+      \node {\pgfimage[interpolate=false,width=0.8\textwidth]{Chapter4/figures/3D/parallel_schematic.png}};
+      \draw (-0.11\textwidth,0.185\textwidth) node {\large$r$};
+      \draw (0.3\textwidth,0.12\textwidth) node {\large$L_x$};
+      \draw (0.1\textwidth,-0.31\textwidth) node {\large$L_y$};
+      \draw (0.42\textwidth,-0.15\textwidth) node {\large$L_z$};
+      \draw (-0.05\textwidth,0.3\textwidth) node {\large$d_1$};
+      \draw (0.02\textwidth,0.23\textwidth) node {\large$d_2$};
+      \draw (0.09\textwidth,0.15\textwidth) node {\large$d_3$};
+  \end{tikzpicture}
+  \caption{Parallel spcimen.}
+  \label{fig:parallel_schematic}
+\end{figure}
 
 
 \begin{figure}[h]
   \noindent\input{Chapter4/figures/tikz/parallelFracPressure.tikz}
   \hspace{0.5cm}
   \input{Chapter4/figures/tikz/parallelFracAperture.tikz}
-  \caption{On the left, the time series of the pressure at the injection point, on the right, the fracture aperture. Both plots show results scaled by a reference value, calculated at the onset of propagation.}  
+  \caption{Two quantities of interest for the parallel fracture problem. On the left, the time series of the pressure at the injection point, on the right, the fracture aperture. Both plots show results scaled by reference values, calculated at the onset of propagation.}  
   \label{fig:parallel_fracs_charts}
 \end{figure}
 
@@ -121,15 +139,57 @@ The aperture and pressure at the injection sources are important quantities in t
   \label{fig:parallel_snapshots}
 \end{figure}
 
+\FloatBarrier
+
 \subsection{Merging two circular fractures}
 
-In this problem, an initial penny-shaped fracture is injected with a viscous fluid and the boundary conditions are these shown in Figure XXX. Since the boundary conditions are different in the outer faces, the fracture tend to have a prefered propagation direction and therefore, loses its initial circular shape. 
+The second problem deals with the case of in-plane fracture merging. In general, fracture merging is one of the most difficult behaviors to simulate with discrete fracture approaches. That is due to the interaction between the stress fields of two fracture fronts, which makes most attempts to extract a stress intensity factor innacurate. 
+
+In these types of problems, the phase-field method becomes handy, allowing for the computation of crack advances regardless of the front geometry. This is explored well in the multi-resolution approach, since the entire fracture front is inside the subdomain by construction, allowing for the use of the phase-field solver. 
+
+Since this problem deals with in-plane merging, getting the discrete fracture planes from the phase-field values is straightforward. However, it is important to mention that this can be a challenge in the case of non-planar merging.
+
+The problem under consideration consists of two parallel fractures, initally of circular shape, embedded in a poroelastic matrix. Both are injected with a viscous fluid and propagate radially, eventually merging.  The simulated behavior is depicted in Figure \ref{fig:merge_snapshots}. As for the previous problem, the times series for the aperture and pressure in the injection point are shown in Figure \ref{fig:merging_charts}. The reference values used to make these charts nondimensional are given in Table \ref{merging_refs}.
+
+Add mesh quantites, time step, material properties, boundary conditions and conclusion.
+
+\begin{table}[ht]
+  \centering
+  \caption{Reference values}
+  \begin{tabular}[t]{lcc}
+  \hline
+  &Value &Unit \\
+  \hline
+  $p_{ref}$&0.2&MPa\\
+  $w_{ref}$&4.0&m\\
+  $t_{ref}$&30&$\text{s}$\\
+  \hline
+  \end{tabular}
+  \label{merging_refs}
+\end{table}%
+
+\begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}
+      \node {\pgfimage[interpolate=false,width=.8\textwidth]{Chapter4/figures/merging/merging_schematic.png}};
+      \draw (0.0\textwidth,0.07\textwidth) node {\large$r$};
+      \draw (0.37\textwidth,0.12\textwidth) node {\large$L_x$};
+      \draw (0.04\textwidth,-0.25\textwidth) node {\large$L_y$};
+      \draw (0.42\textwidth,-0.07\textwidth) node {\large$L_z$};
+      \draw (-0.25\textwidth,0.25\textwidth) node {\large$d_1$};
+      \draw (-0.03\textwidth,0.25\textwidth) node {\large$d_2$};
+      \draw (0.2\textwidth,0.25\textwidth) node {\large$d_3$};
+  \end{tikzpicture}
+  \caption{Merging spcimen.}
+  \label{fig:merging_schematic}
+\end{figure}
+
 
 \begin{figure}[h]
 \noindent\input{Chapter4/figures/tikz/mergingFracPressure.tikz}
 \hspace{0.5cm}
 \input{Chapter4/figures/tikz/mergingFracAperture.tikz}
-\caption{merging}
+\caption{Two quantities of interest for the merging fracture problem. On the left, the time series of the pressure at the injection point, on the right, the fracture aperture. Both plots show results scaled by reference values, calculated at the onset of propagation.}  
 \label{fig:merging_charts}
 \end{figure}
 
@@ -184,20 +244,6 @@ In this problem, an initial penny-shaped fracture is injected with a viscous flu
   \label{fig:merge_snapshots}  
 \end{figure}
 
-\begin{figure}[h]
-% \centering
-\begin{subfigure}{.45\textwidth}
-  \centering
-  \includegraphics[width=0.765\linewidth]{Chapter4/figures/nonplanar/3D_example_init.png}
-  \caption{}
-  \label{fig:init_crack}
-\end{subfigure}%
-\begin{subfigure}{.54\textwidth}
-  \centering
-  \includegraphics[width=0.83\linewidth]{Chapter4/figures/nonplanar/nonplanar_example.png}
-  \caption{}
-  \label{fig:crack_path}
-\end{subfigure}%
-  \caption{(a) Initial crack; (b) Final damage path.} 
-  \label{fig:nonplanar_example}
-\end{figure}
+\FloatBarrier
+
+

@@ -53,7 +53,9 @@ Figure \ref{fig:crack_prop_steps} shows the sequence of steps involved in the fr
     \label{fig:crack_prop_steps}
 \end{figure}
 
-\subsection{Tracking damage in the fracture front elements}
+\FloatBarrier
+
+\subsection{Tracking damage in the fracture front elements}\label{frontTrackingAlgo}
 
 The process of tracking the damage in the front elements also deserves a more detailed explanation. In the set of preliminary results shown next, a simplified method suitable for planar cracks in structured grids is used. It consists of first computing the cross sectional area of the element along the fracture plane. For example, for a fracture whose normal is in the x direction, one gets $H_yH_z$.\footnote{Assume that the global element has dimensions $H_x, H_y$ and $H_z$ whereas the local one has $h_x, h_y$ and $h_z$.} This is only possible when the structured grid is aligned with the fracture (either in $x, y$ or $z$).
 
