@@ -4,20 +4,20 @@
 
 %With respect to the novel model described in Section \ref{sec:model}, it is important to assess how well it satisfies Griffith's law for finite values of $\ell$ and whether it converges as $\ell \rightarrow 0$. For this purpose, it is necessary to extract the instantaneous energy release rate (here denoted as $G$) of pressurized cracks in a phase-field context. 
 
-This Section presents a modified J-integral, capable of retrieving $G$ in the case of pressurized cracks in a phase-field for fracture setting. The resulting integral is then re-cast into a domain-independent form that is more amenable to finite-element calculations.  
+This Section presents a modified J-Integral, capable of retrieving the energy release rate, denoted here by $G$ in the case of pressurized cracks in a phase-field for fracture setting. The resulting integral is then re-cast into a domain-independent form that is more amenable to finite-element calculations.  
  
 
 %{\color{purple}This J-Integral is re-cast in the domain form, which has a few advantages compared to the contour form. First, the implementation is simpler when used in the finite element context, as it only needs integration over elements, allowing standard quadrature rules to be used. Second, it also retains improved accuracy, since it does not require interpolation of quantities outside of quadrature points.} 
 
 %The first use of the J-Integral in the context of phase-field fracture dates back to the work of Hakim and Karma \cite{hakim2009laws}, who used it to study the fracture model proposed in \cite{karma2001phase}. Later, in \cite{sicsic2013gradient} and \cite{ballarini2016closed} the concept was applied to the phase-field model based on the regularization of the variational approach to fracture of Francfort and Marigo \cite{francfort1998revisiting}. In these works, the expression of the J-Integral, which works in general, for traction-free cracks is,
 
-A common form of the J-integral, derived for phase-field fracture and applicable to traction-free cracks is given by \cite{sicsic2013gradient,ballarini2016closed} 
+A common form of the J-Integral, derived for phase-field fracture and applicable to traction-free cracks is given by \cite{sicsic2013gradient,ballarini2016closed} 
 \begin{equation}
     J = \textbf{r} \cdot \int\limits_{\zeta} \biggl( \psi(\bs\epsilon, d)\mathbb{I} - \nabla \textbf{u}^T\bs \sigma-\nabla d \otimes \bs\omega \biggr) \textbf{n}\text{ds}, 
 \end{equation}
-where $\psi(\bs\epsilon, d)$ is given by equation \eqref{PF general form}. In the above, the vector $\textbf{r}$ denotes the crack propagation direction, $\zeta$ is a closed path around the crack tip, $\mathbb{I}$ is the second-order identity tensor, $\textbf{n}$ is the normal to the closed path $\zeta$ and $\bs\omega = \partial \psi/\partial \nabla d = (G_c\ell/c_0)\nabla d$. Compared to the original form of the J-integral proposed by Rice~\cite{rice1968mathematical,rice1968path}, this expression contains additional terms to account for the phase-field parameter $d$. 
+where $\psi(\bs\epsilon, d)$ is given by equation \eqref{PF general form}. In the above, the vector $\textbf{r}$ denotes the crack propagation direction, $\zeta$ is a closed path around the crack tip, $\mathbb{I}$ is the second-order identity tensor, $\textbf{n}$ is the normal to the closed path $\zeta$ and $\bs\omega = \partial \psi/\partial \nabla d = (G_c\ell/c_0)\nabla d$. Compared to the original form of the J-Integral proposed by Rice~\cite{rice1968mathematical,rice1968path}, this expression contains additional terms to account for the phase-field parameter $d$. 
 
-Importantly,  Sicsic and Marigo \cite{sicsic2013gradient} show that, under certain conditions, the standard form of the J-integral widely employed for sharp cracks, viz.
+Importantly,  Sicsic and Marigo \cite{sicsic2013gradient} show that, under certain conditions, the standard form of the J-Integral widely employed for sharp cracks, viz.
 \begin{equation}
     J = \textbf{r} \cdot \int\limits_{\zeta} \biggl( \psi_e(\bs\epsilon, d)\mathbb{I} - \nabla \textbf{u}^T\bs \sigma\biggr) \textbf{n}\text{ds},
 \end{equation}
@@ -92,7 +92,7 @@ Importantly,  Sicsic and Marigo \cite{sicsic2013gradient} show that, under certa
 
 \medskip
 
-\noindent\textbf{Claim}: Consider a domain $\Omega \in \mathbb{R}^2$ with a straight phase-field crack and two closed, non-intersecting paths $\zeta_{in}$ and $\zeta_{out}$ around the crack tip, enclosing an area $\Lambda$ as shown in Figure~\ref{fig:j_integral}. Let $q(x)$ be a sufficently smooth function satisfying $q = 1$ on $\zeta_{in}$ and $q = 0$ on $\zeta_{out}$. Further, assume that $q = 1$ for all points inside $\zeta_{in}$ and $q = 0$ for all points outside $\zeta_{out}$, as shown in Figure \ref{fig:j_integral_q}. Finally, assume that the fracture is loaded by a constant pressure $p$, and that one of the formulations described in Section \ref{sec:model} holds. Then, if conditions \ref{itm:hyp1}, \ref{itm:hyp2} and \ref{itm:hyp3} hold for $\zeta_{in}$ and $\zeta_{out}$, the energy release rate can be approximated by the  integral
+\noindent\textbf{Claim}: Consider a domain $\Omega \in \mathbb{R}^2$ with a straight phase-field crack and two closed, non-intersecting paths $\zeta_{in}$ and $\zeta_{out}$ around the crack tip, enclosing an area $\Lambda$ as shown in Figure~\ref{fig:j_integral}. Let $q(x)$ be a sufficiently smooth function satisfying $q = 1$ on $\zeta_{in}$ and $q = 0$ on $\zeta_{out}$. Further, assume that $q = 1$ for all points inside $\zeta_{in}$ and $q = 0$ for all points outside $\zeta_{out}$, as shown in Figure \ref{fig:j_integral_q}. Finally, assume that the fracture is loaded by a constant pressure $p$, and that one of the formulations described in Section \ref{sec:model} holds. Then, if conditions \ref{itm:hyp1}, \ref{itm:hyp2} and \ref{itm:hyp3} hold for $\zeta_{in}$ and $\zeta_{out}$, the energy release rate can be approximated by the  integral
 \begin{equation}\label{j_integral_theorem}
     J = \textbf{r} \cdot \int\limits_{\Lambda} \biggl( \psi_e(\bs\epsilon, d)\mathbb{I} -p\nabla d\cdot\textbf{u}I'(d)\mathbb{I}  - \nabla \textbf{u}^T\bs \sigma \biggr) \cdot \nabla q\ \text{dA},
 \end{equation}
@@ -126,7 +126,7 @@ Multiplying both sides by the crack direction $\textbf{r}$ and applying the chai
     - p\textbf{u}\nabla(I'(d)\nabla d)\textbf{r} \biggr]\ \text{dA}.
 \end{multline}
 
-\noindent For any elastic material, the definition of stress implies $\dfrac{\partial \psi_e(\bs\epsilon, d)}{\partial\nabla^s\textbf{u}}-\bs\sigma = 0$, and due to equation \eqref{u_equation}, $\nabla \cdot \bs\sigma - p \nabla d = 0$, so, the expression above reduces to
+\noindent For any elastic material, the definition of stress implies $\dfrac{\partial \psi_e(\bs\epsilon, d)}{\partial\nabla^s\textbf{u}} = \bs\sigma$, and due to equation \eqref{u_equation}, $\nabla \cdot \bs\sigma - p \nabla d = \bs 0$, so, the expression above reduces to
 \begin{equation}
     R = \int\limits_{\Lambda} q\biggl(\dfrac{\partial \psi_e(\bs\epsilon, d)}{\partial d}\nabla d\cdot \textbf{r} 
     - p\textbf{u}\nabla(I'(d)\nabla d)\textbf{r} \biggr)\ \text{dA}.

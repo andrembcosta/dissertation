@@ -50,11 +50,11 @@ Often, the strain energy density is split and part of it is degraded with the da
 \end{equation}
 where $g(d)$ denotes the degradation function, and $\psi_e^+(\bs\epsilon(\textbf{u}))$ and $\psi_e^-(\bs\epsilon(\textbf{u}))$ denote the ``active" and ``inactive" parts of the energy. The above form encapsulates most of the strain decompositions used in the literature \cite{amor2009regularized},\cite{miehe2010phase} to introduce asymmetry in the fracture behavior in tension and compression.
 
-Typically, a minimization principle is applied to \eqref{total potential static pf} to extract the governing equations for the displacements $\textbf{u}$ and the damage $d$. According to this principle, a pair ($\textbf{u}$, $d$) is a valid state if and only if all neighboring states ($\textbf{u} + \delta\textbf{u} $, $d+\delta d$) have a greater potential energy. In the case of pressurized cracks, a subtle consideration leads to the formulation proposed herein. Consider the two scenarios indicated in Figure \ref{fig:wet_vs_dry_crack}. In the situation depicted in Figure \ref{fig:wet_crack}, the pressure load (applied in the areas colored in blue), is assumed to accompany any crack propagation. Therefore, in an energetic analysis, the virtual crack extension $da$ is assumed  pressurized. By contrast, in Figure \ref{fig:dry_crack}, the pressure load is assumed to remain confined to the original crack geometry during propagation.  As a result, the virtual crack extension $da$ is not subject to any surface load.
+Typically, a minimization principle is applied to \eqref{total potential static pf} to extract the governing equations for the displacements $\textbf{u}$ and the damage $d$. According to this principle, a pair ($\textbf{u}$, $d$) is a valid state if and only if all neighboring states ($\textbf{u} + \delta\textbf{u} $, $d+\delta d$) have a greater potential energy. In the case of pressurized cracks, a subtle consideration leads to the formulation proposed herein. Consider the two scenarios indicated in Figure \ref{fig:wet_vs_dry_crack} where $a$ denotes the crack length and $da$ an infinitesimal crack increment. In the situation depicted in Figure \ref{fig:wet_crack}, the pressure load (applied in the areas colored in blue), is assumed to accompany any crack propagation. Therefore, in an energetic analysis, the virtual crack extension $da$ is assumed  pressurized. By contrast, in Figure \ref{fig:dry_crack}, the pressure load is assumed to remain confined to the original crack geometry during propagation.  As a result, the virtual crack extension $da$ is not subject to any surface load.
 
 In terms of the resulting formulation, the difference between the two scenarios shown in Figure \ref{fig:wet_vs_dry_crack} translate into the question of whether or not the damage variation $\delta d$ should enter the pressure work contribution \eqref{reg pressure term}.
 
-For the family of formulations that derived from \cite{bourdin2012variational} and \cite{wheeler2014augmented}, the scenario depicted in Figure \ref{fig:wet_crack} is assumed as a consequence of including the damage variation $\delta d$ in \eqref{reg pressure term}. The proposed model in this work, by contrast, assumes the case indicated by Figure \ref{fig:dry_crack}.  Although these competing views are expected to give rise to negligible differences in results in the limit as $da \rightarrow 0$, in practice the two formulations do give rise to slightly different sets of governing equations.  As we will demonstrate in the numerical examples in Section~\ref{sec:results}, in practice these differences can translate into fairly significant differences in the results.  
+For the family of formulations that derived from \cite{bourdin2012variational} and \cite{wheeler2014augmented}, the scenario depicted in Figure \ref{fig:wet_crack} is assumed as a consequence of including the damage variation $\delta d$ in \eqref{reg pressure term}. The proposed model in this work, by contrast, assumes the case indicated by Figure \ref{fig:dry_crack}. While in a discrete crack model these competing views may lead to the same energy release rate when taking the limit $da \rightarrow 0$, their phase-field regularizations give rise to different sets of governing equations. As demonstrated in the numerical examples in Section 5, this can translate into significant differences in the results from model-based simulations.  
 
 \begin{figure}[h]
 % \centering
@@ -105,11 +105,11 @@ In what follows, the formulation associated with Figure \ref{fig:dry_crack} will
 The local minimization principle requires the variation of the potential energy $\delta U$ to be non-negative for any admissible state $\textbf{u},d$. In other words, $\delta U(\bs\epsilon, d) \ge 0$, giving rise to the following equation and boundary condition for $\textbf{u}$, since the variation of the displacement field $\delta \textbf{u}$ is arbitrary:
 
 \begin{equation}\label{disp equation}
-    -\nabla \cdot \bs \sigma  + pI'(d) \nabla d = 0 \text{ on }\Omega,
+    -\nabla \cdot \bs \sigma  + pI'(d) \nabla d = \bs 0 \text{ in }\Omega,
 \end{equation}
 
 \begin{equation}\label{disp bcs}
-    \bs\sigma \cdot \textbf{n} - \textbf{t} = 0 \text{ on }\partial\Omega_N.
+    \bs\sigma \cdot \textbf{n} - \textbf{t} = \bs 0 \text{ in }\partial\Omega_N.
 \end{equation}
 
 \noindent In the above, $\bs\sigma$ denotes the Cauchy stress, defined as $\bs\sigma = \dfrac{\partial\psi_e}{\partial \bs \epsilon}$. 
@@ -118,7 +118,7 @@ For the damage variable, it is assumed that the process is irreversible, such th
 
 \begin{equation}\label{damage equation ch2}
     g'(d) \psi_e^+(\bs\epsilon)
-    + \dfrac{G_c}{c_0\ell}\alpha'(d) - \nabla \cdot \dfrac{2G_c\ell}{c_0}\nabla d \ge 0 \text{ on }\Omega,
+    + \dfrac{G_c}{c_0\ell}\alpha'(d) - \nabla \cdot \dfrac{2G_c\ell}{c_0}\nabla d \ge 0 \text{ in }\Omega,
 \end{equation}
 \begin{equation}\label{damage bcs}
     \dfrac{2G_c\ell}{c_0}\textbf{n}\cdot \nabla d \ge 0 \text{ on }\partial\Omega.
@@ -137,16 +137,16 @@ For the damage variable, it is assumed that the process is irreversible, such th
   ]
   
 \begin{equation}\label{disp equation box}
-    -\nabla \cdot \bs\sigma  + pI'(d) \nabla d = 0 \text{ on }\Omega,
+    -\nabla \cdot \bs\sigma  + pI'(d) \nabla d = \bs 0 \text{ in }\Omega,
 \end{equation}
 
 \begin{equation}\label{disp bcs box}
-    \bs\sigma\cdot \textbf{n} -\textbf{t} = 0 \text{ on }\partial\Omega_N.
+    \bs\sigma\cdot \textbf{n} -\textbf{t} = \bs 0 \text{ in }\partial\Omega_N.
 \end{equation}
 
 \begin{equation}\label{damage equation box}
     g'(d) \psi_e^+(\bs\epsilon)
-    + \dfrac{G_c}{c_0\ell}\alpha'(d) - \nabla \cdot \dfrac{2G_c\ell}{c_0}\nabla d \ge 0 \text{ on }\Omega,
+    + \dfrac{G_c}{c_0\ell}\alpha'(d) - \nabla \cdot \dfrac{2G_c\ell}{c_0}\nabla d \ge 0 \text{ in }\Omega,
 \end{equation}
 
 \begin{equation}\label{damage bcs box}
@@ -166,16 +166,16 @@ For the damage variable, it is assumed that the process is irreversible, such th
   ]
   
 \begin{equation}\label{disp equation box2}
-    -\nabla \cdot \bs\sigma  + pI'(d) \nabla d = 0 \text{ on }\Omega,
+    -\nabla \cdot \bs\sigma  + pI'(d) \nabla d = \bs 0 \text{ in }\Omega,
 \end{equation}
 
 \begin{equation}\label{disp bcs box2}
-    \bs\sigma\cdot \textbf{n} - \textbf{t} = 0 \text{ on }\partial\Omega_N.
+    \bs\sigma\cdot \textbf{n} - \textbf{t} = \bs 0 \text{ in }\partial\Omega_N.
 \end{equation}
 
 \begin{multline}\label{wet damage equation box2}
     g'(d) \psi_e^+(\bs\epsilon)
-    + \dfrac{G_c}{c_0\ell}\alpha'(d) - \nabla \cdot \dfrac{2G_c\ell}{c_0}\nabla d \\ - \nabla \cdot [p\textbf{u}\ I'(d)] + p\nabla d\cdot \textbf{u}I''(d) \ge 0 \text{ on }\Omega,
+    + \dfrac{G_c}{c_0\ell}\alpha'(d) - \nabla \cdot \dfrac{2G_c\ell}{c_0}\nabla d \\ - \nabla \cdot [p\textbf{u}\ I'(d)] + p\nabla d\cdot \textbf{u}I''(d) \ge 0 \text{ in }\Omega,
 \end{multline}
     
 \begin{equation}\label{wet damage bcs box2}
@@ -186,7 +186,7 @@ For the damage variable, it is assumed that the process is irreversible, such th
 
 \noindent It is readily apparent that the governing equations for the displacements are identical in the UVC and the LVC. The main difference is in the absence of the additional pressure-dependent terms in the evolution for the damage field and the accompanying boundary condition.  
 
-In \ref{SIF_equivalence}, an analytical study of the energy release rate of a crack propagating under an arbitrary pressure load $p(x)$ is provided, under the assumptions of the UVC formulation and linear elastic fracture mechanics. The results of the study show that it is possible to recover the classic relationship between the energy release rate and the stress intensity factor with the UVC formulation. This ensures the consistency of the proposed formulation \eqref{uvc} with many theoretical works \cite{detournay2016mechanics, garagash2000tip, detournay2004propagation, garagash2005plane, bunger2005toughness} in the field of hydraulic fracture, where the stress intensity factor is used as the propagation criteria
+In Appendix \ref{SIF_equivalence}, an analytical study of the energy release rate of a crack propagating under an arbitrary pressure load $p(x)$ is provided, under the assumptions of the UVC formulation and linear elastic fracture mechanics. The results of the study show that it is possible to recover the classic relationship between the energy release rate and the stress intensity factor with the UVC formulation. This ensures the consistency of the proposed formulation \eqref{uvc} with many theoretical works \cite{detournay2016mechanics, garagash2000tip, detournay2004propagation, garagash2005plane, bunger2005toughness} in the field of hydraulic fracture, where the stress intensity factor is used as the propagation criterion.
 
 \subsection{Derivation using the maximum dissipation principle}\label{dyn_derivation}
 
@@ -201,7 +201,7 @@ where $u$ is the material internal energy, which relates to the Helmholtz free-e
 In this work, only isothermal processes are considered, therefore, $\dot{u} = \dot{\psi}$. The term $\mathcal{P}^{ext}$ denotes the external power expenditure. If cracks were represented by internal boundaries $\Gamma$ instead of a damage field, one could write,
 
 \begin{equation}\label{power expenditure}
-    \mathcal{P}^{ext} = \int\limits_{\partial \Omega \cup \Gamma} \textbf{t}\cdot\dot{\textbf{u}} \text{dA} = \int\limits_{\partial \Omega} \textbf{t}\cdot\dot{\textbf{u}} + \int\limits_{\Gamma} p\textbf{n}\cdot\dot{\textbf{u}} \text{dA}.
+    \mathcal{P}^{ext} = \int\limits_{\partial \Omega \cup \Gamma} \textbf{t}\cdot\dot{\textbf{u}} \text{dA} = \int\limits_{\partial \Omega} \textbf{t}\cdot\dot{\textbf{u}}\text{dA} + \int\limits_{\Gamma} p\textbf{n}\cdot\dot{\textbf{u}} \text{dA}.
 \end{equation}
 
 \noindent However, in a regularized setting this integral over $\Gamma$ is once again transformed into a volume integral over $\Omega$, as in \eqref{reg pressure term}, 
@@ -225,14 +225,14 @@ The evolution process is postulated to follow the minimizers of this total poten
 
 \noindent Using the Euler-Lagrange equations, the following general evolution equations can then be obtained in terms of the free-energy function $\psi$:
 \begin{equation}\label{u_equation}
-    \nabla \cdot \dfrac{\partial\psi}{\partial \bs\epsilon} - pI'(d) \nabla d = 0 \text{ on }\Omega,
+    \nabla \cdot \dfrac{\partial\psi}{\partial \bs\epsilon} - pI'(d) \nabla d = \bs 0 \text{ in }\Omega,
 \end{equation}
 \begin{equation}\label{d_equation}
-    \nabla \cdot \dfrac{\partial\psi}{\partial \nabla d} - \dfrac{\partial\psi}{\partial d} \ge 0 \text{ on }\Omega,
+    \nabla \cdot \dfrac{\partial\psi}{\partial \nabla d} - \dfrac{\partial\psi}{\partial d} \ge \bs 0 \text{ in }\Omega,
 \end{equation}
 with the boundary conditions
 \begin{equation}\label{u_bc_helmholtz}
-    \dfrac{\partial\psi}{\partial \bs\epsilon}\cdot\textbf{n} - \textbf{t} = 0 \text{ on }\partial\Omega\setminus\partial\Omega_D
+    \dfrac{\partial\psi}{\partial \bs\epsilon}\cdot\textbf{n} - \textbf{t} = \bs 0 \text{ on }\partial\Omega\setminus\partial\Omega_D
 \end{equation}
 \begin{equation}\label{d_bc_helmholtz}
     \textbf{n} \cdot \dfrac{\partial\psi}{\partial \nabla d} \ge 0 \text{ on }\partial\Omega.
@@ -247,15 +247,15 @@ with the boundary conditions
 \noindent following the regularization based on the Ambrosio-Tortorelli functional. In this case, the general equations \eqref{u_equation}-\eqref{d_bc_helmholtz} take the form
 \begin{equation}
 \label{eq:UVC-eq2}
-    -\nabla \cdot \bs\sigma  + pI'(d) \nabla d = 0 \text{ on }\Omega,
+    -\nabla \cdot \bs\sigma  + pI'(d) \nabla d = \bs 0 \text{ in }\Omega,
 \end{equation}
 \begin{equation}
     g'(d) \psi_e^+(\bs\epsilon)
-    + \dfrac{G_c}{c_0\ell}\alpha'(d) - \nabla \cdot \dfrac{2G_c\ell}{c_0}\nabla d \ge 0 \text{ on }\Omega,
+    + \dfrac{G_c}{c_0\ell}\alpha'(d) - \nabla \cdot \dfrac{2G_c\ell}{c_0}\nabla d \ge 0 \text{ in }\Omega,
 \end{equation}
  with the boundary conditions
 \begin{equation}
-    \bs\sigma\cdot \textbf{n}-\textbf{t} = 0 \text{ on }\partial\Omega_N,
+    \bs\sigma\cdot \textbf{n}-\textbf{t} = \bs 0 \text{ on }\partial\Omega_N,
 \end{equation}
 \begin{equation}
 \label{eq:UVC-bc2}
@@ -271,7 +271,7 @@ In the previous subsection, the proposed model for pressurized cracks was develo
     \psi(\bs{\epsilon},d) = \underbrace{g(d)\psi_e^+(\bs{\epsilon}) + \psi_e^-(\bs{\epsilon})}_{\psi_e} + \underbrace{\frac{G_c}{c_0\ell}\bigg( \alpha(d) + \ell^2\nabla d \cdot \nabla d\bigg)}_{\psi_f}.
 \end{equation}
 
-\noindent In what follows, the constitutive choices used in the example problems provided in Section \ref{sec:results} are described. 
+\noindent where $\psi_f$ is used to indicate the part of the free-energy associated with fracture. In what follows, the constitutive choices used in the example problems provided in Section \ref{sec:results} are described. 
 
 \subsubsection{Elastic energy and decomposition}
 
@@ -289,7 +289,7 @@ When damage is present, a decomposition of the energy is often assumed. In many 
     \psi_e^-(\bs\epsilon(\textbf{u}),d)=0 \rightarrow \psi_e(\bs\epsilon(\textbf{u}),d) = \dfrac{1}{2}g(d)\bs\epsilon(\textbf{u}) : \mathbb{C} : \bs\epsilon(\textbf{u}),
 \end{equation}
 
-\noindent is capable of correctly predicting the material response, while leading to a simpler set of governing equations. However, in a wide-range of scenarios, compressive forces are present, and an energy split is needed to prevent crack formation in zones of high compression, as well as to allow for transmission of compressive forces across fractured faces. 
+\noindent is capable of correctly predicting the material response, while leading to a simpler set of governing equations. However, in a wide range of scenarios, compressive forces are present, and an energy split is needed to prevent crack formation in zones of high compression, as well as to allow for transmission of compressive forces across fractured faces. 
 
 In Section \ref{sec:results}, one of the example problems will employ the spectral split of Miehe et al. \cite{miehe2010phase},  given by,
 

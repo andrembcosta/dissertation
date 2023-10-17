@@ -121,7 +121,6 @@ Finally, these function spaces can be discretized over a finite element mesh, th
 \end{mdframed}
 
 In this work, bilinear finite elements are used to approximate the damage and displacement fields. 
-% The crack irreversibility condition is enforced with a primal-dual active set (PDAS) strategy. 
-% A detailed description of the PDAS is given by Heister et al in \cite{heister2015primal}, and some additional details pertinent to phase-field for fracture discretizations can be found in Hu et al \cite{hu2020phase}.
-The coupling between the two discrete equations \ref{eq: semidiscrete momentum balance ch2} and \ref{eq: semidiscrete fracture evolution} is handled by an alternating minimization scheme. A detailed description of this scheme is given in \cite{hu2020phase}.  {\color{blue} This solution scheme is implemented using RACCOON \cite{raccoon}, a massively parallel finite element code specializing in phase-field fracture problems. RACCOON is built upon the MOOSE framework \cite{gaston2009moose, permann2020moose} developed at the Idaho National Laboratory.}
+
+The coupling between the two discrete equations \eqref{eq: semidiscrete momentum balance ch2} and \eqref{eq: semidiscrete fracture evolution} is handled by an alternating minimization scheme. A detailed description of this scheme is given in \cite{hu2020phase}.   This solution scheme is implemented using RACCOON \cite{raccoon}, a  parallel finite element code specializing in phase-field fracture problems. RACCOON is built upon the MOOSE framework \cite{gaston2009moose, permann2020moose} developed and maintained by  Idaho National Laboratory.
 
