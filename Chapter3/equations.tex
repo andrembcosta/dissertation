@@ -120,7 +120,7 @@ The strain energy density $W(\boldsymbol{\epsilon}(\textbf{u}), p_m)$ is postula
     W(\boldsymbol{\epsilon}(\textbf{u}), p_m) = \dfrac{1}{2}\left( \boldsymbol\epsilon(\textbf{u}) - \dfrac{\alpha}{nK} p_m\mathbb{I}\right) : \mathbb{C} : \left( \boldsymbol\epsilon(\textbf{u}) - \dfrac{\alpha}{nK} p_m\mathbb{I}\right),
 \end{equation}
 
-with $K$ denoting the bulk modulus and $n$ the system's dimension (2 or 3). The phase-field regularization, based on the Ambrosio-Tortorelli \cite{ambrosio1990approximation} functional is then performed by the introduction of the damage parameter $d$ and the regularization length $\ell$,
+\noindent with $K$ denoting the bulk modulus and $n$ the system's dimension (2 or 3). The phase-field regularization, based on the Ambrosio-Tortorelli \cite{ambrosio1990approximation} functional is then performed by the introduction of the damage parameter $d$ and the regularization length $\ell$,
 
 \begin{multline}\label{Poroelastic PF funcional}
     \mathcal{E}_{\ell}(\textbf{u},d,p_m,p_f) = \int\limits_{\Omega }\widetilde{W}(\boldsymbol{\epsilon}(\textbf{u}), p_m, d)d\Omega - \int\limits_{\partial\Omega_N}\textbf{t} \cdot \textbf{u} ds \\
@@ -129,18 +129,18 @@ with $K$ denoting the bulk modulus and $n$ the system's dimension (2 or 3). The 
     + \dfrac{G_c}{c_0}\int\limits_{\Omega }\left(\dfrac{\zeta(d)}{\ell} + \ell\nabla d\cdot\nabla d  \right)d\Omega,
 \end{multline}
 
-where the function $\zeta(d)$ is the local dissipation function, which is usually taken as $\zeta(d) = d$ or $d^2$. The constant $c_0$ is given by $c_0 = 4\int_0^1 \sqrt{\zeta(z)}dz$ and the regularized strain energy is defined by,
+\noindent where the function $\zeta(d)$ is the local dissipation function, which is usually taken as $\zeta(d) = d$ or $d^2$. The constant $c_0$ is given by $c_0 = 4\int_0^1 \sqrt{\zeta(z)}dz$ and the regularized strain energy is defined by,
 
 \begin{equation}\label{damaged strain energy}
     \widetilde{W}(\boldsymbol{\epsilon}(\textbf{u}), p_m, d) = \dfrac{1}{2}\left( (1-d)\boldsymbol\epsilon(\textbf{u}) - \dfrac{\alpha}{nK} p_m\mathbb{I}\right) : \mathbb{C} : \left( (1-d)\boldsymbol\epsilon(\textbf{u}) - \dfrac{\alpha}{nK} p_m\mathbb{I}\right),
 \end{equation}
 
-which is consistent with an assumption of damage arising in the sub pore scale \cite{chukwudozie2019variational}. Finally, our regularized crack evolution problem is then stated as a minimization principle for the functional $\mathcal{E}_{\ell}(\textbf{u},d,p_m,p_f)$, with respect to the variables $\textbf{u}$ and $d$, with the added condition that the damage process is irreversible and that the damage variable $d$ is bounded between the values of zero (undamaged state) and unity (fully broken state):
+\noindent which is consistent with an assumption of damage arising in the sub pore scale \cite{chukwudozie2019variational}. Finally, our regularized crack evolution problem is then stated as a minimization principle\footnote{Since the focus of this Chapter is in the solution procedure, we opted to use the more established LVC hypothesis instead of the UVC one, proposed in Chapter \ref{section: Chapter2}.} for the functional $\mathcal{E}_{\ell}(\textbf{u},d,p_m,p_f)$, with respect to the variables $\textbf{u}$ and $d$, with the added condition that the damage process is irreversible and that the damage variable $d$ is bounded between the values of zero (undamaged state) and unity (fully broken state):
 \begin{equation}\label{variational formulation of phase-field}
     \textbf{u}, d = \underset{\textbf{u},d}{{\operatorname{argmin}}} \ \mathcal{E}_{\ell}(\textbf{u},d,p_m,p_f)\ \text{,\ \   subject to } \dot{d} \ge 0, \text{ and } 0 \le d \le 1. 
 \end{equation}
 
-The following set of evolution equations can then be derived from the Karush–Kuhn–Tucker (KKT) \cite{karush1939minima, kuhn1951nonlinear} conditions:
+The following set of evolution equations can then be derived from the Karush, Kuhn, Tucker (KKT) \cite{karush1939minima, kuhn1951nonlinear} conditions:
 
 \begin{equation}\label{basic u problem}
     \nabla \cdot \left( (1-d)^2\ \mathbb{C}:\boldsymbol\epsilon(\textbf{u}) -(1-d)\alpha p_m \mathbb{I}\right) + \textbf{b} = p_f\nabla d, 
@@ -163,7 +163,7 @@ The following set of evolution equations can then be derived from the Karush–K
     \label{eq:ddot-strong}
 \end{equation}
 
-with boundary conditions, $\boldsymbol\sigma \cdot \textbf{n} = \textbf{t}$ on $\partial \Omega_N$ and $(2G_c\ell\nabla d +c_0p_f\textbf{u})\cdot \textbf{n} \ge 0$ on $\partial \Omega$. The damaged stress is defined as $\boldsymbol\sigma = (1-d)^2\ \mathbb{C}:\boldsymbol\epsilon(\textbf{u}) -(1-d)\alpha p_m \mathbb{I}$.
+\noindent with boundary conditions, $\boldsymbol\sigma \cdot \textbf{n} = \textbf{t}$ on $\partial \Omega_N$ and $(2G_c\ell\nabla d +c_0p_f\textbf{u})\cdot \textbf{n} \ge 0$ on $\partial \Omega$. The damaged stress is defined as $\boldsymbol\sigma = (1-d)^2\ \mathbb{C}:\boldsymbol\epsilon(\textbf{u}) -(1-d)\alpha p_m \mathbb{I}$.
 
 In some cases, it is useful to decompose the energy \eqref{damaged strain energy} into positive and negative parts, in order to provide asymmetry between tension and compression states. In most problems studied in this Chapter, we found this decomposition to be important, and, unless otherwise mentioned, the spectral decomposition introduced in Miehe et al.~\cite{miehe2010phase} is used. With this decomposition, the equations for the macro-scale force balance \eqref{basic u problem} and the micro-force balance \eqref{damage equation ch3} are modified as
 
@@ -175,7 +175,7 @@ In some cases, it is useful to decompose the energy \eqref{damaged strain energy
     S_d \coloneqq  \dfrac{2G_c\ell}{c_0}\Delta d - \dfrac{G_c}{c_0\ell}\zeta'(d)-g'(d)W(\boldsymbol{\epsilon^+}(\boldsymbol{\textbf{u}}),0) - \alpha p_m\nabla \cdot \textbf{u} + \nabla \cdot (p_f\textbf{u}) \le 0,
 \end{equation}
 
-and the damaged stress becomes $\boldsymbol\sigma = (1-d)^2\ \mathbb{C}:\boldsymbol\epsilon^+(\textbf{u}) + \mathbb{C}:\boldsymbol\epsilon^-(\textbf{u})-(1-d)\alpha p_m \mathbb{I}$. In the above, $\boldsymbol\epsilon^+$ and $\boldsymbol\epsilon^-$ denote the positive and negative parts of the strain tensor as described in \cite{miehe2010phase}. 
+\noindent and the damaged stress becomes $\boldsymbol\sigma = (1-d)^2\ \mathbb{C}:\boldsymbol\epsilon^+(\textbf{u}) + \mathbb{C}:\boldsymbol\epsilon^-(\textbf{u})-(1-d)\alpha p_m \mathbb{I}$. In the above, $\boldsymbol\epsilon^+$ and $\boldsymbol\epsilon^-$ denote the positive and negative parts of the strain tensor as described in \cite{miehe2010phase}. 
 
 Finally, to close this section, we note that the extent to which the solution to \eqref{variational formulation of phase-field} approaches a particular sharp model in hydraulic fracture in the limit as the regularization length $\ell\rightarrow 0$ has yet to be established.  Nevertheless, the particular phase-field model adopted here contains all of the requisite components to allow for a proof of concept of the multi-resolution approach.  
 

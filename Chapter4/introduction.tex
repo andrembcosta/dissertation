@@ -1,13 +1,8 @@
 \section{Introduction}
 \label{section: Chapter4/intro}
 
-While two-dimensional simulations, based on the multi-resolution algorithm proposed in the previous chapter, can be useful to study fundamental processes in hydraulic fracturing, realistic systems are almost always three-dimensional. Therefore, an extension of the approach to 3D is certainly the most natural next step to be taken. In addition to that, due to the size of the problems, in which fractures of the size of kilometers have to be resolved in the scale of their apertures, high-performance computing(HPC) is a must. 
+While two-dimensional simulations, based on the multi-resolution algorithm proposed in the previous chapter, can be useful to study fundamental processes in hydraulic fracturing, realistic systems are almost always three-dimensional. Therefore, an extension of the approach to 3D is certainly the most natural next step to be taken. 
 
-To address these challenges, this chapter proposed a new propagation algorithm for the multi-resolution approach that is suited for planar fractures in three dimensions. This algorithm is implemented in the HPC solver GEOS \cite{settgast2012simulation,settgast2014simulation,settgast2017fully} in a fruitful collaboration with the Lawrence Livermore National Laboratory. 
+This chapter then proposes a new propagation algorithm for the multi-resolution approach that is suited for planar fractures in three dimensions. This algorithm is implemented in the HPC solver GEOS \cite{settgast2012simulation,settgast2014simulation,settgast2017fully} in a fruitful collaboration with the Lawrence Livermore National Laboratory. 
 
-The chapter begins with a brief recap of the multi-resolution algorithm and moves on to the detailed description of the new propagation algorithm for the case of planar fractures. It then discusses the implementation in GEOS and some challenges associated with the parallelazation of the scheme. Illustrative examples are then presented, including in-plane merging of two-penny shaped cracks.
-In the end, the extension to non-planar fractures in 3D is discussed, pointing out the limitations of the planar algorithm.  
-
-
-
-
+The chapter begins with a brief recap of the multi-resolution algorithm and moves on to the detailed description of the new propagation algorithm for the case of planar fractures. Illustrative examples are then presented, including in-plane merging of two-penny shaped cracks. In the end, in Section \ref{section: Chapter4/nonplanar}, the extension to non-planar fractures in 3D is discussed, and the prototype of an algorithm is presented. A simplified version of this algorithm is implemented and tested in a 2.5D problem with a curved crack. While it addresses some of the challenges, it requires further work to handle the general case.

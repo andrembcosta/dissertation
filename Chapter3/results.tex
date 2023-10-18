@@ -74,7 +74,7 @@ The solution for the crack length and pressure in the crack can be written as
     \end{cases}
 \end{equation}
 
-where $t_{cr} =(\pi G_c a_0^3/Q^2E')^{1/2}$. A derivation of this solution can be found in Yoshioka \cite{yoshioka2020crack}.
+\noindent where $t_{cr} =(\pi G_c a_0^3/Q^2E')^{1/2}$. A derivation of this solution can be found in Yoshioka \cite{yoshioka2020crack}.
 
 For simulations using the multi-resolution scheme, a computational domain of size $W\times H = 30\text{ m} \times 240\text{ m}$ is used (Figure \ref{fig:2D_schematics_kgd}). According to \cite{isida1973analysis}, this domain size should be sufficiently large to yield a good approximation to an infinite plane.  We first report results using a sub-domain size of $L \times L = a_0 \times a_0$.   The sensitivity of the results to the choice of sub-domain size will be discussed later in this subsection.  
 
@@ -217,7 +217,7 @@ The model assumes that a Darcy model of flow holds in the matrix, with isotropic
     w_n = h (\textbf{n}^d \cdot \bf{\epsilon} \cdot \textbf{n}^d),
 \end{equation}
 
-in which the normalized gradient $\textbf{n}^d = \nabla d/|\nabla d|$ approximates the normal to the crack plane.   In the above, $\boldsymbol{\kappa}_0$ is an isotropic part of the permeability that accounts for the undamaged permeability of the matrix, $w_n$ is the crack's normal aperture, and $\xi$ is a weighting exponent.  The weighting exponent concentrates the effects of the second term in \ref{miehe_model_basics} to areas where $d \approx 1$. Consistent with the work of Miehe and Mauthe \cite{miehe2015minimization, miehe2016phase}, we use $\xi= 50$.
+\noindent in which the normalized gradient $\textbf{n}^d = \nabla d/|\nabla d|$ approximates the normal to the crack plane.   In the above, $\boldsymbol{\kappa}_0$ is an isotropic part of the permeability that accounts for the undamaged permeability of the matrix, $w_n$ is the crack's normal aperture, and $\xi$ is a weighting exponent.  The weighting exponent concentrates the effects of the second term in \ref{miehe_model_basics} to areas where $d \approx 1$. Consistent with the work of Miehe and Mauthe \cite{miehe2015minimization, miehe2016phase}, we use $\xi= 50$.
 
 \begin{table}[ht]
 \centering
