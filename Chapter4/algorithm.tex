@@ -30,7 +30,7 @@ The fracture front plays an important role in the propagation step. It greatly r
 \begin{figure}
     \floatsetup[subfigure]{style=plain,capposition = beside, capbesideposition={left, center},capbesidesep=quad, capbesidewidth =5cm, captionskip=20pt, rowpostcode=captionskip}
     \captionsetup[subfloatrow]{format=hang, labelfont=up, textfont=up}
-    \captionsetup{labelfont=sc, textfont = it}
+    \captionsetup{labelfont=sc}
     \ffigbox{%
       \begin{subfloatrow}[1]
         \fcapside{\caption{Beginning of time step. The phase-field fracture is shown as a countor to facilitate the visualization. As in \ref{fig:crack_front}, green elements represent the front and red the discrete fracture.}}
@@ -47,34 +47,6 @@ The fracture front plays an important role in the propagation step. It greatly r
       }{\caption{Sequence of steps performed during crack propagation.}
       \label{fig:crack_prop_steps}}
   \end{figure}
-
-% \begin{figure}[h]
-% %    \begin{subfigure}
-
-%         \floatbox[{\capbeside\thisfloatsetup{capbesideposition={left,top},capbesidewidth=4cm}}]{figure}[\FBwidth]
-%         {\caption{Beginning of time step. The phase-field fracture is shown as a countor to facilitate the visualization. As in \ref{fig:crack_front}, green elements represent the front and red the discrete fracture.}}
-%         {\includegraphics[width=5cm]{Chapter4/figures/penny_with_descriptions.png}}
-%         % \hspace*{1.85cm}\includegraphics[scale = 0.9, width=0.55\linewidth]{Chapter4/figures/penny_with_descriptions.png}
-%         % \caption{Beginning of time step. The phase-field fracture is shown as a countor to facilitate the visualization. As in \ref{fig:crack_front}, green elements represent the front and red the discrete fracture.}
-%         % \label{fig:lorem1}
-% %    \end{subfigure}
-% \end{figure}
-% \begin{figure}[h]
-%     \begin{subfigure}{\textwidth}    
-%         \hspace*{2.35cm}\includegraphics[scale = 0.9, width=0.51\linewidth]{Chapter4/figures/larger_penny_with_descriptions.png}
-%         \caption{After a few iterations in the local problem, the phase-field advances and some front elements (now in orange) are identified as fully damaged. They will be fractured and their neighbors in light green will be added to the front.}
-%         \label{fig:lorem2}
-%     \end{subfigure}
-    
-%     \begin{subfigure}{\textwidth}
-%         \centering
-%         \includegraphics[scale = 0.9, width=0.33\linewidth]{Chapter4/figures/larger_penny.png}
-%         \caption{Final configuration after the updates. Since the global fracture changed, the time-step must be relaunched.}
-%         \label{fig:lorem3}
-%     \end{subfigure}
-%     \caption{Sequence of steps performed during crack propagation.}
-%     \label{fig:crack_prop_steps}
-% \end{figure}
 
 \FloatBarrier
 
@@ -99,63 +71,3 @@ An alternative method to circunvent these limitation is inspired by \cite{muixi2
 For each global element in the crack front, the damage field, computed in the local mesh, is inspected on every edge. If damage above a threshold (typically 0.9 or 0.95) is identified in a given edge, that edge is considered cut. If any face contains two cut edges, it is marked as cut. An element is then marked as fracture when at least three of its faces are cut.
 
 This criteria circunvents some of the limitations of the simpliefied one, removing the need for structured grids. It is also applicable to nonplanar fractures as well. However, it is not perfectly robust and certain relative configurations between the damage field and the global element in the front can lead to unexpected results. This will be shown in Section \ref{section: Chapter4/nonplanar} that discusses the case of nonplanar fractures.
-
-
-% \begin{figure}[h]
-%     \centering
-%     \begin{subfigure}{.45\textwidth}
-%         \centering
-%         \includegraphics[width=\linewidth]{Chapter4/figures/penny_with_descriptions.png}
-%         \caption{Multi-resolution solution algorithm.}
-%         \label{fig:lorem1}
-%     \end{subfigure}%
-%     \begin{subfigure}{.45\textwidth}
-%         \centering
-%         \includegraphics[width=\linewidth]{Chapter4/figures/penny_with_descriptions.png}
-%         \caption{Multi-resolution solution algorithm.}
-%         \label{fig:lorem2}
-%     \end{subfigure}%
-    
-%     \bigskip
-%     \begin{subfigure}{.45\textwidth}
-%         \centering
-%         \includegraphics[width=\linewidth]{Chapter4/figures/larger_penny_with_descriptions.png}
-%         \caption{Multi-resolution solution algorithm.}
-%         \label{fig:lorem3}
-%     \end{subfigure}
-%     \begin{subfigure}{.45\textwidth}
-%         \centering
-%         \includegraphics[width=0.65\linewidth]{Chapter4/figures/larger_penny.png}
-%         \caption{Multi-resolution solution algorithm.}
-%         \label{fig:lorem4}
-%     \end{subfigure}
-%       \caption{Schematic of propagation steps.}
-% \end{figure}
-
-% \begin{figure}[h]
-%     \centering
-%     \begin{subfigure}{\textwidth}
-%         \centering
-%         \includegraphics[width=\linewidth]{Chapter4/figures/penny_with_descriptions.png}
-%         \caption{Multi-resolution solution algorithm.}
-%         \label{fig:lorem1}
-%     \end{subfigure}%
-%     \bigskip
-%     \begin{subfigure}{\textwidth}
-%         \centering
-%         \includegraphics[width=\linewidth]{Chapter4/figures/larger_penny_with_descriptions.png}
-%         \caption{Multi-resolution solution algorithm.}
-%         \label{fig:lorem2}
-%     \end{subfigure}
-%     \bigskip
-%     \begin{subfigure}{\textwidth}
-%         \centering
-%         \includegraphics[width=0.65\linewidth]{Chapter4/figures/larger_penny.png}
-%         \caption{Multi-resolution solution algorithm.}
-%         \label{fig:lorem3}
-%     \end{subfigure}
-%     \caption{Schematic of propagation steps.}
-% \end{figure}
-
-
-
