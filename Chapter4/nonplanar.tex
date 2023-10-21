@@ -63,14 +63,14 @@ Luckly, this issue can be circuvented by noting that the damage intersection on 
     \label{fig:flux_calculations}
 \end{figure}
 
-Combining all the workaround described in this Section, we can obtain an algorithm that extends algorithm \ref{fig:MR_planar_algo} to allow for the treatment of non-planar fractures with a multi-resolution scheme. The modified algorithm is summarized in Figure \ref{fig:nonplanar_algo}.
+Combining all the workaround described in this Section, we can obtain an algorithm that extends algorithm \ref{fig:MR_planar_algo} to allow for the treatment of non-planar fractures with a multi-resolution scheme. These modification are displayed as an algorithm in Figure \ref{fig:nonplanar_algo}.
 
 While this algorithm theoretically answers most of the challenges discussed in this Section, a full implementation for general 3D problems is not yet completed. Currently, only the first modification to the algorithm, which concerns the topological criterion and its enhancement with the angle check and pre-cuts is implemented and tested. The optimization scheme and the flux computations based on the damage interesections in the edges are left for future investigations. 
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.95\linewidth]{Chapter4/figures/nonplanar/nonplanar_algo.png}
-    \caption{Algorithm modifications}
+    \includegraphics[width=\linewidth]{Chapter4/figures/nonplanar/nonplanar_algo.png}
+    \caption{Enhancements to \ref{fig:MR_planar_algo} to allow for non-planar fracture propagation.}
     \label{fig:nonplanar_algo}
 \end{figure}
 
@@ -79,15 +79,36 @@ In the next section, this simplification of the algorithm described above is app
 
 \subsection{Example problem}
 
-This subsection presents a small 2D problem used to test some features of the algorithm presented in \ref{basicNonplanarAlgo}. This problem consists of an edge crack in a square plate, which is loaded in the top edge by an inclined traction as shown in Figure \ref{fig:nonplanar_schematic}. The material properties and geometric parameters are given in Table XX. All the fluid effects are removed, as the focus is only on the algorithm to track the fracture and insert the discrete cuts. The subdomain is set to be the entire domain, which simplifies the transfer of boundary conditions from the global to local problem. 
+This subsection presents a small 2D problem used to test some features of the algorithm presented in \ref{basicNonplanarAlgo}. The problem consists of an edge crack in a square plate, which is pulled in the top edge by an inclined displacement $\Delta u$, at an angle of 45deg, as shown in Figure \ref{fig:nonplanar_schematic}. The bottom surface is held fixed while the sides are left with a zero traction boundary condition. The material properties and geometric parameters are given in Table \ref{material properties nonplanar}. All the fluid effects are removed, as the focus is only on the algorithm to track the fracture and insert the discrete cuts. The subdomain is set to be the entire domain, which simplifies the transfer of boundary conditions from the global to local problem. 
 
-Despite the simplification in defining the cut direction, the discrete fracture is still capable of tracking the damage band quite well, as shown in Figure \ref{fig:crack_path}. Interestingly, this problem involves multiple cases of the damage band approaching the diagonal of an element, which constitutes a pathological case, described previously. This shows that the correction based on the neighboring cutting angles is indeed useful and necessary in this type of approach.
+\begin{table}[h]
+    \centering
+    \caption{Material properties for non-planar fracture problem.}
+    \begin{tabular}[t]{lcc}
+    \hline
+    &Value &Unit \\
+    \hline
+    Young's modulus ($E$)&16.0&GPa\\
+    Poisson's ratio ($\nu$)&0.18&--\\
+    Critical energy release rate ($G_c$)&2.5&$\text{N/m}$\\
+    Regularization length ($\ell$)&0.04&$\text{m}$\\
+    Applied displacement ($\Delta u$)&$2.0\times 10^{-5}$&$\text{m}$\\
+    Initial crack length (a)&2.5&$\text{m}$\\
+    Plate size (L)&5.0&$\text{m}$\\
+    \hline
+    \end{tabular}
+    \label{material properties nonplanar}
+\end{table}%
 
-For a sake of comparison, this same problem was studied in \cite{giovanardi2017hybrid} and the crack path results are in good agreement with the one displayed in Figure \ref{fig:crack_path}. A relative straightforward improvement can be done with the introduction of an optimization method, such as \cite{geelen2018optimization} to produce cuts that better align with the damage band locally. However, the use of "crude" approximations is still important to test the angle criteria and prevent lighly damaged elements to be wrongly cut due to a pathological case, such as the one shown in Figure XX.
+In terms of discretization, the coarser global mesh uniformly splits the domain in 21x21 elements, with the finer grid being 11 times smaller. That leads to a subdomain element whose size is 2 times smaller than the phase-field regularization length. The load increment used was $2.0\times 10^{-7}$ m. 
 
-One the other hand, this example doesn't explore a lot of the difficulties that arise in full 3D problems. To begin, mapping damage on edges to the "crude" approximations shown in Figure XX becomes much more difficult in 3D. In addition to that, the angle criteria may work well in cracks that evolve progressively as the one in this example, however, it may get into a "locking" situation if two cracks are merging at an angle. This is, different neighbors may impose constraints in the cutting angle of an element that may be impossible to satisfy simultaneously. 
+A very similar problem was studied in \cite{giovanardi2017hybrid}. Despite the differences in material properties, it serves as a reference solution for the crack path, which is the main quantity of interest for this analysis. So, their results are shown in Figure \ref{fig:reference result}. Despite the simplification in defining the cut direction, the discrete fracture is still capable of tracking the damage band quite well, as shown in Figure \ref{fig:crack_path}, displaying a great agreement with the reference solution. Interestingly, this problem involves multiple cases of the damage band approaching the diagonal of an element, which constitutes a pathological case, described previously. This shows that the correction based on the neighboring cutting angles is indeed useful and necessary in this type of approach.
 
-Overcoming these challegens may require a more severe reformulation of the algorithm used for planar fractures. One promising approach is to employ a global method of surface reconstruction after the solution of the phase-field problem. This is a research topic on its own, with important contributions developed in recent years, such as \cite{}. In \cite{}, the authors actually looked at surface reconstruction in a similar framework, to improve the simulation of plasticity using phase-field methods. They used the gradient of the damage to guide the identification of a discrete fracture surface embedded in a triangular mesh. REVIEW THIS. While the robustness of their reconstruction in the presence of crack merging and branching is still unclear, it certainly points to a promising direction that can be explored in the context of the current work in hydraulic fracture.
+A relative straightforward improvement can be done with the introduction of an optimization method, as discusssed in \ref{basicNonplanarAlgo} to produce cuts that better align with the damage band locally. However, the use of "crude" approximations (pre-cuts) is still important to test the angle criteria and prevent lighly damaged elements from being wrongly cut due to a pathological case, such as the one shown in Figure \ref{fig:pathological_case}.
+
+One the downside, this example doesn't explore a lot of the difficulties that arise in full 3D problems. To begin, mapping damage on edges to the ``crude" approximations shown in Figure \ref{fig:pre_cuts} becomes much more difficult in 3D. In addition to that, the angle criteria may work well in cracks that evolve progressively as the one in this example, however, it may get into a ``locking" situation if two cracks are merging at an angle. This is, different neighbors may impose constraints in the cutting angle of an element that may be impossible to satisfy simultaneously. 
+
+Overcoming these challegens likely requires a more severe reformulation of the algorithm used for planar fractures. One promising approach is to employ a global method of surface reconstruction after the solution of the phase-field problem. This is a research topic on its own, with important contributions developed in recent years, such as \cite{}. In \cite{}, the authors actually looked at surface reconstruction in a similar framework, to improve the simulation of plasticity using phase-field methods. They used the gradient of the damage to guide the identification of a discrete fracture surface embedded in a triangular mesh. REVIEW THIS. While the robustness of their reconstruction in the presence of crack merging and branching is still unclear, it certainly points to a promising direction that can be explored in the context of the current work in hydraulic fracture.
 
 \begin{figure}[ht]
     \centering
@@ -97,7 +118,7 @@ Overcoming these challegens may require a more severe reformulation of the algor
         \draw (0.22\textwidth,0.0\textwidth) node {\large$L$};
         \draw (0.02\textwidth,0.23\textwidth) node {\large$\Delta\textbf{u}$};
     \end{tikzpicture}
-    \caption{Edge crack spcimen.}
+    \caption{Schematic of the edge crack problem. The load of the top surface is inclined 45deg, which leads to a curved fracture path.}
     \label{fig:nonplanar_schematic}
 \end{figure}
 
@@ -115,6 +136,6 @@ Overcoming these challegens may require a more severe reformulation of the algor
       \caption{Crack path - current work}
       \label{fig:crack_path}
     \end{subfigure}%
-      \caption{(a) Initial crack; (b) Final damage path.} 
+      \caption{Comparision of the crack paths obtained for the edge crack problem.} 
       \label{fig:nonplanar_example}
 \end{figure}

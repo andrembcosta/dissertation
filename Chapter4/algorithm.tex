@@ -18,7 +18,20 @@ If multiple front elements are cracked, this process is done for all of them. Th
 
 \subsection{Fracture front construction}\label{sec:front}
 
-The fracture front plays an important role in the propagation step. It greatly reduces the computational expense associated with the inspection of damage in the global elements while also serving to indicate a reference position to place the subdomains as the crack advances. It's construction happens during the initial discretization of the fracture in the global domain. One goes over all fractured elements and among its neighbors, adding to the front those elements that share a fractured face (but are not yet fractured) with the fractured ones (Figure XX). This step is repeated every time the global fracture geometry is updated (i.e new fracture cells are inserted). Figure \ref{fig:crack_front} shows the fracture front for a penny shaped crack. Figure \ref{fig:crack_prop_steps} shows the sequence of steps involved in the fracture propagation process, including the update of the fracture front.
+The fracture front plays an important role in the propagation step. It greatly reduces the computational expense associated with the inspection of damage in the global elements while also serving to indicate a reference position to place the subdomains as the crack advances. It's construction happens during the initial discretization of the fracture in the global domain. One goes over all fractured elements and among its neighbors, adding to the front those elements that share a fractured face (but are not yet fractured) with the fractured ones (Figure \ref{fig:front_faces}). This step is repeated every time the global fracture geometry is updated (i.e new fracture cells are inserted). Figure \ref{fig:crack_front} shows the fracture front for a penny shaped crack. Figure \ref{fig:crack_prop_steps} shows the sequence of steps involved in the fracture propagation process, including the update of the fracture front.
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}
+      \node {\pgfimage[interpolate=false,width=.4\textwidth]{Chapter4/figures/front_faces.png}};
+      \draw (-0.1\textwidth,-0.11\textwidth) node {\large$A$};
+      \draw (0.08\textwidth,-0.11\textwidth) node {\large$B$};
+      \draw (-0.08\textwidth,0.10\textwidth) node {\large$C$};
+      \draw (0.08\textwidth,0.10\textwidth) node {\large$D$};
+  \end{tikzpicture}
+  \caption{Fractured element A and some of its neighbors. Element B is assigned to the front because the face it shares with A is fractured. C is not on the front because the face it shares with A is not fractured. D is not on the front because it does not share a face with a fractured element. }
+  \label{fig:front_faces}
+\end{figure}
 
 \begin{figure}[h]
     \centering
