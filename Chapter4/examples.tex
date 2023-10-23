@@ -5,7 +5,7 @@ In this Section, a two example problems computed with the aforementioned method 
 
 Importantly, a true verification procedure is not performed here. For example, mesh convergence studies and comparisons with well-known solutions are yet to be performed for these 3D problems as we did in Chapter \ref{section: Chapter3}. These require a few enhancements in the solver technology that are currently under development. First, due to the high discrepancy between the scales of degrees of freedom (matrix displacements, fracture apertures and pressures), general purpose linear solvers struggle to converge when the meshes are refined past a certain point. Because of that, special preconditioners that take into account the block structure of the system are being developed. Second, analytical solutions for poroelastic problems are scarce, so, a common verification procedure consists in solving them with vanishing small permeability coefficients to verify convergence towards the impermeable case, which does have a closed-form solution. However, as the permeability decreses, the poromechanics problem starts to display spurious pressure oscillations unless LBB-stable elements \cite{arnold1984stable} or a stabilized formulations, such as \cite{white2008stabilized} are used. These enhancements in the solver infrastructure are left for future work.
 
-For the two problems in this Section, the material properties used are listed in Table \ref{material properties ch4}. 
+For the two problems in this Section, the material properties used are listed in Table \ref{material properties ch4}. The fluid injection rate $Q$ is set to $2.0 m^3/s$ (on each injection point).
 
 \begin{table}[h]
   \centering
