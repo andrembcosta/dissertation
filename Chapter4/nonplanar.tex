@@ -106,9 +106,10 @@ A very similar problem was studied in \cite{giovanardi2017hybrid}. Despite the d
 
 A relative straightforward improvement can be done with the introduction of an optimization method, as discusssed in \ref{basicNonplanarAlgo} to produce cuts that better align with the damage band locally. However, the use of "crude" approximations (pre-cuts) is still important to test the angle criteria and prevent lighly damaged elements from being wrongly cut due to a pathological case, such as the one shown in Figure \ref{fig:pathological_case}.
 
-One the downside, this example doesn't explore a lot of the difficulties that arise in full 3D problems. To begin, mapping damage on edges to the ``crude" approximations shown in Figure \ref{fig:pre_cuts} becomes much more difficult in 3D. In addition to that, the angle criteria may work well in cracks that evolve progressively as the one in this example, however, it may get into a ``locking" situation if two cracks are merging at an angle. This is, different neighbors may impose constraints in the cutting angle of an element that may be impossible to satisfy simultaneously. 
+One the downside, this example doesn't explore a lot of the difficulties that arise in general three-dimensional problems. 
+First, creating a map between the damaged faces and the pre-cuts shown in Figure \ref{fig:pre_cuts} becomes much more difficult in 3D. In addition to that, the angle criteria may work well in cracks that evolve progressively as the one in this example, however, it may get into a ``locking" situation if two cracks are merging at an angle. This is, different neighbors may impose constraints in the cutting angle of an element that may be impossible to satisfy simultaneously. 
 
-Overcoming these challegens likely requires a more severe reformulation of the algorithm used for planar fractures. One promising approach is to employ a global method of surface reconstruction after the solution of the phase-field problem. This is a research topic on its own, with important contributions developed in recent years, such as \cite{eldahshan2021cipfar}. In \cite{}, the authors actually looked at surface reconstruction in a similar framework, to improve the simulation of plasticity using phase-field methods. They used the gradient of the damage to guide the identification of a discrete fracture surface embedded in a triangular mesh. REVIEW THIS. While the robustness of their reconstruction in the presence of crack merging and branching is still unclear, it certainly points to a promising direction that can be explored in the context of the current work in hydraulic fracture.
+Overcoming these challegens likely requires a more severe reformulation of the algorithm used for planar fractures. One promising approach is to employ a global method of surface reconstruction after the solution of the phase-field problem. This is a research topic on its own, with important contributions developed in recent years, such as \cite{yang2021explicit, zeng2022tracking, xu2023reconstruct}. In the context of hybrid phase-field methods, the authors of \cite{eldahshan2021cipfar} used a global surface reconstruction to improve the simulation of ductile fracture. They used the gradient of the damage to guide the identification of a discrete fracture surface embedded in a triangular mesh. While the robustness of their reconstruction in the presence of crack merging and branching is still unclear, it certainly points to a promising direction that can be explored in the context of the multi-resolution approach for hydraulic fracture.
 
 \begin{figure}[ht]
     \centering
@@ -136,6 +137,6 @@ Overcoming these challegens likely requires a more severe reformulation of the a
       \caption{Crack path - current work}
       \label{fig:crack_path}
     \end{subfigure}%
-      \caption{Comparision of the crack paths obtained for the edge crack problem.} 
+      \caption{Comparision of the crack paths obtained for the edge crack problem. Despite the roughness of the crack path in (b), the overall path compares very well to the reference result.} 
       \label{fig:nonplanar_example}
 \end{figure}
